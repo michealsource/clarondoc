@@ -1,0 +1,135 @@
+.patient-profile-container{
+    margin-top: 30px;
+    margin: 20px;
+}
+
+.patient-profile-pic>img{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.patient-details{
+    display: flex;
+    margin-left: 30px;
+   
+}
+
+.details-container{
+    background: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+/* DATA STYLING */
+.info-pat{
+    padding: 10px;
+}
+.info-pat>h4{
+    font-size: 28px;
+    color: #0d2344;
+    padding-bottom: 10px;
+}
+
+.info-pat>p{
+    font-size: 15px;
+    color: #7a7a7a;
+    padding-bottom: 20px;
+}
+
+.pat-icon{
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+/* SUBSCRIPTION STYLING */
+.patient-subcribtion-details{
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+}
+
+.plan-title{
+    font-size: 16x;
+    font-weight: bold;
+    padding-bottom: 10px;
+    align-self: center;
+}
+
+.sub-card{
+    font-size: 16px;
+    color: #f8a664;
+    margin-bottom: 15px;
+}
+
+
+/* BUTTON STYLES */
+.upgrad-btn{
+    background: #33cc99;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.saved-btn{
+    background: #33cc99;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.edit-btn{
+    background: #cccc33;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.medical-history-container{
+    background: #fff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.medical-history-container>p{
+    color: #7a7a7a;
+}
+
+.straght-line{
+    border-bottom: 1px solid #d9d9d8;
+    margin-top: 20px;
+}
+
+.history-inner-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.history-1{
+    margin-bottom: 30px;
+}
+
+.history-header{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sub-histort-title{
+    color: #7a7a7a;
+}

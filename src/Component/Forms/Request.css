@@ -1,0 +1,44 @@
+
+.inner-individual-container-request{
+   margin: 40px;
+   background-color: #fff;
+   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+   padding: 20px;
+   border-radius: 10px;
+   margin-bottom: 90px;
+}
+
+.inner-individual-container-request h2{
+    padding-top: 30px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-weight: 700;
+    color: #5f5f5f;
+    display: flex;
+    text-align: center;
+}
+
+.mobile-lab-btn{
+    background-color: #61cd88;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+.mobile-lab-btn:hover{
+    background-color: #2c854d;
+}
+
+.searchBox{ 
+	border: none;
+	font-size: 10px;
+	min-height: 40px;
+  }
+
+  .chips{
+	background: red !important;
+  }

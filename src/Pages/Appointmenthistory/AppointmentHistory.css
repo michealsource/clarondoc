@@ -1,0 +1,156 @@
+.appointment-container{
+    margin-top: 40px;
+    margin: 20px;
+    position: fixed;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.appointment-container-box{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem,1fr));
+    gap: 1rem;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.one{
+    background: #007991;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #78ffd6, #007991);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #78ffd6, #007991); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.two{
+    background: #06beb6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.three{
+    background: #24C6DC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.four{
+    background: #FF512F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #F09819, #FF512F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+
+.appointment-box{
+    color: #fff;
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.appointment-box>p{
+    font-size: 25px;
+}
+
+.upcoming-num{
+    background-color: #339999;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 50%;
+   box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+   margin-bottom: 30px; 
+}
+
+.pending-num{
+    background-color: #00cccc;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 50%;
+   box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+   margin-bottom: 30px;
+}
+
+.completed-num{
+    background-color: #336699;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 50%;
+   box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+   margin-bottom: 30px;
+}
+
+.cancelled-num{
+    background-color: #ff6633;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 50%;
+   box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+   margin-bottom: 30px;
+}
+
+.appointment-input-container{
+    margin-top: 20px;
+    width: 400px;
+}
+
+.appointment-input-container input{
+    width: 100%;
+    outline: 0;
+    border: none;
+    background: none;
+    padding: 10px;
+    font-size: 19px;
+    border-bottom: 1px solid #999999;
+}
+
+.appointment-input-container input:focus {
+    border-color: #33cc99;
+    color: #767676;
+  }
+
+  .table-container table{
+      width: 100%;
+      text-align: left;
+      margin-top: 20px;
+      overflow:scroll;
+      border-collapse: collapse;
+      border-top-right-radius: 10px;
+      margin-bottom: 100px;
+  }
+
+  .table-container thead{
+    color: #fff;
+    background-color: #666666;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    padding: 20px;
+    text-align: center;
+   
+  }
+
+  .table-container th{
+      width: 200px;
+      height: 50px;
+  }
+
+  .table-container th:first-child{
+      border-top-left-radius: 10px;
+  }
+
+  .table-container th:last-child{
+    border-top-right-radius: 10px;
+  }
+
+  .table-container tbody tr{
+      background-color: #fff;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+     margin-top: 10px;
+     height: 40px;
+  }

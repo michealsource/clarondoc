@@ -1,0 +1,91 @@
+
+.search-doc-conatainer{
+    width: 1270px;
+    margin-top: 120px;
+    margin-bottom: 30px;
+    margin-left: -45px;
+}
+.doc-column {
+    flex: 28.23%;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .doc-column h3{
+      color: #2c2d2d;
+  }
+
+  .doc-column h4,h5{
+    color: #6f7070;
+    text-align: center;
+    padding-bottom: 5px;
+}
+  
+  .labrequest-caontainer {
+     display: flex;
+     flex-wrap: wrap;
+     /* justify-content: center; */
+    text-align: center;
+    width: 93%;
+    margin-left: 70px;
+  }	
+
+  .add-lab-test-btn{
+    display: block;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: #61cd88;
+    font-size: 19px;
+    width: 200px;
+    opacity: 0.9;
+    transition: 0.3s;
+  }
+
+  .add-lab-test-btn:hover{
+    background-color: #2c854d;  
+    opacity: 1;
+    cursor: pointer;
+}
+
+.p-title-doc{
+  font-size: 20px !important;
+  color: #474948;
+}
+
+  .doc-submit-test{
+    background: #1bcc88;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 18px;
+    opacity: 0.9;
+    transition: 0.4s;
+  }
+
+  .doc-submit-test:hover{
+    background-color: #2c854d;  
+    opacity: 1
+  }
+  .doc-column img{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+  }
+
+.search-doc-conatainer{
+  width: 100%;
+  margin-left: 1px;
+  }
+
+  .search-doc-conatainer h2{
+    text-align: center;
+  }

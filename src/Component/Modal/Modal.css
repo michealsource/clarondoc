@@ -1,0 +1,46 @@
+.modal-background{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(76, 175, 80, 0.3);
+    position: fixed;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container{
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    margin-top: 70px;
+    margin-left: -200px;
+    transition: 0.2s all;
+}
+
+.doctor{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.doctor-title{
+color: #444;
+}
+
+.close-modal{
+    font-size: 40px;
+    position: relative;
+    top: -18px;
+    right: -200px;
+    color: #16a085;
+    cursor: pointer;
+}

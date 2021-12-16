@@ -1,0 +1,46 @@
+.lab-container{
+    margin: 20px;
+    margin-top: 40px;
+}
+
+.inner-lab-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.laboratory-container-btn{
+    display: flex;
+    justify-content: flex-end;
+    justify-content: center;
+}
+
+.individual-btn{
+    background: #009999;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    margin-right: 10px;
+}
+
+.facility-btn{
+    background: #3399cc;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+}
+
+.history-content{
+    margin-left: 15px;
+    margin-top: 30px;
+    font-size: 30px;
+}

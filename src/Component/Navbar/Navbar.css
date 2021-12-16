@@ -1,0 +1,33 @@
+.logo img{
+display: block;
+width: 100px;
+height: 50px;
+}
+.Navbar-header{
+    padding:2rem 9%;
+    position: fixed;
+    top:0; left: 0; right: 0;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+}
+
+.login-signup-container a{
+    font-size: 1.5rem;
+    color: #777;
+    margin-left: 2rem;
+}
+
+.Navbar-header .login-signup-container a:hover{
+    color: #61CD88;
+}
+
+/* MEDIA QUERY */
+@media only screen and (max-width: 737px) {
+    .header{
+        display: none;
+    }
+}

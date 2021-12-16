@@ -1,0 +1,48 @@
+.drug-his-doc-container{
+    margin-top: 50px;
+    height: 100vh;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.doc-pre-his-container{
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px;
+    border-radius: 20px;
+    margin-right: 20px;
+    width: 50%;
+    
+}
+
+.drug-his-doc-container h4{
+    text-align: center;
+    font-size: 30px;
+    color: #2b2a2b;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.doc-pre-his-container p{
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.title-doc-head p{
+ font-size: 18px;
+ font-weight: bold;
+ color: #424343;
+}
+
+.d-container-h{
+    display: flex;
+    margin-top: 20px;
+}
+
+.p-sarch-textfield{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

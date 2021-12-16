@@ -1,0 +1,23 @@
+.about-us-doc-container{
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 98%;
+}
+.about-us-doc-container h4{
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.about-us-doc-container p{
+    font-size: 25px;
+    line-height: 30px;
+    justify-content: center;
+    width: 95%;
+    margin-right:auto;
+    margin-left: auto;
+    margin-bottom: 100px;
+    color: #595959;
+}

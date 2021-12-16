@@ -1,0 +1,104 @@
+.consultation-title-doc{
+    text-align: center;
+    margin-top: 30px;
+    color: #383838;
+}
+.container-notification-card{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10px;
+    height: 100vh;
+}
+
+.reject-accept-container{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-bottom: 15px;
+}
+
+.actions-doc-claron{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accept{
+    background: #1bcc88;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px;
+    /* width: 60px;
+    height: 60px; */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.reject{
+    background: #e52748;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px; 
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ACCEPT AND CANCEL CONSULTATION BUTTON */
+.accept-r{
+    background: #e52748;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reject-a{
+    background: #1bcc88;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn-book{
+    background: #e9db2c;
+    color: #fff;
+    padding: 10px;
+    font-size: 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.symptoms-container{
+    display: flex;
+    background: #ecdda3;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    color: #424240;
+    font-size: 16px !important;
+    align-items: center;
+}
+
+.consult-n{
+    padding-left: 325px;
+}
+.symptoms-title{
+    font-weight: bold;
+    padding-right: 10px;
+    font-size: 22px;
+}
+
+.date-created-container{
+    margin-top: 10px;
+    font-weight: bold;
+    color: #424240;
+}

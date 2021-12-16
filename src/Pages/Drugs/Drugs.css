@@ -1,0 +1,160 @@
+.drugs-container{
+    margin: 20px;
+    margin-top: 40px;
+}
+
+.drugs_btn_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.otcdrugs{
+    background: #009999;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    margin-right: 10px;
+}
+
+.prescribed{
+    background: #3399cc;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    margin-right: 10px;
+}
+
+.card{
+    margin-right: 5px;
+}
+.main-drug-history{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    padding: 20px;
+}
+
+.main-drug-content{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.drug-titles p{
+    color: #8b8b8b;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.drugs-item p{
+    font-size: 20px;
+    padding-bottom: 10px;
+    color: #464646;
+}
+
+.drug-amount{
+    color: #61cd88;
+}
+
+.status-container{
+    margin-left: 125px;
+}
+
+.status{
+    color: #fdc43b;
+}
+.drug-btn-payment{
+    background-color: #f8343d;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    align-self: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.upload-prescribe{
+    padding-bottom: 15px;
+}
+
+.upload-prescr-btn{
+    background-color: #61cd88;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    align-self: center;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* DRUGS HISTORY STYLING */
+
+.drugs-order-history h2{
+text-align: center;
+color: #0d2344;
+margin-bottom: 15px;
+}
+
+.drugs-hisory-container{
+    background-color: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    margin-bottom: 80px;
+    margin-right: 10px;
+}
+
+.drug-histor-title p{
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #0d2344;
+}
+
+.drug-history-values p{
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #5e5e5e;
+}
+
+.drug-history-values{
+   margin-left: 20px;
+}
+
+.drugs-status{
+    color: #dcc610;
+}
+
+.price-drugs{
+    color:#5dc683 !important;
+}
+
+.drug-his-btn{
+    background: #f8343d;
+    color: #fff;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.two-column{
+    display: flex;
+}

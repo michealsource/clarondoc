@@ -1,0 +1,98 @@
+.subcription-container{
+    margin-top: 30px;
+}
+
+.subcription-container>h3{
+    margin: 20px;
+}
+
+.pricing-table{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
+    gap: 2rem;
+    margin: 20px;
+    margin-bottom: 100px;
+}
+
+.pricing-card{
+    background: #fff;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pricing-card-header{
+    background: #c5dfd9;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 25px;
+    text-align: center;
+}
+
+.pricing-card-header h4{
+    font-size: 20px;
+    line-height: 40px;
+    color:#16a085;
+    font-weight: bold;
+}
+
+.pricing-card-header h3{
+    font-size: 25px;
+    line-height: 40px;
+    color:#16a085;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.pay-btn{
+    background: #16a085;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.price p{
+    padding: 10px;
+}
+
+.single-price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single-price p{
+    font-size: 15px;
+    display: flex;
+    align-content:flex-end;
+ 
+   
+}
+
+.sub-description{
+    padding: 25px;
+    line-height: 25px;
+    background: #c5dfd9;
+    color: #16a085;
+}
+.price-icon{
+    margin-left: 10px;
+    color: #16a085;
+}
+
+.amount{
+display: flex;
+flex: 1;
+}
+
+.sub-title-pay{
+    margin-left: -30px;
+    flex: 2;
+  
+}

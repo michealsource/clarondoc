@@ -1,0 +1,73 @@
+.pickup-container{
+    margin: 30px;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #fff;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.tme-item-container{
+    display: flex;
+    justify-content: space-between;
+}
+.item-bought-container{
+    background-color: #fff;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.item-bought-container h3{
+    color: #4c4c4c;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+.item-bought-container p{
+    padding-bottom: 10px;
+}
+.item-bought-container span{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.amount-drug-pay{
+    color: #61cd88;
+}
+
+.check-out-btn{
+    background-color: #61cd88;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: flex;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.time-container div{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.time-container label{
+    padding-left: 20px;
+}
+
+.time-container h4{
+    padding-top: 15px;
+}
+
+.time-container{
+    background-color: #fff;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    border-radius: 20px;
+    padding: 10px;
+}

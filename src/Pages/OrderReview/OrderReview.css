@@ -1,0 +1,58 @@
+.payment-review-container{
+    background-color: '#fff !important';
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    color: '#292929';
+}
+
+.title-of-pay p{
+    padding-bottom: 10px;
+}
+
+.price-of-pay p{
+    padding-bottom: 10px;
+}
+
+
+.discount-price{
+    color: "#000";
+    font-weight: 700;
+}
+
+.support-header{
+    margin: 30px;
+    color: #595959;
+}
+
+.supported-payment-options-container{
+    background-color: '#fff';
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px;
+}
+
+.mobile-icon-money{
+    display: flex;
+    flex: 1;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.phone{
+    margin-right: 30px;
+    font-size: 35px;
+}
+
+.mobile-charge{
+    font-weight: bold;
+}
+
+.mobile-money-heading{
+    margin-bottom: 20px;
+}

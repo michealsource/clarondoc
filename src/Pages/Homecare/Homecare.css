@@ -1,0 +1,84 @@
+.home-care-container-1{
+    margin: 30px;
+    margin-top: 60px;
+}
+
+.homecare-inner-container-2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.homecare-history-container{
+    background: #fff;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    border-radius: 10px;
+}
+
+.his-header{
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+}
+.his-header p{
+    padding-bottom: 10px;
+    color: #0d2344;
+    font-weight: 600;
+}
+
+.col-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* one */
+
+.top-history-container{
+    margin-bottom: 80px;
+    margin-top: -20px;
+}
+.row-his{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
+    gap: 1rem;
+   
+  }
+  .column-his-1{
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  }
+ 
+  .his-container-title p{
+      padding: 7px;
+      font-size: 18px;
+      color: #0d2344;
+      font-weight: bold;
+  }
+
+  .his-container-cont p{
+    padding: 7px;
+    font-size: 18px;
+  }
+
+  .head-his{
+      border-bottom: 2px solid #b8babe;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      color: #0d2344;
+  }
+
+  .drug-his-btn-h{
+    background: #f8343d;
+    color: #fff;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 350px;
+  }

@@ -1,0 +1,65 @@
+.appointment-p-dat{
+    margin-top: 30px;
+}
+
+.submit-book-doc{
+    background-color: #1bcc88 !important;
+    margin-top: 10px !important;
+    width: 65%;
+}
+
+.list-of-prescribed-drug-container{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.list-card{
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    width: 50%;
+    border-radius: 10px;
+    padding: 20px;
+}
+.list-card h4{
+    border-bottom: 2px solid #c4cac6;
+    color: #3c3f3d;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.list-card-inner{
+    margin-top: 20px;
+}
+
+.list-card-name{
+    display: flex;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.drug-1{
+    font-size: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.drug-p-p-container h4{
+    font-size: 20px;
+    color: #3c3f3d;
+    font-weight: 800;
+    padding-bottom: 10px;
+}
+
+.cart-sub-btn-c{
+    background: #1bcc88;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+}

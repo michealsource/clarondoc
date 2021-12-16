@@ -1,0 +1,192 @@
+.notification-top-container{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.notification-container{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.notification-title{
+    color: #0d2344;
+    padding-bottom: 10px;
+}
+
+.time{
+    color: #898a8c;
+   padding-left: 50px;
+}
+
+.btn-notfi{
+    background: #61cd88;
+    font-size: 15px;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.notification-container p{
+    color: #bdbebd;
+}
+
+/* SWITCH STYLING */
+
+.switch{
+    position: relative;
+    display: inline-block;
+}
+
+.switch input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #6e6968;
+    transition: 0.4s;
+    width: 55px;
+    height: 28px;
+    border-radius: 34px;
+}
+
+.slider:before{
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.input-checked:checked + .slider{
+    background: #61cd88;
+}
+
+.input-checked:checked + .slider::before{
+    transform: translateX(26px);
+}
+
+.pick-text{
+    padding-left: 80px;
+    display: flex;
+    align-self: center;
+    margin-top: -14px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333232;
+}
+
+.switch-container{
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.add-contact-container{
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 18px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.add-contact-container h4{
+    padding-bottom: 10px;
+}
+
+.add-contact-container span{
+    padding-left: 10px;
+    color: #4d4c4c;
+    font-weight: bold;
+}
+
+.drug-delivery-time-container{
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 18px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.list-of-drugs-container{
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 18px;
+    border-radius: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-d{
+    color: #404040;
+    font-weight: bold;
+}
+
+.pay-drug-btn{
+    background: #61cd88;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.pay-drug-btn-container{
+    margin-top: 20px;
+}
+
+.lab-container{
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 18px;
+    border-radius: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lab-container p{
+    line-height: 35px;
+    color: #5d5b5b;
+}
+
+.title-lab-price h4{
+    line-height: 35px;
+    color: #2e2d2d;
+}
+/* .address{
+    display: flex;
+    justify-content: space-around;
+} */

@@ -1,0 +1,137 @@
+.doc-prescribe-drugs-container{
+    margin-top: 50px;
+    width: 100%;
+}
+
+.search-doc-conatainer h2{
+    padding-top: 15px;
+    color: #767978;
+    font-weight: bold;
+}
+
+.all-patient-container-d{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.drug-sarch-textfield{
+    width: 83%;
+    position: absolute;
+    left: 25px;
+    bottom: -20px;
+}
+
+.doc-prescribe-drugs-container h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.doc-drugs-prscribe-container{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+    height: auto;
+}
+
+.doc-drug-col{
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.doc-drugs-prscribe-container img{
+    width: 300px;
+    height: 250px;
+}
+
+.increase-doc-decrease-btn-contaner{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.increase-doc-decrease-btn-contaner button{
+    background: #1bcc88;;
+    padding: 3px;
+    color: #fff;
+    border-radius: 5px;
+    width: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.dg-btn{
+    display: block;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: #61cd88;
+    font-size: 19px;
+    width: 200px;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+.dg-btn:hover{
+    opacity: 1;
+    background-color: #2c854d;
+}
+
+.doc-drug-name{
+    color: #4e4f4f;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.discount{
+    text-decoration: line-through;
+    padding-right: 40px;
+}
+
+.f-price{
+    color: #1bcc88;
+    font-weight: bold;
+}
+
+.doc-add-to-cart{
+    background: #1bcc88;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.name-h-d{
+    margin-top: 40px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.drug-sum-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.drug-sum-container button{
+    background: #1bcc88;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 20%;
+    cursor: pointer;
+} 
+
+

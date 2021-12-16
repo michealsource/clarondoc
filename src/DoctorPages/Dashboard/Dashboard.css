@@ -1,0 +1,140 @@
+
+main{
+    display: flex;
+    background-color: #f1f5f4;
+}
+
+.doc-notification-icon{
+    color: #1bcc88;
+}
+
+/* SWITCH PRESENCE STYLING */
+
+
+/* TOP NAVBAR DOCTOR */
+.doc-nav-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    width: 80%;
+    padding: 10px;
+    box-shadow: 0 3px 2px -2px gray;
+    position: fixed;
+    z-index: 100;
+    margin-left: 48px;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius: 10px;
+}
+
+.cat-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart{
+    margin-right: 10px;
+}
+
+.cart-items{
+    background: #1bcc88;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    font-size: 22px;
+    color: #fff;
+}
+
+.user-left{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.user-profile-doc{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.doc{
+    margin-top: 20px;
+}
+
+.doc-info{
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.doc-info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.name-prof{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.doc-info{
+    cursor: pointer;
+}
+
+.info-name{
+    color: #1e1e1e;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.doc-sidebar-menu{
+    width: 21%;
+    background:#1bcc88;
+    height: 100vh;
+    color: whitesmoke;
+    position: fixed;
+}
+
+.doc-sidebar-list{
+    padding: 15px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.doc-sidebar-list:hover{
+  background: #22af93;
+  border-radius: 30px 0px 0px 30px;
+  cursor: pointer;
+}
+
+.active{
+    background: #22af93;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.doc-menu-icon{
+    margin-right: 15px;
+    font-size: 30px;
+    display: flex;
+    align-self: center;
+}
+
+.doc-sidebar-content{
+    width: 75%;
+    background-color: #f1f5f4;
+    margin-left: 272px;
+}
+
+.doc-notification{
+    font-size: 25px;
+}

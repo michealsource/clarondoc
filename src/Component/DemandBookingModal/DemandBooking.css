@@ -1,0 +1,141 @@
+.radio-1{
+    display: none;
+}
+
+.specialist-heading{
+  margin-bottom: 10px;
+}
+.demand-booking-modal-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #fff;
+    width: 80%;
+    margin-left: auto;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+
+.demand-booking-btn{
+  background: #1bcc88;
+  margin-top: 60px;
+  margin-right: 20px;
+  padding: 20px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+  .submit-booking-btn{
+      background-color: #33cc99;
+      color: #fff;
+      padding: 15px;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: rgba(25,25,25,.05) 0 0 1px 0,rgba(0,0,0,.2) 0 3px 4px 0;
+      transition: 0.3s ease-in-out;
+      margin-top: 20px;
+  }
+
+  .submit-booking-btn:hover{
+      background-color: #009966;
+  }
+
+  /* CONSULT MEDIUM STYLING*/
+  .consult-medium-container{
+    margin-top: 20px;
+}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+
+.app-reason{
+  margin-top: 25px !important;
+}
+.dateTime{
+  margin-top: 30px !important;
+}
+
+.appoint-for-container{
+  margin-top: 30px;
+}

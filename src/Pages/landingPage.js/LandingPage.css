@@ -1,0 +1,159 @@
+root{
+    --green:#16a085;
+    --black:#444;
+    --light-color:#777;
+    --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--green);
+}
+.landing-container{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.landing-page-home{
+    display: flex;
+    align-items: center;
+    padding-top: 10rem;
+    gap:1.5rem;
+}
+
+.landingpage-image{
+    flex:1 1 45rem;
+}
+.landingpage-image img{
+    display: block;
+    width: 100%;
+}
+
+.landing-page-content h3{
+    font-size: 2.5rem;
+    color: #2d2d32;
+    line-height: 1.5;
+}
+
+.landing-page-content p{
+    font-size: 1.5rem;
+    color:var(--light-color);
+    line-height: 1.8;
+    padding: 1rem 0;
+}
+
+.col-1{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+.col-2 img{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.col-1 h2{
+    padding-bottom: 15px;
+}
+
+.col-1 p{
+    line-height: 30px;
+    padding-right: 20px;
+}
+
+.section-1-container{
+    display: flex;
+    margin: 50px;
+    margin-top: -20px;
+    font-size: 20px;
+}
+
+.sec-container-claron h2{
+    text-align: center;
+}
+
+.section-2-container{
+    margin: 50px;
+    display: flex;
+    padding: 20px;
+}
+
+.sec-col{
+    flex: 33.33%;
+    padding: 20px;
+    margin: 5px;
+    background-color: #fff;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    line-height: 25px;
+}
+
+.sec-container-claron h2{
+    font-size: 30px;
+}
+
+.col-1{
+    flex: 70%; 
+}
+
+.col-2{
+    flex: 30%;
+}
+
+.sec-col h3{
+    padding-bottom: 20px;
+    text-align: center;
+    color: #61cd88;
+}
+
+.play-store-conatiner img{
+    object-fit: contain;
+    width: 50%;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-radius: 10px;
+}
+
+.play-store-conatiner{
+    display: flex;
+    margin: 50px;
+}
+
+.play-store-conatiner p{
+    padding-left: 50px;
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.online-pharmacy-container{
+    display: flex;
+    margin: 50px;
+    margin-top: 70px;
+}
+
+.online-pharmacy-container img{
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.online-pharmacy-container p ,h3{
+    padding-left: 50px;
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.online-pharmacy-container h3{
+    padding-bottom: 20px;
+}
+
+footer{
+    background: #61cd88;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+}

@@ -1,0 +1,150 @@
+
+:root{
+    --green:#16a085;
+    --black:#444;
+    --light-color:#777;
+    --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--green);
+}
+
+.others{
+    margin-top: 10px !important;
+}
+.doctors .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
+    gap: 2rem;
+    margin: 20px;
+    margin-bottom: 100px;
+}
+
+.heading{
+    margin: 20px;
+}
+
+.demand-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-container{
+    margin: 10px;
+}
+
+.demand-container>button{
+    background-color: #33cc99;
+    margin-right: 20px;
+    padding: 10px !important;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+}
+
+.doctors .box-container .box{
+    text-align: center;
+    background:#fff;
+    border-radius: .5rem;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+}
+
+.doctors .box-container .box img{
+    /* height: 15rem;
+    width: 15rem; */
+    border:var(--border);
+    border-radius: .5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    width: 70%;
+}
+.title{
+    color: var(--black);
+}
+
+.share{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .share:hover + .doctor-icon{
+    background: #61cd88;
+    border-radius: 5px;
+    color: #fff;
+} */
+
+.action-container{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.doctor-icon{
+    color: #61CD88;
+    font-size: 20px;
+    display: flex;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.action-container span{
+    color: var(--black);
+}
+
+/* SEARCH STYLING */
+.doctor-input-container input{
+    width: 50%;
+    outline: 0;
+    border: none;
+    background: none;
+    padding: 10px;
+    font-size: 19px;
+    border-bottom: 1px solid #999999;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.doctor-input-container input:focus {
+    border-color: #33cc99;
+    color: #767676;
+  }
+
+  .schedule-app-btn{
+    background-color: #33cc99;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+  }
+
+  .video, .phone-call{
+      font-size: 70px;
+      cursor: pointer;
+      color:#33cc99;
+      background: #333;
+      padding: 10px;
+      border-radius: 10px;
+  }
+  
+  .active-state{
+      background: #33cc99;
+      color: #fff;
+      padding: 5px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      margin-top: -2px;
+      /* margin-left: 270px; */
+      font-size: 15px;
+      border-bottom-left-radius: 5px;
+      border-top-right-radius: 5px;
+  }

@@ -1,0 +1,137 @@
+.referral-upper-container{
+    margin: 40px;
+}
+
+.referal-actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.referal-actions h1{
+    color: #000000b3;
+}
+
+.referral-btn{
+    background: #61cd88;
+    color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 10px;
+}
+.referal-content{
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.amount-ref{
+    color: #61cd88;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+.amount-ref p{
+    color:#0d2344;
+}
+
+.referal-history-container{
+    margin-top: 50px;
+}
+.referral-box{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    padding: 25px;
+    border-radius: 10px;
+
+}
+
+.referal-history-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ref{
+    margin-right: 20px;
+    font-size: 30px;
+    color: #e5c0a3;
+}
+.ref-num p{
+font-size: 20px;
+color: #4d607b;
+}
+
+.referral-link-container{
+    background-color: #fff;
+    padding: 30px;
+    margin-top: 50px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.ref-code{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ref-code p{
+    color: #676f7b;
+    font-size: 18px;
+}
+
+.code{
+    background: #4b4a4a;
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.link-share-container{
+    display: flex;
+    margin-top: 30px;
+}
+
+.link-share-container button{
+    background-color: #61cd88;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: -5px;
+    z-index: 100;
+}
+
+.patien-doc-ref-table-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    margin-top: 50px;
+    width: 80%;
+}
+
+.patient-refreed{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+.doctor-refrred{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
