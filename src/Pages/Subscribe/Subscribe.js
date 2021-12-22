@@ -1,10 +1,11 @@
 import React from 'react'
 import { FaCheckCircle} from "react-icons/fa";
-
+import MainLayout from '../MainLayout';
 
 import './Subscribe.css'
 function Subscribe() {
     return (
+        <MainLayout>
         <div className="subcription-container">
             <h3>OUR SUBCRIPTIONS PLANS</h3>
             <div class="pricing-table">
@@ -174,6 +175,7 @@ function Subscribe() {
                 </div>
             </div>
         </div>
+        </MainLayout>
     )
 }
 

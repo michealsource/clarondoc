@@ -3,8 +3,10 @@ import { Link } from "react-router-dom"
 import './Referral.css'
 import { FaUserFriends,FaUserPlus,FaWallet } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
+import MainLayout from '../MainLayout';
 function Referral() {
     return (
+        <MainLayout>
         <div className="referral-upper-container">
             <div class="referal-actions">
                 <h1>Your Referrals</h1>
@@ -79,6 +81,7 @@ function Referral() {
                 </div>
             </div>
         </div>
+        </MainLayout>
     )
 }
 

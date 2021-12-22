@@ -1,9 +1,12 @@
 import React from 'react'
 import './Settings.css'
 import doctor from '../../images/doctor-patient.jpg'
+import Navbar from '../../Component/Navbar/Navbar'
 
 function About() {
     return (
+        <>
+        <Navbar/>
         <div className="about-us-container">
             <h2>Health is wealth</h2>
             <p>We combine modern health strategies and technological expertise to create digital experiences that addresses the challenges of accessing medical health.We do this by offering low cost medical services from online to door-step outreach.</p>
@@ -20,6 +23,7 @@ function About() {
                 
             </div>
         </div>
+        </>
     )
 }
 

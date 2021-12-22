@@ -28,9 +28,6 @@ import Switch from '../DocComponent/Switch'
 import CartModal from '../Modals/CartModal'
 // PAGES IMPORTATION
 function Dashboard() {
-    // useEffect(()=>{
-    //     window.location.assign("/doctorDashboard"); 
-    // },[])
     const [open, setOpen] = useState(false)
     const [sidebar, setSidebar] = useState(true)
     const [activeRoute, setActiveRoute] = useState('')

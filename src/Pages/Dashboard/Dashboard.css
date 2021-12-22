@@ -48,7 +48,8 @@
 }
 .individual-content-lg{
     position: fixed;
-    width: 92%;
+    margin-left: 19%;
+    width: 82%;
     height: 100%;
     top: 50px;
     overflow-y: scroll;

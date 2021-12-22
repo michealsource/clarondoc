@@ -1,18 +1,22 @@
 
 import './App.css';
-import React,{useState} from 'react'
-import Navbar from './Component/Navbar/Navbar.js'
-import Dashboard from './Pages/Dashboard/Dashboard';
-import DashboardDoctor from './DoctorPages/Dashboard/Dashboard'
+import React,{useState,useEffect} from 'react'
+// import Navbar from './Component/Navbar/Navbar.js'
+// import Dashboard from './Pages/Dashboard/Dashboard';
+// import DashboardDoctor from './DoctorPages/Dashboard/Dashboard'
+import IndexRoutes from './Routes/index'
 function App() {
-  const[login, setLogin] = useState(false)
-  const[loginP, setLoginP] = useState(false)
+  // const[login, setLogin] = useState()
+  // const[loginP, setLoginP] = useState(localStorage.getItem('email'))
+  // // await AsyncStorage.setItem('email', data.email)
+
   return (
-    <div>
-      {loginP?<Dashboard/>:'' }
-      {login?<DashboardDoctor/>:''}
-      {!login && !loginP?<Navbar setLogin={setLogin} setLoginP={setLoginP} login={login}/>:''}
-    </div>
+    <IndexRoutes/>
+    // <div>
+    //   {loginP?<Dashboard/>:<Navbar/> }
+    //   {/* {login?<DashboardDoctor/>:''} */}
+    //   {/* {!login && !loginP?<Navbar/>:''} */}
+    // </div>
   );
 }
 

@@ -8,6 +8,7 @@ import Modal from '@mui/material/Modal';
 import drug from '../../images/drug.png'
 import labrequest from '../../images/labrequest.png'
 import pharmacist from '../../images/pharmacist.png'
+import MainLayout from '../MainLayout';
 
 const style = {
   position: 'absolute',
@@ -25,6 +26,7 @@ function Drugs() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
+    <MainLayout>
     <div className="drugs-container">
       <div className="cards">
         <div class="card-container">
@@ -126,6 +128,7 @@ function Drugs() {
       <div>
       </div>
     </div>
+    </MainLayout>
   )
 }
 

@@ -1,14 +1,25 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './Card.css'
 import {Link } from "react-router-dom"
-
 // import images
 import drug from '../../images/drug.png'
 import labrequest from '../../images/labrequest.png'
 import ambulance from '../../images/ambulance.png'
 import homecare from '../../images/homecare.png'
+import MainLayout from '../../Pages/MainLayout'
+// import {userDetails} from '../../Api/Auth'
 function Card({sidebar}) {
+    const[user,SetUser]= useState()
+    useEffect(()=>{
+        (async()=>{
+            let account = localStorage.getItem('user')
+            SetUser(JSON.parse(account))
+          })()
+
+          console.log(user)
+    },[])
     return (
+        <MainLayout>
         <div className="main-area-card-container">
             <div class="notifcation-container">
                 <div class="update-profile">
@@ -29,7 +40,7 @@ function Card({sidebar}) {
 
             <div class="first-container">
                 <div class="name-container">
-                    <h4>Hi, Vincent Chibuike</h4>
+                    <h4>Hi, {user?user.firstname:'Vincent'}</h4>
                     <p>Welcome Back!</p>
                 </div>
 
@@ -88,6 +99,7 @@ function Card({sidebar}) {
                 </div>
             </div>
         </div>
+        </MainLayout>
     )
 }
 

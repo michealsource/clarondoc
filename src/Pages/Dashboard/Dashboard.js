@@ -19,7 +19,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Ambulance from '../Ambulance/Ambulance'
 import Homecare from '../Homecare/Homecare'
 import Laboratory from '../Laboratory/Laboratory'
-import Pharmacy from '../Pharmacy/Pharmacy'
+// import Pharmacy from '../Pharmacy/Pharmacy'
 import Consultation from '../Consultation/Consultation'
 import Subscribe from '../Subscribe/Subscribe'
 import AppointmentHistory from '../Appointmenthistory/AppointmentHistory'
@@ -56,10 +56,11 @@ function Dashboard() {
       const handleClose = () => {
         setAnchorEl(null);
       };
+      
     return (
         <div className="static-dashboard">
             <div className="dashboard-container">
-                <div className={sidebar?'sidabar-container':'sidebar-container-sm'}>
+                <div className='sidabar-container'>
                         {sidebar?(
                         <>
                             <div className="profile-container">
@@ -110,17 +111,8 @@ function Dashboard() {
                                     <img src={user} alt="" className="user-profile" />
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
-
                                 <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>
-                                {/* {open ? <div class="user-action-container">
-                                    <Link to="/profile" className="profile">
-                                        <div class="inner-profile-container">
-                                        <span className="profile-name-inner">Vincent Chibuike</span>
-                                        <span style={{color:'#33cc99', fontSize:'16px'}}>Patient | Profile</span>
-                                        </div>
-                                        </Link>
-                                </div> : ''} */}
-
+                               
                             </div>
                         </div>
 
@@ -133,7 +125,6 @@ function Dashboard() {
                             <Route exact path="ambulance" element={<Ambulance />}></Route>
                             <Route exact path="homecare" element={<Homecare />}></Route>
                             <Route exact path="laboratory" element={<Laboratory />}></Route>
-                            <Route exact path="pharmacy" element={<Pharmacy />}></Route>
                             <Route exact path="consultation" element={<Consultation />}></Route>
                             <Route exact path="Subscribe" element={<Subscribe />}></Route>
                             <Route exact path="AppointmentHistory" element={<AppointmentHistory/>}></Route>
@@ -154,7 +145,6 @@ function Dashboard() {
                             <Route exact path="/Wallet" element={< Wallet />}></Route>
                             <Route exact path="/notification" element={< Notification />}></Route>
                             <Route exact path="/chat" element={< Chat />}></Route>
-                            
                         </Routes>
                     </div>
 

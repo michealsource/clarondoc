@@ -15,6 +15,8 @@ import 'date-fns';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 
+import MainLayout from '../MainLayout';
+
 // MODAL IMPORTATION
 import ModalProfile from '../../Component/Modal/ModalProfile';
 import ScheduleAppointment from '../../Component/ScheduleAppointment/ScheduleAppointment'
@@ -90,6 +92,7 @@ function Consultation() {
         setOthers(!others)
     }
     return (
+        <MainLayout>
         <div className="doctors">
             <div class="demand-container">
                 <h1 class="heading">Talk to a Health Care <span>Professional</span></h1>
@@ -166,6 +169,7 @@ function Consultation() {
             {openModal && <ModalProfile closeModal={setOpenModal} />}
             <ActionsModal call={call} setCall={setCall}/>
         </div>
+        </MainLayout>
     )
 }
 

@@ -7,7 +7,7 @@ import LandingPage from '../../Pages/landingPage.js/LandingPage'
 import About from '../../Pages/Settings/About'
 import TermsandCondition from '../../Pages/Settings/TermsandCondition'
 
-function Navbar({setLogin,setLoginP,login}) {
+function Navbar() {
     return (
         <>
         <header className="Navbar-header">
@@ -19,13 +19,13 @@ function Navbar({setLogin,setLoginP,login}) {
                 <Link to="/privacy">Terms and Privacy</Link>
             </nav>
         </header>
-        <Routes>
+        {/* <Routes>
         <Route exact path="/" element={<LandingPage />}></Route>
-        <Route exact path="SignIn" element={<SigIn login={login} setLogin={setLogin} setLoginP={setLoginP} />}></Route>
-        <Route exact path="SignUp" element={<SignUp />}></Route>
+        <Route exact path="/SignIn" element={<SigIn/>}></Route>
+        <Route exact path="/SignUp" element={<SignUp />}></Route>
         <Route exact path="/about" element={<About />}></Route>
         <Route exact path="/privacy" element={<TermsandCondition />}></Route>
-    </Routes>
+    </Routes> */}
     </>
     )
 }

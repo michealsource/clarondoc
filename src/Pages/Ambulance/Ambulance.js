@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import {Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import MainLayout from '../MainLayout';
 
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
@@ -67,6 +68,7 @@ function Ambulance() {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
     return (
+        <MainLayout>
         <div>
             <div class="ambulance">
                 <div class="heading-container">
@@ -356,6 +358,7 @@ function Ambulance() {
             </div>
             
         </div>
+        </MainLayout>
     )
 }
 

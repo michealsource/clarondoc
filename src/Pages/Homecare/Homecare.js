@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import './Homecare.css'
 import HomeCareCard from './HomeCareCard'
+import MainLayout from '../MainLayout';
 function Homecare() {
     return (
+        <MainLayout>
         <div className="home-care-container-1">
             <div class="homecare-inner-container-2">
                 <h2>HOME CARE OVERVIEW</h2>
@@ -37,8 +39,8 @@ function Homecare() {
             </div>
 
             <HomeCareCard/>
-
         </div>
+        </MainLayout>
     )
 }
 

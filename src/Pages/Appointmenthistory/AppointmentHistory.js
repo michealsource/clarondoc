@@ -1,7 +1,9 @@
 import React from 'react'
 import './AppointmentHistory.css'
+import MainLayout from '../MainLayout';
 function AppointmentHistory() {
     return (
+        <MainLayout>
         <div className="appointment-container">
             <h2>Appointment History</h2>
 
@@ -87,6 +89,7 @@ function AppointmentHistory() {
                 </table>
             </div>
         </div>
+        </MainLayout>
     )
 }
 

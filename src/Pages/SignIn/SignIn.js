@@ -1,62 +1,88 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState,useContext,useEffect } from 'react'
+import Radio from '../../Component/Radio/Radio'
 import './SignIn.css'
 import signIn from '../../images/book-img.svg'
-import Navbar from '../../Component/Navbar/Navbar'
 import logo from '../../images/logo.png'
-import { Link ,useNavigate  } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-function SignIn({setLogin,setLoginP,login}) {
-    const[email,setEmail]= useState()
-    const[password,setPassword]= useState()
-    const navigate = useNavigate ();
-        const loginUser =()=>{
-            if(email === "Patient@Gmail.Com" && password ==="patient"){
-                setLoginP(true) 
-                navigate('/userDashboard')
-               
-            }else if(email === "Doctor@Gmail.Com" && password ==="doctor"){
-                setLogin(true)
-                navigate('/doctorDashboard')
-            }
-            else{
-                alert('invalid credentilas')
-            }
+import {login,sociallogin} from '../../Api/Auth'
+import {AuthContext} from '../../Context/AuthContext'
+import Navbar from '../../Component/Navbar/Navbar'
+
+function SignIn() {
+    let navigate = useNavigate();
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
+    const {user,dispatch} = useContext(AuthContext)
+
+    console.log(user)
+    const loginUser = async () => {
+        if(email.length < 6){
+        return setError('Please provide a valid email address.')
         }
+
+        if(password.length < 6){
+         return  setError('Password minimum length is 6 characters.')
+        }
+        setLoading(true);
+
+        try{
+            const response = await login(email, password)
+
+            if(response){
+                setLoading(false)
+                console.log(response)
+                // dispatch({type:"LOGIN_SUCCESS", payload:response})
+                navigate("/userDashboard")
+            }else{
+                setError(response.message)
+                setLoading(false)
+            }
+        }catch(e){
+            setError(e.message)
+            setLoading(false)
+        }
+
+    }
+
+    // GOOGLE LOGIN
     return (
         <>
-        <div className="container">
-            <img src={signIn} alt="login" style={{ width: '500px', height: 400 }}  className="SignIn-Img"/>
+        <Navbar />
+            <div className="container">
+                <img src={signIn} alt="login" style={{ width: '500px', height: 400}} className="SignIn-Img" />
 
-            <div className="loginContainer">
-                <div className="inputContainer">
-                <img src={logo} alt="logo"  className="logo-img"/>
+                <div className="loginContainer">
+                    <div className="inputContainer">
+                        <img src={logo} alt="logo" className="logo-img" />
+                        <p style={{color:'red',marginTop:5, textAlign:'center', fontSize:20, paddingBottom:10}}>{error ? error : ''}</p>
+                        <input type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email Address" className="input-field" />
 
-                    <input type="email"
-                    onChange={(e)=>setEmail(e.target.value)}
-                    placeholder="Email Address" className="input-field"/>
+                        <input
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password" placeholder="Password" className="input-field" />
 
-                    <input
-                     onChange={(e)=>setPassword(e.target.value)}
-                    type="password" placeholder="Password" className="input-field"/>
-                 
-                    <div className="passForgotContainer">
-                        <p>forgot Password</p>
-                        <button className="sigInBtn" onClick={loginUser}>Sign In</button>
+                            {/* <Radio/> */}
+
+                        <div className="passForgotContainer">
+                            <p>forgot Password</p>
+                            <button className="sigInBtn" onClick={loginUser}>{ loading ? 'Please wait...' : 'Login'}</button>
+                        </div>
+                        <p className="or">Or</p>
                     </div>
-                    <p className="or">Or</p>
+                    <div className="socialContainer">
+                        <button className="facebook"><FaFacebookF className="icon" />Sign in with Facebook</button>
+                        <button className="google"><FcGoogle className="icon" />Sign in with Google</button>
+                    </div>
+                    <p className="dont-have-account">Don't have account? <Link to="/SignUp" className="sign-up">Sign Up</Link></p>
                 </div>
-                <div className="socialContainer">
-                    <button className="facebook"><FaFacebookF className="icon"/>Sign in with Facebook</button>
-                    <button className="google"><FcGoogle className="icon"/>Sign in with Google</button>
-                </div>
-                <p className="dont-have-account">Don't have account? <Link to="/SignUp" className="sign-up">Sign Up</Link></p>
             </div>
-
-        </div>
         </>
     )
 }
-
 export default SignIn

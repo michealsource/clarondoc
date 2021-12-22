@@ -18,6 +18,7 @@ import {
 import {Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {Link} from 'react-router-dom'
+import MainLayout from '../MainLayout';
 
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
@@ -68,6 +69,7 @@ function Laboratory() {
     const classes = useStyles();
     const [open, setOpen] = useState(false)
     return (
+        <MainLayout>
         <div>
             <div class="ambulance">
                 <div class="heading-container">
@@ -202,8 +204,8 @@ function Laboratory() {
             </div>
                 
             </div>
-            
         </div>
+        </MainLayout>
     )
 }
 
