@@ -85,7 +85,7 @@ export default function MainLayout({ children }) {
 
                             <div class="main-profile-container">
                                 <div className="user-profile-container">
-                                    <img src={user} alt="" className="user-profile" />
+                                    <img src={user?user.avatar:''} alt="" className="user-profile" />
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
                                 <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>

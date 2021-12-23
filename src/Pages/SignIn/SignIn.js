@@ -20,12 +20,12 @@ function SignIn() {
 
     console.log(user)
     const loginUser = async () => {
-        if(email.length < 6){
+        if(!email){
         return setError('Please provide a valid email address.')
         }
 
-        if(password.length < 6){
-         return  setError('Password minimum length is 6 characters.')
+        if(!password){
+         return  setError('Password field cant be empty.')
         }
         setLoading(true);
 
