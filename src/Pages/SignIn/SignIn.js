@@ -10,6 +10,8 @@ import {login,sociallogin} from '../../Api/Auth'
 import {AuthContext} from '../../Context/AuthContext'
 import Navbar from '../../Component/Navbar/Navbar'
 
+import{GoogleLogin} from 'react-google-login'
+
 function SignIn() {
     let navigate = useNavigate();
     const [email, setEmail] = useState()
@@ -45,6 +47,12 @@ function SignIn() {
     }
 
     // GOOGLE LOGIN
+    const loginSuccess =(res)=>{
+        console.log('login successful', res.profileObj)
+    }
+    const loginFaliure =(res)=>{
+        console.log('login failed',res)
+    }
     return (
         <>
         <Navbar />
@@ -73,7 +81,14 @@ function SignIn() {
                     </div>
                     <div className="socialContainer">
                         <button className="facebook"><FaFacebookF className="icon" />Sign in with Facebook</button>
-                        <button className="google"><FcGoogle className="icon" />Sign in with Google</button>
+                        {/* <button className="google"><FcGoogle className="icon" />Sign in with Google</button> */}
+                        <GoogleLogin
+                        clientId="77071010064-u7nlds7si6bh93bmvs2q5dkb8er0qkaa.apps.googleusercontent.com"
+                        onSuccess={loginSuccess}
+                        onFaliure={loginFaliure}
+                        cookiePolicy={"single_host_origin"}
+                       
+                        />
                     </div>
                     <p className="dont-have-account">Don't have account? <Link to="/SignUp" className="sign-up">Sign Up</Link></p>
                 </div>
