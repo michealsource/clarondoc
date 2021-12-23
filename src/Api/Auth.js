@@ -34,7 +34,6 @@ export const register = async (data,dispatch) => {
 // PATIENT LOGIN
 export const login = async (email, password) => {
     const key = await apiKey()
-
     try{
         const response = await axios({
             method: 'POST',

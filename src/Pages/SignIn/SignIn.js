@@ -18,21 +18,17 @@ function SignIn() {
     const [loading, setLoading] = useState(false)
     const {user,dispatch} = useContext(AuthContext)
 
-    console.log(user)
     const loginUser = async () => {
         if(!email){
         return setError('Please provide a valid email address.')
         }
-
         if(!password){
          return  setError('Password field cant be empty.')
         }
         setLoading(true);
-
         try{
             const response = await login(email, password)
-
-            if(response){
+            if(response.success){
                 setLoading(false)
                 console.log(response)
                 // dispatch({type:"LOGIN_SUCCESS", payload:response})
