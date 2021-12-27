@@ -1,33 +1,36 @@
+
 import React, { useState,useEffect } from 'react'
+import TextField from '@mui/material/TextField';
 import {FaAlignJustify,FaCartPlus} from "react-icons/fa";
 import { Routes, Route, Link } from "react-router-dom"
 import Badge from '@mui/material/Badge';
-import { SidebarMenus } from '../Sidbar/SidebarMenu'
+import {SidebarMenus} from '../DoctorPages/Sidbar/SidebarMenu'
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import DoctorLayout from '../../Pages/DoctorLayout';
-import './Dashboard.css'
+import '../DoctorPages/Dashboard/Dashboard.css'
 // PAGES IMPORTS
-import docuser from '../../images/doc-1.jpg'
-// import LabRequest from '../LabRequest/LabRequest'
-// import PrescribeDrugs from '../PrescribedDrugs/PrescribeDrugs'
-// import Settings from '../Settings/Settings'
-// import Home from '../Home/Home'
-// import DocDrugs from '../PrescribedDrugs/DocDrugs'
-// import Chat from '../Chat/Chat'
-// import DrugHistory from '../DrugPrescriptionHistory/DrugHistory'
-// import LabRequestDoctor from '../LabRequestDoctor/LabRequestDoctor'
-// import Actions from '../Actions/Actions'
+import docuser from '../images/doc-1.jpg'
+import LabRequest from '../DoctorPages/LabRequest/LabRequest'
+import PrescribeDrugs from '../DoctorPages/PrescribedDrugs/PrescribeDrugs'
+import Settings from '../DoctorPages/Settings/Settings'
+import Home from '../DoctorPages/Home/Home'
+import DocDrugs from '../DoctorPages/PrescribedDrugs/DocDrugs'
+import Chat from '../DoctorPages/Chat/Chat'
+import DrugHistory from '../DoctorPages/DrugPrescriptionHistory/DrugHistory'
+import LabRequestDoctor from '../DoctorPages/LabRequestDoctor/LabRequestDoctor'
+import Actions from '../DoctorPages/Actions/Actions'
+import Switch from '../DoctorPages/DocComponent/Switch'
+// import UserDropDown from './UserDropDown'
+import doc from '../images/doc-1.jpg'
 // import DocFacilityRequest from '../DocFacilityRequest/DocFacilityRequest'
 // import DoctorNotification from '../DoctorNotification/DoctorNotification'
 // import UpdateProfile from '../Settings/UpdateProfile'
-import UserDropDown from './UserDropDown'
+// import UserDropDown from './UserDropDown'
 // import Consultations from '../Consultations/Consultations';
 // import Terms from '../Terms/Terms'
 // import About from '../About/About'
-import Switch from '../DocComponent/Switch'
+// import Switch from '../DocComponent/Switch'
 // import CartModal from '../Modals/CartModal'
-// PAGES IMPORTATION
-function Dashboard() {
+function DoctorLayout({ children }) {
     const [open, setOpen] = useState(false)
     const [sidebar, setSidebar] = useState(true)
     const [activeRoute, setActiveRoute] = useState('')
@@ -41,16 +44,16 @@ function Dashboard() {
       const handleClose = () => {
         setAnchorEl(null);
       };
+
     return (
         <>
-        <DoctorLayout/>
-        <div className="static-dashboard">
+            <div className="static-dashboard">
             <div className="dashboard-container">
                 <div className={sidebar?'sidabar-container':'sidebar-container-sm'}>
                         {sidebar?(
                         <>
                             <div className="profile-container doc">
-                            <img src={docuser} alt="" className="user-left" />
+                            <img src={doc} alt="" className="user-left" />
                         </div>
                         <div class="user-detail">
                             <p className="name">Vincent Chibuike</p>
@@ -96,14 +99,17 @@ function Dashboard() {
                             <p className="info-name">Spunky Henry</p>
                             <p>Health Professional</p>
                         </div>
-                        <UserDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>
+                        {/* <UserDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/> */}
                     </div>
                         </div>
 
                     </div>
 
                     {/* =====ROUTES TO DIFFRENT PAGES */}
-                    
+                   
+                </div>
+                <div className="individual-content-lg">
+                    {children}
                 </div>
             </div>
         </div>
@@ -111,4 +117,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard
+export default DoctorLayout

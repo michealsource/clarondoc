@@ -19,6 +19,11 @@ function SignIn() {
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
     const {user,dispatch} = useContext(AuthContext)
+    const [value, setValue] = useState('Patient');
+
+   const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
     const loginUser = async () => {
         if(!email){
@@ -30,12 +35,16 @@ function SignIn() {
         setLoading(true);
         try{
             const response = await login(email, password)
-            if(response.success){
+            if(response.success && value==="Patient"){
                 setLoading(false)
                 console.log(response)
                 // dispatch({type:"LOGIN_SUCCESS", payload:response})
                 navigate("/userDashboard")
-            }else{
+            }
+            else if(response.success && value==="Doctor"){
+                navigate("/doctorDashboard")
+            }
+            else{
                 setError(response.message)
                 setLoading(false)
             }
@@ -47,8 +56,14 @@ function SignIn() {
     }
 
     // GOOGLE LOGIN
-    const loginSuccess =(res)=>{
-        console.log('login successful', res.profileObj)
+    const loginSuccess = async (res)=>{
+      
+        const response = await sociallogin(res.profileObj.email)
+        if(response.success){
+           navigate("/userDashboard") 
+        }else{
+            alert('error trying to navigate')
+        }
     }
     const loginFaliure =(res)=>{
         console.log('login failed',res)
@@ -71,7 +86,7 @@ function SignIn() {
                             onChange={(e) => setPassword(e.target.value)}
                             type="password" placeholder="Password" className="input-field" />
 
-                            {/* <Radio/> */}
+                            <Radio value={value} handleChange={handleChange} />
 
                         <div className="passForgotContainer">
                             <p>forgot Password</p>
@@ -83,7 +98,7 @@ function SignIn() {
                         <button className="facebook"><FaFacebookF className="icon" />Sign in with Facebook</button>
                         {/* <button className="google"><FcGoogle className="icon" />Sign in with Google</button> */}
                         <GoogleLogin
-                        clientId="77071010064-u7nlds7si6bh93bmvs2q5dkb8er0qkaa.apps.googleusercontent.com"
+                        clientId="975805596889-071l5f7rtmfbeqjov22r8i03m6rh5q2j.apps.googleusercontent.com"
                         onSuccess={loginSuccess}
                         onFaliure={loginFaliure}
                         cookiePolicy={"single_host_origin"}

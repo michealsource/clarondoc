@@ -7,10 +7,12 @@ import video from '../../chatimages/video.png'
 import phone from '../../chatimages/phone.png'
 import attachfile from '../../chatimages/attachfile.png'
 import check2 from '../../chatimages/check-2.png'
+import DoctorLayout from '../../Pages/DoctorLayout'
 
 import send from '../../chatimages/send.png'
 function Chat() {
     return (
+		<DoctorLayout>
         <div>
         <div class="container-chat-doc">
 		<div class="chat">
@@ -154,6 +156,7 @@ function Chat() {
 	</div>
 	
         </div>
+		</DoctorLayout>
     )
 }
 

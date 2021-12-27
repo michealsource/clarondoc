@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import doc from '../../images/doc-1.jpg'
 import './Home.css'
+import DoctorLayout from '../../Pages/DoctorLayout';
 import { Patients } from './Patients'
 import { FaPhone, FaVideo, FaRocketchat } from "react-icons/fa";
 function Home() {
@@ -23,6 +24,7 @@ function Home() {
     }
     return (
         <>
+            <DoctorLayout>
             <div class="patients-platform-container">
                 <h2>PATIENTS</h2>
                 <TextField 
@@ -41,7 +43,7 @@ function Home() {
                                 <p><span className="p-title-doc">{patient.email}</span></p>
 
                                 <div className="perform-actions-container">
-                                    <Link to="/Chat">
+                                    <Link to="/ChChatDoctorat">
                                         <FaRocketchat className="phone-doc" />
                                     </Link>
                                     <FaPhone className="phone-doc" />
@@ -52,7 +54,7 @@ function Home() {
                     ))}
                 </div>:<div className="all-patient-container">
                     {data.map(patient => (
-                        <div class="card-container-patient" key={patient.id}>
+                        <div className="card-container-patient" key={patient.id}>
                             <img src={doc} alt="" />
                             <Link to={`/actions/${patient.id}`} className="pat-info-claron-docs">
                                 <p className="p-name-c">{patient.name}</p>
@@ -60,7 +62,7 @@ function Home() {
                                 <p><span className="p-title-doc">{patient.email}</span></p>
 
                                 <div className="perform-actions-container">
-                                    <Link to="/Chat">
+                                    <Link to="/ChatDoctor">
                                         <FaRocketchat className="phone-doc" />
                                     </Link>
                                     <FaPhone className="phone-doc" />
@@ -71,6 +73,7 @@ function Home() {
                     ))}
                 </div>}
             </div>
+            </DoctorLayout>
         </>
     )
 }

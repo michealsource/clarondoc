@@ -77,8 +77,8 @@ function Signup() {
         <>
             <Navbar />
             <div className="wrapper">
-                <div class="inner">
-                    <div class="image-holder">
+                <div className="inner">
+                    <div className="image-holder">
                         <img src={signupimage} alt="" className="sign-up-img" />
                     </div>
                     <form onSubmit={handleSignup} className='sign-up-form'>
@@ -97,22 +97,22 @@ function Signup() {
                             </div>
                         </div>
 
-                        <div class="form-wrapper">
+                        <div className="form-wrapper">
                             <TextField value={email}  onChange={(e)=>setEmail(e.target.value)}  style={{ width: '100%' }} id="outlined-basic" label="Email" variant="outlined" />
                         </div>
 
-                        <div class="form-wrapper">
+                        <div className="form-wrapper">
                             <TextField value={phone} onChange={(e)=>setPhone(e.target.value)}  style={{ width: '100%' }} id="outlined-basic" label="Phone Number" variant="outlined" />
                         </div>
 
                         
 
-                        <div class="form-wrapper">
+                        <div className="form-wrapper">
                             <TextField value={password} onChange={(e)=>setPassword(e.target.value)} style={{ width: '100%' }} id="outlined-basic" label="password" variant="outlined" />
                            
                         </div>
 
-                        <div class="form-group">
+                        <div className="form-group">
                             <div style={{ width: '45%' }}>
                                 <TextField value={age} onChange={(e)=>setAge(e.target.value)} style={{ width: '100%' }} id="outlined-basic" label="Age" variant="outlined" />
                             </div>
@@ -134,7 +134,7 @@ function Signup() {
                                 </FormControl>
                             </div>
                         </div>
-                        <div class="form-wrapper">
+                        <div className="form-wrapper">
                             <TextField value={address} onChange={(e)=>setAddress(e.target.value)} style={{ width: '100%' }} id="outlined-multiline-flexible" label="Physical Address" multiline maxRows={4} />
                         </div>
                         <button disabled={loading}   className="sign-up-button">{ loading ? 'Please wait...' : 'Create Account'}</button>

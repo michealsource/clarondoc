@@ -92,7 +92,8 @@ function Consultation() {
         setOthers(!others)
     }
     return (
-        <MainLayout>
+    
+        
         <div className="doctors">
             <div class="demand-container">
                 <h1 class="heading">Talk to a Health Care <span>Professional</span></h1>
@@ -169,7 +170,7 @@ function Consultation() {
             {openModal && <ModalProfile closeModal={setOpenModal} />}
             <ActionsModal call={call} setCall={setCall}/>
         </div>
-        </MainLayout>
+     
     )
 }
 

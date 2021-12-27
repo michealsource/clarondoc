@@ -101,6 +101,7 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials':true
             }
         })
 
@@ -125,12 +126,14 @@ export const sociallogin = async (email) => {
             },
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': key
+                'x-api-key': key,
+                'Access-Control-Allow-Credentials':true
             },
             options: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
+        console.log(key)
         localStorage.setItem('access-token',response.data.accessToken);
         localStorage.setItem('login-expiry', response.data.tokenExpiryUTC)
         localStorage.setItem('email',email)
@@ -138,6 +141,7 @@ export const sociallogin = async (email) => {
         await userDetails(email, key, response.data.accessToken)
 
         return response.data
+
     }catch(e){
         return {
             message: e.message,//'The credentials you provided are not associated with any account',

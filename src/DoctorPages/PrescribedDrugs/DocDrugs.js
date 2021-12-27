@@ -1,6 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField';
 import drug4 from '../../images/drug-4.jpg'
+import DoctorLayout from '../../Pages/DoctorLayout';
 const drugs = [
     {
         id: 1,
@@ -50,6 +51,7 @@ const drugs = [
 
 function DocDrugs() {
     return (
+        <DoctorLayout>
         <div>
             <div className="doc-prescribe-drugs-container">
                 <h2>Select Drugs for Patient</h2>
@@ -78,6 +80,7 @@ function DocDrugs() {
 
             </div>
         </div>
+        </DoctorLayout>
     )
 }
 

@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import './LabRequest.css'
-import docuser from '../../images/doc-1.jpg'
+// import docuser from '../../images/doc-1.jpg'
 import TextField from '@mui/material/TextField';
 import {Patients} from '../LabRequest/Patient'
 import {Box,Dialog,DialogTitle,DialogContent,IconButton} from '@mui/material';
 import { FiX } from "react-icons/fi";
 import LabTests from '../LabRequest/LabTests'
 import doc from '../../images/doc-1.jpg'
+import DoctorLayout from '../../Pages/DoctorLayout';
 function LabRequest() {
     const[openModal, setOpenModal]= useState(false)
     const [data, setData]= useState(Patients)
@@ -26,6 +27,7 @@ function LabRequest() {
     }
     return (
         <>
+        <DoctorLayout>
         <div class="patients-platform-container">
         <h2>PATIENTS</h2>
         <TextField 
@@ -75,7 +77,7 @@ function LabRequest() {
                    <button className="doc-submit-test">Submit</button>
                 </DialogContent>
             </Dialog>
-            
+            </DoctorLayout>
             </>
     )
 }

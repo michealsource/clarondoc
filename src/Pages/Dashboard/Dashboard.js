@@ -44,6 +44,15 @@ import Chat from '../Chat/Chat'
 import UserProfileDropDown from './UserProfileDropDown'
 
 function Dashboard() {
+    const[user,SetUser]= useState()
+    useEffect(()=>{
+        (async()=>{
+            let account = localStorage.getItem('user')
+            SetUser(JSON.parse(account))
+          })()
+
+          console.log(user)
+    },[])
 
     const [open, setOpen] = useState(false)
     const [sidebar, setSidebar] = useState(true)
@@ -64,7 +73,7 @@ function Dashboard() {
                         {sidebar?(
                         <>
                             <div className="profile-container">
-                            <img src={user} alt="" className="user" />
+                            <img src= {user?user.avatar:''} alt="" className="user" />
                         </div>
                         <div class="user-detail">
                             <p className="name">Vincent Chibuike</p>
@@ -108,7 +117,7 @@ function Dashboard() {
 
                             <div class="main-profile-container">
                                 <div className="user-profile-container">
-                                    <img src={user} alt="" className="user-profile" />
+                                    <img src={user?user.avatar:''} alt="" className="user-profile" />
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
                                 <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>

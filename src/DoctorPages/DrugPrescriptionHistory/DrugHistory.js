@@ -1,9 +1,11 @@
 import React from 'react'
 import './DrugHistory.css'
 import TextField from '@mui/material/TextField';
+import DoctorLayout from '../../Pages/DoctorLayout';
 
 function DrugHistory() {
     return (
+        <DoctorLayout>
         <div className="drug-his-doc-container">
            <h4>DRUGS PRESCRIPTION HISTORY FOR PATIENTS</h4> 
             <TextField label="Search Patient" className="p-sarch-textfield" fullWidth/>
@@ -41,6 +43,7 @@ function DrugHistory() {
             </div>
             </div>
         </div>
+        </DoctorLayout>
     )
 }
 

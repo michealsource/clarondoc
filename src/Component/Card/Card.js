@@ -40,7 +40,7 @@ function Card({sidebar}) {
 
             <div class="first-container">
                 <div class="name-container">
-                    <h4>Hi, {user?user.firstname:'Vincent'}</h4>
+                    <h4>Hi, {user?user.firstname:''}</h4>
                     <p>Welcome Back!</p>
                 </div>
 

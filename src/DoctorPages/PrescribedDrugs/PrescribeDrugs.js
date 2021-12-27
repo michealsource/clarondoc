@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import {Patients} from '../LabRequest/Patient'
 import doc from '../../images/doc-1.jpg'
 import { Link } from "react-router-dom"
+import DoctorLayout from '../../Pages/DoctorLayout';
 
 function PrescribeDrugs() {
     const[openModal, setOpenModal]= useState(false)
@@ -23,6 +24,7 @@ function PrescribeDrugs() {
         }
     }
     return (
+        <DoctorLayout>
         <div class="patients-platform-container">
         <h2>PATIENTS</h2>
         <TextField
@@ -56,6 +58,7 @@ function PrescribeDrugs() {
          ))}   
         </div>}
     </div>
+    </DoctorLayout>
     )
 }
 

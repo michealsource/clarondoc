@@ -2,9 +2,11 @@ import React from 'react'
 import { FaPhoneAlt, FaVideo } from "react-icons/fa";
 // import './DoctorNotification.css'
 import './Consultations.css'
+import DoctorLayout from '../../Pages/DoctorLayout';
 function Consultations() {
     return (
         <>
+        <DoctorLayout>
         <h2 className="consultation-title-doc">CONSULTATIONS</h2>
         <div class="container-notification-card">
             <div className="reject-accept-container">
@@ -44,6 +46,7 @@ function Consultations() {
                 </div>
             </div>
         </div>
+        </DoctorLayout>
         </>
     )
 }
