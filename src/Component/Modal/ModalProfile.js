@@ -3,17 +3,18 @@ import './Modal.css'
 import doctor from '../../images/doc-1.jpg'
 import { FaTimes} from "react-icons/fa";
 
-function ModalProfile({closeModal}) {
+function ModalProfile({closeModal,doctors}) {
     return (
         <div className="modal-background">
             <div class="modal-container">
                 <FaTimes className="close-modal" onClick={()=>closeModal(false)}/>
                 <div class="doctor-name">
                     <img src={doctor} alt="" className="doctor"/>
-                    <h3>Theophilus Tinku</h3>
+                    <h3>{doctors.firstname} {doctors.lastname}</h3>
                 </div>
                 <div class="doctor-title">
                     <p>Medical Laboratory Scientist</p>
+                   
                 </div>
 
                 <div class="about-doctor">

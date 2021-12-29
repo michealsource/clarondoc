@@ -1,11 +1,13 @@
 import React from 'react'
 import './Chat.css'
 import { FaTelegramPlane,FaRegArrowAltCircleUp } from "react-icons/fa";
+import MainLayout from '../MainLayout';
 
 const img = "https://goo.gl/pB9rpQ";
 
 function Chat() {
     return (
+        <MainLayout>
         <div className="chart-cantaner">
             <h4 className="dr-chat-detail">You are Chatting with <span>Dr Fenuku</span></h4>
             <div class="chat-msg-user">
@@ -33,9 +35,8 @@ function Chat() {
 
                 <FaTelegramPlane  className="upload-icon"/>
             </div>
-
-            
         </div>
+        </MainLayout>
     )
 }
 

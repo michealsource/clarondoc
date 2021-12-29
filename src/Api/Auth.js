@@ -86,6 +86,31 @@ export const userDetails = async (email, key, auth) => {
     }
 }
 
+export const downgrade = async () => {
+    const key = await apiKey()
+    const auth = await localStorage.getItem('access-token');
+
+    try{
+        const response = await axios.default.put('https://api.clarondoc.com/subscriptions/downgrade', {},
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`,
+                    'x-api-key': key
+                },
+                options: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+
+        return response.data
+    }catch(e){
+        console.info(e.response.data)
+        return null
+    }
+}
+
 export const apiKey = async (data) => {
     let key = localStorage.getItem('api-key');
   
