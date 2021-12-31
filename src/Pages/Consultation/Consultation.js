@@ -2,14 +2,6 @@ import React, { useState,useEffect } from 'react'
 import { FaInfo } from "react-icons/fa";
 import { FaRegCalendarAlt, FaHeart,FaPhoneAlt } from "react-icons/fa";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
-import doctor from '../../images/doc-1.jpg'
-import { FaTimes} from "react-icons/fa";
-import doc1 from '../../images/doc-1.jpg'
-import doc2 from '../../images/doc-2.jpg'
-import doc3 from '../../images/doc-3.jpg'
-import doc4 from '../../images/doc-4.jpg'
-import doc5 from '../../images/doc-5.jpg'
-import doc6 from '../../images/doc-6.jpg'
 import Box from '@mui/material/Box';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
@@ -19,55 +11,15 @@ import TextField from '@mui/material/TextField';
 import MainLayout from '../MainLayout';
 import moment from 'moment';
 // MODAL IMPORTATION
-import ModalProfile from '../../Component/Modal/ModalProfile';
 import ScheduleAppointment from '../../Component/ScheduleAppointment/ScheduleAppointment'
 import ActionsModal from './ActionsModal';
+import DoctorProfile from './DoctorProfile';
 import './Consultation.css'
 // import PrescriptionModal from '../../Component/PrescriptionModal/PrescriptionModal'
 import { Link } from 'react-router-dom';
 import {userDetails,downgrade} from '../../Api/Auth'
 import { fetchDoctors } from '../../Api/doctors';
 import DocCard from './DocCard';
-
-// DUMMY DOCTORS DATA
-const doctorData = [
-    {
-        id: 1,
-        name: "Theophilus Fenuku",
-        title: "Medical Laboratory Scientist",
-        image: doc1
-    },
-    {
-        id: 2,
-        name: "Bless Ansah Antwi",
-        title: "Laboratory Technologist",
-        image: doc2
-    },
-    {
-        id: 3,
-        name: "Hackel Amoabeng Abban",
-        title: "Nutritionist",
-        image: doc3
-    },
-    {
-        id: 4,
-        name: "Dr Jabez Arthur Otabil",
-        title: "Optometry Eye",
-        image: doc4
-    },
-    {
-        id: 5,
-        name: "Gideon Gyamfi",
-        title: "Physiotherapist",
-        image: doc5
-    },
-    {
-        id: 6,
-        name: "Seth Atta Appiah MD",
-        title: "Medical Doctor",
-        image: doc6
-    }
-]
 
 const style = {
     position: 'absolute',
@@ -86,6 +38,11 @@ function Consultation() {
     const[call, setCall] = useState(false)
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+     const [openP, setOpenP] = React.useState(false);
+     const  handleCloseProfile = () => setOpenP(false);
+     const [selectedData, setSelectedData] = useState({});
+
     const [selectedDate, setSelectedDate] = useState();
     const [others, setOthers] = useState(false)
 
@@ -104,6 +61,11 @@ function Consultation() {
     const changeInput = () => {
         setOthers(!others)
     }
+
+    const handleOpenProfile = (selectedRec) => {
+        setSelectedData(selectedRec);
+        setOpenP(true)
+      };
 
     const checkSubscription = async(date)=>{
 
@@ -195,9 +157,8 @@ useEffect(()=>{
                         <h3 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h3>
                         <span className="title">{doctor.department}</span>
                         <div class="share">
-                            <div class="action-container"
-                                onClick={() => setOpenModal(true)}
-                            >
+                            <div class="action-container" onClick={handleOpenProfile}
+>
                                 <FaInfo className="doctor-icon" />
                                 <span> About</span>
                             </div>
@@ -255,8 +216,41 @@ useEffect(()=>{
                 <div class="box-container">
             
                 {doctors.map((doctor) => (
-                   <DocCard doctor={doctor} setOpenModal={setOpenModal} handleOpen={handleOpen} setCall={setCall} call={call} />
-                    
+                   <div key={doctor.email} class="box" id={doctor.email}>
+                   {doctor.availability === 'Online' ? <div className="active-state">Active</div> : ''}
+   
+                   <img src={doctor.avatar} alt="" />
+                   <h3 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h3>
+                   <span className="title">{doctor.department}</span>
+                   <div class="share">
+                       <div class="action-container"
+                           onClick={()=>handleOpenProfile(doctor)}
+                       >
+                           <FaInfo className="doctor-icon" />
+                           <span> About</span>
+                       </div>
+   
+                       <Link to="/chat" class="action-container">
+                           <BsFillChatSquareTextFill className="doctor-icon" />
+                           <span>Chat</span>
+                       </Link>
+   
+                       <div onClick={handleOpen} class="action-container">
+                           <FaRegCalendarAlt className="doctor-icon" />
+                           <span>Book</span>
+                       </div>
+   
+                       <div class="action-container">
+                           <FaHeart className="doctor-icon" />
+                           <span>Favourite</span>
+                       </div>
+                       <div onClick={() => setCall(!call)} class="action-container">
+                           <FaPhoneAlt className="doctor-icon" />
+                           <span>Call</span>
+                       </div>
+                   </div>
+               </div>
+   
                 ))}
 
                     {/* BOOK DOCTOR MODAL */}
@@ -288,7 +282,7 @@ useEffect(()=>{
                
             </div>
             )}
-            {/* {openModal && <ModalProfile doctors={doctors} closeModal={setOpenModal} />} */}
+            <DoctorProfile selectedData={selectedData} openP={openP} handleCloseProfile={handleCloseProfile} />
             <ActionsModal call={call} setCall={setCall}/>
         </div>
         </MainLayout>

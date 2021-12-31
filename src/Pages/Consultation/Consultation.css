@@ -164,3 +164,35 @@
       border-bottom-left-radius: 5px;
       border-top-right-radius: 5px;
   }
+
+  /* DOCTOR PROFILE COMPONENT STYLING */
+  .doc-profile-dash{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .doc-profile-dash img{
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+  }
+  .profile-name-dash{
+      color: #323030;
+      padding-top: 10px;
+  }
+  .doc-department-dash{
+      padding-top: 5px;
+  }
+
+  .doc-bio{
+      font-size: 18px;
+      color: #6F6E6E;
+  }
+
+  .bio-container-dash{
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+  }

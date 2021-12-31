@@ -8,25 +8,9 @@ import DoctorLayout from '../../Pages/DoctorLayout';
 import './Dashboard.css'
 // PAGES IMPORTS
 import docuser from '../../images/doc-1.jpg'
-// import LabRequest from '../LabRequest/LabRequest'
-// import PrescribeDrugs from '../PrescribedDrugs/PrescribeDrugs'
-// import Settings from '../Settings/Settings'
-// import Home from '../Home/Home'
-// import DocDrugs from '../PrescribedDrugs/DocDrugs'
-// import Chat from '../Chat/Chat'
-// import DrugHistory from '../DrugPrescriptionHistory/DrugHistory'
-// import LabRequestDoctor from '../LabRequestDoctor/LabRequestDoctor'
-// import Actions from '../Actions/Actions'
-// import DocFacilityRequest from '../DocFacilityRequest/DocFacilityRequest'
-// import DoctorNotification from '../DoctorNotification/DoctorNotification'
-// import UpdateProfile from '../Settings/UpdateProfile'
 import UserDropDown from './UserDropDown'
-// import Consultations from '../Consultations/Consultations';
-// import Terms from '../Terms/Terms'
-// import About from '../About/About'
 import Switch from '../DocComponent/Switch'
-// import CartModal from '../Modals/CartModal'
-// PAGES IMPORTATION
+
 function Dashboard() {
     const [open, setOpen] = useState(false)
     const [sidebar, setSidebar] = useState(true)

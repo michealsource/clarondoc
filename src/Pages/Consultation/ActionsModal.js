@@ -20,7 +20,6 @@ const style = {
 
 function ActionsModal({call,setCall}) {
 //   const [open, setOpen] = useState(true);
-  const handleOpen = () => setCall(true);
   const handleClose = () => setCall(false);
     return (
         <div>

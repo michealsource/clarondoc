@@ -11,7 +11,7 @@ import MomentUtils from '@date-io/moment';
 import 'date-fns';
 import Modal from '@mui/material/Modal';
 // MODAL IMPORTATION
-import ModalProfile from '../../Component/Modal/ModalProfile';
+// import ModalProfile from '../../Component/Modal/ModalProfile';
 import ScheduleAppointment from '../../Component/ScheduleAppointment/ScheduleAppointment'
 import './SavedDoctors.css'
 
@@ -114,7 +114,7 @@ function SavedDoctors() {
                     </Box>
                 </Modal>
             </div>
-            {openModal && <ModalProfile closeModal={setOpenModal} />}
+            {/* {openModal && <ModalProfile closeModal={setOpenModal} />} */}
         </div>
     )
 }
