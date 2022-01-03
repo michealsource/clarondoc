@@ -101,7 +101,6 @@ function Chat() {
             if (true) {
                 setmessage('')
                 setattachment(null)
-                alert('messege sent successfully')
                 // setloading(true)
                 // startStream()
             } else {
@@ -132,9 +131,7 @@ function Chat() {
         });
     }
     useEffect(() => {
-        
         (async () => {
-           alert('checked')
             let account = localStorage.getItem("user")
             let token = localStorage.getItem('access-token')
             let key = localStorage.getItem('api-key');
@@ -145,12 +142,7 @@ function Chat() {
                 setUser(data)
                 loadfirebasechat(data)
             })
-
-           
-            console.log(conversation)
-            console.log('reachedddfffff')
         })()
-        
     }, [])
 
  
@@ -161,7 +153,7 @@ function Chat() {
 
                 <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname}</span></h4>
 
-                {conversation.map(chat => {
+                {conversation.length> 0? conversation.map(chat => {
                     
                     return (
                         <>
@@ -177,7 +169,7 @@ function Chat() {
 
                         </>
                     )
-                })}
+                }):'Loading Chat'}
                 <div>
                     {image ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
                             </div>
