@@ -16,7 +16,8 @@ import ActionsModal from './ActionsModal';
 import DoctorProfile from './DoctorProfile';
 import './Consultation.css'
 // import PrescriptionModal from '../../Component/PrescriptionModal/PrescriptionModal'
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import {userDetails,downgrade} from '../../Api/Auth'
 import { fetchDoctors } from '../../Api/doctors';
 import DocCard from './DocCard';
@@ -47,11 +48,15 @@ function Consultation() {
     const [others, setOthers] = useState(false)
 
     const [doctors, setDoctors] = useState([])
+    const [selected, setSelected]= useState({})
+
     const [user, setUser] = useState({})
     const [expiry, setexpiry] = useState()
     // Search State
     const [filtered,setFiltered]= useState([]);
     const [searchInput, setSearchInput] = useState("")
+
+    const navigate = useNavigate()
 
     const handleDateChange = (date) => {
         console.log(date);
@@ -62,10 +67,14 @@ function Consultation() {
         setOthers(!others)
     }
 
+    // HANDLING PROFILE PAGE
     const handleOpenProfile = (selectedRec) => {
         setSelectedData(selectedRec);
         setOpenP(true)
       };
+
+    // SPECIFIC DOCTOR ROUTE FUNCTION
+    
 
     const checkSubscription = async(date)=>{
 
@@ -108,7 +117,7 @@ useEffect(()=>{
     (async()=>{
         let account = localStorage.getItem('user')
         let token  = localStorage.getItem('access-token')
-        let key = localStorage.getItem('api-key');
+        let key =    localStorage.getItem('api-key');
         setUser(JSON.parse(account))
 
         let found = await fetchDoctors()
@@ -230,10 +239,10 @@ useEffect(()=>{
                            <span> About</span>
                        </div>
    
-                       <Link to="/chat" class="action-container">
+                       <div onClick={()=>navigate('/chat',{state:doctor})}  class="action-container">
                            <BsFillChatSquareTextFill className="doctor-icon" />
                            <span>Chat</span>
-                       </Link>
+                       </div>
    
                        <div onClick={handleOpen} class="action-container">
                            <FaRegCalendarAlt className="doctor-icon" />

@@ -3,9 +3,11 @@
     padding: 20px;
     border-radius: 10px;
     width: 80%;
+    height: auto;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     margin-top: 50px;
     margin-left: 20px;
+    margin-bottom: 100px;
 }
 
 .chat-msg-user{
@@ -20,7 +22,7 @@
 }
 
 .chat-msg-doc{
-    background: #0b5727;
+    background: #16a085;
     border-radius: 10px;
     padding: 20px;
     color: #fff;
@@ -28,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    margin-left: 40px;
+    margin-left: 50px;
 }
 
 .chat-text{
@@ -67,6 +69,7 @@
 
 .input-chat-conatiner{
     margin-top: 20px;
+    margin-bottom: 70px;
 }
 
 .dr-chat-detail{
@@ -76,4 +79,9 @@
 
 .dr-chat-detail span{
     color: #61cd88;
+}
+
+.msg-img{
+    width: 200px;
+    height: 300px;
 }

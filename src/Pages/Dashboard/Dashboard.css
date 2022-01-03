@@ -68,12 +68,15 @@
     margin-top: 10px;
 }
 
+
+
 .user{
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50%;
 }
 
 .user-detail{
@@ -144,6 +147,7 @@ color: whitesmoke;
     display: block;
     width: 50px;
     height: 50px;
+    border-radius: 2px;
 }
 
 .navbar-container{

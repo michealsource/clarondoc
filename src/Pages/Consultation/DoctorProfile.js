@@ -20,30 +20,10 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
         p: 4,
       };
 
-    // const [open, setOpen] = React.useState(false);
-    // const handleOpenProfile = () => setOpen(true);
-    // const handleCloseProfile = () => setOpen(false);
     return (
-        // <div className="modal-background">
-        //     <div class="modal-container">
-        //         <FaTimes className="close-modal" onClick={()=>closeModal(false)}/>
-        //         <div class="doctor-name">
-        //             <img src={doctor} alt="" className="doctor"/>
-        //             <h3>{doctors.firstname} {doctors.lastname}</h3>
-        //         </div>
-        //         <div class="doctor-title">
-        //             <p>Medical Laboratory Scientist</p>
-                   
-        //         </div>
-
-        //         <div class="about-doctor">
-        //             <h2>About</h2>
-        //             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reprehenderit excepturi soluta error eveniet repellat dicta tempore, odio ducimus repellendus?</p>
-        //         </div>
-        //     </div>
-        // </div>
+     
         <div>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
+
         <Modal
           open={openP}
           onClose={handleCloseProfile}

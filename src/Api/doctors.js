@@ -28,7 +28,7 @@ export const fetchDoctors = async () => {
 export const makeBooking = async (data) => {
 
     const key = await apiKey()
-    const auth = await localStorage.getItem('access-token');
+    const auth = localStorage.getItem('access-token');
 
     const response = await axios({
         method: 'POST',
@@ -70,8 +70,8 @@ export const onDemandBooking = async (data) => {
 
 export const myBookings = async () => {
     const key = await apiKey()
-    const auth = await  localStorage.getItem('access-token');
-    const email = await localStorage.getItem('email');
+    const auth = localStorage.getItem('access-token');
+    const email = localStorage.getItem('email');
 
     const response = await axios({
         method: 'GET',
@@ -87,7 +87,7 @@ export const myBookings = async () => {
 }
 
 export const apiKey = async (data) => {
-    let key = await localStorage.getItem('api-key');
+    let key = localStorage.getItem('api-key');
 
     if(key != null){
         return key
@@ -106,7 +106,7 @@ export const apiKey = async (data) => {
 
         key = response.data.apiKey
 
-        await localStorage.getItem('api-key', key)
+        localStorage.getItem('api-key', key)
 
         return key
     }

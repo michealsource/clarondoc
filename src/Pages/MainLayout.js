@@ -20,8 +20,6 @@ export default function MainLayout({ children }) {
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
           })()
-
-          console.log(user)
     },[])
   const [open, setOpen] = useState(false)
   const [sidebar, setSidebar] = useState(true)
@@ -45,7 +43,7 @@ export default function MainLayout({ children }) {
               <div className="profile-container">
                 <img src={user?user.avatar:''} alt="" className="user" />
               </div>
-              <div class="user-detail">
+              <div className="user-detail">
                 <p className="name">{user?user.firstname:''} {user?user.lastname:''}</p>
                 <p className="title">Patient</p>
               </div>
@@ -65,9 +63,9 @@ export default function MainLayout({ children }) {
           </div>
           <div>
           <div className="content">
-                    <div class="content-container">
+                    <div className="content-container">
 
-                        <div class={sidebar?'navbar-container':'navbar-container-full'}>
+                        <div className={sidebar?'navbar-container':'navbar-container-full'}>
                             <div className="menu-container">
                                 <FaAlignJustify className="menu-icon" onClick={()=>setSidebar(!sidebar)}/>
                             </div>
@@ -83,7 +81,7 @@ export default function MainLayout({ children }) {
                             <h5>Health Tips</h5>
                             </Link>
 
-                            <div class="main-profile-container">
+                            <div className="main-profile-container">
                                 <div className="user-profile-container">
                                     <img src={user?user.avatar:''} alt="" className="user-profile" />
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
