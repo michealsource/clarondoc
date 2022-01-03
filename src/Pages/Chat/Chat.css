@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 .chat-text{
@@ -47,7 +47,6 @@
 
 .input-chat-conatiner{
     display: flex;
-    
     align-items: center;
     
 }
@@ -84,4 +83,9 @@
 .msg-img{
     width: 200px;
     height: 300px;
+}
+
+.upload-image-attachment{
+    max-width: 50%;
+    height: 50%;
 }
