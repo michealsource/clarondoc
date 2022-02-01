@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './Ambulance.css'
 import Modal from 'react-modal'
 import { FaTimes } from "react-icons/fa";
@@ -22,6 +22,8 @@ import MainLayout from '../MainLayout';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import * as API from '../../Api/pharmacy'
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -64,9 +66,34 @@ function Ambulance() {
         console.log(date);
         setSelectedDate(date);
     };
-
     const classes = useStyles();
     const [open, setOpen] = useState(false)
+
+    // GETTING AMBULANCE HISTORY STATE
+    const [bookings, setBookings] = useState([])
+    const [filtered, setFiltered] = useState([])
+    const [loaded, setLoaded] = useState(false)
+
+    useEffect(()=>{
+        (async()=>{
+    
+          if(!loaded){
+            try{
+                let res
+                res = await API.myAmbulanceRequests()
+                setBookings(res.requests)
+                setFiltered(res.requests.filter(request=>request.status === 'Completed'))
+                console.log(filtered)
+                
+            }catch(e){
+              console.log(e)
+            }
+            setLoaded(true)
+          }
+    
+        })()
+      })
+    
     return (
         <MainLayout>
         <div>
@@ -82,12 +109,12 @@ function Ambulance() {
                 <div class="ambulance-container">
                     <div class="appointment-container-box">
                         <div class="appointment-box one">
-                            <div className="upcoming-num">0</div>
+                            <div className="upcoming-num">{filtered.length}</div>
                             <p>Completed Bookings</p>
                         </div>
 
                         <div class="appointment-box two">
-                            <div className="pending-num">0</div>
+                            <div className="pending-num">{bookings.length}</div>
                             <p>Pending Bookings</p>
                         </div>
 
@@ -274,40 +301,30 @@ function Ambulance() {
             <div class="row-his">
                 <div className="column-his-1">
                     <div className="head-his">
-                        <h4>Rountine Doctors Consultations</h4>
-                        <p>Processing</p>
-                    </div>
+                        <h4>REQUEST DETAILS</h4>
+                        {/* <p>Processing</p> */}
+                </div>
 
-                <div class="col-container">
-                    <div class="his-container-title">
-                        <p>Requuest ID:</p>
-                        <p>Schedule Date:</p>
-                        <p>Gender:</p>
-                        <p>Patient Name:</p>
-                        <p>Symptoms:</p>
-                        <p>Phone:</p>
-                        <p>Email:</p>
-                        <p>Lab Test</p>
+                <div >
+             
+                    <div class="his-container-cont">
+                        {bookings.map((value)=>(
+                            <>
+                            <div className='single-ambulance'>
+                            <div style={{display:'flex'}}><p className='a-head'>Address</p> <p>{value.pickup}</p> </div>
+                            <div style={{display:'flex'}}><p className='a-head'>Emergency</p> <p>{value.conditions[0]}</p> </div>
+                            <div style={{display:'flex'}}><p className='a-head'>Comments</p> <p>{value.conditions[1]}</p> </div>
+                            <div className='divider'></div>
+                            <div style={{display:'flex'}}><p className='a-head'>Requested On</p> <p>{new Date(value.createDate).toString().substring(0, 21)}</p> </div>
+                            </div>
+                            </>
+                        ))}
                         
                     </div>
-
-                    <div class="his-container-cont">
-                        <p>hyr9jnds98-57yhdf-irydrhbd</p>
-                        <p>12/01/2021 12:15 AM</p>
-                        <p>Male</p>
-                        <p>Gulus</p>
-                        <p>N.A</p>
-                        <p>0803445687347</p>
-                        <p>gulus@gmail.com</p>
-                        <p>fasting,Blood Sugar</p>
-                    </div>
-                   
                 </div>
 
                 </div>
-
             </div>
-
         </div>
                         </Panel>
                         <Panel value={index} index={1}>
@@ -315,34 +332,25 @@ function Ambulance() {
             <div class="row-his">
                 <div className="column-his-1">
                     <div className="head-his">
-                        <h4>Rountine Doctors Consultations</h4>
-                        <p>Completed</p>
+                    <h4>REQUEST DETAILS</h4>
+                    
                     </div>
 
-                <div class="col-container">
-                    <div class="his-container-title">
-                        <p>Requuest ID:</p>
-                        <p>Schedule Date:</p>
-                        <p>Gender:</p>
-                        <p>Patient Name:</p>
-                        <p>Symptoms:</p>
-                        <p>Phone:</p>
-                        <p>Email:</p>
-                        <p>Lab Test</p>
-                        {/* <Link to="/OrderReview" className="drug-his-btn-h">Make Payment</Link> */}
+                <div>
+                <div class="his-container-cont">
+                        {filtered.length>0?bookings.map((value)=>(
+                            <>
+                            <div className='single-ambulance'>
+                            <div style={{display:'flex'}}><p className='a-head'>Address</p> <p>{value.pickup}</p> </div>
+                            <div style={{display:'flex'}}><p className='a-head'>Emergency</p> <p>{value.conditions[0]}</p> </div>
+                            <div style={{display:'flex'}}><p className='a-head'>Comments</p> <p>{value.conditions[1]}</p> </div>
+                            <div className='divider'></div>
+                            <div style={{display:'flex'}}><p className='a-head'>Requested On</p> <p>{new Date(value.createDate).toString().substring(0, 21)}</p> </div>
+                            </div>
+                            </>
+                        )):'No request to show'}
+                        
                     </div>
-
-                    <div class="his-container-cont">
-                        <p>hyr9jnds98-57yhdf-irydrhbd</p>
-                        <p>12/01/2021 12:15 AM</p>
-                        <p>Male</p>
-                        <p>Gulus</p>
-                        <p>N.A</p>
-                        <p>0803445687347</p>
-                        <p>gulus@gmail.com</p>
-                        <p>fasting,Blood Sugar</p>
-                    </div>
-                   
                 </div>
 
                 </div>

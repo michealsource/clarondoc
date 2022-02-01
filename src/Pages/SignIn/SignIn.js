@@ -42,7 +42,7 @@ function SignIn() {
                 // dispatch({type:"LOGIN_SUCCESS", payload:response})
                 navigate("/userDashboard")
             }
-            else if (response.success && value === "Doctor") {
+            else if (response.success && value === "Doctor" ) {
                 navigate("/doctorDashboard")
             }
             else {

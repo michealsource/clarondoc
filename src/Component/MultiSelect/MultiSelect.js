@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState,useEffect}from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -14,22 +15,10 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
-      marginTop:15
     },
   },
 };
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+
 
 function getStyles(name, personName, theme) {
   return {
@@ -40,32 +29,53 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip({name}) {
+
+export default function MultiSelect({filterednames, getTest}) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [testName, setTestName] = useState([]);
+  const [savedData, setSavedData] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [names,setNames]= useState(filterednames)
+
+  
   const handleChange = (event) => {
+    console.log(event)
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    setTestName(value)
+    getTest(savedData, total)
+    setTotal(calculateTotal(value))
   };
+
+
+
+  const calculateTotal = (data)=>{
+    const totalTest =[]
+    data.map(p => {
+      const singleTest = p.split('GHS')[1]
+     return  totalTest.push(Number(singleTest))
+    })
+    return totalTest.reduce((v,t)=> v+t) 
+  }
+
+
   return (
     <div>
-      <FormControl sx={{width: 450 }}>
-        <InputLabel id="demo-multiple-chip-label" cl>{name}</InputLabel>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-chip-label">Select</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={testName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
+              { setSavedData(selected)}
+              {
+              selected.map((value) => (
                 <Chip key={value} label={value} />
               ))}
             </Box>
@@ -76,7 +86,7 @@ export default function MultipleSelectChip({name}) {
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, personName, theme)}
+              style={getStyles(name, testName, theme)}
             >
               {name}
             </MenuItem>

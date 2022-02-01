@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Drugs.css'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-
 import drug from '../../images/drug.png'
 import labrequest from '../../images/labrequest.png'
 import pharmacist from '../../images/pharmacist.png'
 import MainLayout from '../MainLayout';
+import * as API from '../../Api/pharmacy'
 
 const style = {
   position: 'absolute',
@@ -25,6 +25,29 @@ function Drugs() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [bookings, setBookings] = useState([])
+  const [filtered, setFiltered] = useState([])
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(()=>{
+    (async()=>{
+
+      if(!loaded){
+        try{
+            let res
+            res = await API.myPharmacyOrders()
+            setBookings(res.orders)
+            setFiltered(res.orders)
+            console.log(bookings)
+        }catch(e){
+          console.log(e)
+        }
+        setLoaded(true)
+      }
+
+    })()
+  })
   return (
     <MainLayout>
     <div className="drugs-container">
@@ -53,59 +76,45 @@ function Drugs() {
         <section class="two-column">
         <div class="histry-box">
           <div class="drugs-hisory-container">
-              <div className="drug-histor-title">
-                <p>Status: <span className="drugs-status">Pending</span></p>
-                <p>Order Id:</p>
-                <p>Order Date:</p>
-                <p>Delivery Type:</p>
-                <p>Prescription:</p>
-                <p>Drug Name:</p>
-                <p>Total:</p>
+              <div className="his-container-cont-drug">
+                {bookings.map((item)=>(
+                  <>
+                {filtered.length>0?bookings.map((item)=>(
+                            <>
+                            <div className='single-drug-history'>
+                            <h6>PHARMACY ORDER</h6>  
+                            <div className='order-contain'>
+                             {item.drugsOrdered.map(drug=>(
+                               <>
+                               <p className='drug-n'>{drug.drugName} X <span>{drug.quantity}</span></p>
+                               
+                               </>
+                             ))}
+                              
+                            </div>
+                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Ordered On:</p> <p>{new Date(item.createDate).toString().substring(0, 21)}</p> </div>
+                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Order Status: </p> <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> </div>
+                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Ordered Type:</p> <p>{item.deliveryOption}</p> </div>
+                            <div className='divider'></div>
+                            { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''}
+                            
+                            </div>
+                            </>
+                        )):'No request to show'}
+                  </>
+
+                ))}
+               
               </div>
 
-              <div className="drug-history-values">
-                <p></p>
-                <p></p>
-                <p>69cf33ffbe-6013-4cf-ab6e-151200110c7d2</p>
-                <p>09/11/2021 12:25 AM</p>
-                <p>Not stated</p>
-                <p>not required</p>
-                <p>ZINCVIT SYRUP</p>
-                <p className="price-drugs">GHS 26.66</p>
-                <Link to="/OrderReview" className="drug-his-btn">Make Payment</Link>
-              </div>
+               
+                
+           
 
             </div>
 
           </div>
 
-          <div class="histry-box">
-          <div class="drugs-hisory-container">
-              <div className="drug-histor-title">
-                <p>Status: <span className="drugs-status">Pending</span></p>
-                <p>Order Id:</p>
-                <p>Order Date:</p>
-                <p>Delivery Type:</p>
-                <p>Prescription:</p>
-                <p>Drug Name:</p>
-                <p>Total:</p>
-              </div>
-
-              <div className="drug-history-values">
-                <p></p>
-                <p></p>
-                <p>69cf33ffbe-6013-4cf-ab6e-151200110c7d2</p>
-                <p>09/11/2021 12:25 AM</p>
-                <p>Not stated</p>
-                <p>not required</p>
-                <p>ZINCVIT SYRUP</p>
-                <p className="price-drugs">GHS 26.66</p>
-                <Link to="/OrderReview" className="drug-his-btn">Make Payment</Link>
-              </div>
-
-            </div>
-
-          </div>
         </section>
 
 

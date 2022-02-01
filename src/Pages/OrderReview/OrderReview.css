@@ -56,3 +56,15 @@
 .mobile-money-heading{
     margin-bottom: 20px;
 }
+
+.card-error{
+    color: red;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.phone-error{
+    color: red;
+    font-size: 20px;
+    margin-bottom: 10px;
+}

@@ -113,11 +113,10 @@ margin-bottom: 15px;
     background-color: #fff;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
+    padding: 10px;
     margin-bottom: 80px;
-    margin-right: 10px;
+   margin-left: 10px;
+    width: 1050px;
 }
 
 .drug-histor-title p{
@@ -147,14 +146,61 @@ margin-bottom: 15px;
 }
 
 .drug-his-btn{
-    background: #f8343d;
-    color: #fff;
-    padding: 10px;
-    font-size: 17px;
-    border-radius: 5px;
+    background: #caebe7;
+    color: #168171;
+    padding: 8px;
+    font-size: 12px;
+    border-radius: 3px;
     cursor: pointer;
 }
 
 .two-column{
     display: flex;
+}
+
+.single-drug-history{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 10px;
+    padding: 8px;
+}
+
+.his-container-cont-drug{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;	
+}
+
+.a-head{
+   padding-right: 20px;
+  
+}
+
+.order-contain{
+  margin-top: 10px;
+}
+
+.order-contain span{
+background: #168171;
+color: #fff;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+padding: 5px;
+
+}
+
+.drug-n{
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+.pending{
+    color: #f9df06;
+}
+
+.danger{
+    color: red;
+}
+
+.success{
+    color: #53c8ab;
 }

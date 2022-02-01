@@ -68,6 +68,7 @@
       justify-content: space-between;
       padding: 20px;
       color: #0d2344;
+      margin-bottom: 10px;
   }
 
   .drug-his-btn-h{
@@ -82,3 +83,25 @@
     align-items: center;
     margin-left: 350px;
   }
+
+  .single-home-car{
+   margin-right: 20px;
+   padding: 10px;
+   margin-bottom: 20px;
+   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .col-container-home{
+    display: grid;
+    grid-template-columns: 50% 50% ;	
+    margin-top: 20px;
+  }
+
+  .symtomss{
+   font-size: 20px;
+  }
+
+  .pending{
+    color: #f9df06;
+  }
+  

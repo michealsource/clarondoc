@@ -51,6 +51,26 @@ function Chat() {
         }
     }
 
+    const uriToBlob = (uri) => {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.onload = function() {
+            // return the blob
+            resolve(xhr.response);
+          };
+          
+          xhr.onerror = function() {
+            // something went wrong
+            reject(new Error('uriToBlob failed'));
+          };
+          // this helps us get a blob
+          xhr.responseType = 'blob';
+          xhr.open('GET', uri, true);
+          
+          xhr.send();
+        });
+      }
+
     const chat_code = (patient, doctor) => {
         return patient + '-' + doctor;
     }
@@ -68,12 +88,12 @@ function Chat() {
             // var name = getFileName(attachment.name, path);
 
             try {
-                // var blob = await uriToBlob(attachment.uri);
+                var blob = await uriToBlob(attachment.image);
                 // let attached = await firebase.storage().ref(`new-attaches/${name}`).put(blob, {contentType: type})
                 // url = await firebase.storage().ref(`new-attaches`).child(name).getDownloadURL()
-                // console.log(url)
-                // setsendingNow(false)
-                // return false;
+                console.log(url)
+                setsendingNow(false)
+                return false;
             } catch (e) {
                 console.log('*****')
                 console.log(e)
@@ -86,7 +106,7 @@ function Chat() {
             let sen = {
                 message: messag.trim(),
                 recipient: state.email,
-                attachment: 'https://www.manchestereveningnews.co.uk/sport/football/football-news/man-city-tuchel-chelsea-liverpool-22624756',
+                attachment: url,
                 file_type: type,
                 sender: user.email,
                 symptoms: [],

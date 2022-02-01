@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Request.css'
 import { makeStyles } from '@mui/styles';
-import { TextField,FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { TextField, FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { MuiPickersUtilsProvider, KeyboardDatePicker, DateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
-import MultipleSelect from '../MultiSelect/MultiSelect';
+import { fetchDoctors } from '../../Api/doctors';
+import { getLabTests } from '../../Api/lab';
+import MultiSelect from '../MultiSelect/MultiSelect';
 import MomentUtils from '@date-io/moment';
-import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import MainLayout from '../../Pages/MainLayout';
+import MenuItem from '@mui/material/MenuItem';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import Select from '@mui/material/Select';
+import { Formik,Form } from 'formik';
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -17,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
     textField: {
         width: '100%',
-        marginBottom:'25px !important'
+        marginBottom: '25px !important'
     },
     dateTime: {
         marginTop: 20,
@@ -25,173 +34,237 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function FacilityRequest() {
+function FacilityRequest({testName}) {
+    const navigate = useNavigate()
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState();
 
     const handleDateChange = (date) => {
-        console.log(date);
-        setSelectedDate(date);
+        setSelectedDate(date.toDate());
+        console.log(date.toDate());
     };
+
+    // MAIN FRORM STATE
+    let testnames = []
+    const [tests, settests] = useState([])
+    const [labtestnames, setlabtestnames] = useState([])
+    const [filterednames, setfilterednames] = useState(testnames)
+    const [isfacility, setisfacility] = useState(false)
+    const [facilitymodal, setfacilitymodal] = useState(false)
+    const [name, setName] = useState()
+    const [user, setuser] = useState()
+    const [pendingtime, setpendingtime] = useState(false)
+    const [labs, setLabs] = useState([])
+    const [labtests, setlabtests] = useState([])
+    const [dob, setDob] = useState(new Date())
+    const [purpose, setPurpose] = useState('')
+    const [doctors, setdoctors] = useState([])
+    const [value, setValue] = useState();
+    const [doctor, setdoctor] = useState()
+    const [phone, setPhone] = useState('')
+    const [sex, setSex] = useState(0)
+    const [doc, setdoc] = useState('')
+    const [facility, setfacility] = useState({
+        name: '',
+        location: '',
+        department: '',
+        diagnosis: ''
+    })
+    const [address, setAddress] = useState('')
+    const [labTests, setLabTests] = useState([])
+    const [totalCost, setTotalCost] = useState(0)
+
+    // FORMIK INITIAL VALUES
+    const initialValues={
+        name:'',
+        doctor:'',
+        picked:'',
+        
+        
+    }
+
+
+    useEffect(() => {
+
+        (async () => {
+            try {
+                let account = localStorage.getItem('user')
+                setuser(JSON.parse(account))
+                let found = await fetchDoctors()
+                setdoctors(found)
+                setdoc(found[0].firstname + ' ' + found[0].lastname)
+                let data = await getLabTests()
+                settests(data)
+                data.map(test => {
+                    return testnames.push(`${test.name} - GHS ${test.charges.toFixed(2)}`)
+                })
+            } catch (e) {
+                alert('Error', e.message)
+            }
+        })()
+    }, [])
+
+    const getTests = (test, total) => {
+        console.log(test,total, "frm arent")
+        setLabTests(test)
+        setTotalCost(total)
+    }
+
+    // console.log(labTests,totalCost, "frm arent")
     return (
-        <div className="individual-request-container-outer">
-            <div class="inner-individual-container-request">
-                <h2>MEDICAL FACILITY REQUEST</h2>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Enter Patient Name"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Enter Requesting Doctor Name"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
-                    </Grid>
-                </Grid>
-
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Gender</FormLabel>
-                            <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-                                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
-                            <KeyboardDatePicker
-                                InputAdornmentProps={{ position: "end" }}
-                                inputVariant="outlined"
-                                label="Select Date of Birth"
-                                value={selectedDate}
-                                onChange={handleDateChange}
+        <MainLayout >
+            <div className="individual-request-container-outer">
+                <div class="inner-individual-container-request">
+                    <h2>LABORATORY</h2>
+                    <Formik initialValues={initialValues}>
+                        {(props)=>(
+                            <Form>
+                                <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Enter Patient Name"
+                                variant="outlined"
+                                value={name}
+                                onChangeText={(e) => setName(e.target.value)}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    className: classes.floatingLabelFocusStyle,
+                                }}
                             />
-                        </MuiPickersUtilsProvider>
-                    </Grid>
-                </Grid>
+                        </Grid>
 
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Enter Requesting Doctor Name"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
-                    </Grid>
+                        <Grid item xs={6}>
 
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Name of Facility"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
+                            <FormControl sx={{ minWidth: 150 }} fullWidth>
+                                <Select
+                                    onChange={(e) => {
+                                        const selectedDoctor = e.target.value;
+                                        setValue(selectedDoctor)
+                                    }}
+                                    displayEmpty
+                                    inputProps={{ 'aria-label': 'Without label' }}
+                                >
+                                    <MenuItem selected value="">
+                                        <em disa>Select Requesting Doctor</em>
+                                    </MenuItem>
+                                    {doctors.map(doc => <MenuItem key={doc.email} value={doc.firstname}>{doc.firstname + ' ' + doc.lastname}</MenuItem>)}
+                                </Select>
+
+                            </FormControl>
+                        </Grid>
                     </Grid>
 
-                </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Gender</FormLabel>
+                                <RadioGroup  row aria-label="gender" name="row-radio-buttons-group">
+                                    <FormControlLabel name="picked" value="female" control={<Radio />} label="Female" />
+                                    <FormControlLabel name="picked" value="male" control={<Radio />} label="Male" />
+                                </RadioGroup>
+                            </FormControl>
+                        </Grid>
 
+                        <Grid item xs={6}>
+                            <div className="date">
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        fullWidth
+                                        label="Date of Birth"
+                                        value={dob}
+                                        onChange={(newValue) => {
+                                            setDob(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </div>
 
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Facility Location"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
+                        </Grid>
                     </Grid>
 
-                    <Grid item xs={6}>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
-                            <DateTimePicker
-                                className={classes.dateTime}
-                                InputAdornmentProps={{ position: "end" }}
-                                inputVariant="outlined"
-                                label="Select Propse Date and Time"
-                                value={selectedDate}
-                                onChange={handleDateChange}
+                    <Grid container spacing={2}>
+
+                        <Grid item xs={6}>
+                            <TextField
+                                value={address}
+                                onChange={e => { setAddress(e.target.value) }}
+                                id="outlined-basic"
+                                label="Physical Address"
+                                variant="outlined"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    className: classes.floatingLabelFocusStyle,
+                                }}
                             />
-                        </MuiPickersUtilsProvider>
-                    </Grid>
-                </Grid>
+                        </Grid>
 
+                        <Grid item xs={6}>
+                            <TextField
+                                value={phone}
+                                onChange={e => { setPhone(e.target.value) }}
+                                id="outlined-basic"
+                                label="Phone Number"
+                                variant="outlined"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    className: classes.floatingLabelFocusStyle,
+                                }}
+                            />
+                        </Grid>
 
-                <Grid container spacing={5}>
-                    {/* <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Enter Name Alias"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
-                    </Grid> */}
-
-                    <Grid item xs={12} className={classes.dateTime}>
-                        <MultipleSelect />
-                    </Grid>
-                </Grid>
-
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Department (optional)"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
                     </Grid>
 
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Diagnosis"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                value={purpose}
+                                onChange={e => { setPurpose(e.target.value) }}
+                                id="outlined-basic"
+                                label="Purpose of Test"
+                                variant="outlined"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    className: classes.floatingLabelFocusStyle,
+                                }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <MuiPickersUtilsProvider utils={MomentUtils}>
+                                <DateTimePicker
+                                    fullWidth
+                                    // className={classes.dateTime}
+                                    InputAdornmentProps={{ position: "end" }}
+                                    inputVariant="outlined"
+                                    label="Select Propse Date and Time"
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </Grid>
                     </Grid>
 
-                </Grid>
-                <Link to ="/OrderReview" className="mobile-lab-btn">
-                Submit Request
-                </Link>
+
+                    <Grid container spacing={5}>
+                       
+                        <Grid item xs={12} className={classes.dateTime}>
+                            <p className='cost-p'>Select All Tests that Apply {totalCost?<span className='cost'>{totalCost}</span> :''}</p>
+                            <MultiSelect filterednames={filterednames} getTest={getTests}/>
+                        </Grid>
+                    </Grid>
+
+                  <button className="mobile-lab-btn"
+                   onClick={()=>navigate('/OrderReview',
+                   {state:{totalCost:totalCost,name:name,value:value,sex:sex,dob:dob,address:address,phone:phone,purpose:purpose,selectedDate:selectedDate,labTests:labTests}})}>Proccessed</button>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

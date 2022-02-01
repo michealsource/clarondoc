@@ -76,12 +76,12 @@ function Laboratory() {
                     <h2 class="ambulanc-heading">LABORATORY REQUEST OVERVIEW</h2>
                    
                     <div class="laboratory-container-btn">
-                    <div class="individual-request">
+                    {/* <div class="individual-request">
                         <Link to="/individualRequest" className="individual-btn">INDIVIDUAL REQUEST</Link>
-                    </div>
+                    </div> */}
 
                     <div class="medical-facility">
-                        <Link to="/facilityrequest" className="facility-btn">MEDICAL FACLITY REQUEST</Link>
+                        <Link to="/facilityrequest" className="facility-btn">LABORATORY REQUEST</Link>
                     </div>
                 </div>
                 </div>

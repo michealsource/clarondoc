@@ -127,3 +127,30 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.his-container-cont{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;	
+  
+}
+
+.single-ambulance{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 20px;
+    padding: 5px;
+}
+
+.single-ambulance p{
+    font-size: 13px;
+}
+
+.a-head{
+    font-weight: bold;
+    font-size: 15px !important;
+}
+
+.divider{
+    background: grey;
+    width: 100%;
+    height: 10px;
+}

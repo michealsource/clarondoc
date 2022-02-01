@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import './OrderReview.css'
-import { FaMobileAlt, FaCreditCard, FaPlusSquare } from "react-icons/fa";
+import { FaMobileAlt, FaCreditCard} from "react-icons/fa";
 import { InputLabel, Box, Button, Grid, FormControl, TextField, Select, MenuItem } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import Accordion from '@mui/material/Accordion';
@@ -13,6 +13,8 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import 'date-fns';
+import { useLocation } from "react-router-dom";
+import { initPayment } from '../../Api/paystack';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,9 +53,32 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function OrderReview() {
+function OrderReview({name}) {
+    const location = useLocation();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [user, setUser] = useState()
+    // const [card, setCard] = useState({number: '',month: '',year: '',cvv: ''})
+
+    const [number, setNumber] = useState('')
+    const [cvv, setCvv] = useState('')
+    const [pin, setPin] = useState('')
+    const [month, setMonth] = useState('')
+    const [year, setYear] = useState('')
+
+    const [method, setMethod] = useState('Mobile Money')
+    const [price, setPrice] = useState()
+    const [phone, setPhone] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [button, setButton] = useState('Pay Now')
+    const [reference, setReference] = useState()
+    const [status, setStatus] = useState()
+    const [phone_error, setPhoneError] = useState()
+    const [card_error, setCardError] = useState()
+    const mtns = ['024', '054', '055', '059']
+    const tigos = ['027', '057', '026', '056']
+    const vods = ['020', '050']
+   
 
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -65,7 +90,99 @@ function OrderReview() {
         setExpanded(isExpanded ? panel : false);
     };
 
-   
+    // MAKE PAYMENT Function
+    const payment = ()=>{
+        
+            if(number.length < 16){
+                setCardError('Please enter a valid card number')
+                return
+            }
+    
+            if(month.length < 2){
+                setCardError('Please enter a valid expiry month')
+                return
+            }
+    
+            if(month*1 > 12){
+                setCardError('Please enter a valid expiry month')
+                return
+            }
+    
+            if(year.length < 2){
+                setCardError('Please enter a valid expiry year')
+                return
+            }
+    
+            if(year*1 < 21){
+                setCardError('Please enter a valid expiry year')
+                return
+            }
+    
+            if(cvv.length < 3){
+                setCardError('Please enter a valid card cvv')
+                return
+            }
+            
+    }
+
+    // HANDLE MOMO PAYMENT
+
+    const momopayment = async ()=>{
+        if(phone.length < 10){
+            setPhoneError('Please enter a valid number')
+            return
+        }
+        let network;
+        mtns.includes(phone.substr(0, 3)) ? network = 'mtn'
+        : tigos.includes(phone.substr(0, 3)) ? network = 'tgo'
+        : vods.includes(phone.substr(0, 3)) ? network = 'vod'
+        : network = null
+
+        if(network == null){
+            setPhoneError('Please enter a vald Ghanaian number')
+            return
+        }
+        try{
+            setLoading(true)
+            setButton('Initializing Transaction...')
+            let init = await initPayment(location.state.totalCost +5,phone,network)
+
+            if(init.status){
+
+              if(init.data.status === 'send_otp'){
+                  setLoading(false)
+                  setButton('Submit OTP')
+              }else if(init.data.status === 'pay_offline'){
+                  setLoading(false)
+                  setButton('Awaiting for payment confirmation...')
+              }else if(init.data.status === 'success'){
+
+                alert('payment successful')
+                setLoading(false)
+                setButton('Done')
+                
+              }else{
+                  setLoading(false)
+                  setButton(init.data.gateway_response)
+                  alert('payment not successful')
+              }
+
+            }else{
+              setLoading(false)
+              setButton('Pay Now')
+              setPhoneError(init.data.message)
+              return
+            }
+
+        }catch(e){
+          console.log(e.response.data)
+            setLoading(false)
+            setButton('Pay Now')
+            setPhoneError(e.message)
+            return
+        }
+    }
+    
 
     return (
         <div class="order-container">
@@ -78,19 +195,19 @@ function OrderReview() {
 
                     <div class="discount-price">
                         <p>Discount</p>
-                        <p>Total</p>
+                        <p>Net Total</p>
                     </div>
                 </div>
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                        <p style={{ color: '#61cd88' }}>GHS 160.0</p>
-                        <p style={{ color: '#61cd88' }}>GHS5.0</p>
+                        <p style={{ color: '#61cd88' }}>GHS {location.state.totalCost} </p>
+                        <p style={{ color: '#61cd88' }}>GHS 5.0</p>
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>GHS 24.0</p>
-                        <p style={{ fontWeight: 'bold' }}>GHS 141.O</p>
+                        <p style={{ color: '#cb2938' }}>GHS 0</p>
+                        <p style={{ fontWeight: 'bold' }}>GHS {(location.state.totalCost) +5}</p>
                     </div>
 
                 </div>
@@ -113,9 +230,9 @@ function OrderReview() {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">GHS 141.0</span> from your mobile money</p>
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">GHS {(location.state.totalCost) +5}</span> from your mobile money</p>
                             <Grid container spacing={2}>
-                                <Grid item xs={6}>
+                                {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label"></InputLabel>
                                         <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Age" >
@@ -124,9 +241,10 @@ function OrderReview() {
                                             <MenuItem value={30}>VODAFONE</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Grid> */}
 
                                 <Grid item xs={6}>
+                                    <p className='phone-error'>{phone_error?phone_error:''}</p>
                                     <TextField
                                         id="outlined-basic"
                                         label="Enter Mobile Money Number"
@@ -138,7 +256,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button className={classes.payBtn}>Pay With Momo</Button>
+                            <Button onClick={momopayment} className={classes.payBtn}>Pay With Momo</Button>
                         </AccordionDetails>
                     </Accordion>
 
@@ -155,11 +273,18 @@ function OrderReview() {
                                     VISA/MasterCard
                                 </Typography>
                             </Box>
+                           
                         </AccordionSummary>
+                        
                         <AccordionDetails>
+                        <p className='card-error'>{card_error?card_error:''}</p>
                             <Grid container spacing={2}>
+                           
                                 <Grid item xs={6}>
+                                
                                     <TextField
+                                        value={number}
+                                        onChange={e => {setNumber(e.target.value) }}
                                         id="outlined-basic"
                                         label="Card Number"
                                         variant="outlined"
@@ -172,6 +297,8 @@ function OrderReview() {
 
                                 <Grid item xs={6}>
                                     <TextField
+                                        value={month}
+                                        onChange={e => {setMonth(e.target.value) }}
                                         id="outlined-basic"
                                         label="Card Month MM"
                                         variant="outlined"
@@ -185,6 +312,8 @@ function OrderReview() {
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <TextField
+                                        value={year}
+                                        onChange={e => {setYear(e.target.value) }}
                                         id="outlined-basic"
                                         label="Card Expiry YY"
                                         variant="outlined"
@@ -197,8 +326,24 @@ function OrderReview() {
 
                                 <Grid item xs={6}>
                                     <TextField
+
                                         id="outlined-basic"
                                         label="CVV"
+                                        value={cvv}
+                                        onChange={e => {setCvv(e.target.value) }}
+                                        variant="outlined"
+                                        className={classes.textField}
+                                        InputLabelProps={{
+                                            className: classes.floatingLabelFocusStyle,
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        value={pin}
+                                        onChange={e => {setPin(e.target.value) }}
+                                        id="outlined-basic"
+                                        label="PIN"
                                         variant="outlined"
                                         className={classes.textField}
                                         InputLabelProps={{
@@ -207,7 +352,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button className={classes.payBtn}>Pay GHS 85.75</Button>
+                            <Button onClick={payment} className={classes.payBtn}>Pay GHS {(location.state.totalCost) +5}</Button>
                         </AccordionDetails>
                     </Accordion>
 
