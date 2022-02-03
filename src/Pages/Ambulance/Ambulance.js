@@ -23,7 +23,7 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pi
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import * as API from '../../Api/pharmacy'
-
+import loading from '../../images/loading.gif'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -52,7 +52,6 @@ const Panel = (props) => (
         <Typography>{props.children}</Typography>
     </div>
 );
-
 
 function Ambulance() {
     // HANDLES DATE STATE
@@ -308,17 +307,17 @@ function Ambulance() {
                 <div >
              
                     <div class="his-container-cont">
-                        {bookings.map((value)=>(
+                        {bookings.length? bookings.map((value)=>(
                             <>
                             <div className='single-ambulance'>
-                            <div style={{display:'flex'}}><p className='a-head'>Address</p> <p>{value.pickup}</p> </div>
-                            <div style={{display:'flex'}}><p className='a-head'>Emergency</p> <p>{value.conditions[0]}</p> </div>
-                            <div style={{display:'flex'}}><p className='a-head'>Comments</p> <p>{value.conditions[1]}</p> </div>
+                            <div className='booked-container-ambulance'><p>Address</p> <p>{value.pickup}</p> </div>
+                            <div className='booked-container-ambulance'><p>Emergency</p> <p>{value.conditions[0]}</p> </div>
+                            <div className='booked-container-ambulance'><p>Comments</p> <p>{value.conditions[1]}</p> </div>
                             <div className='divider'></div>
-                            <div style={{display:'flex'}}><p className='a-head'>Requested On</p> <p>{new Date(value.createDate).toString().substring(0, 21)}</p> </div>
+                            <div className='booked-container-ambulance'><p className='a-head'>Requested On</p> <p>{new Date(value.createDate).toString().substring(0, 21)}</p> </div>
                             </div>
                             </>
-                        ))}
+                        )):(<img src={loading} alt="" className="loader-img"/>)}
                         
                     </div>
                 </div>

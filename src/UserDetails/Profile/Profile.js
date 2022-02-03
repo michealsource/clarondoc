@@ -3,7 +3,7 @@ import './Profile.css'
 import profile from '../../images/user.png'
 import MainLayout from '../../Pages/MainLayout'
 
-import { Link } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 // ICONS IMPORT
 import { FaPhoneAlt,FaEye } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -11,6 +11,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaCcAmazonPay } from "react-icons/fa";
 import { FaAddressCard } from "react-icons/fa";
 function Profile() {
+    const navigate = useNavigate();
     const[user,SetUser]= useState()
     useEffect(()=>{
         (async()=>{
@@ -18,6 +19,10 @@ function Profile() {
             SetUser(JSON.parse(account))
           })()
     },[])
+
+    const editPage=()=>{
+        navigate('/Editpatient',{state:{user:user}});
+          }
     return (
         <MainLayout>
         <div className="patient-profile-container">
@@ -60,9 +65,9 @@ function Profile() {
                     <button className="upgrad-btn"> <FaEye/> Upgrade Plan</button>
                     </Link>
 
-                    <Link to="/Editpatient">
+                    <button onClick={()=>{editPage()}}>
                             <button className="edit-btn"> <FaEye/> Edit Profile</button>
-                    </Link>
+                    </button>
 
                     <Link to="/SavedDoctors">
                    

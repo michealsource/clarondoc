@@ -9,7 +9,7 @@ import labrequest from '../../images/labrequest.png'
 import pharmacist from '../../images/pharmacist.png'
 import MainLayout from '../MainLayout';
 import * as API from '../../Api/pharmacy'
-
+import loading from '../../images/loading.gif'
 const style = {
   position: 'absolute',
   top: '50%',
@@ -77,44 +77,42 @@ function Drugs() {
         <div class="histry-box">
           <div class="drugs-hisory-container">
               <div className="his-container-cont-drug">
-                {bookings.map((item)=>(
+               
                   <>
-                {filtered.length>0?bookings.map((item)=>(
+                {bookings.length? bookings.map((item)=>(
                             <>
                             <div className='single-drug-history'>
                             <h6>PHARMACY ORDER</h6>  
                             <div className='order-contain'>
                              {item.drugsOrdered.map(drug=>(
-                               <>
-                               <p className='drug-n'>{drug.drugName} X <span>{drug.quantity}</span></p>
-                               
-                               </>
+                               <div className='booked-container'>
+                               <p className='drug-n'>{drug.drugName}</p>
+                               <p className='qty'>{drug.quantity}</p>
+                               </div>
                              ))}
                               
                             </div>
-                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Ordered On:</p> <p>{new Date(item.createDate).toString().substring(0, 21)}</p> </div>
-                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Order Status: </p> <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> </div>
-                            <div style={{display:'flex',paddingTop:'10px'}}><p className='a-head'>Ordered Type:</p> <p>{item.deliveryOption}</p> </div>
+                            <div className='booked-container'>
+                              <p className='a-head'>Ordered On:</p> 
+                              <p>{new Date(item.createDate).toString().substring(0, 21)}</p>
+                            </div>
+                            <div className='booked-container'>
+                              <p className='a-head'>Order Status: </p> 
+                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> </div>
+                            <div className='booked-container'>
+                              <p className='a-head'>Ordered Type:</p> 
+                              <p>{item.deliveryOption}</p> 
+                              </div>
                             <div className='divider'></div>
                             { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''}
                             
                             </div>
                             </>
-                        )):'No request to show'}
+                        )):(<img src={loading} alt="" className="loader-img"/>)}
                   </>
-
-                ))}
-               
               </div>
-
-               
-                
-           
-
             </div>
-
           </div>
-
         </section>
 
 

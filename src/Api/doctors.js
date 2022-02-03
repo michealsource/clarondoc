@@ -4,7 +4,6 @@ export const fetchDoctors = async () => {
 
     const key = await apiKey()
     const auth = localStorage.getItem('access-token');
-
     const response = await axios({
         method: 'GET',
         url: 'https://api.clarondoc.com/physicians',

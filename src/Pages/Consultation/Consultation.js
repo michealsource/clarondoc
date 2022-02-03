@@ -3,6 +3,7 @@ import { FaInfo } from "react-icons/fa";
 import { FaRegCalendarAlt, FaHeart,FaPhoneAlt } from "react-icons/fa";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import 'date-fns';
@@ -10,6 +11,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MainLayout from '../MainLayout';
 import moment from 'moment';
+import swal from 'sweetalert';
 // MODAL IMPORTATION
 import ScheduleAppointment from '../../Component/ScheduleAppointment/ScheduleAppointment'
 import ActionsModal from './ActionsModal';
@@ -20,8 +22,9 @@ import { Link} from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import {userDetails,downgrade} from '../../Api/Auth'
 import { fetchDoctors } from '../../Api/doctors';
+import { makeBooking } from '../../Api/doctors';
+import loading from '../../images/loading.gif'
 import DocCard from './DocCard';
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -37,7 +40,10 @@ function Consultation() {
     const [openModal, setOpenModal] = useState(false)
     const [open, setOpen] = useState(false);
     const[call, setCall] = useState(false)
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (doctor) => {
+        setOpen(true);
+        setValue(doctor)
+    }
     const handleClose = () => setOpen(false);
 
      const [openP, setOpenP] = React.useState(false);
@@ -49,9 +55,14 @@ function Consultation() {
 
     const [doctors, setDoctors] = useState([])
     const [selected, setSelected]= useState({})
-
+    const [value, setValue] = useState()
+    const [date, setDate] = useState()
+    const [reason,setReason]= useState('')
+    const [error, setError] = useState()
+    const [time, setTime] = useState('')
     const [user, setUser] = useState({})
     const [expiry, setexpiry] = useState()
+    const available =['06:00 - 07:00','07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00','19:00 - 20:00','20:00 - 21:00'];
     // Search State
     const [filtered,setFiltered]= useState([]);
     const [searchInput, setSearchInput] = useState("")
@@ -72,9 +83,6 @@ function Consultation() {
         setSelectedData(selectedRec);
         setOpenP(true)
       };
-
-    // SPECIFIC DOCTOR ROUTE FUNCTION
-    
 
     const checkSubscription = async(date)=>{
 
@@ -140,8 +148,39 @@ useEffect(()=>{
     })()
 
 }, [])
+
+// SCHEDULE APPOINTMENT FUNCTION
+const book = async()=>{
+    if(reason.length === 0){
+        setError('Please provide reason for the booking')
+        return
+    }
+
+    try{
+        const res = await makeBooking({
+            physicianId: value?value.id:'',
+            schedule: date,
+            symptoms: [reason]
+        })
+
+        // console.log(res)
+        
+        if(res.success){
+           swal({
+            title: `${value.firstname}  ${value.lastname} has received your call booking.`,
+            text: "You will be notified when they respond",
+            icon: "success",
+          })
+          setOpen(false);
+        }else{
+            alert('Booking Error confirmed')
+        }
+
+    }catch(e){
+        setError(e)
+    }
+}
     return (
-    
         <MainLayout >
         <div className="doctors">
             <div class="demand-container">
@@ -158,7 +197,7 @@ useEffect(()=>{
             {searchInput.length> 0?
             <div class="box-container">
             
-                {filtered.map((doctor) => (
+                {filtered.length? filtered.map((doctor) => (
                     <div class="box" id={doctor.email}>
                         {doctor.availability === 'Online'?<div className="active-state">Active</div>:''}
                         
@@ -178,7 +217,7 @@ useEffect(()=>{
                                 <span>Chat</span>
                             </Link>
 
-                            <div onClick={handleOpen} class="action-container">
+                            <div onClick={() => handleOpen(doctor)} class="action-container">
                                 <FaRegCalendarAlt className="doctor-icon" />
                                 <span>Book</span>
                             </div>
@@ -195,7 +234,7 @@ useEffect(()=>{
                         </div>
                     </div>
                     
-                ))}
+                )):(<img src={loading} alt="" className="loader-img"/>)}
 
                 <Modal
                     open={open}
@@ -224,7 +263,7 @@ useEffect(()=>{
             (
                 <div class="box-container">
             
-                {doctors.map((doctor) => (
+                {doctors.length? doctors.map((doctor) => (
                    <div key={doctor.email} class="box" id={doctor.email}>
                    {doctor.availability === 'Online' ? <div className="active-state">Active</div> : ''}
    
@@ -244,7 +283,7 @@ useEffect(()=>{
                            <span>Chat</span>
                        </div>
    
-                       <div onClick={handleOpen} class="action-container">
+                       <div onClick={() => handleOpen(doctor)} class="action-container">
                            <FaRegCalendarAlt className="doctor-icon" />
                            <span>Book</span>
                        </div>
@@ -260,32 +299,48 @@ useEffect(()=>{
                    </div>
                </div>
    
-                ))}
+                )):(<img src={loading} alt="" className="loader-img"/>)}
 
                     {/* BOOK DOCTOR MODAL */}
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <MuiPickersUtilsProvider utils={MomentUtils}>
-                            <DateTimePicker
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        fullWidth
+                    >
+                        <Box sx={style} style={{ width: 1000 }} >
+                            <h2 style={{marginBottom:20}}>{value ? value.firstname: ''} Availability</h2>
+                            <div>
+                                <TextField
+                                    id="date"
+                                    label="Book Date"
+                                    type="date"
+                                    defaultValue={date}
+                                    fullWidth
+                                    onChange={(e)=>setDate(e.target.value)}
+                                    sx={{ width: 400 }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                     <h4 style={{marginTop:20, marginBottom:10}}> Select Doctor Availabilty Time</h4>
+                                <div className="time-availability">
+                                    {available.map((t,index)=>(
+                                    <div className='time-btn-contaner'>
+                                    <input onChange={(e)=>setTime(e.target.value)} type="radio" className="radio-input" value={t} name="claron-radio" id={index}/>
+                                    <label className='time-btn' htmlFor={index}>{t}</label>
+                                    </div>
+                                  
+                                    ))}
+                                </div>
 
-                                InputAdornmentProps={{ position: "end" }}
-                                inputVariant="outlined"
-                                label="Select Propse Date and Time"
-                                value={selectedDate}
-                                onChange={handleDateChange}
-                            />
-                        </MuiPickersUtilsProvider>
-                       {others && <TextField className="others" id="outlined-multiline-flexible" label="Others" multiline/>}
-                        {others ? '' : <ScheduleAppointment changeInput={changeInput} />}
-
-                        <button className="schedule-app-btn">Submit Request</button>
-                    </Box>
-                </Modal>
+                                 <p style={{color:'red'}}>{error? error:''}</p>     
+                                <TextField value={reason} onChange={(e)=>setReason(e.target.value)}  style={{marginTop:20}} fullWidth id="standard-basic" label="Please provide reasons for the consultation" variant="standard" />
+                                <Button onClick={book} style={{marginTop:20, background:'#16a085'}} variant="contained">CONFIRM BOOKING</Button>
+                            </div>
+                        </Box>
+                    </Modal>
 
                 {/* DOCTORS DETAILS PROFILE MODAL */}
                

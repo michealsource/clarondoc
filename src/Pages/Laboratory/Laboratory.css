@@ -40,7 +40,37 @@
 }
 
 .history-content{
-    margin-left: 15px;
+   
     margin-top: 30px;
     font-size: 30px;
+}
+
+.his-container-cont-lab{
+    display: grid;
+    grid-template-columns: 50% 50%;	
+    width: 90%;
+}
+
+.single-ambulance{
+    padding: 15px;
+}
+
+.request-test{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.booked-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.loader-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

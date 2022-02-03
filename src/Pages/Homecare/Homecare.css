@@ -66,9 +66,8 @@
       border-bottom: 2px solid #b8babe;
       display: flex;
       justify-content: space-between;
-      padding: 20px;
-      color: #0d2344;
       margin-bottom: 10px;
+      padding-bottom: 10px;
   }
 
   .drug-his-btn-h{
@@ -105,3 +104,13 @@
     color: #f9df06;
   }
   
+  .booked-container-home{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  .reason{
+      color: #16a085 !important;
+  }

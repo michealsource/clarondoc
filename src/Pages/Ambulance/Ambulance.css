@@ -136,8 +136,7 @@
 
 .single-ambulance{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    margin: 20px;
-    padding: 5px;
+    margin: 10px;
 }
 
 .single-ambulance p{
@@ -153,4 +152,21 @@
     background: grey;
     width: 100%;
     height: 10px;
+}
+
+.loader-img{
+  display: block;
+  margin-left: 500px !important;
+  margin-right: auto !important;
+}
+
+.booked-container-ambulance{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p{
+    padding: 0 !important;
+    margin: 0 !important;
 }

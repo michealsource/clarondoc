@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './EditPatient.css'
 import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from '@material-ui/core'; //importing material ui component
 import { makeStyles } from '@mui/styles';
 import image from '../../images/user-profile.jpg'
-
+import {useLocation} from 'react-router-dom';
+import MainLayout from '../../Pages/MainLayout';
+import { update } from '../../Api/Auth';
+import swal from 'sweetalert';
+import firebase from 'firebase';
 // import profile from '../../images/user.png'
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,21 +36,94 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
 function Editpatient() {
     const classes = useStyles();
+    const location = useLocation();
+    const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
+    const [error, seterror] = useState()
+    const [loading, setloading] = useState(false)
+    const [response, setresponse] = useState({
+    error: false,
+    message: null
+  })
+
+  const[fname,setFname]= useState(firstname)
+  const[lname,setlname]= useState(lastname)
+  const[emailu,setEmal]= useState(email)
+  const[avataru,setAvatar]= useState(avatar)
+  const[phoneNumber,setPhoneNumber]= useState(phone)
+  const [imgloading, setimgloading] = useState(false)
+
+  console.log(avataru)
+  
+  const ImageUpload = async(e)=>{
+    if(e.target.files[0]){
+        setAvatar(e.target.files[0])
+    }
+    let file = avataru;
+    let storage = firebase.storage();
+    let storageRef = storage.ref();
+    let uploadTask = storageRef.child('new-photo/' + file.name).put(file);
+    let url = await firebase.storage().ref(`new-photo`).child(file.name).getDownloadURL()
+  }
+    const saveAccount = async ()=>{
+        const data ={
+            firstname:fname,
+             lastname:lname,
+             age:age,
+             email:emailu, 
+             avatar:avataru.name,
+             address:address, 
+             gender:sex, 
+             phoneNumber:phoneNumber
+          }
+
+ 
+            try {
+          setloading(true)
+          let data2 = await update(data)
+          setloading(false)
+
+          if(data2.success){
+            localStorage.setItem('user', JSON.stringify({...data}))
+            swal({
+                title: "Update",
+                text: "updated successfully",
+                icon: "success",
+                button: "Ok",
+              });
+          }else{
+            alert(data.message)
+            // setresponse({
+            //   error: true,
+            //   message: data.message
+            // })
+          }
+
+            } catch (error) {
+                console.log(error)
+            }
+      }
+
+    
     return (
+        <MainLayout>
         <div className="edit-user-contaner">
-            <h2>Kndly Update Your Profile</h2>
-            <img src={image} alt="" className="pro-img"/>
+            <h2>Kndly Update Your Profile {firstname}</h2>
+            <img  src={avataru?avataru:image} alt="Profile" className="pro-img"/>
             <div class="parent-div">
-                <button class="btn-upload">Choose file</button>
-                <input type="file" name="upfile" />
+                <button class="btn-upload">Change Photo</button>
+                <input onChange={ImageUpload} type="file" name="upfile" />
             </div>
             <Grid container spacing={2}>
+                <p>{error?error:''}</p>
                 <Grid item xs={6}>
                     <TextField
+                        value={fname}
+                        onChange={(e)=>setFname(e.target.value)}
+                        // defaultValue={firstname}
                         id="outlined-basic"
-                        label="Vncent"
                         variant="outlined"
                         className={classes.textField}
                         InputLabelProps={{
@@ -57,8 +134,9 @@ function Editpatient() {
 
                 <Grid item xs={6}>
                     <TextField
+                        value={lname}
                         id="outlined-basic"
-                        label="Chibuke"
+                        onChange={(e)=>setlname(e.target.value)}
                         variant="outlined"
                         className={classes.textField}
                         InputLabelProps={{
@@ -69,7 +147,7 @@ function Editpatient() {
             </Grid>
 
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                {/* <Grid item xs={6}>
                     <Grid item xs={6}>
                         <FormControl component="fieldset" className={classes.gender}>
                             <FormLabel component="legend">Gender</FormLabel>
@@ -79,12 +157,13 @@ function Editpatient() {
                             </RadioGroup>
                         </FormControl>
                     </Grid>
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={6}>
                     <TextField
                         id="outlined-basic"
-                        label="Chibuke@gmail.com"
+                        value={emailu}
+                        onChange={(e)=>setEmal(e.target.value)}
                         variant="outlined"
                         className={classes.textField}
                         InputLabelProps={{
@@ -95,7 +174,7 @@ function Editpatient() {
             </Grid>
 
             <Grid container spacing={2}>
-                <Grid item xs={3}>
+                {/* <Grid item xs={3}>
                     <TextField
                         id="outlined-basic"
                         label="28"
@@ -105,8 +184,8 @@ function Editpatient() {
                             className: classes.floatingLabelFocusStyle,
                         }}
                     />
-                </Grid>
-                <Grid item xs={3}>
+                </Grid> */}
+                {/* <Grid item xs={3}>
                     <TextField
                         id="outlined-basic"
                         label="Abuja"
@@ -116,13 +195,14 @@ function Editpatient() {
                             className: classes.floatingLabelFocusStyle,
                         }}
                     />
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={6}>
 
                     <TextField
                         id="outlined-basic"
-                        label="070348765427"
+                        value={phoneNumber}
+                        onChange={(e)=>setPhoneNumber(e.target.value)}
                         variant="outlined"
                         className={classes.textField}
                         InputLabelProps={{
@@ -131,8 +211,13 @@ function Editpatient() {
                     />
                 </Grid>
             </Grid>
-            <Button className={classes.btn} variant="contained">Save Changes</Button>
+            <Button
+             disabled={loading}
+             onClick={saveAccount} 
+             className={classes.btn}
+            variant="contained"> { loading ? 'Saving...' : 'Save Changes' }</Button>
         </div>
+        </MainLayout>
     )
 }
 

@@ -1,3 +1,97 @@
 .heading-fav{
     margin: 30px;
 }
+
+.saved-doc-img{
+    max-width: 80%;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 3px solid #3eb7a9;
+}
+
+.saved-doc-caontainer{
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-bottom: 100px;
+}
+
+.sav-img-container{
+    border: 5px solid #3eb7a9;
+    border-radius: 5px;
+}
+
+.box-saved{
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.saved-doc-name{
+font-size: 18px;
+font-weight: bold;
+margin-top: 10px;
+margin-bottom: 5px;
+color: #1c1d1d;
+}
+
+.saved-inner-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.saved-action-share{
+    background: #b1e4de;
+    color: #16a085;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.time-availability{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.time-btn{
+    background: #16a085;
+    color: #fff;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.time-btn:hover{
+    background: #0c5d4d;
+}
+
+.radio-input{
+    display: none;
+}
+
+.time-btn-contaner{
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+/* .radio_label{
+    background: #16a085;
+    padding: 8px 14px;
+    margin: 10px;
+    margin-top: 10px !important;
+    cursor: pointer;
+    transition: background 0.1s;
+} */
+
+.radio-input:checked + .time-btn{
+    background: #0c5d4d;
+}

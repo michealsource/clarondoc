@@ -15,6 +15,10 @@
     display: block;
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 10px;
+    border: 2px solid #61cd88;
 }
 
 .edit-user-contaner h2{
@@ -39,11 +43,16 @@
   }
   .btn-upload {
     background-color: #fff;
-    border: 3px solid #000;
+    border: 3px solid #61cd88;
     color: #000;
     padding: 10px 25px;
     border-radius: 10px;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
+  }
+
+  .btn-upload:hover{
+    background: #16a085;
+    color: #fff;
   }

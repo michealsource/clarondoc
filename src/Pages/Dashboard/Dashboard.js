@@ -115,6 +115,11 @@ function Dashboard() {
                             <h5>Health Tips</h5>
                             </Link>
 
+                            <Link to="/call" class="blog">
+                            <FaHeart className="hrt"/> 
+                            <h5>Video Call</h5>
+                            </Link>
+
                             <div class="main-profile-container">
                                 <div className="user-profile-container">
                                     <img src={user?user.avatar:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png'} alt="" className="user-profile" />

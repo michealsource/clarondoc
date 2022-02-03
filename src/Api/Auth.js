@@ -30,6 +30,26 @@ export const register = async (data,dispatch) => {
     }
 }
 
+export const update = async (data) => {
+    const key = await apiKey()
+    const auth = localStorage.getItem('access-token');
+    const response = await axios.default.put('https://api.clarondoc.com/users/update/profile',
+        data,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${auth}`,
+                'x-api-key': key
+            },
+            options: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    )
+
+    return response.data
+}
+
 
 // PATIENT LOGIN
 export const login = async (email, password) => {

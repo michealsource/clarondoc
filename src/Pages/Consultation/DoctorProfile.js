@@ -1,11 +1,9 @@
-import React from 'react'
-
-import doctor from '../../images/doc-1.jpg'
-import { FaTimes} from "react-icons/fa";
+import React,{useState,useEffect} from 'react'
+// import doctor from '../../images/doc-1.jpg'
+// import { FaTimes} from "react-icons/fa";
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import { FaRegCommentDots,FaCalendarAlt,FaHeart } from "react-icons/fa";
 function DoctorProfile({openP,handleCloseProfile,selectedData}) {
     const style = {
         position: 'absolute',
@@ -20,10 +18,41 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
         p: 4,
       };
 
-    return (
-     
-        <div>
+      const [loading, setloading] = useState(false)
+      const [favorites, setfavorites] = useState([])
+      const [loaded, setloaded] = useState(false)
+  
+      const favorite = async()=>{
+  
+          setloading(true)
+          if(favorites.includes(selectedData.email)){
+              setfavorites(favorites.filter(fav=>fav!=selectedData.email))
+              await localStorage.setItem('saved', favorites.filter(fav=>fav!=selectedData.email).toString())
+          }else{
+              setfavorites([...favorites, ...[selectedData.email]])
+              await localStorage.setItem('saved', [...favorites, ...[selectedData.email]].toString())
+          }
+          setloading(false)
+      }
+  
+      useEffect(()=>{
+        (async()=>{
+            if(!loaded){
+                let saved = await localStorage.getItem('saved')
+                if(saved == null){
+                    return
+                }
+                console.log(saved)
+                setfavorites(saved.split(','))
+                setloaded(true)
+            }
 
+        })()
+        
+    }, [])
+
+    return (
+        <div>
         <Modal
           open={openP}
           onClose={handleCloseProfile}
@@ -37,6 +66,23 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
               <span className='doc-department-dash'>{selectedData.department}</span>
               <div className='bio-container-dash'>
                 <p className='doc-bio'>{selectedData.bio}</p>
+              </div>
+
+              <div class="claron-doc-online-actions">
+                <div class="item-doc" disabled={loading} onClick={favorite}>
+                  <FaHeart/>
+                     <p>
+                     { loading ? 'Saving...' : favorites.includes(selectedData.email) ? 'Remove from Account' : 'Save to Account'}
+                   </p>
+                   </div>
+                <div class="item-doc">
+                  <FaCalendarAlt/>
+                  <p>Check Availability</p>
+                  </div>
+                <div class="item-doc">
+                  <FaRegCommentDots/>
+                  <p>Chat</p>
+                  </div>
               </div>
             </div>
           </Box>
