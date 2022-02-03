@@ -104,16 +104,16 @@ function Dashboard() {
                                 <FaAlignJustify className="menu-icon" onClick={()=>setSidebar(!sidebar)}/>
                             </div>
 
-                            <Link to="/notification" class="notification">
+                            {/* <Link to="/notification" class="notification">
                                 <Badge badgeContent={4} color="success">
                                     <NotificationsIcon color="action" />
                                 </Badge>
-                            </Link>
+                            </Link> */}
                             
-                            <Link to="/blog" class="blog">
+                            {/* <Link to="/blog" class="blog">
                             <FaHeart className="hrt"/> 
                             <h5>Health Tips</h5>
-                            </Link>
+                            </Link> */}
 
                             <Link to="/call" class="blog">
                             <FaHeart className="hrt"/> 
