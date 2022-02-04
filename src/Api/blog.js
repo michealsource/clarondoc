@@ -1,11 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const axios = require('axios');
 
 export const fetchArticles = async (from, to) => {
 
     const key = await apiKey()
-    const auth = await AsyncStorage.getItem('access-token');
+    const auth = await localStorage.getItem('access-token');
 
     try{
         const response = await axios({
@@ -39,7 +37,7 @@ export const mediumPosts = async()=>{
 }
 
 export const apiKey = async (data) => {
-    let key = await AsyncStorage.getItem('api-key');
+    let key = await localStorage.getItem('api-key');
 
     if(key != null){
         return key
@@ -58,7 +56,7 @@ export const apiKey = async (data) => {
 
         key = response.data.apiKey
 
-        await AsyncStorage.setItem('api-key', key)
+        await localStorage.setItem('api-key', key)
 
         return key
     }
