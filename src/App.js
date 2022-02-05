@@ -6,7 +6,7 @@ import IndexRoutes from './Routes/index'
 
 
 function App() {
-  // const [token, setToken] = useState("")
+  const [token, setToken] = useState("")
 
   // useEffect(() => {
   //   const messaging = firebase.messaging()

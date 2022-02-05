@@ -7,7 +7,7 @@ import {useLocation} from 'react-router-dom';
 import MainLayout from '../../Pages/MainLayout';
 import { update } from '../../Api/Auth';
 import swal from 'sweetalert';
-import firebase from 'firebase';
+import firebase from '../../firebaseConfig';
 // import profile from '../../images/user.png'
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,18 +54,36 @@ function Editpatient() {
   const[avataru,setAvatar]= useState(avatar)
   const[phoneNumber,setPhoneNumber]= useState(phone)
   const [imgloading, setimgloading] = useState(false)
-
-  console.log(avataru)
   
   const ImageUpload = async(e)=>{
+    setimgloading(true)
     if(e.target.files[0]){
-        setAvatar(e.target.files[0])
+        let file =  e.target.files[0];
+        firebase.storage().ref('new-photo/' + file.name).put(file);
+        let url = await firebase.storage().ref(`new-photo`).child(file.name).getDownloadURL()
+       
+        const data ={
+            firstname:fname,
+             lastname:lname,
+             age:age,
+             email:emailu, 
+             avatar:url,
+             address:address, 
+             gender:sex, 
+             phoneNumber:phoneNumber
+          }
+         const response = await update(data)
+         if(response.success){
+            setimgloading(false)
+            swal({
+                title: "Image Update",
+                text: "successful",
+                icon: "success",
+                button: "Ok",
+              });
+         }
     }
-    let file = avataru;
-    let storage = firebase.storage();
-    let storageRef = storage.ref();
-    let uploadTask = storageRef.child('new-photo/' + file.name).put(file);
-    let url = await firebase.storage().ref(`new-photo`).child(file.name).getDownloadURL()
+    
   }
     const saveAccount = async ()=>{
         const data ={
@@ -73,7 +91,7 @@ function Editpatient() {
              lastname:lname,
              age:age,
              email:emailu, 
-             avatar:avataru.name,
+             avatar:avataru,
              address:address, 
              gender:sex, 
              phoneNumber:phoneNumber
@@ -113,8 +131,8 @@ function Editpatient() {
             <h2>Kndly Update Your Profile {firstname}</h2>
             <img  src={avataru?avataru:image} alt="Profile" className="pro-img"/>
             <div class="parent-div">
-                <button class="btn-upload">Change Photo</button>
-                <input onChange={ImageUpload} type="file" name="upfile" />
+                <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
+                <input onChange={(e) => ImageUpload(e)} type="file" name="upfile" />
             </div>
             <Grid container spacing={2}>
                 <p>{error?error:''}</p>

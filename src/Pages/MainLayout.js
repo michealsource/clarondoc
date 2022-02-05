@@ -81,10 +81,10 @@ export default function MainLayout({ children }) {
                             <h5>Health Tips</h5>
                             </Link>
 
-                            {/* <Link to="/call" className="blog">
+                            <Link to="/call" className="blog">
                             <FaHeart className="hrt"/> 
                             <h5>start call</h5>
-                            </Link> */}
+                            </Link>
 
                             <div className="main-profile-container">
                                 <div className="user-profile-container">

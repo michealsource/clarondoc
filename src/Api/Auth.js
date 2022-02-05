@@ -37,7 +37,7 @@ export const update = async (data) => {
         data,
         {
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             },
