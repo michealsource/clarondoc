@@ -47,7 +47,7 @@ import Consultations from '../DoctorPages/Consultations/Consultations';
 import TermsD from '../DoctorPages/Terms/Terms'
 import AboutD from '../DoctorPages/About/About'
 import CartModal from '../DoctorPages/Modals/CartModal'
-import Call from '../Pages/Call/Index'
+// import Call from '../Pages/Call/Index'
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
@@ -84,7 +84,7 @@ function index() {
                 <Route exact path="/Wallet" element={< Wallet />} />
                 <Route exact path="/notification" element={< Notification />} />
                 <Route exact path="/chat" element={< Chat />} />
-                <Route exact path="/call" element={< Call />} />
+                {/* <Route exact path="/call" element={< Call />} /> */}
                 {/* DOCTOR ROUTES */}
                 <Route exact path="/doctorDashboard" element={<Home />}></Route>
                     <Route exact path="/LabRequestUser" element={<LabRequest />}></Route>
