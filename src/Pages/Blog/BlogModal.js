@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Grid,Box,Dialog,DialogTitle,DialogContent,IconButton} from '@mui/material';
 import { FiX } from "react-icons/fi";
 import './Blog.css'
 import { FaUserAlt,FaCalendarAlt } from "react-icons/fa";
+import axios from "axios"
 
 
 
 function BlogModal({openModal,setOpenModal,product}) {
+    const [blogDetails, setBlogDetails] = useState({})
+   
+  
     return (
         <div className="details-container">
             <Dialog open={openModal} fullWidth={true}>
