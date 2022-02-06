@@ -1,69 +1,58 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import './Blog.css'
 import BlogModal from './BlogModal';
+import MainLayout from "../MainLayout"
+import {fetchArticles,mediumPosts} from "../../Api/blog"
+import loading from '../../images/loading.gif'
 
-
-const blogData =[
-    {
-        id: 1,
-        title:"Hypertension",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    },
-    {
-        id: 2,
-        title:"Eating Rght!",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    },
-    {
-        id: 3,
-        title:"Clarn Health Walk",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    }, {
-        id: 4,
-        title:"A few tips to help you manage period Pain",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    },
-    {
-        id: 5,
-        title:"Hypertension",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    },
-    {
-        id: 6,
-        title:"Hypertension",
-        content:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sed nostrum excepturi soluta minus nam id commodi eius exercitationem ex?",
-        date:"August 01, 2020 12:57"
-    }
-
-]
 
 function Blog() {
 
     const[openModal, setOpenModal] = useState(false)
     const[product, setProduct]= useState({})
+    const [blogs, setBlogs] = useState([])
+
+
+    useEffect(() => {
+        const getBlogs = async () => {
+            const blog = await mediumPosts()
+            console.log(blog, "blogs")
+            setBlogs(blog)
+        }
+        getBlogs()
+
+    }, [])
     return (
+        <MainLayout>
         <div className="blog-container">
 
-            <div className="blog-row">
-                {blogData.map((data)=>(
-                        <div key={data.id} className="blog-column"  onClick={()=>{setOpenModal(true); setProduct(data)}}>
-                        <h2 className="blog-title">{data.title}</h2>
-                        <p className="blog-content">{data.content}</p>
-                        <p className="blog-date">{data.date}</p>
+        {
+            blogs.length ? (
+                <div className="blog-row">
+                {blogs.map((data)=>(
+                    <a href={data.link} rel="noopener noreferrer" target="_parent">
+                        <div key={data.id} className="blog-column"  >
+                        <img className="blog-img" src={data.thumbnail} alt="blog-img"/>
+                        <h4 className="blog-title">{data.title}</h4>
+                        <div className="categories">
+                        {data.categories.map(item => (
+                            <button className= "btn-category">{item}</button>
+                            ))}
+                        </div>
                     </div>
+                    </a>
                 )
                 )}
                 
             </div>
+            ): (<img src={loading} alt="" className="loader-img"/>)
+        }
+            
 
             <BlogModal openModal={openModal} setOpenModal={setOpenModal} product={product}/>
 
         </div>
+        </MainLayout>
     )
 }
 
