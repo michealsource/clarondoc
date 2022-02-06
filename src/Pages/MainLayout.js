@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import user1 from '../images/user.png'
 import { FaCalendarPlus, FaShareSquare } from "react-icons/fa";
 import { FaFlask } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaAmbulance } from "react-icons/fa";
 import { FaHouzz } from "react-icons/fa";
 import { FaNotesMedical } from "react-icons/fa";
@@ -69,7 +70,7 @@ export default function MainLayout({ children }) {
                             <div className="menu-container">
                                 <FaAlignJustify className="menu-icon" onClick={()=>setSidebar(!sidebar)}/>
                             </div>
-
+                            
                             <Link to="/notification" className="notification">
                                 <Badge badgeContent={4} color="success">
                                     <NotificationsIcon color="action" />
