@@ -1,13 +1,131 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import './AppointmentHistory.css'
+import Modal from 'react-modal'
+import { FaTimes } from "react-icons/fa";
+import {
+    TextField,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    Grid,
+    InputLabel,
+    Select,
+    MenuItem,
+    Checkbox
+} from '@material-ui/core';
+import {Tab, Tabs, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import {Link} from 'react-router-dom'
 import MainLayout from '../MainLayout';
+import moment from 'moment';
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import * as API from '../../Api/pharmacy'
+import { myBookings } from '../../Api/doctors';
+import loading from '../../images/loading.gif'
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: "flex",
+        flexWrap: "wrap",
+    },
+    floatingLabelFocusStyle: {
+        color: "#66cc99"
+    },
+    textField: {
+        width: '90%',
+        '.Mui-focused': {
+            borderColor: 'yellow !important',
+        }
+    },
+    tab: {
+        color: "#525252",
+        fontSize: '20px !important'
+    },
+}));
+
+Modal.setAppElement('#root')
+
+const Panel = (props) => (
+    <div hidden={props.value !== props.index}>
+        <Typography>{props.children}</Typography>
+    </div>
+);
+
+
 function AppointmentHistory() {
+    // HANDLES DATE STATE
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [index, setIndex] = useState(0);
+
+    const onTabClicked = (event, index) => {
+        setIndex(index)
+        // filter(index)
+    };
+
+    const handleDateChange = (date) => {
+        console.log(date);
+        setSelectedDate(date);
+    };
+
+    const classes = useStyles();
+    const [open, setOpen] = useState(false)
+
+    const [bookings, setBookings] = useState([])
+    const [filtered, setFiltered] = useState([])
+    const [upcoming, setUpcoming]=useState([])
+    const [loaded, setLoaded] = useState(false)
+    
+    useEffect(()=>{
+     
+        (async()=>{
+            
+          if(!loaded){
+            try{
+                
+                let res = await myBookings()
+                // setData(resu.requests)
+                // console.log(data)
+                // res = await API.myLabTests('individual')
+                setBookings(res.requests)
+                setFiltered(res.requests.filter(booking=>moment().isAfter(new Date(booking.scheduledFor))))
+                
+                setUpcoming(res.requests.filter(booking=>moment().isBefore(new Date(booking.scheduledFor))))
+                
+            }catch(e){
+              console.log(e)
+            }
+            setLoaded(true)
+          }
+    
+        })()
+      })
+    
     return (
         <MainLayout>
-        <div className="appointment-container">
-            <h2>Appointment History</h2>
+        <div>
+            <div class="ambulance">
+                <div class="heading-container">
+                    <h2 class="ambulanc-heading">APPOINTMENTS REQUEST OVERVIEWS</h2>
+                   
+                    <div class="laboratory-container-btn">
+                    {/* <div class="individual-request">
+                        <Link to="/individualRequest" className="individual-btn">INDIVIDUAL REQUEST</Link>
+                    </div> */}
 
-            <div class="appointment-container-box">
+                    {/* <div class="medical-facility">
+                        <Link to="/facilityrequest" className="facility-btn">LABORATORY REQUEST</Link>
+                    </div> */}
+
+                   
+                </div>
+                </div>
+
+                <div class="ambulance-container">
+                <div class="appointment-container-box">
                 <div class="appointment-box one">
                     <div className="upcoming-num">0</div>
                     <p>Upcoming Appointments</p>
@@ -28,65 +146,84 @@ function AppointmentHistory() {
                     <p>Cancelled Appointments</p>
                 </div>
             </div>
-            <h2>My Appointments</h2>
-            <div class="appointment-input-container">
-                <input type="text" placeholder="search appointment" />
+                </div>
+                <div class="amblance-history-container">
+                <div>
+                    <Tabs value={index} onChange={onTabClicked}>
+                        <Tab className={classes.tab} label="Upcoming" />
+                        <Tab className={classes.tab} label="Past" />
+                    </Tabs>
+                    <div class="history-content">
+                        <Panel value={index} index={0}>
+                        <div className="top-history-container">
+            <div class="row-his">
+                <div className="column-his-1">
+                <div class="col-container">
+                    
+                             <div class="his-container-cont-lab">
+                             {upcoming.length? upcoming.map((item)=>(
+                                 <>
+                                 <div className='single-ambulance'>
+                                  <div>
+                                  <p style={{color:'#2d8f88'}}>{item.physician.fullName}</p>
+                                     
+                                          <div className='request-test'>
+                                          <p> schedules for</p>
+                                          <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p>
+                                          </div>
+                                     
+                                 </div>  
+                                 <div className='divider'></div> 
+                                 <div className='booked-container'>
+                                     <p className='cancel-booking-btn'>Cancel Booking</p>
+                                      </div>
+                                 </div>
+                                 </>
+                             )):(<img src={loading} alt="" className="loader-img"/>)}
+                             
+                         </div>
+                  
+                </div>
+
+                </div>
+
             </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Doctor</th>
-                            <th>Appointment Date</th>
-                            <th>Mode of Appointment</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+        </div>
+                        </Panel>
+                        <Panel value={index} index={1}>
+                        <div className="top-history-container">
+            <div class="row-his">
+                <div className="column-his-1">
+                <div class="col-container">
+                <div class="his-container-cont-lab">
+                        {filtered.length? filtered.map((item)=>(
+                            <>
+                            <div className='single-ambulance'>
+                             <div>
+                             <p style={{color:'#2d8f88'}}>{item.physician.fullName}</p>
+                                     <div className='request-test'>
+                                     <p>Was on</p>
+                                     <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p>
+                                     </div>
+                                
+                            </div>  
+                            </div>
+                            </>
+                        )):(<img src={loading} alt="" className="loader-img"/>)}
+                    </div>
+                </div>
 
-                    <tbody>
-                        <tr>
-                            <td>micheal</td>
-                            <td>29-05-2021</td>
-                            <td>Health Reasons</td>
-                            <td>Pending</td>
-                            <td>Cancel</td>
-                        </tr>
+                </div>
 
-                        <tr>
-                            <td>micheal</td>
-                            <td>29-05-2021</td>
-                            <td>Health Reasons</td>
-                            <td>Pending</td>
-                            <td>Cancel</td>
-                        </tr>
+            </div>
 
-                        <tr>
-                            <td>micheal</td>
-                            <td>29-05-2021</td>
-                            <td>Health Reasons</td>
-                            <td>Pending</td>
-                            <td>Cancel</td>
-                        </tr>
-
-                        <tr>
-                            <td>micheal</td>
-                            <td>29-05-2021</td>
-                            <td>Health Reasons</td>
-                            <td>Pending</td>
-                            <td>Cancel</td>
-                        </tr>
-
-                        <tr>
-                            <td>micheal</td>
-                            <td>29-05-2021</td>
-                            <td>Health Reasons</td>
-                            <td>Pending</td>
-                            <td>Cancel</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+                        </Panel>
+                    </div>
+                </div>
+            </div>
+                
             </div>
         </div>
         </MainLayout>

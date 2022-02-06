@@ -5,14 +5,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
 import 'date-fns';
-import {Link} from "react-router-dom"
-import MultipleSelect from '../../Component/MultiSelect/MultiSelect';
+import { Link } from "react-router-dom"
+import HomeCareMultiSelect from '../../Component/HomeCareMultiSelect/HomeCareMultiSelect'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-
+import MainLayout from '../MainLayout'
 import { TextField, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
@@ -33,6 +32,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+let reasons = [
+    'Routine Doctors Consultation', 
+    'Nurse Home Visit', 
+    'Routine Medical Check-up', 
+    'Emergency Visit', 
+    'Chronic Home Care Disease Managment'
+  ]
+
 function HomeCareForm() {
     const classes = useStyles();
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -41,9 +48,10 @@ function HomeCareForm() {
         setValue(newValue);
     };
     return (
-        <div className="individual-request-container-outer">
-            <div class="inner-individual-container-request">
-                <h2>Home Care REQUEST</h2>
+        <MainLayout>
+            <div className="individual-request-container-outer">
+                <div class="inner-individual-container-request">
+                <h2>HOME CARE REQUEST</h2>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <TextField
@@ -59,19 +67,17 @@ function HomeCareForm() {
 
                     <Grid item xs={6}>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 400 }}>
-                            <InputLabel id="demo-simple-select-standard-label">Select Reason</InputLabel>
+                            <InputLabel id="demo-simple-select-standard-label">Reason for service</InputLabel>
                             <Select
                                 labelId="demo-simple-select-standard-label"
                                 id="demo-simple-select-standard"
 
                                 label="Age"
                             >
-                                <MenuItem value={10}>ROUNTINE Doctors Consultations.</MenuItem>
-                                <MenuItem value={20}>Nrse Home Visit</MenuItem>
-                                <MenuItem value={30}>Rountine Medical Check-up</MenuItem>
-                                <MenuItem value={40}>ALLIANZ WORLDWIDE CARE</MenuItem>
-                                <MenuItem value={50}>Emergency Visit</MenuItem>
-                                <MenuItem value={60}>Chronic Home Care Disease Management</MenuItem>
+                                {reasons.map((item)=>(
+                                    <MenuItem value={10}>{item}</MenuItem>
+                                ))}
+                               
                             </Select>
                         </FormControl>
                     </Grid>
@@ -80,7 +86,7 @@ function HomeCareForm() {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 400 }}>
-                            <InputLabel id="demo-simple-select-standard-label">Select Requesting For</InputLabel>
+                            <InputLabel id="demo-simple-select-standard-label">Making Request for</InputLabel>
                             <Select
                                 labelId="demo-simple-select-standard-label"
                                 id="demo-simple-select-standard"
@@ -95,8 +101,9 @@ function HomeCareForm() {
                     </Grid>
 
                     <Grid item xs={6}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
                             <DesktopDatePicker
+                                
                                 label="Date desktop"
                                 value={value}
                                 onChange={handleChange}
@@ -106,7 +113,6 @@ function HomeCareForm() {
                         </LocalizationProvider>
                     </Grid>
                 </Grid>
-
 
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
@@ -123,7 +129,7 @@ function HomeCareForm() {
                     <Grid item xs={6}>
                         <TextField
                             id="outlined-basic"
-                            label="Private Doctor Name (if any)"
+                            label="Physical Address"
                             variant="outlined"
                             className={classes.textField}
                             InputLabelProps={{
@@ -133,33 +139,12 @@ function HomeCareForm() {
                     </Grid>
                 </Grid>
 
-
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <TextField
                             id="outlined-basic"
                             multiline
-                            label="Enter your Address"
-                            variant="outlined"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                className: classes.floatingLabelFocusStyle,
-                            }}
-                        />
-
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <MultipleSelect name="Add Symptoms" />
-                    </Grid>
-                </Grid>
-
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="outlined-basic"
-                            multiline
-                            label="Medical History (if any)"
+                            label="Phone Number"
                             variant="outlined"
                             className={classes.textField}
                             InputLabelProps={{
@@ -170,14 +155,8 @@ function HomeCareForm() {
                     </Grid>
 
                     <Grid item xs={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DateTimePicker
-                            label="Proposed date and time"
-                            value={value}
-                            onChange={handleChange}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
+                        <label for="">Symptoms</label>
+                        <HomeCareMultiSelect/>
                     </Grid>
                 </Grid>
 
@@ -186,7 +165,7 @@ function HomeCareForm() {
                         <TextField
                             id="outlined-basic"
                             multiline
-                            label="Basic Contact No"
+                            label="Private Doctor (if none, enter none)"
                             variant="outlined"
                             className={classes.textField}
                             InputLabelProps={{
@@ -200,7 +179,7 @@ function HomeCareForm() {
                     <TextField
                             id="outlined-basic"
                             multiline
-                            label="Initials"
+                            label="Medical History (if none, enter none)"
                             variant="outlined"
                             className={classes.textField}
                             InputLabelProps={{
@@ -209,12 +188,9 @@ function HomeCareForm() {
                         />
                     </Grid>
                 </Grid>
-
-                <Link to ="/OrderReview" className="mobile-lab-btn">
-                Submit Request
-                </Link>
+                </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

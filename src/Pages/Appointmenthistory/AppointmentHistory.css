@@ -154,3 +154,10 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
      margin-top: 10px;
      height: 40px;
   }
+
+  .cancel-booking-btn{
+      background-color: red;
+      color: #fff;
+      padding: 5px !important;
+      border-radius: 5px;
+  }
