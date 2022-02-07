@@ -1,0 +1,40 @@
+.cart-item_view{
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 5px 10px 0px;
+    
+}
+
+.cart-container{
+    width: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 4px;
+
+}
+
+.cart-drug-img {
+    width: 100px;
+    height: 100px;
+}
+
+.total_view{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem
+}
+
+.cart-checkout{
+    border: 3px solid #368885;
+    display: flex;
+    align-items: center;
+    padding: .6rem;
+    margin: 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cart-checkout:hover{
+    background-color: #368885;
+    color:#fff
+}
