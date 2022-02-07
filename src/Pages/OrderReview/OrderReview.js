@@ -189,7 +189,7 @@ function OrderReview({name}) {
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        <p>Laboratory request</p>
+                        <p>{location.state.type}</p>
                         <p>Service fee</p>
                     </div>
 
@@ -202,12 +202,12 @@ function OrderReview({name}) {
                 <div class="price-of-pay">
                     <div class="first-price">
                         <p style={{ color: '#61cd88' }}>GHS {location.state.totalCost} </p>
-                        <p style={{ color: '#61cd88' }}>GHS 5.0</p>
+                        <p style={{ color: '#61cd88' }}>{location.state.serviceCharge ? `GHS ${location.state.serviceCharge}` : "GHS 0"}</p>
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>GHS 0</p>
-                        <p style={{ fontWeight: 'bold' }}>GHS {(location.state.totalCost) +5}</p>
+                        <p style={{ color: '#cb2938' }}>{location.state.discount ? `GHS ${location.state.discount}` : "GHS 0"}</p>
+                        <p style={{ fontWeight: 'bold' }}> {location.state.serviceCharge ? `GHS ${location.state.totalCost + location.state.serviceCharge}` : `GHS ${location.state.totalCost}` }</p>
                     </div>
 
                 </div>
@@ -230,7 +230,7 @@ function OrderReview({name}) {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">GHS {(location.state.totalCost) +5}</span> from your mobile money</p>
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</span> from your mobile money</p>
                             <Grid container spacing={2}>
                                 {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
@@ -352,7 +352,7 @@ function OrderReview({name}) {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={payment} className={classes.payBtn}>Pay GHS {(location.state.totalCost) +5}</Button>
+                            <Button onClick={payment} className={classes.payBtn}>Pay {location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</Button>
                         </AccordionDetails>
                     </Accordion>
 

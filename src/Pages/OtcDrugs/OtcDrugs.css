@@ -162,3 +162,8 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.search_field {
+    display:flex;
+    justify-content:space-around
+}
