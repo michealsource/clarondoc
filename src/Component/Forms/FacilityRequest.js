@@ -5,7 +5,7 @@ import { TextField, FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, 
 import { MuiPickersUtilsProvider, KeyboardDatePicker, DateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
 import { fetchDoctors } from '../../Api/doctors';
-import { getLabTests } from '../../Api/lab';
+
 import MultiSelect from '../MultiSelect/MultiSelect';
 import MomentUtils from '@date-io/moment';
 import { useNavigate } from "react-router-dom"
@@ -15,7 +15,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import Select from '@mui/material/Select';
-import { Formik,Form } from 'formik';
+import Lab from './Lab'
+import { Formik, Form } from 'formik';
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -34,10 +35,26 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function FacilityRequest({testName}) {
+const colourStyles = {
+    control: (styles) => ({ ...styles, backgroundColor: "white"}),
+    option: (styles, { isDisabled }) => {
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? "red" : "black",
+        color: "#FFF",
+        cursor: "pointer"
+      };
+    }
+  };
+
+function FacilityRequest({ testName }) {
     const navigate = useNavigate()
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState();
+    const [selectedvalue,setSelectedValue]= useState()
+    const handleChange = (e) => {
+     setSelectedValue (Array.isArray(e)?e.map(x=>x.label):[])
+  }
 
     const handleDateChange = (date) => {
         setSelectedDate(date.toDate());
@@ -59,7 +76,7 @@ function FacilityRequest({testName}) {
     const [dob, setDob] = useState(new Date())
     const [purpose, setPurpose] = useState('')
     const [doctors, setdoctors] = useState([])
-    const [value, setValue] = useState();
+    const [value, setValue] = useState([]);
     const [doctor, setdoctor] = useState()
     const [phone, setPhone] = useState('')
     const [sex, setSex] = useState(0)
@@ -74,16 +91,6 @@ function FacilityRequest({testName}) {
     const [labTests, setLabTests] = useState([])
     const [totalCost, setTotalCost] = useState(0)
 
-    // FORMIK INITIAL VALUES
-    const initialValues={
-        name:'',
-        doctor:'',
-        picked:'',
-        
-        
-    }
-
-
     useEffect(() => {
 
         (async () => {
@@ -93,19 +100,16 @@ function FacilityRequest({testName}) {
                 let found = await fetchDoctors()
                 setdoctors(found)
                 setdoc(found[0].firstname + ' ' + found[0].lastname)
-                let data = await getLabTests()
-                settests(data)
-                data.map(test => {
-                    return testnames.push(`${test.name} - GHS ${test.charges.toFixed(2)}`)
-                })
             } catch (e) {
                 alert('Error', e.message)
             }
         })()
+
+        console.log(testnames)
     }, [])
 
     const getTests = (test, total) => {
-        console.log(test,total, "frm arent")
+        console.log(test, total, "frm arent")
         setLabTests(test)
         setTotalCost(total)
     }
@@ -116,10 +120,9 @@ function FacilityRequest({testName}) {
             <div className="individual-request-container-outer">
                 <div class="inner-individual-container-request">
                     <h2>LABORATORY</h2>
-                    <Formik initialValues={initialValues}>
-                        {(props)=>(
-                            <Form>
-                                <Grid container spacing={2}>
+
+
+                    <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <TextField
                                 id="outlined-basic"
@@ -159,7 +162,7 @@ function FacilityRequest({testName}) {
                         <Grid item xs={6}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Gender</FormLabel>
-                                <RadioGroup  row aria-label="gender" name="row-radio-buttons-group">
+                                <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
                                     <FormControlLabel name="picked" value="female" control={<Radio />} label="Female" />
                                     <FormControlLabel name="picked" value="male" control={<Radio />} label="Male" />
                                 </RadioGroup>
@@ -247,21 +250,18 @@ function FacilityRequest({testName}) {
                         </Grid>
                     </Grid>
 
-
                     <Grid container spacing={5}>
-                       
                         <Grid item xs={12} className={classes.dateTime}>
-                            <p className='cost-p'>Select All Tests that Apply {totalCost?<span className='cost'>{totalCost}</span> :''}</p>
-                            <MultiSelect filterednames={filterednames} getTest={getTests}/>
+                            <p className='cost-p'>Select All Tests that Apply {totalCost ? <span className='cost'>{totalCost}</span> : ''}</p>
+                            <Lab/>
+                            {/* <MultiSelect filterednames={filterednames} getTest={getTests} /> */}
                         </Grid>
                     </Grid>
 
-                  <button className="mobile-lab-btn"
-                   onClick={()=>navigate('/OrderReview',
-                   {state:{totalCost:totalCost,name:name,value:value,sex:sex,dob:dob,address:address,phone:phone,purpose:purpose,selectedDate:selectedDate,labTests:labTests}})}>Proccessed</button>
-                            </Form>
-                        )}
-                    </Formik>
+                    <button className="mobile-lab-btn"
+                        onClick={() => navigate('/OrderReview',
+                            { state: { totalCost: totalCost, name: name, value: value, sex: sex, dob: dob, address: address, phone: phone, purpose: purpose, selectedDate: selectedDate, labTests: labTests } })}>Proccessed</button>
+
                 </div>
             </div>
         </MainLayout>

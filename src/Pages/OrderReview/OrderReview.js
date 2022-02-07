@@ -15,7 +15,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import 'date-fns';
 import { useLocation } from "react-router-dom";
 import { initPayment } from '../../Api/paystack';
-
+import MainLayout from '../MainLayout';
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -126,7 +126,6 @@ function OrderReview({name}) {
     }
 
     // HANDLE MOMO PAYMENT
-
     const momopayment = async ()=>{
         if(phone.length < 10){
             setPhoneError('Please enter a valid number')
@@ -185,6 +184,7 @@ function OrderReview({name}) {
     
 
     return (
+        <MainLayout>
         <div class="order-container">
             <div class="payment-review-container">
                 <div class="title-of-pay">
@@ -259,7 +259,6 @@ function OrderReview({name}) {
                             <Button onClick={momopayment} className={classes.payBtn}>Pay With Momo</Button>
                         </AccordionDetails>
                     </Accordion>
-
 
                     <Accordion>
                         <AccordionSummary
@@ -355,7 +354,6 @@ function OrderReview({name}) {
                             <Button onClick={payment} className={classes.payBtn}>Pay GHS {(location.state.totalCost) +5}</Button>
                         </AccordionDetails>
                     </Accordion>
-
 
                     <Accordion>
                         <AccordionSummary
@@ -463,6 +461,7 @@ function OrderReview({name}) {
                 </div>
             </div>
         </div>
+        </MainLayout>
     )
 }
 
