@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Select from '@mui/material/Select';
 import Lab from './Lab'
 import { Formik, Form } from 'formik';
@@ -149,7 +150,7 @@ function FacilityRequest({ testName }) {
                                     inputProps={{ 'aria-label': 'Without label' }}
                                 >
                                     <MenuItem selected value="">
-                                        <em disa>Select Requesting Doctor</em>
+                                        <em>Select Requesting Doctor</em>
                                     </MenuItem>
                                     {doctors.map(doc => <MenuItem key={doc.email} value={doc.firstname}>{doc.firstname + ' ' + doc.lastname}</MenuItem>)}
                                 </Select>
@@ -172,7 +173,7 @@ function FacilityRequest({ testName }) {
                         <Grid item xs={6}>
                             <div className="date">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
+                                    <DesktopDatePicker
                                         fullWidth
                                         label="Date of Birth"
                                         value={dob}

@@ -1,9 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import Select from 'react-select';
 import './Multi.css'
-import { getSymptoms } from '../../Api/homecare';
-let testnames = []
-
 const colourStyles = {
     control: (styles) => ({ ...styles, backgroundColor: "white"}),
     option: (styles, { isDisabled }) => {
@@ -15,27 +12,8 @@ const colourStyles = {
       };
     }
   };
-function HomeCareMultiSelect() {
-  const [user, setuser] = useState()
-    const [selectedvalue,setSelectedValue]= useState()
-   const handleChange = (e) => {
-    setSelectedValue (Array.isArray(e)?e.map(x=>x.label):[])
- }
- useEffect(() => {
-    (async()=>{
-        try{
-            let account = localStorage.getItem('user')
-            setuser(JSON.parse(account))
-            let data = await getSymptoms()
-            data.map(s=>{
-                testnames.push({value:s.id, label:s.body})
-            })
-        }catch(e){
-            alert('Error', e.message)
-        }
-    })()
-}, [])
-console.log(selectedvalue)
+function HomeCareMultiSelect(props) {
+  const { testnames, handleChange} = props
   return (
     <div>
         <Select
