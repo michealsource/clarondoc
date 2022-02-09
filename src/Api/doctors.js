@@ -47,7 +47,7 @@ export const onDemandBooking = async (data) => {
 
     try{
         const key = await apiKey()
-        const auth = await localStorage.getItem('access-token');
+        const auth = localStorage.getItem('access-token');
 
         const response = await axios({
             method: 'POST',
