@@ -53,8 +53,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function OrderReview({name}) {
+function OrderReview() {
     const location = useLocation();
+
+    const{item,totalCost,name,discount}= location.state
+    // const{totalCost}= item
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [user, setUser] = useState()
@@ -71,17 +74,13 @@ function OrderReview({name}) {
     const [phone, setPhone] = useState('')
     const [loading, setLoading] = useState(false)
     const [button, setButton] = useState('Pay Now')
-    const [reference, setReference] = useState()
-    const [status, setStatus] = useState()
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
     const mtns = ['024', '054', '055', '059']
     const tigos = ['027', '057', '026', '056']
     const vods = ['020', '050']
-   
 
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
-
     const handleDateChange = (newValue) => {
       setValue(newValue);
     };
@@ -92,6 +91,8 @@ function OrderReview({name}) {
 
     // MAKE PAYMENT Function
     const payment = ()=>{
+
+        
         
             if(number.length < 16){
                 setCardError('Please enter a valid card number')
@@ -182,6 +183,7 @@ function OrderReview({name}) {
         }
     }
     
+    console.log(name)
 
     return (
         <MainLayout>
@@ -189,25 +191,25 @@ function OrderReview({name}) {
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        <p>{location.state.type}</p>
-                        <p>Service fee</p>
+                        {/* <p>{location.state.type}</p> */}
                     </div>
 
                     <div class="discount-price">
                         <p>Discount</p>
+                        <p>Total</p>
                         <p>Net Total</p>
                     </div>
                 </div>
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                        <p style={{ color: '#61cd88' }}>GHS {location.state.totalCost} </p>
-                        <p style={{ color: '#61cd88' }}>{location.state.serviceCharge ? `GHS ${location.state.serviceCharge}` : "GHS 0"}</p>
+                        <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
+                        <p style={{ color: '#61cd88' }}>GHS {totalCost?totalCost:item.totalCost}</p>
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>{location.state.discount ? `GHS ${location.state.discount}` : "GHS 0"}</p>
-                        <p style={{ fontWeight: 'bold' }}> {location.state.serviceCharge ? `GHS ${location.state.totalCost + location.state.serviceCharge}` : `GHS ${location.state.totalCost}` }</p>
+                        <p style={{ color: '#cb2938' }}>GHS {totalCost?totalCost:item.totalCost}</p>
+                        {/* <p style={{ fontWeight: 'bold' }}> {serviceCharge ? `GHS ${totalCost + serviceCharge}` : `GHS ${totalCost?totalCost:item.totalCost}` }</p> */}
                     </div>
 
                 </div>

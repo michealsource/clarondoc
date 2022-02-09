@@ -9,7 +9,6 @@ import { useNavigate} from "react-router-dom"
 import HomeCareMultiSelect from '../../Component/HomeCareMultiSelect/HomeCareMultiSelect'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DateTimePicker from '@mui/lab/DateTimePicker';
 import TimePicker from '@mui/lab/TimePicker';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import MainLayout from '../MainLayout'
@@ -47,6 +46,7 @@ function HomeCareForm() {
     let navigate = useNavigate()
     const classes = useStyles();
     const [date, setDate] = useState(new Date());
+    const [user, setuser] = useState()
     const [time,setTime]= useState()
     const [name,setName]= useState()
     const [reason,setReason]= useState()
@@ -65,8 +65,6 @@ function HomeCareForm() {
         setTime(newTime)
     }
 
-    const [user, setuser] = useState()
-    
     const handleChange = (e) => {
     setSelectedValue (Array.isArray(e)?e.map(x=>x.label):[])
  }
@@ -263,7 +261,11 @@ console.log(selectedvalue)
                         </Grid>
                     </Grid>
                     <button
-                      
+                      onClick={()=>navigate('/OrderReview', { state: {  item: {
+                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? (350-(350*0.15)) : 350+5,
+                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? 350 : 350+5,
+                        totalDiscount:  ['Basic', 'Premium', 'Family'].includes(user.subscription) ? 350*0.15 : 0,
+                    }, name:'micheal'} })}
                      className='home-care-form-btn'>Submit</button>
                 </div>
             </div>
