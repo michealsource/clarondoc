@@ -11,6 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import  MainLayout from "../MainLayout"
 import 'date-fns';
 import { useLocation, useNavigate } from "react-router-dom";
 import { initPayment, verOtp, cardPayment } from '../../Api/paystack';
@@ -58,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 function OrderReview() {
     const location = useLocation();
 
-    const{item,totalCost,name,discount}= location.state
+    const{item,totalCost,name,serviceCharge,discount}= location.state
     // const{totalCost}= item
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -90,7 +91,7 @@ function OrderReview() {
 
     const navigate = useNavigate()
 
-    const netAmount = location.state.totalCost + location.state.serviceCharge
+    const netAmount = item.totalCost + item.serviceCharge
 
     const handleDateChange = (newValue) => {
       setValue(newValue);
@@ -121,7 +122,7 @@ function OrderReview() {
         try{
             setLoading(true)
             setButton('Initializing Transaction...')
-            let init = await initPayment(location.state.data.totalCost + 5,phone,network)
+            let init = await initPayment(item.totalCost + 5,phone,network)
 
             console.log(init, "init")
 
@@ -129,7 +130,7 @@ function OrderReview() {
 
               if(init.data.status === 'send_otp'){
                   setLoading(false)
-                  alert("Otp has been sent to you please submit")
+                  alert(init.data.display_text)
                   setButton('Submit OTP')
                   
               }else if(init.data.status === 'pay_offline'){
@@ -155,6 +156,7 @@ function OrderReview() {
             }
 
         }catch(e){
+            console.log(e)
           console.log(e.response.data)
             setLoading(false)
             setButton('Pay Now')
@@ -223,15 +225,15 @@ function OrderReview() {
               }else if(init.data.status == 'success'){
     
                 if(location.state.type == 'lab'){
-                  if(location.state.data.type == 'facility'){
-                    await facilityLabRequest(location.state.data)
+                  if(location.state.item.type == 'facility'){
+                    await facilityLabRequest(location.state.item)
                   }else{
-                    await individualLabRequest(location.state.data)
+                    await individualLabRequest(location.state.item)
                   }
                 }else if(location.state.type == 'homecare'){
-                  await requestHomeCare(location.state.data)
+                  await requestHomeCare(location.state.item)
                 }else if(location.state.type == 'pharmacy'){
-                  await buyDrugs(location.state.data)
+                  await buyDrugs(location.state.item)
                 }
     
                 setLoading(false)
@@ -275,15 +277,15 @@ function OrderReview() {
           }else if(init.data.status == 'success'){
   
             if(location.state.type == 'lab'){
-              if(location.state.data.type == 'facility'){
-                await facilityLabRequest(location.state.data)
+              if(location.state.item.type == 'facility'){
+                await facilityLabRequest(location.state.item)
               }else{
-                await individualLabRequest(location.state.data)
+                await individualLabRequest(location.state.item)
               }
             }else if(location.state.type == 'homecare'){
-              await requestHomeCare(location.state.data)
+              await requestHomeCare(location.state.item)
             }else if(location.state.type == 'drug'){
-              await buyDrugs(location.state.data)
+              await buyDrugs(location.state.item)
             }
   
             setLoading(false)
@@ -316,7 +318,7 @@ function OrderReview() {
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        <p>{location.state.data.type}</p>
+                        <p>{location.state.type}</p>
                         <p>Service fee</p>
                     </div>
 
@@ -329,13 +331,15 @@ function OrderReview() {
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                        <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
-                        <p style={{ color: '#61cd88' }}>GHS {totalCost?totalCost:item.totalCost}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.totalCost}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.serviceCharge?item.serviceCharge:'0.00'} </p>
+                    <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
+                        
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>GHS {totalCost?totalCost:item.totalCost}</p>
-                        {/* <p style={{ fontWeight: 'bold' }}> {serviceCharge ? `GHS ${totalCost + serviceCharge}` : `GHS ${totalCost?totalCost:item.totalCost}` }</p> */}
+                        <p style={{ color: '#cb2938' }}>GHS {item.totalCost?item.totalCost:item.totalCost}</p>
+                        <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${item.totalCost + item.serviceCharge}` : `GHS ${item.totalCost}` }</p>
                     </div>
 
                 </div>
@@ -358,7 +362,7 @@ function OrderReview() {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.data.serviceCharge ? `GHS ${location.state.data.serviceCharge + location.state.data.totalCost}` : `GHS ${location.state.data.totalCost}`}</span> from your mobile money</p>
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</span> from your mobile money</p>
                             <Grid container spacing={2}>
                                 {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
@@ -406,8 +410,6 @@ function OrderReview() {
                                     )
                                 }
 
-                               
-                                
                             </Grid>
                                 {
                                     button === "Submit OTP" ? (
@@ -511,7 +513,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={processCardPayment} className={classes.payBtn}>Pay {location.state.serviceCharge ? `GHS ${location.state.data.serviceCharge + location.state.data.totalCost}` : `GHS ${location.state.data.totalCost}`}</Button>
+                            <Button onClick={processCardPayment} className={classes.payBtn}>Pay {location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</Button>
                         </AccordionDetails>
                     </Accordion>
 

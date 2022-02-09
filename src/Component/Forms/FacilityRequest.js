@@ -254,14 +254,16 @@ function FacilityRequest({ testName }) {
                     <Grid container spacing={5}>
                         <Grid item xs={12} className={classes.dateTime}>
                             <p className='cost-p'>Select All Tests that Apply {totalCost ? <span className='cost'>{totalCost}</span> : ''}</p>
-                            <Lab/>
+                            <Lab getTests={(test, total) => getTests(test,total)}/>
                             {/* <MultiSelect filterednames={filterednames} getTest={getTests} /> */}
                         </Grid>
                     </Grid>
 
                     <button className="mobile-lab-btn"
                         onClick={() => navigate('/OrderReview',
-                            { state: { totalCost: totalCost, name: name, value: value, sex: sex, dob: dob, address: address, phone: phone, purpose: purpose, selectedDate: selectedDate, labTests: labTests } })}>Proccessed</button>
+                            { state: { totalCost: totalCost, name: name, type:"Laboratory", item: {
+                               serviceCharge: 5, totalCost: totalCost,value: value, sex: sex, dob: dob, address: address, phone: phone, purpose: purpose, selectedDate: selectedDate, labTests: labTests 
+                            }} })}>Proccessed</button>
 
                 </div>
             </div>
