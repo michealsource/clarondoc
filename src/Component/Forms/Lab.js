@@ -17,7 +17,7 @@ const colourStyles = {
       };
     }
   };
-function Lab() {
+function Lab(props) {
   const [user, setuser] = useState()
     const [selectedvalue,setSelectedValue]= useState([])
     const [total,setTotal]=useState(0)
@@ -34,7 +34,9 @@ function Lab() {
      return  totalTest.push(Number(singleTest))
     })
     // return totalTest
-    return totalTest.reduce((v,t)=> v+t)
+    const total = totalTest.reduce((v,t)=> v+t)
+    props.getTests(data, total)
+    return total
   }
 
  useEffect(() => {

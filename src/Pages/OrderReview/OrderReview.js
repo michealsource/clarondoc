@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import './OrderReview.css'
 import { FaMobileAlt, FaCreditCard} from "react-icons/fa";
@@ -12,10 +11,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import  MainLayout from "../MainLayout"
 import 'date-fns';
-import { useLocation } from "react-router-dom";
-import { initPayment } from '../../Api/paystack';
-import MainLayout from '../MainLayout';
+import { useLocation, useNavigate } from "react-router-dom";
+import { initPayment, verOtp, cardPayment } from '../../Api/paystack';
+import { facilityLabRequest, individualLabRequest, insurancefacilityLabRequest, insuranceindividualLabRequest } from '../../Api/lab';
+import { requestHomeCare, insurancerequestHomeCare, get_insurance_provider, request_payment_through_insurance } from '../../Api/homecare';
+import { buyDrugs } from '../../Api/pharmacy'
+
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -56,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 function OrderReview() {
     const location = useLocation();
 
-    const{item,totalCost,name,discount}= location.state
+    const{item,totalCost,name,serviceCharge,discount}= location.state
     // const{totalCost}= item
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -73,14 +76,23 @@ function OrderReview() {
     const [price, setPrice] = useState()
     const [phone, setPhone] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showotp_field, setshowotp_field] = useState(false)
+    const [otperror, setotperror] = useState(false)
+    const [tnx_ref, settnx_ref] = useState('')
     const [button, setButton] = useState('Pay Now')
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
+    const [otp, setOTP] = useState("")
     const mtns = ['024', '054', '055', '059']
     const tigos = ['027', '057', '026', '056']
     const vods = ['020', '050']
 
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+    const navigate = useNavigate()
+
+    const netAmount = item.totalCost + item.serviceCharge
+
     const handleDateChange = (newValue) => {
       setValue(newValue);
     };
@@ -89,42 +101,7 @@ function OrderReview() {
         setExpanded(isExpanded ? panel : false);
     };
 
-    // MAKE PAYMENT Function
-    const payment = ()=>{
-
-        
-        
-            if(number.length < 16){
-                setCardError('Please enter a valid card number')
-                return
-            }
-    
-            if(month.length < 2){
-                setCardError('Please enter a valid expiry month')
-                return
-            }
-    
-            if(month*1 > 12){
-                setCardError('Please enter a valid expiry month')
-                return
-            }
-    
-            if(year.length < 2){
-                setCardError('Please enter a valid expiry year')
-                return
-            }
-    
-            if(year*1 < 21){
-                setCardError('Please enter a valid expiry year')
-                return
-            }
-    
-            if(cvv.length < 3){
-                setCardError('Please enter a valid card cvv')
-                return
-            }
-            
-    }
+   
 
     // HANDLE MOMO PAYMENT
     const momopayment = async ()=>{
@@ -145,13 +122,17 @@ function OrderReview() {
         try{
             setLoading(true)
             setButton('Initializing Transaction...')
-            let init = await initPayment(location.state.totalCost +5,phone,network)
+            let init = await initPayment(item.totalCost + 5,phone,network)
+
+            console.log(init, "init")
 
             if(init.status){
 
               if(init.data.status === 'send_otp'){
                   setLoading(false)
+                  alert(init.data.display_text)
                   setButton('Submit OTP')
+                  
               }else if(init.data.status === 'pay_offline'){
                   setLoading(false)
                   setButton('Awaiting for payment confirmation...')
@@ -175,6 +156,7 @@ function OrderReview() {
             }
 
         }catch(e){
+            console.log(e)
           console.log(e.response.data)
             setLoading(false)
             setButton('Pay Now')
@@ -182,16 +164,162 @@ function OrderReview() {
             return
         }
     }
+
+    const processCardPayment = async () => {
+
+        const card = {
+            number: number,
+            month: month,
+            year: year,
+            cvv: cvv,
+            pin: pin
+        }
+  
+            if(card.number.length < 10){
+                setCardError('Please enter a valid card number')
+                return
+            }
+    
+            if(card.month.length < 2){
+                setCardError('Please enter a valid expiry month')
+                return
+            }
+    
+            if(card.month*1 > 12){
+                setCardError('Please enter a valid expiry month')
+                return
+            }
+    
+            if(card.year.length < 2){
+                setCardError('Please enter a valid expiry year')
+                return
+            }
+    
+            if(card.year*1 < 21){
+                setCardError('Please enter a valid expiry year')
+                return
+            }
+    
+            if(card.cvv.length < 3){
+                setCardError('Please enter a valid card cvv')
+                return
+            }
+    
+            setLoading(true)
+            setButton('Initializing Transaction, Please wait...')
+            let init = await cardPayment(card, netAmount);
+    
+            console.log(card)
+    
+            // start
+            if(init.status){
+    
+              if(init.data.status == 'send_otp'){
+                  setLoading(false)
+                  setshowotp_field(true)
+                  settnx_ref(init.data.reference)
+                  setButton('Pay Now')
+              }else if(init.data.status == 'pay_offline'){
+                  setLoading(false)
+                  setButton('Awaiting for payment confirmation...')
+              }else if(init.data.status == 'success'){
+    
+                if(location.state.type == 'lab'){
+                  if(location.state.item.type == 'facility'){
+                    await facilityLabRequest(location.state.item)
+                  }else{
+                    await individualLabRequest(location.state.item)
+                  }
+                }else if(location.state.type == 'homecare'){
+                  await requestHomeCare(location.state.item)
+                }else if(location.state.type == 'pharmacy'){
+                  await buyDrugs(location.state.item)
+                }
+    
+                setLoading(false)
+                setButton('Done')
+                // navigation.pop()
+                navigate('PaymentResult', {state:{purpose: location.state.type == 'pharmacy' ? 'Pharmacy Order' : location.state.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service', amount: netAmount, reference: init.data.reference, date: init.data.transaction_date}})
+              }else{
+                  setLoading(false)
+                  setButton(init.data.gateway_response)
+              }
+    
+            }else{
+              setLoading(false)
+              setButton('Pay Now')
+              setPhoneError(init.data.message)
+              alert(init.data.message)
+              return
+            }
+            // stop
+    
+          
+    }
+
+
+    const process_otp = async()=>{
+        setLoading(true)
+        setButton('Initializing Verification for Otp...')
+  
+        let init = await verOtp(tnx_ref, otp);
+        // start
+        if(init.status){
+  
+          if(init.data.status == 'send_otp'){
+              setLoading(false)
+              setPhoneError("Invalid or expired otp")
+              settnx_ref(init.data.reference)
+              setButton('Pay Now')
+          }else if(init.data.status == 'pay_offline'){
+              setLoading(false)
+              setButton('Awaiting for payment confirmation...')
+          }else if(init.data.status == 'success'){
+  
+            if(location.state.type == 'lab'){
+              if(location.state.item.type == 'facility'){
+                await facilityLabRequest(location.state.item)
+              }else{
+                await individualLabRequest(location.state.item)
+              }
+            }else if(location.state.type == 'homecare'){
+              await requestHomeCare(location.state.item)
+            }else if(location.state.type == 'drug'){
+              await buyDrugs(location.state.item)
+            }
+  
+            setLoading(false)
+            setButton('Done')
+            // navigation.pop()
+            navigate('PaymentResult', {state:{purpose: location.state.type == 'drug' ? 'Pharmacy Order' : location.state.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service', amount: netAmount, reference: init.data.reference, date: init.data.transaction_date}})
+          }else{
+              setLoading(false)
+              setButton(init.data.gateway_response)
+          }
+  
+        }else{
+          setLoading(false)
+          setButton('Pay Now')
+          setPhoneError(init.data.message)
+          return
+        }
+        // stop
+      }
+  
+      
     
     console.log(name)
 
+    
+    
     return (
         <MainLayout>
         <div class="order-container">
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        {/* <p>{location.state.type}</p> */}
+                        <p>{location.state.type}</p>
+                        <p>Service fee</p>
                     </div>
 
                     <div class="discount-price">
@@ -203,13 +331,15 @@ function OrderReview() {
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                        <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
-                        <p style={{ color: '#61cd88' }}>GHS {totalCost?totalCost:item.totalCost}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.totalCost}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.serviceCharge?item.serviceCharge:'0.00'} </p>
+                    <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
+                        
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>GHS {totalCost?totalCost:item.totalCost}</p>
-                        {/* <p style={{ fontWeight: 'bold' }}> {serviceCharge ? `GHS ${totalCost + serviceCharge}` : `GHS ${totalCost?totalCost:item.totalCost}` }</p> */}
+                        <p style={{ color: '#cb2938' }}>GHS {item.totalCost?item.totalCost:item.totalCost}</p>
+                        <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${item.totalCost + item.serviceCharge}` : `GHS ${item.totalCost}` }</p>
                     </div>
 
                 </div>
@@ -232,7 +362,7 @@ function OrderReview() {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</span> from your mobile money</p>
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</span> from your mobile money</p>
                             <Grid container spacing={2}>
                                 {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
@@ -245,12 +375,16 @@ function OrderReview() {
                                     </FormControl>
                                 </Grid> */}
 
-                                <Grid item xs={6}>
-                                    <p className='phone-error'>{phone_error?phone_error:''}</p>
+                                {
+                                    button === "Submit OTP" ? (
+                                        <Grid item xs={6} >
+                                    <p className='phone-error'>{phone_error ? phone_error : ''}</p>
                                     <TextField
                                         id="outlined-basic"
-                                        label="Enter Mobile Money Number"
+                                        label="Enter OTP"
                                         variant="outlined"
+                                        value={otp}
+                                        onChange={e => setOTP(e.target.value)}
                                         className={classes.textField}
                                         InputLabelProps={{
                                             className: classes.floatingLabelFocusStyle,
@@ -258,8 +392,33 @@ function OrderReview() {
                                     />
                                     
                                 </Grid>
+                                    ): (
+                                        <Grid item xs={6}>
+                                        <p className='phone-error'>{phone_error?phone_error:''}</p>
+                                        <TextField
+                                            id="outlined-basic"
+                                            label="Enter Mobile Money Number"
+                                            variant="outlined"
+                                            value={phone}
+                                            onChange={e => setPhone(e.target.value)}
+                                            className={classes.textField}
+                                            InputLabelProps={{
+                                                className: classes.floatingLabelFocusStyle,
+                                            }}
+                                        />
+                                    </Grid>
+                                    )
+                                }
+
                             </Grid>
-                            <Button onClick={momopayment} className={classes.payBtn}>Pay With Momo</Button>
+                                {
+                                    button === "Submit OTP" ? (
+                                        <Button onClick={process_otp} className={classes.payBtn}>{button}</Button>
+
+                                    ) : (
+                                        <Button onClick={momopayment} className={classes.payBtn}>{button}</Button>
+                                    )
+                                }
                         </AccordionDetails>
                     </Accordion>
 
@@ -354,7 +513,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={payment} className={classes.payBtn}>Pay {location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</Button>
+                            <Button onClick={processCardPayment} className={classes.payBtn}>Pay {location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</Button>
                         </AccordionDetails>
                     </Accordion>
 
