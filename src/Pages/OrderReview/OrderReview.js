@@ -55,8 +55,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function OrderReview({name}) {
+function OrderReview() {
     const location = useLocation();
+
+    const{item,totalCost,name,discount}= location.state
+    // const{totalCost}= item
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [user, setUser] = useState()
@@ -76,15 +79,12 @@ function OrderReview({name}) {
     const [otperror, setotperror] = useState(false)
     const [tnx_ref, settnx_ref] = useState('')
     const [button, setButton] = useState('Pay Now')
-    const [reference, setReference] = useState()
-    const [status, setStatus] = useState()
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
     const [otp, setOTP] = useState("")
     const mtns = ['024', '054', '055', '059']
     const tigos = ['027', '057', '026', '056']
     const vods = ['020', '050']
-   
 
     const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -103,7 +103,6 @@ function OrderReview({name}) {
    
 
     // HANDLE MOMO PAYMENT
-
     const momopayment = async ()=>{
         if(phone.length < 10){
             setPhoneError('Please enter a valid number')
@@ -307,10 +306,12 @@ function OrderReview({name}) {
   
       
     
+    console.log(name)
 
     
     
     return (
+        <MainLayout>
         <div class="order-container">
             <div class="payment-review-container">
                 <div class="title-of-pay">
@@ -321,19 +322,20 @@ function OrderReview({name}) {
 
                     <div class="discount-price">
                         <p>Discount</p>
+                        <p>Total</p>
                         <p>Net Total</p>
                     </div>
                 </div>
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                        <p style={{ color: '#61cd88' }}>GHS {location.state.data.totalCost} </p>
-                        <p style={{ color: '#61cd88' }}>{location.state.data.serviceCharge ? `GHS ${location.state.data.serviceCharge}` : "GHS 0"}</p>
+                        <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
+                        <p style={{ color: '#61cd88' }}>GHS {totalCost?totalCost:item.totalCost}</p>
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>{location.state.data.discount ? `GHS ${location.state.data.discount}` : "GHS 0"}</p>
-                        <p style={{ fontWeight: 'bold' }}> {location.state.data.serviceCharge ? `GHS ${location.state.data.totalCost + location.state.data.serviceCharge}` : `GHS ${location.state.data.totalCost}` }</p>
+                        <p style={{ color: '#cb2938' }}>GHS {totalCost?totalCost:item.totalCost}</p>
+                        {/* <p style={{ fontWeight: 'bold' }}> {serviceCharge ? `GHS ${totalCost + serviceCharge}` : `GHS ${totalCost?totalCost:item.totalCost}` }</p> */}
                     </div>
 
                 </div>
@@ -384,6 +386,7 @@ function OrderReview({name}) {
                                             className: classes.floatingLabelFocusStyle,
                                         }}
                                     />
+                                    
                                 </Grid>
                                     ): (
                                         <Grid item xs={6}>
@@ -416,7 +419,6 @@ function OrderReview({name}) {
                                 }
                         </AccordionDetails>
                     </Accordion>
-
 
                     <Accordion>
                         <AccordionSummary
@@ -512,7 +514,6 @@ function OrderReview({name}) {
                             <Button onClick={processCardPayment} className={classes.payBtn}>Pay {location.state.serviceCharge ? `GHS ${location.state.data.serviceCharge + location.state.data.totalCost}` : `GHS ${location.state.data.totalCost}`}</Button>
                         </AccordionDetails>
                     </Accordion>
-
 
                     <Accordion>
                         <AccordionSummary
@@ -620,6 +621,7 @@ function OrderReview({name}) {
                 </div>
             </div>
         </div>
+        </MainLayout>
     )
 }
 

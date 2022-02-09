@@ -52,7 +52,7 @@
 
   /* CONSULT MEDIUM STYLING*/
   .consult-medium-container{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 @keyframes click-wave {
@@ -138,4 +138,17 @@
 
 .appoint-for-container{
   margin-top: 30px;
+}
+
+.date-container{
+  margin-top: 15px;
+  margin-bottom: 5px;
+  width: 100% !important;
+  display: flex;
+flex-direction: column;
+}
+
+.insurance-form-container{
+  display: flex;
+  flex-direction: column;
 }

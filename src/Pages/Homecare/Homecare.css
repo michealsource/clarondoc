@@ -114,3 +114,16 @@
   .reason{
       color: #16a085 !important;
   }
+
+  .inner-individual-container-request{
+      margin-bottom: 600px;
+  }
+
+  .home-care-form-btn{
+      background-color: #16a085;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+  }
