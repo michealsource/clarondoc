@@ -83,7 +83,7 @@ function HomeCareForm() {
         }
     })()
 }, [])
-console.log(selectedvalue)
+
 
     return (
         <MainLayout>

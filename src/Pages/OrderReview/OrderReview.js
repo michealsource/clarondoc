@@ -80,6 +80,7 @@ function OrderReview() {
     const [otperror, setotperror] = useState(false)
     const [tnx_ref, settnx_ref] = useState('')
     const [button, setButton] = useState('Pay Now')
+
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
     const [otp, setOTP] = useState("")
@@ -362,7 +363,9 @@ function OrderReview() {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</span> from your mobile money</p>
+
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{totalCost?totalCost:item.totalCost}</span> from your mobile money</p>
+
                             <Grid container spacing={2}>
                                 {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
@@ -513,7 +516,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={processCardPayment} className={classes.payBtn}>Pay {location.state.item.serviceCharge ? `GHS ${location.state.item.serviceCharge + location.state.item.totalCost}` : `GHS ${location.state.item.totalCost}`}</Button>
+                            <Button onClick={payment} className={classes.payBtn}>Pay GHS {totalCost?totalCost:item.totalCost}</Button>
                         </AccordionDetails>
                     </Accordion>
 
