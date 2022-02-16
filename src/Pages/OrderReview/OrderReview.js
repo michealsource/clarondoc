@@ -74,6 +74,7 @@ function OrderReview() {
     const [phone, setPhone] = useState('')
     const [loading, setLoading] = useState(false)
     const [button, setButton] = useState('Pay Now')
+
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
     const mtns = ['024', '054', '055', '059']
@@ -232,7 +233,7 @@ function OrderReview() {
 
                         </AccordionSummary>
                         <AccordionDetails>
-                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</span> from your mobile money</p>
+                            <p className="mobile-money-heading">You will be charged GHS <span className="mobile-charge">{totalCost?totalCost:item.totalCost}</span> from your mobile money</p>
                             <Grid container spacing={2}>
                                 {/* <Grid item xs={6}>
                                     <FormControl fullWidth>
@@ -354,7 +355,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={payment} className={classes.payBtn}>Pay {location.state.serviceCharge ? `GHS ${location.state.serviceCharge + location.state.totalCost}` : `GHS ${location.state.totalCost}`}</Button>
+                            <Button onClick={payment} className={classes.payBtn}>Pay GHS {totalCost?totalCost:item.totalCost}</Button>
                         </AccordionDetails>
                     </Accordion>
 
