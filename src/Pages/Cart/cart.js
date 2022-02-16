@@ -66,10 +66,16 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
                     </div>
                    
                    <div class="cart-checkout" onClick={() => navigate("/OrderReview", {state:{
-                       totalCost: totalBill(),
                        type: "Pharmacy",
+                       totalCost: totalBill(),
+                       name: "pharmacy",
                        discount: 0,
-                       netTotal: totalBill()
+                       item: {
+                        totalCost: totalBill(),
+                        type: "Pharmacy",
+                        discount: 0,
+                        netTotal: totalBill()
+                       }
                    }})} >
                         <p>CHECKOUT</p>
                     </div>
