@@ -61,6 +61,9 @@ function OtcDrugs() {
   }, [])
 
 
+ 
+
+
   const search = (query) => {
     setFiltered(drugs.filter(drug =>
       drug.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -108,7 +111,6 @@ function OtcDrugs() {
 
   const getCartItem = localStorage.getItem('cart')
   const myCartItem = JSON.parse(getCartItem)
-  console.log(myCartItem, "myCartItem")
 
   return (
     <MainLayout >
@@ -148,11 +150,6 @@ function OtcDrugs() {
             </Link>
             <p>My Cart</p>
             <div class="drugs-button-actions">
-            {/* <div class="qty-container">
-                                    <button onClick={() =>removeFromCart(data)}>-</button>
-        
-                                    <button onClick={() =>addToCart(data)}>+</button>
-                                </div> */}
               <div class="add-to-cart" onClick={() => removeFromCart(data)}>
                 <FaShoppingCart className="card" />
                 -

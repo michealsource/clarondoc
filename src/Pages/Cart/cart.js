@@ -69,8 +69,6 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
         return parseFloat((total).toFixed(2))
     }
 
-   
-
 
     const handleChange = (event) => {
         setpickup(event.target.checked);

@@ -10,6 +10,8 @@ import pharmacist from '../../images/pharmacist.png'
 import MainLayout from '../MainLayout';
 import * as API from '../../Api/pharmacy'
 import loading from '../../images/loading.gif'
+import {S3} from 'aws-sdk'
+import { uploadFile } from 'react-s3';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,6 +31,11 @@ function Drugs() {
   const [bookings, setBookings] = useState([])
   const [filtered, setFiltered] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [file, setFile] = useState(null)
+  const [prescription, setPrescription] = useState()
+  const [loadinga, setloadinga] = useState(false)
+  const [prescriptiona, setprescriptiona] = useState(false)
+  const [progress , setProgress] = useState(0);
 
   useEffect(()=>{
     (async()=>{
@@ -47,7 +54,71 @@ function Drugs() {
       }
 
     })()
-  })
+  }, [])
+
+
+
+
+
+
+  
+
+  const fileUpload = async(file)=>{
+    setloadinga(true)
+    console.log(file, "prescription")
+    const options = {
+      keyPrefix: '/', // Ex. myuploads/ arn:aws:s3:::imageuploads01
+      bucket: 'imageuploads01', // Ex. aboutreact
+      region: 'us-east-2', // Ex. ap-south-1
+      accessKey: 'AKIA24CPCGBT22ID7H5V',
+      // Ex. AKIH73GS7S7C53M46OQ
+      secretKey: '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',
+      // Ex. Pt/2hdyro977ejd/h2u8n939nh89nfdnf8hd8f8fd
+      successActionStatus: 201,
+    }
+
+    
+    try {
+      console.log(options)
+      
+      // const resp = await S3.put({
+      //   // `uri` can also be a file system path (i.e. file://)
+      //   // uri: prescription.uri,
+      //   name: file.name,
+      //   type: file.type,
+      // }, options)
+
+      
+        const resp = await uploadFile(file, options)
+    
+
+      console.log(resp, "ddddddd")
+      const response = resp;
+
+      if (response.status !== 201){
+        alert('Failed to upload image to S3');
+        return setloadinga(false)
+      }
+          
+        console.log(response.body);
+        // setFilePath('');
+        let {
+          bucket,
+          etag,
+          key,
+          location
+        } = response.body.postResponse;
+
+        setPrescription(location)
+        setprescriptiona(false)
+        alert('uploaded prescription to server');
+    } catch (error) {
+      
+    }
+
+    setloadinga(false)
+  }
+
   return (
     <MainLayout>
     <div className="drugs-container">
@@ -127,9 +198,11 @@ function Drugs() {
       >
         <Box sx={style}>
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
-          <input type="file" />
+          <input type="file" onChange={(e) => {
+            fileUpload(e.target.files[0])
+          }}/>
           <br />
-          <button className="upload-prescr-btn">Upload Prescription</button>
+          <button className="upload-prescr-btn" onClick={() => fileUpload()}>{loadinga ? progress : "Upload Prescription"}</button>
         </Box>
       </Modal>
       <div>
