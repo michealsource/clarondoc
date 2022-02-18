@@ -75,8 +75,8 @@
 
 const axios = require('axios');
 
-// const sk_key = "sk_test_b99f2f6df4585689836cad3d63d8b1d145789934";
-const sk_key = "sk_live_10b0401836f2ba502abc0ee39c1264797d5e0213";
+const sk_key = "sk_test_b99f2f6df4585689836cad3d63d8b1d145789934";
+// const sk_key = "sk_live_10b0401836f2ba502abc0ee39c1264797d5e0213";
 
 const getUser = async()=>{
     let account = await localStorage.getItem('user')

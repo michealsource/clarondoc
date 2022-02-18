@@ -18,6 +18,11 @@ import { initPayment, verOtp, cardPayment } from '../../Api/paystack';
 import { facilityLabRequest, individualLabRequest, insurancefacilityLabRequest, insuranceindividualLabRequest } from '../../Api/lab';
 import { requestHomeCare, insurancerequestHomeCare, get_insurance_provider, request_payment_through_insurance } from '../../Api/homecare';
 import { buyDrugs } from '../../Api/pharmacy'
+import Modal from '@mui/material/Modal';
+import moment from 'moment';
+import swal from 'sweetalert';
+import loading from '../../images/loading.gif'
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,10 +61,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
 function OrderReview() {
     const location = useLocation();
 
-    const{item,totalCost,name,serviceCharge,discount}= location.state
+    const{item,totalCost,name,serviceCharge,discount, type}= location.state
     // const{totalCost}= item
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -80,7 +97,8 @@ function OrderReview() {
     const [otperror, setotperror] = useState(false)
     const [tnx_ref, settnx_ref] = useState('')
     const [button, setButton] = useState('Pay Now')
-
+    const [open, setOpen] = useState(false);
+    
     const [phone_error, setPhoneError] = useState()
     const [card_error, setCardError] = useState()
     const [otp, setOTP] = useState("")
@@ -102,7 +120,7 @@ function OrderReview() {
         setExpanded(isExpanded ? panel : false);
     };
 
-   
+    const handleClose = () => setOpen(false);
 
     // HANDLE MOMO PAYMENT
     const momopayment = async ()=>{
@@ -158,7 +176,7 @@ function OrderReview() {
 
         }catch(e){
             console.log(e)
-          console.log(e.response.data)
+          console.log(e)
             setLoading(false)
             setButton('Pay Now')
             setPhoneError(e.message)
@@ -166,7 +184,7 @@ function OrderReview() {
         }
     }
 
-    const processCardPayment = async () => {
+    const processCardPayment = async (netAmount) => {
 
         const card = {
             number: number,
@@ -208,9 +226,11 @@ function OrderReview() {
     
             setLoading(true)
             setButton('Initializing Transaction, Please wait...')
+
+            
             let init = await cardPayment(card, netAmount);
     
-            console.log(card)
+            console.log(card, netAmount, init)
     
             // start
             if(init.status){
@@ -227,20 +247,29 @@ function OrderReview() {
     
                 if(location.state.type == 'lab'){
                   if(location.state.item.type == 'facility'){
-                    await facilityLabRequest(location.state.item)
+                    await facilityLabRequest(location.state.data)
                   }else{
-                    await individualLabRequest(location.state.item)
+                    await individualLabRequest(location.state.data)
                   }
                 }else if(location.state.type == 'homecare'){
-                  await requestHomeCare(location.state.item)
-                }else if(location.state.type == 'pharmacy'){
-                  await buyDrugs(location.state.item)
+                  await requestHomeCare(location.state.data)
+                }else if(location.state.type == 'drug'){
+                    await buyDrugs(location.state.data)
+                    localStorage.removeItem("cart")
                 }
+
+                const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
     
                 setLoading(false)
                 setButton('Done')
-                // navigation.pop()
-                navigate('PaymentResult', {state:{purpose: location.state.type == 'pharmacy' ? 'Pharmacy Order' : location.state.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service', amount: netAmount, reference: init.data.reference, date: init.data.transaction_date}})
+                swal({
+                    title: "Payment successful",
+                    text: `You have successfully paid GHS ${totalCost?totalCost:item.total} for ${purpose}. \n Your trasaction reference is ${init.data.reference}.`,
+                    icon: "success",
+                    button: "Ok",
+                  });
+                  navigate(-1)
+                
               }else{
                   setLoading(false)
                   setButton(init.data.gateway_response)
@@ -250,7 +279,7 @@ function OrderReview() {
               setLoading(false)
               setButton('Pay Now')
               setPhoneError(init.data.message)
-              alert(init.data.message)
+              alert(init)
               return
             }
             // stop
@@ -279,20 +308,26 @@ function OrderReview() {
   
             if(location.state.type == 'lab'){
               if(location.state.item.type == 'facility'){
-                await facilityLabRequest(location.state.item)
+                await facilityLabRequest(location.state.data)
               }else{
-                await individualLabRequest(location.state.item)
+                await individualLabRequest(location.state.data)
               }
             }else if(location.state.type == 'homecare'){
-              await requestHomeCare(location.state.item)
+              await requestHomeCare(location.state.data)
             }else if(location.state.type == 'drug'){
-              await buyDrugs(location.state.item)
+              await buyDrugs(location.state.data)
             }
   
+            const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
             setLoading(false)
             setButton('Done')
-            // navigation.pop()
-            navigate('PaymentResult', {state:{purpose: location.state.type == 'drug' ? 'Pharmacy Order' : location.state.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service', amount: netAmount, reference: init.data.reference, date: init.data.transaction_date}})
+            swal({
+                title: "Payment successful",
+                text: `You have successfully paid GHS ${totalCost?totalCost:item.total} for ${purpose}. \n Your trasaction reference is ${init.data.reference}.`,
+                icon: "success",
+                button: "Ok",
+              });
+              navigate(-1)
           }else{
               setLoading(false)
               setButton(init.data.gateway_response)
@@ -308,7 +343,6 @@ function OrderReview() {
       }
   
       
-    
     console.log(name)
 
     
@@ -332,7 +366,7 @@ function OrderReview() {
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.totalCost}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p>
                     <p style={{ color: '#61cd88' }}>GHS {item.serviceCharge?item.serviceCharge:'0.00'} </p>
                     <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
                         
@@ -441,84 +475,108 @@ function OrderReview() {
                         </AccordionSummary>
                         
                         <AccordionDetails>
-                        <p className='card-error'>{card_error?card_error:''}</p>
-                            <Grid container spacing={2}>
-                           
-                                <Grid item xs={6}>
+                            {
+                                showotp_field ? (
+                                    <>
+                                     <Grid item xs={6}>
+                                        <TextField
+                                            value={otp}
+                                            onChange={e => {setOTP(e.target.value) }}
+                                            id="outlined-basic"
+                                            label="OTP"
+                                            variant="outlined"
+                                            className={classes.textField}
+                                            InputLabelProps={{
+                                                className: classes.floatingLabelFocusStyle,
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Button onClick={() => process_otp()} className={classes.payBtn}>{button}</Button>
+                                    </>
+                                ) : (
+                                    <>
+                                    <p className='card-error'>{card_error?card_error:''}</p>
+                                    <Grid container spacing={2}>
                                 
-                                    <TextField
-                                        value={number}
-                                        onChange={e => {setNumber(e.target.value) }}
-                                        id="outlined-basic"
-                                        label="Card Number"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
+                                        <Grid item xs={6}>
+                                        
+                                            <TextField
+                                                value={number}
+                                                onChange={e => {setNumber(e.target.value) }}
+                                                id="outlined-basic"
+                                                label="Card Number"
+                                                variant="outlined"
+                                                className={classes.textField}
+                                                InputLabelProps={{
+                                                    className: classes.floatingLabelFocusStyle,
+                                                }}
+                                            />
+                                        </Grid>
 
-                                <Grid item xs={6}>
-                                    <TextField
-                                        value={month}
-                                        onChange={e => {setMonth(e.target.value) }}
-                                        id="outlined-basic"
-                                        label="Card Month MM"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        value={year}
-                                        onChange={e => {setYear(e.target.value) }}
-                                        id="outlined-basic"
-                                        label="Card Expiry YY"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                value={month}
+                                                onChange={e => {setMonth(e.target.value) }}
+                                                id="outlined-basic"
+                                                label="Card Month MM"
+                                                variant="outlined"
+                                                className={classes.textField}
+                                                InputLabelProps={{
+                                                    className: classes.floatingLabelFocusStyle,
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                value={year}
+                                                onChange={e => {setYear(e.target.value) }}
+                                                id="outlined-basic"
+                                                label="Card Expiry YY"
+                                                variant="outlined"
+                                                className={classes.textField}
+                                                InputLabelProps={{
+                                                    className: classes.floatingLabelFocusStyle,
+                                                }}
+                                            />
+                                        </Grid>
 
-                                <Grid item xs={6}>
-                                    <TextField
+                                        <Grid item xs={6}>
+                                            <TextField
 
-                                        id="outlined-basic"
-                                        label="CVV"
-                                        value={cvv}
-                                        onChange={e => {setCvv(e.target.value) }}
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        value={pin}
-                                        onChange={e => {setPin(e.target.value) }}
-                                        id="outlined-basic"
-                                        label="PIN"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Button  className={classes.payBtn}>Pay GHS {totalCost?totalCost:item.totalCost}</Button>
+                                                id="outlined-basic"
+                                                label="CVV"
+                                                value={cvv}
+                                                onChange={e => {setCvv(e.target.value) }}
+                                                variant="outlined"
+                                                className={classes.textField}
+                                                InputLabelProps={{
+                                                    className: classes.floatingLabelFocusStyle,
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                value={pin}
+                                                onChange={e => {setPin(e.target.value) }}
+                                                id="outlined-basic"
+                                                label="PIN"
+                                                variant="outlined"
+                                                className={classes.textField}
+                                                InputLabelProps={{
+                                                    className: classes.floatingLabelFocusStyle,
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Button onClick={() => processCardPayment(totalCost?totalCost:item.totalCost)} className={classes.payBtn}>{ loading ? "Processing..." : `Pay GHS ${totalCost?totalCost:item.totalCost}`}</Button>
+                                    </>
+                                )
+                            }
                         </AccordionDetails>
                     </Accordion>
+
 
                     <Accordion>
                         <AccordionSummary
