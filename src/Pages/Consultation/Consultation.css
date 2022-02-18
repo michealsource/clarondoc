@@ -19,11 +19,11 @@
     width: 93%;
     margin-right: auto;
     margin-left: auto;
+    
 }
 
 .doctors .box-container .box{
-    text-align: center;
-    background:#fff;
+    /* text-align: center; */
     border-radius: .5rem;
     border:var(--border);
     box-shadow: var(--box-shadow);
@@ -31,11 +31,15 @@
     width: 80%;
     margin-bottom: 20px;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .doc-name-consult{
     font-size: 15px !important;
-
+    margin-bottom: 10px;
 }
 .doctors .box-container .box img{
     /* height: 15rem;

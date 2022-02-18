@@ -516,7 +516,7 @@ function OrderReview() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button onClick={payment} className={classes.payBtn}>Pay GHS {totalCost?totalCost:item.totalCost}</Button>
+                            <Button  className={classes.payBtn}>Pay GHS {totalCost?totalCost:item.totalCost}</Button>
                         </AccordionDetails>
                     </Accordion>
 

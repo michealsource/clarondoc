@@ -27,6 +27,8 @@ export default function UserProfileDropDown({ handleClose, anchorEl, openAction 
                 }}
             >
                 <MenuItem> <Link to="/profile">Profile</Link></MenuItem>
+                <MenuItem> <Link to="/AboutClaron">About Us</Link></MenuItem>
+                <MenuItem> <Link to="/ClaronTerms">Terms and Condition</Link></MenuItem>
                 {/* <MenuItem> <Link to="/">Logout</Link></MenuItem>     */}
                 <MenuItem onClick={logOut}>Logout</MenuItem> 
             </Menu>

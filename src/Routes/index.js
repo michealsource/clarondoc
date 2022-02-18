@@ -10,7 +10,6 @@ import Homecare from '../Pages/Homecare/Homecare'
 import Ambulance from '../Pages/Ambulance/Ambulance'
 import Laboratory from '../Pages/Laboratory/Laboratory'
 import AppointmentHistory from '../Pages/Appointmenthistory/AppointmentHistory'
-// import UserProfile from '../UserDetails/Profile'
 import UserProfile from '../UserDetails/Profile/Profile'
 import Editpatient from '../UserDetails/EditPatient/Editpatient'
 import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
@@ -28,6 +27,8 @@ import Referral from '../Pages/Referral/Referral'
 import Wallet from '../Pages/Wallet/Wallet'
 import Notification from '../Pages/Notification/Notification'
 import Chat from '../Pages/Chat/Chat'
+import AboutClaron from '../Pages/AboutClaron/AboutClaron'
+import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
 // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
 // DOCTORS PAGE IMPORT
@@ -84,6 +85,9 @@ function index() {
                 <Route exact path="/Wallet" element={< Wallet />} />
                 <Route exact path="/notification" element={< Notification />} />
                 <Route exact path="/chat" element={< Chat />} />
+                <Route exact path="/AboutClaron" element={< AboutClaron />} />
+                <Route exact path="/ClaronTerms" element={< ClaronTerms />} />
+
                 {/* <Route exact path="/call" element={< Call />} /> */}
                 {/* DOCTOR ROUTES */}
                 <Route exact path="/doctorDashboard" element={<Home />}></Route>

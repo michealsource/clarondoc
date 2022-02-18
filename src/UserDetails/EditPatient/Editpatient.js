@@ -1,6 +1,7 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import './EditPatient.css'
-import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from '@material-ui/core'; //importing material ui component
+import { AuthContext } from '../../Context/AuthContext';
+import { TextField, Grid, Button } from '@material-ui/core'; //importing material ui component
 import { makeStyles } from '@mui/styles';
 import image from '../../images/user-profile.jpg'
 import {useLocation} from 'react-router-dom';
@@ -39,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 function Editpatient() {
     const classes = useStyles();
+    const {company} = useContext(AuthContext);
     const location = useLocation();
     const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
     const [error, seterror] = useState()
@@ -129,6 +131,7 @@ function Editpatient() {
         <MainLayout>
         <div className="edit-user-contaner">
             <h2>Kndly Update Your Profile {firstname}</h2>
+
             <img  src={avataru?avataru:image} alt="Profile" className="pro-img"/>
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
