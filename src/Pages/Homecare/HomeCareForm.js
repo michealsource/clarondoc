@@ -57,6 +57,8 @@ function HomeCareForm() {
     const [privateDoctor,setPrivateDotor]= useState()
     const [medical,setMedical]= useState()
     const [selectedvalue,setSelectedValue]= useState()
+    const [dateOfBirth,setDateOfBirth]= useState()
+    
     const handleDateChange = (newDate) => {
         setDate(newDate);
     };
@@ -84,7 +86,7 @@ function HomeCareForm() {
     })()
 }, [])
 
-
+// console.log(selectedvalue)
     return (
         <MainLayout>
             <div className="individual-request-container-outer">
@@ -181,6 +183,16 @@ function HomeCareForm() {
                                 </RadioGroup>
                             </FormControl>
 
+                            <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
+                                <DesktopDatePicker
+                                    label="Date of birth"
+                                    value={dateOfBirth}
+                                    onChange={(e)=>setDateOfBirth(e)}
+                                    inputFormat="MM/dd/yyyy"
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+
                         </Grid>
 
                         <Grid item xs={6}>
@@ -265,8 +277,23 @@ function HomeCareForm() {
                         netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? (350-(350*0.15)) : 350+5,
                         totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? 350 : 350+5,
                         totalDiscount:  ['Basic', 'Premium', 'Family'].includes(user.subscription) ? 350*0.15 : 0,
-                    }, name:'micheal'} })}
-                     className='home-care-form-btn'>Submit</button>
+                    }, data: {
+                        schedule: date.toISOString(), 
+                        address: address, 
+                        names: name, 
+                        gender: sex, 
+                        dob: dateOfBirth, 
+                        history: medical, 
+                        previousPhysicianName: privateDoctor, 
+                        symptoms: selectedvalue, 
+                        reasons: reasons, 
+                        requestingFor: Reqesfor, 
+                        bestContact: phone, 
+                        signature: true,
+                        serviceId: 'homecarerequests'
+                      },
+                      type: 'homecare'} })}
+                     className='home-care-form-btn'>Proccessed</button>
                 </div>
             </div>
         </MainLayout>

@@ -39,6 +39,7 @@ function SignIn() {
             if (response.success && value === "Patient") {
                 setLoading(false)
                 console.log(response)
+                // user()
                 // dispatch({type:"LOGIN_SUCCESS", payload:response})
                 navigate("/userDashboard")
             }
@@ -46,11 +47,11 @@ function SignIn() {
                 navigate("/doctorDashboard")
             }
             else {
-                setError(response.message)
+                setError(response.message,'fffff')
                 setLoading(false)
             }
         } catch (e) {
-            setError(e.message)
+            setError(e.message,'rrrrrr')
             setLoading(false)
         }
 

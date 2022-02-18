@@ -13,6 +13,7 @@ export const AuthContextProvider =({children})=>{
     return(
         <AuthContext.Provider
         value={{
+            company:"learnit",
             user:state.user,
             isFetching:state.isFetching,
             error:state.error,

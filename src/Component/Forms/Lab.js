@@ -19,12 +19,13 @@ const colourStyles = {
   };
 function Lab(props) {
   const [user, setuser] = useState()
-    const [selectedvalue,setSelectedValue]= useState([])
+    
     const [total,setTotal]=useState(0)
+    const [selectedvalues,setSelectedValues]= useState([])
    const handleChange = (e) => {
     setTotal(calculateTotal(e))
     // console.log(e)
-    setSelectedValue (Array.isArray(e)?e.map(x=>x.label):[])
+    setSelectedValues(Array.isArray(e)?e.map(x=>x.label):[])
  }
 
  const calculateTotal = (data)=>{
@@ -54,10 +55,9 @@ function Lab(props) {
     })()
     
 }, [])
-// console.log(selectedvalue)
   return (
     <div>
-        <p>{total}</p>
+        {/* <p>{total}</p> */}
         <Select
         styles={colourStyles}
         isMulti

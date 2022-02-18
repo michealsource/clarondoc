@@ -76,8 +76,9 @@ const style = {
 function OrderReview() {
     const location = useLocation();
 
-    const{item,totalCost,name,serviceCharge,discount, type}= location.state
+    const{item,totalCost,name,serviceCharge,discount, type,data,id}= location.state
     // const{totalCost}= item
+    console.log(data)
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [user, setUser] = useState()
@@ -248,11 +249,14 @@ function OrderReview() {
                 if(location.state.type == 'lab'){
                   if(location.state.item.type == 'facility'){
                     await facilityLabRequest(location.state.data)
+                   
                   }else{
-                    await individualLabRequest(location.state.data)
+                    const resp = await individualLabRequest(location.state.data)
+                    console.log(resp)
                   }
                 }else if(location.state.type == 'homecare'){
-                  await requestHomeCare(location.state.data)
+                    const resp = await requestHomeCare(location.state.data)
+                  console.log(resp)
                 }else if(location.state.type == 'drug'){
                     await buyDrugs(location.state.data)
                     localStorage.removeItem("cart")
@@ -343,7 +347,7 @@ function OrderReview() {
       }
   
       
-    console.log(name)
+    console.log(item.totalCost)
 
     
     

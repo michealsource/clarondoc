@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react'
+import firebase from "../../firebaseConfig"
 import './AppointmentHistory.css'
 import Modal from 'react-modal'
 import { FaTimes } from "react-icons/fa";
@@ -24,7 +25,7 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pi
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import * as API from '../../Api/pharmacy'
-import { myBookings } from '../../Api/doctors';
+import { myBookings,DeleteBooking,respondRequest } from '../../Api/doctors';
 import loading from '../../images/loading.gif'
 
 const useStyles = makeStyles(theme => ({
@@ -78,6 +79,7 @@ function AppointmentHistory() {
     const [filtered, setFiltered] = useState([])
     const [upcoming, setUpcoming]=useState([])
     const [loaded, setLoaded] = useState(false)
+    const [loadinga, setloadinga] = useState(true);
     
     useEffect(()=>{
      
@@ -103,6 +105,25 @@ function AppointmentHistory() {
     
         })()
       })
+
+      const cancelAppointment = async (id) =>{
+        // console.log(filtered);
+        try{
+          setloadinga(true)
+          const email = localStorage.getItem('email');
+          await firebase.firestore().collection('deletedAppointment').doc(email).collection('list').add({id: id});
+          // let resa = await DeleteBooking(id)
+          // console.log(resa.data)
+          alert('deleted successfully')
+          await respondRequest('Rejected', id);
+        //   loadData();
+        }catch(e){
+          console.log(e)
+          setloadinga(false)
+        }
+    
+      }
+    
     
     return (
         <MainLayout>
@@ -175,11 +196,11 @@ function AppointmentHistory() {
                                  </div>  
                                  <div className='divider'></div> 
                                  <div className='booked-container'>
-                                     <p className='cancel-booking-btn'>Cancel Booking</p>
+                                     <p onClick={()=>cancelAppointment(item.id)} className='cancel-booking-btn'>Cancel Booking</p>
                                       </div>
                                  </div>
                                  </>
-                             )):(<img src={loading} alt="" className="loader-img"/>)}
+                             )):upcoming.length===0?'No appointments to show': (<img src={loading} alt="" className="loader-img"/>)}
                              
                          </div>
                   
