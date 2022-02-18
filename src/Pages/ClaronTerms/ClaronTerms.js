@@ -2,16 +2,18 @@ import React,{useEffect} from 'react';
 import MainLayout from '../MainLayout'
 const axios = require('axios');
 function ClaronTerms() {
-    const terms = ()=>{
-        axios.get("https://clarondoc.com/terms")
-    }
+   
     useEffect(()=>{
-        
+        (async()=>{
+         const data =   axios.get("https://clarondoc.com/terms")
+         console.log(data)
+          })()
     },[])
     return (
-        <MainLayout>
+        <MainLayout>p
             <div class="aboutclarondc-container">
                 <h2>Terms and Conditions</h2>
+                
                 <p></p>
             </div>
         </MainLayout>
