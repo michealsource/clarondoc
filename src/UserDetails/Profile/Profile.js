@@ -42,7 +42,7 @@ function Profile() {
                     <div class="info-pat">
                         <h4>{user?user.firstname:''} {user?user.lastname:''}</h4>
                         <p><FaPhoneAlt className="pat-icon" />{user?user.phone:''}</p>
-                        <p><FaMapMarkerAlt className="pat-icon" />NIGERIA</p>
+                        <p><FaMapMarkerAlt className="pat-icon" />Ghana</p>
                         <p> <FaEnvelope className="pat-icon" />{user?user.email:''}</p>
                     </div>
 

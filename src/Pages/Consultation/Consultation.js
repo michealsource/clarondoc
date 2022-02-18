@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router';
 import {userDetails,downgrade} from '../../Api/Auth'
 import { fetchDoctors } from '../../Api/doctors';
 import { makeBooking } from '../../Api/doctors';
+import doctorDefault from '../../images/doctor.png'
 import loading from '../../images/loading.gif'
 import DocCard from './DocCard';
 const style = {
@@ -49,10 +50,8 @@ function Consultation() {
      const [openP, setOpenP] = React.useState(false);
      const  handleCloseProfile = () => setOpenP(false);
      const [selectedData, setSelectedData] = useState({});
-
     const [selectedDate, setSelectedDate] = useState();
     const [others, setOthers] = useState(false)
-
     const [doctors, setDoctors] = useState([])
     const [selected, setSelected]= useState({})
     const [value, setValue] = useState()
@@ -62,6 +61,9 @@ function Consultation() {
     const [time, setTime] = useState('')
     const [user, setUser] = useState({})
     const [expiry, setexpiry] = useState()
+    const [loaded, setloaded] = useState(false)
+    const [favorites, setfavorites] = useState([])
+    const [loading, setloading] = useState(false)
     const available =['06:00 - 07:00','07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00','19:00 - 20:00','20:00 - 21:00'];
     // Search State
     const [filtered,setFiltered]= useState([]);
@@ -121,21 +123,29 @@ function Consultation() {
 
 
 useEffect(()=>{
-        
     (async()=>{
         let account = localStorage.getItem('user')
         let token  = localStorage.getItem('access-token')
         let key = localStorage.getItem('api-key');
         setUser(JSON.parse(account))
-
         let found = await fetchDoctors()
         setDoctors(found)
-
+        console.log(favorites)
         userDetails(JSON.parse(account).email, key, token).then(data=>{
             setUser(data)
         }).catch(e=>{
             console.log('Error: ', e)
         })
+
+        if(!loaded){
+            let saved = localStorage.getItem('saved')
+            if(saved == null){
+                return
+            }
+            // console.log(saved)
+            setfavorites(saved.split(','))
+            setloaded(true)
+        }
 
         try{
             checkSubscription(JSON.parse(account).subscription_end);
@@ -179,6 +189,21 @@ const book = async()=>{
     }catch(e){
         setError(e)
     }
+}
+
+// ADD TO FAVOUURITE FUNCTION
+const favorite = async(email)=>{
+    setloading(true)
+    if(favorites.includes(email)){
+        setfavorites(favorites.filter(fav=>fav!=email))
+        localStorage.setItem('saved', favorites.filter(fav=>fav!=email).toString())
+        alert('saved already')
+    }else{
+        setfavorites([...favorites, ...[email]])
+        localStorage.setItem('saved', [...favorites, ...[email]].toString())
+        alert('saved.....')
+    }
+    setloading(false)
 }
     return (
         <MainLayout >
@@ -266,9 +291,10 @@ const book = async()=>{
                 {doctors.length? doctors.map((doctor) => (
                    <div key={doctor.email} class="box" id={doctor.email}>
                    {doctor.availability === 'Online' ? <div className="active-state">Active</div> : ''}
-   
-                   <img src={doctor.avatar} alt="" />
-                   <h3 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h3>
+                
+                   <img src={doctor.avatar && doctor.avatar !=="undefined" ?doctor.avatar:doctorDefault} alt="" />
+
+                   <h6 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h6>
                    <span className="title">{doctor.department}</span>
                    <div class="share">
                        <div class="action-container"
@@ -289,8 +315,9 @@ const book = async()=>{
                        </div>
    
                        <div class="action-container">
-                           <FaHeart className="doctor-icon" />
-                           <span>Favourite</span>
+                           <FaHeart onClick={()=>favorite(doctor.email)} className="doctor-icon" />
+                           <span> { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove' : 'Save'}</span>
+                           {/* <span>Favourite</span> */}
                        </div>
                        <div onClick={() => setCall(!call)} class="action-container">
                            <FaPhoneAlt className="doctor-icon" />

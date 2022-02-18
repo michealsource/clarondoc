@@ -1,5 +1,6 @@
 
 const axios = require('axios');
+let base_url = 'https://api.clarondoc.com'
 export const fetchDoctors = async () => {
 
     const key = await apiKey()
@@ -108,5 +109,49 @@ export const apiKey = async (data) => {
         localStorage.getItem('api-key', key)
 
         return key
+    }
+}
+
+export const DeleteBooking = async (id) => {
+    const key = await apiKey()
+    const auth = localStorage.getItem('access-token');
+    const email = localStorage.getItem('email');
+
+    const response = await axios({
+        method: 'PUT',
+        url: `https://api.clarondoc.com/requests/physicians/consultations/${id}`,
+        data: {schedule: 'Wed Jan 13 2021 15:30'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+    console.log(response.data)
+    return response.data
+}
+
+
+export const respondRequest = async (response, id)=>{
+    try{
+        console.log('reach for logger: '+response+id)
+        const key = await apiKey()
+        let token = await localStorage.getItem('access-token');
+        let res = await axios.post(`${base_url}/physicians/consultations/confirm`, {
+            availability: response,
+            status: response,
+            id
+        }, {
+            headers: {
+                'x-api-key': key,
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        console.log(res.data);
+        return res.data.success;
+    }catch(e){
+        console.log(e.response.data);
+        return false
     }
 }

@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import './Request.css'
 import { makeStyles } from '@mui/styles';
-import { TextField, FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import { MuiPickersUtilsProvider, KeyboardDatePicker, DateTimePicker } from '@material-ui/pickers';
+import { TextField, Checkbox, FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import 'date-fns';
 import { fetchDoctors } from '../../Api/doctors';
-
-import MultiSelect from '../MultiSelect/MultiSelect';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+// import MultiSelect from '../MultiSelect/MultiSelect';
 import MomentUtils from '@date-io/moment';
 import { useNavigate } from "react-router-dom"
 import MainLayout from '../../Pages/MainLayout';
 import MenuItem from '@mui/material/MenuItem';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+// import DatePicker from '@mui/lab/DatePicker';
 import Select from '@mui/material/Select';
 import Lab from './Lab'
-import { Formik, Form } from 'formik';
+// import { Formik, Form } from 'formik';
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -37,51 +36,55 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const colourStyles = {
-    control: (styles) => ({ ...styles, backgroundColor: "white"}),
+    control: (styles) => ({ ...styles, backgroundColor: "white" }),
     option: (styles, { isDisabled }) => {
-      return {
-        ...styles,
-        backgroundColor: isDisabled ? "red" : "black",
-        color: "#FFF",
-        cursor: "pointer"
-      };
+        return {
+            ...styles,
+            backgroundColor: isDisabled ? "red" : "black",
+            color: "#FFF",
+            cursor: "pointer"
+        };
     }
-  };
+};
 
 function FacilityRequest({ testName }) {
     const navigate = useNavigate()
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState();
-    const [selectedvalue,setSelectedValue]= useState()
+    const [selectedvalue, setSelectedValue] = useState()
+
     const handleChange = (e) => {
-     setSelectedValue (Array.isArray(e)?e.map(x=>x.label):[])
-  }
+        setSelectedValue(Array.isArray(e) ? e.map(x => x.label) : [])
+    }
 
     const handleDateChange = (date) => {
-        setSelectedDate(date.toDate());
-        console.log(date.toDate());
+        setSelectedDate(date);
+        // setSelectedDate(date.toDate());
+        // console.log(date.toDate());
     };
 
     // MAIN FRORM STATE
     let testnames = []
-    const [tests, settests] = useState([])
-    const [labtestnames, setlabtestnames] = useState([])
-    const [filterednames, setfilterednames] = useState(testnames)
+    
+  
     const [isfacility, setisfacility] = useState(false)
-    const [facilitymodal, setfacilitymodal] = useState(false)
+ 
     const [name, setName] = useState()
     const [user, setuser] = useState()
-    const [pendingtime, setpendingtime] = useState(false)
-    const [labs, setLabs] = useState([])
+ 
+   
     const [labtests, setlabtests] = useState([])
     const [dob, setDob] = useState(new Date())
     const [purpose, setPurpose] = useState('')
     const [doctors, setdoctors] = useState([])
     const [value, setValue] = useState([]);
     const [doctor, setdoctor] = useState()
-    const [phone, setPhone] = useState('')
-    const [sex, setSex] = useState(0)
+    const [phone, setPhone] = useState()
+    const [sex, setSex] = useState('male')
     const [doc, setdoc] = useState('')
+    const [total, settotal] = useState()
+    const [selectedvalues, setSelectedValues] = useState([])
+
     const [facility, setfacility] = useState({
         name: '',
         location: '',
@@ -95,6 +98,7 @@ function FacilityRequest({ testName }) {
     useEffect(() => {
 
         (async () => {
+
             try {
                 let account = localStorage.getItem('user')
                 setuser(JSON.parse(account))
@@ -105,17 +109,16 @@ function FacilityRequest({ testName }) {
                 alert('Error', e.message)
             }
         })()
-
-        console.log(testnames)
     }, [])
 
     const getTests = (test, total) => {
-        console.log(test, total, "frm arent")
+        console.log(test, total)
         setLabTests(test)
         setTotalCost(total)
     }
 
     // console.log(labTests,totalCost, "frm arent")
+    console.log(total)
     return (
         <MainLayout >
             <div className="individual-request-container-outer">
@@ -130,7 +133,7 @@ function FacilityRequest({ testName }) {
                                 label="Enter Patient Name"
                                 variant="outlined"
                                 value={name}
-                                onChangeText={(e) => setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                                 className={classes.textField}
                                 InputLabelProps={{
                                     className: classes.floatingLabelFocusStyle,
@@ -163,7 +166,7 @@ function FacilityRequest({ testName }) {
                         <Grid item xs={6}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Gender</FormLabel>
-                                <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
+                                <RadioGroup value={sex} onChange={(e) => setSex(e.target.value)} row aria-label="gender" name="row-radio-buttons-group">
                                     <FormControlLabel name="picked" value="female" control={<Radio />} label="Female" />
                                     <FormControlLabel name="picked" value="male" control={<Radio />} label="Male" />
                                 </RadioGroup>
@@ -237,8 +240,18 @@ function FacilityRequest({ testName }) {
                         </Grid>
 
                         <Grid item xs={6}>
-                            <MuiPickersUtilsProvider utils={MomentUtils}>
-                                <DateTimePicker
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DesktopDatePicker
+                                    label="Date desktop"
+                                    inputFormat="MM/dd/yyyy"
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+
+
+
+                                {/* <DateTimePicker
                                     fullWidth
                                     // className={classes.dateTime}
                                     InputAdornmentProps={{ position: "end" }}
@@ -246,25 +259,70 @@ function FacilityRequest({ testName }) {
                                     label="Select Propse Date and Time"
                                     value={selectedDate}
                                     onChange={handleDateChange}
-                                />
-                            </MuiPickersUtilsProvider>
+                                /> */}
+                            </LocalizationProvider>
                         </Grid>
                     </Grid>
 
                     <Grid container spacing={5}>
                         <Grid item xs={12} className={classes.dateTime}>
                             <p className='cost-p'>Select All Tests that Apply {totalCost ? <span className='cost'>{totalCost}</span> : ''}</p>
-                            <Lab getTests={(test, total) => getTests(test,total)}/>
+                            <Lab getTests={(test, total) => getTests(test, total)} />
                             {/* <MultiSelect filterednames={filterednames} getTest={getTests} /> */}
                         </Grid>
                     </Grid>
 
+                    <FormControlLabel
+                        control={<Checkbox checked={isfacility} onChange={(event) => setisfacility(event.target.checked)} />}
+                        label="Check this if the request is from a medical facility"
+                    />
+
                     <button className="mobile-lab-btn"
                         onClick={() => navigate('/OrderReview',
-                            { state: { totalCost: totalCost, name: name, type:"Laboratory", item: {
-                               serviceCharge: 5, totalCost: totalCost,value: value, sex: sex, dob: dob, address: address, phone: phone, purpose: purpose, selectedDate: selectedDate, labTests: labTests 
-                            }} })}>Proccessed</button>
-
+                        {
+                            state:{
+                                item:{
+                                    netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? (totalCost - (totalCost * 0.15)) + 5 : total + 5,
+                                    totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost : totalCost + 5,
+                                    totalDiscount: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost * 0.15 : 0,
+                                },
+                                data: isfacility ? {
+                                    patientName: name,
+                                    gender: sex,
+                                    labTests: labTests,
+                                    // address: address,
+                                    signature: true,
+                                    phone: phone,
+                                    doctor: value,
+                                    schedule: selectedDate.toISOString(),
+                                    facilityName: 'facility',
+                                    facilityLocation:address,
+                                    dob: dob,
+                                    purpose: purpose,
+                                    names: name,
+                                    type: 'facility',
+                                    serviceId: 'facilitylabrequests'
+                                } : {
+                                    patientName: name,
+                                    gender: sex,
+                                    labTests: labTests,
+                                    // address: address,
+                                    signature: true,
+                                    phone: phone,
+                                    doctor: value,
+                                    schedule: selectedDate.toISOString(),
+                                    dob: dob,
+                                    purpose: purpose,
+                                    names: name,
+                                    facilityLocation:address,
+                                    facilityName:'individual',
+                                    type: 'individual',
+                                    serviceId: 'individuallabrequests'
+                                },
+                                type: 'lab',
+                            }
+                        }
+                        ) }>Proccessed</button>
                 </div>
             </div>
         </MainLayout>

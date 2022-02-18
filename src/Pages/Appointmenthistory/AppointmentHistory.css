@@ -160,4 +160,5 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
       color: #fff;
       padding: 5px !important;
       border-radius: 5px;
+      cursor: pointer;
   }

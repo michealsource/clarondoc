@@ -7,8 +7,10 @@ import labrequest from '../../images/labrequest.png'
 import ambulance from '../../images/ambulance.png'
 import homecare from '../../images/homecare.png'
 import MainLayout from '../../Pages/MainLayout'
+import {useNavigate } from "react-router-dom"
 // import {userDetails} from '../../Api/Auth'
 function Card({sidebar}) {
+    const navigate = useNavigate();
     const[user,SetUser]= useState()
     useEffect(()=>{
         (async()=>{
@@ -18,15 +20,19 @@ function Card({sidebar}) {
 
           console.log(user)
     },[])
+
+    const editPage=()=>{
+        navigate('/Editpatient',{state:{user:user}});
+          }
     return (
         <MainLayout>
         <div className="main-area-card-container">
             <div class="notifcation-container">
                 <div class="update-profile">
                     <p>Profile Update: You should update your "Blood Group, City, Gender, State, Genotype and Date Of Birth</p>
-                    <Link to="/Editpatient" className="update-btn-user">
-                    Update Profile
-                    </Link>
+                    <button onClick={()=>{editPage()}} className="update-btn-user">
+                        Update Profile
+                    </button>
                 </div>
 
                 <div className="update-subscription">

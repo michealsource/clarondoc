@@ -21,7 +21,7 @@ export const facilityLabRequest = async (data) => {
 }
 
 export const individualLabRequest = async (data) => {
-
+    console.log(data, 'ggggggggg')
     try{
         const key = await apiKey()
         const auth = await localStorage.getItem('access-token');

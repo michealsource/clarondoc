@@ -23,14 +23,15 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
       const [loaded, setloaded] = useState(false)
   
       const favorite = async()=>{
-  
+
           setloading(true)
           if(favorites.includes(selectedData.email)){
               setfavorites(favorites.filter(fav=>fav!=selectedData.email))
-              await localStorage.setItem('saved', favorites.filter(fav=>fav!=selectedData.email).toString())
+              localStorage.setItem('saved', favorites.filter(fav=>fav!=selectedData.email).toString())
+              console.log(favorites)
           }else{
               setfavorites([...favorites, ...[selectedData.email]])
-              await localStorage.setItem('saved', [...favorites, ...[selectedData.email]].toString())
+              localStorage.setItem('saved', [...favorites, ...[selectedData.email]].toString())
           }
           setloading(false)
       }
@@ -38,7 +39,7 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
       useEffect(()=>{
         (async()=>{
             if(!loaded){
-                let saved = await localStorage.getItem('saved')
+                let saved = localStorage.getItem('saved')
                 if(saved == null){
                     return
                 }
