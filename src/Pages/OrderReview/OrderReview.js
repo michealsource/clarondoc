@@ -283,6 +283,7 @@ function OrderReview() {
                 } else if (location.state.type == 'drug') {
                     await buyDrugs(location.state.data)
                     localStorage.removeItem("cart")
+                    localStorage.removeItem("prescription")
                 }
 
                 const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
@@ -465,32 +466,29 @@ function OrderReview() {
 
     return (
         <MainLayout>
-            <div class="order-container">
-                <div class="payment-review-container">
-                    <div class="title-of-pay">
-                        <div class="first-title-pay">
-                            <p>{location.state.type}</p>
-                            <p>Service fee</p>
-                        </div>
-
-                        <div class="discount-price">
+        <div class="order-container">
+            <div class="payment-review-container">
+                <div class="title-of-pay">
+                    <div class="first-title-pay">
+                        <p>Service type</p>
+                    </div>
+                    <div class="discount-price">
                             <p>Discount</p>
                             <p>Total</p>
                             <p>Net Total</p>
                         </div>
+
+                   </div>
+
+                <div class="price-of-pay">
+                    <div class="first-price">
+                    <p style={{ color: '#61cd88' }}>{location.state.type}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
                     </div>
 
-                    <div class="price-of-pay">
-                        <div class="first-price">
-                            <p style={{ color: '#61cd88' }}>GHS {item.totalCost ? item.totalCost : item.total}</p>
-                            <p style={{ color: '#61cd88' }}>GHS {item.serviceCharge ? item.serviceCharge : '0.00'} </p>
-                            <p style={{ color: '#61cd88' }}>GHS {discount ? discount : '0.00'} </p>
-
-                        </div>
-
                         <div class="second-price">
-                            <p style={{ color: '#cb2938' }}>GHS {item.totalCost ? item.totalCost : item.totalCost}</p>
-                            <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${item.totalCost + item.serviceCharge}` : `GHS ${item.totalCost}`}</p>
+                            <p style={{ color: '#cb2938' }}>GHS { (item.totalCost).toFixed(2) }</p>
+                            <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${(item.totalCost + item.serviceCharge).toFixed(2)}` : `GHS ${(item.totalCost).toFixed(2)}`}</p>
                         </div>
 
                     </div>

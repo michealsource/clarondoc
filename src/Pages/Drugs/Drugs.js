@@ -10,6 +10,13 @@ import pharmacist from '../../images/pharmacist.png'
 import MainLayout from '../MainLayout';
 import * as API from '../../Api/pharmacy'
 import loading from '../../images/loading.gif'
+import swal from 'sweetalert';
+// import {S3} from 'aws-sdk'
+// import { uploadFile } from 'react-s3';
+import S3FileUpload from 'react-s3';
+import S3 from 'react-aws-s3';
+import firebase from '../../firebaseConfig';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,6 +36,11 @@ function Drugs() {
   const [bookings, setBookings] = useState([])
   const [filtered, setFiltered] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [file, setFile] = useState(null)
+  const [prescription, setPrescription] = useState()
+  const [loadinga, setloadinga] = useState(false)
+  const [prescriptiona, setprescriptiona] = useState(false)
+  const [progress , setProgress] = useState(0);
 
   useEffect(()=>{
     (async()=>{
@@ -47,7 +59,35 @@ function Drugs() {
       }
 
     })()
-  })
+  }, [])
+
+
+
+  const prescriptionUpload = async(e)=>{
+    setloadinga(true)
+    if(file){
+
+        await firebase.storage().ref('prescriptions/' + file.name).put(file);
+        let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
+        
+         if(url){
+            setloadinga(false)
+            setPrescription(url)
+            setprescriptiona(false)
+            localStorage.setItem('prescription', JSON.stringify(url))
+            handleClose()
+            
+            swal({
+                title: "Prescription Upload",
+                text: "uploaded prescription to server",
+                icon: "success",
+                button: "Ok",
+              });
+         }
+    }
+    
+  }
+
   return (
     <MainLayout>
     <div className="drugs-container">
@@ -96,15 +136,16 @@ function Drugs() {
                               <p className='a-head'>Ordered On:</p> 
                               <p>{new Date(item.createDate).toString().substring(0, 21)}</p>
                             </div>
-                            <div className='booked-container'>
+                            {/* <div className='booked-container'>
                               <p className='a-head'>Order Status: </p> 
-                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> </div>
+                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> 
+                            </div> */}
                             <div className='booked-container'>
                               <p className='a-head'>Ordered Type:</p> 
                               <p>{item.deliveryOption}</p> 
                               </div>
-                            <div className='divider'></div>
-                            { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''}
+                            {/* <div className='divider'></div> */}
+                            {/* { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''} */}
                             
                             </div>
                             </>
@@ -127,9 +168,9 @@ function Drugs() {
       >
         <Box sx={style}>
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
-          <input type="file" />
+          <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           <br />
-          <button className="upload-prescr-btn">Upload Prescription</button>
+          <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button>
         </Box>
       </Modal>
       <div>
