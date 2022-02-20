@@ -29,6 +29,7 @@ import Notification from '../Pages/Notification/Notification'
 import Chat from '../Pages/Chat/Chat'
 import AboutClaron from '../Pages/AboutClaron/AboutClaron'
 import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
+import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
 // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
 // DOCTORS PAGE IMPORT
@@ -87,6 +88,8 @@ function index() {
                 <Route exact path="/chat" element={< Chat />} />
                 <Route exact path="/AboutClaron" element={< AboutClaron />} />
                 <Route exact path="/ClaronTerms" element={< ClaronTerms />} />
+                <Route exact path="/Sub-Summary" element={< SubscriptionSummary />} />
+                
 
                 {/* <Route exact path="/call" element={< Call />} /> */}
                 {/* DOCTOR ROUTES */}

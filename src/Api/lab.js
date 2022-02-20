@@ -83,8 +83,72 @@ export const apiKey = async () => {
 
         key = response.data.apiKey
 
-        await localStorage.setItem('api-key', key)
+         localStorage.setItem('api-key', key)
 
         return key
     }
 }
+
+export const insurancefacilityLabRequest = async (data) => {
+
+    const key = await apiKey()
+    const auth =  localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'POST',
+        // url: 'https://api.clarondoc.com/requests/tests/facility',
+        url: 'https://api.clarondoc.com/requests/insurance/tests/facility',
+        data,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data.requestDetails
+}
+
+export const insuranceindividualLabRequest = async (data) => {
+
+    try{
+        const key = await apiKey()
+        const auth = await localStorage.getItem('access-token');
+
+        const response = await axios({
+            method: 'POST',
+            url: 'https://api.clarondoc.com/requests/insurance/tests/individual',
+            data: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`,
+                'x-api-key': key
+            }
+        })
+        console.log(response.data)
+
+        return response.data.requestDetails;
+        
+    }catch(e){
+        console.log(e)
+        return false
+    }
+}
+
+export const insurancegetLabTests = async () => {
+    const key = await apiKey()
+    const auth = localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'GET',
+        url: `https://api.clarondoc.com/tests`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data.tests
+}
+
