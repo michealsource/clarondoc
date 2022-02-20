@@ -39,8 +39,7 @@ function SignIn() {
             if (response.success && value === "Patient") {
                 setLoading(false)
                 console.log(response)
-                // user()
-                // dispatch({type:"LOGIN_SUCCESS", payload:response})
+                dispatch({type:"LOGIN_SUCCESS", payload:response})
                 navigate("/userDashboard")
             }
             else if (response.success && value === "Doctor" ) {
