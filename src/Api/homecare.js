@@ -63,3 +63,58 @@ export const apiKey = async () => {
         return key
     }
 }
+
+export const insurancerequestHomeCare = async (data, token) => {
+
+    const key = await apiKey()
+    const auth = await localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'POST',
+        url: 'https://api.clarondoc.com/requests/insurance/homeCare',
+        data: data,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-payment-token': token,
+            'x-api-key': key
+        }
+    })
+
+    return response.data.requestDetails
+}
+
+export const get_insurance_provider = async()=>{
+    const key = await apiKey()
+    const auth = await localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'GET',
+        url: `https://api.clarondoc.com/payments/insurance/providers`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data.providers
+}
+
+export const request_payment_through_insurance = async(data)=>{
+    const key = await apiKey()
+    const auth = await localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'POST',
+        data: data,
+        url: `https://api.clarondoc.com/payments/insurance/pay`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data
+}
