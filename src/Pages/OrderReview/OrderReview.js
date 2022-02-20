@@ -484,13 +484,11 @@ function OrderReview() {
                     <div class="first-price">
                     <p style={{ color: '#61cd88' }}>{location.state.type}</p>
                     <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
-                    {/* <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p>
-                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p> */}
                     </div>
 
                         <div class="second-price">
-                            <p style={{ color: '#cb2938' }}>GHS {item.totalCost ? item.totalCost : item.totalCost}</p>
-                            <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${item.totalCost + item.serviceCharge}` : `GHS ${item.totalCost}`}</p>
+                            <p style={{ color: '#cb2938' }}>GHS { (item.totalCost).toFixed(2) }</p>
+                            <p style={{ fontWeight: 'bold' }}> {item.serviceCharge ? `GHS ${(item.totalCost + item.serviceCharge).toFixed(2)}` : `GHS ${(item.totalCost).toFixed(2)}`}</p>
                         </div>
 
                     </div>

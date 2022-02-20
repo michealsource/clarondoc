@@ -49,7 +49,7 @@ import Consultations from '../DoctorPages/Consultations/Consultations';
 import TermsD from '../DoctorPages/Terms/Terms'
 import AboutD from '../DoctorPages/About/About'
 import CartModal from '../DoctorPages/Modals/CartModal'
-// import Call from '../Pages/Call/Index'
+import Call from '../Pages/Call/Index'
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
@@ -89,9 +89,8 @@ function index() {
                 <Route exact path="/AboutClaron" element={< AboutClaron />} />
                 <Route exact path="/ClaronTerms" element={< ClaronTerms />} />
                 <Route exact path="/Sub-Summary" element={< SubscriptionSummary />} />
+                <Route exact path="/call" element={< Call />} />
                 
-
-                {/* <Route exact path="/call" element={< Call />} /> */}
                 {/* DOCTOR ROUTES */}
                 <Route exact path="/doctorDashboard" element={<Home />}></Route>
                     <Route exact path="/LabRequestUser" element={<LabRequest />}></Route>
