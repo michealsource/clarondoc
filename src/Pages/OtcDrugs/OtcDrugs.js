@@ -46,7 +46,7 @@ function OtcDrugs() {
   const [total, setTotal] = useState(0)
   const classes = useStyles();
 
-  console.log(cart, "dddddd")
+  console.log(drugs, "dddddd")
   useEffect(() => {
     const getAllDrugs = async () => {
       setIsLoading(true)
@@ -59,10 +59,6 @@ function OtcDrugs() {
     }
     getAllDrugs()
   }, [])
-
-
- 
-
 
   const search = (query) => {
     setFiltered(drugs.filter(drug =>
@@ -101,6 +97,7 @@ function OtcDrugs() {
         arr[arr.indexOf(arr.filter(d => d.drugId == item.id)[0])].quantity -= 1
       } else {
         delete arr[arr.indexOf(arr.filter(d => d.drugId == item.id)[0])]
+
       }
       setTotal((total - item.unitprice))
     }
@@ -118,7 +115,7 @@ function OtcDrugs() {
         <TextField
           multiline
           id="standard-basic"
-          label="Searching..."
+          label="Searching for drugs"
           variant="standard"
           onChange={(e) => search(e.target.value)}
           className={classes.textField}
@@ -128,9 +125,9 @@ function OtcDrugs() {
         />
         {
          myCartItem !== null && myCartItem.length && !cart.length ? (
-            <CartModal openModal={openCartModal} setOpenModal={setOpenCartModal} cartItem={myCartItem}/>
+            <CartModal openModal={openCartModal} setOpenModal={setOpenCartModal} cartItem={myCartItem} total={total}/>
          ) : cart.length && myCartItem.length ? (
-            <CartModal openModal={openCartModal} setOpenModal={setOpenCartModal} cartItem={cart}/>
+            <CartModal openModal={openCartModal} setOpenModal={setOpenCartModal} cartItem={cart} total={total}/>
           ) : null
         }
       </div>

@@ -260,6 +260,7 @@ function OrderReview() {
                 }else if(location.state.type == 'drug'){
                     await buyDrugs(location.state.data)
                     localStorage.removeItem("cart")
+                    localStorage.removeItem("prescription")
                 }
 
                 const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
@@ -357,8 +358,7 @@ function OrderReview() {
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        <p>{location.state.type}</p>
-                        <p>Service fee</p>
+                        <p>Service type</p>
                     </div>
 
                     <div class="discount-price">
@@ -370,10 +370,10 @@ function OrderReview() {
 
                 <div class="price-of-pay">
                     <div class="first-price">
-                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p>
-                    <p style={{ color: '#61cd88' }}>GHS {item.serviceCharge?item.serviceCharge:'0.00'} </p>
+                    <p style={{ color: '#61cd88' }}>{location.state.type}</p>
                     <p style={{ color: '#61cd88' }}>GHS {discount?discount:'0.00'} </p>
-                        
+                    {/* <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p>
+                    <p style={{ color: '#61cd88' }}>GHS {item.totalCost? item.totalCost:item.total}</p> */}
                     </div>
 
                     <div class="second-price">

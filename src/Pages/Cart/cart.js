@@ -16,7 +16,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
-
+import swal from 'sweetalert';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,12 +38,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
+function CartModal({ openModal, setOpenModal, cartItem, total }) {
     const classes = useStyles();
     const [ttotal, setTotal] = useState(0)
     const [pickup, setpickup] = useState(false)
     const [user, setUser] = useState()
-    const [prescription, setprescription] = useState()
+    const [prescription, setprescription] = useState(null)
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [deliveryAddress, setDeliveryAddress] = useState('')
 
@@ -52,18 +52,20 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
     };
     const navigate = useNavigate()
 
-    console.log(selectedDate,deliveryAddress, pickup)
+    console.log(cartItem, "cartItem")
 
     useEffect(() => {
         const user = localStorage.getItem("user")
+        const prescriptions = localStorage.getItem("prescription")
+        setprescription(prescriptions)
         setUser(user)
-    })
+    }, [])
 
 
     const totalBill = () => {
         let total = 0
         for (let i = 0; i < cartItem.length; i++) {
-            const subtotal = cartItem[i].drug.unitprice * cartItem[i].quantity
+            const subtotal = cartItem[i] !== null ? cartItem[i].drug.unitprice * cartItem[i].quantity : 0
             total = total + subtotal
         }
         return parseFloat((total).toFixed(2))
@@ -73,6 +75,85 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
     const handleChange = (event) => {
         setpickup(event.target.checked);
     };
+
+
+    const checkout = ()=>{
+
+        let otc = true
+        let count = 0
+    
+        cartItem.forEach(item=>{
+          if(item?.drug?.requiresPrescription){
+            otc = false
+            count++
+          }
+        })
+    
+        if(otc){
+            
+
+            navigate('/OrderReview', {
+                state: {
+                    item: {
+                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? total : total + 5,
+                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? total : total + 5,
+                        totalDiscount: 0,
+                    },
+                    data: {
+                        order: cartItem,
+                        prescription: 'not required',
+                        deliveryOption: pickup ? 'Pickup' : 'Delivery',
+                        deliveryLocation: {
+                            address_type: "null",
+                            contact_no: "null",
+                            location_address: deliveryAddress,
+                            name: "null"
+                        },
+                        deliveryTime: selectedDate,
+                        isDirectDoctorPrescription: prescription ? true : false,
+                        serviceId: 'orders'
+                    },
+                    type: 'drug'
+                }
+            })
+        }else{
+          if(prescription){
+
+            navigate('/OrderReview', {
+                state: {
+                    item: {
+                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
+                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
+                        totalDiscount: 0,
+                    },
+                    data: {
+                        order: cartItem,
+                        prescription: prescription,
+                        deliveryOption: pickup ? 'Pickup' : 'Delivery',
+                        deliveryLocation: {
+                            address_type: "null",
+                            contact_no: "null",
+                            location_address: deliveryAddress,
+                            name: "null"
+                        },
+                        deliveryTime: selectedDate,
+                        isDirectDoctorPrescription: prescription ? true : false,
+                        serviceId: 'orders'
+                    },
+                    type: 'drug'
+                }
+            })
+          }else{
+
+            swal({
+                title: "Missing prescription",
+                text: `Missing Prescription', ${count} of the drugs on your cart require a doctor's prescription. Please upload one before you procced`,
+                icon: "fail",
+                button: "Ok",
+              });
+          }
+        }
+      }
 
     return (
         <div className="details-container">
@@ -96,11 +177,11 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
 
                             <div className="cart-container">
                                 <div className="cart-item_view">
-                                    <img className="cart-drug-img" src={product.drug.avatar} alt="drug-image" />
+                                    <img className="cart-drug-img" src={product?.drug?.avatar} alt="drug-image" />
                                     <div class="cart-drug-name-and-price">
-                                        <h4>{product.drug.name}</h4>
-                                        <h5>{product.quantity}</h5>
-                                        <p>GHS{parseFloat((product.drug.unitprice * product.quantity).toFixed(2))}</p>
+                                        <h4>{product?.drug?.name}</h4>
+                                        <h5>{product?.quantity}</h5>
+                                        <p>GHS{parseFloat((product?.drug?.unitprice * product?.quantity).toFixed(2))}</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,35 +238,12 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
 
                     <div class="total_view">
                         <h2>Total:</h2>
-                        <p>{totalBill()}</p>
+                        <p>{total}</p>
                     </div>
 
 
 
-                    <div class="cart-checkout" onClick={() => navigate('/OrderReview', {
-                        state: {
-                            item: {
-                                netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
-                                totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
-                                totalDiscount: 0,
-                            },
-                            data: {
-                                order: cartItem,
-                                prescription: 'not required',
-                                deliveryOption: pickup ? 'Pickup' : 'Delivery',
-                                deliveryLocation: {
-                                    address_type: "null",
-                                    contact_no: "null",
-                                    location_address: deliveryAddress,
-                                    name: "null"
-                                },
-                                deliveryTime: selectedDate,
-                                isDirectDoctorPrescription: prescription ? true : false,
-                                serviceId: 'orders'
-                            },
-                            type: 'drug'
-                        }
-                    })} >
+                    <div class="cart-checkout" onClick={() => checkout()} >
                         <p>CHECKOUT</p>
                     </div>
 
@@ -195,4 +253,4 @@ function DrugDetailsModal({ openModal, setOpenModal, cartItem }) {
     )
 }
 
-export default DrugDetailsModal
+export default CartModal

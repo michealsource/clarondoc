@@ -10,8 +10,13 @@ import pharmacist from '../../images/pharmacist.png'
 import MainLayout from '../MainLayout';
 import * as API from '../../Api/pharmacy'
 import loading from '../../images/loading.gif'
-import {S3} from 'aws-sdk'
-import { uploadFile } from 'react-s3';
+import swal from 'sweetalert';
+// import {S3} from 'aws-sdk'
+// import { uploadFile } from 'react-s3';
+import S3FileUpload from 'react-s3';
+import S3 from 'react-aws-s3';
+import firebase from '../../firebaseConfig';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -58,65 +63,29 @@ function Drugs() {
 
 
 
-
-
-
-  
-
-  const fileUpload = async(file)=>{
+  const prescriptionUpload = async(e)=>{
     setloadinga(true)
-    console.log(file, "prescription")
-    const options = {
-      keyPrefix: '/', // Ex. myuploads/ arn:aws:s3:::imageuploads01
-      bucket: 'imageuploads01', // Ex. aboutreact
-      region: 'us-east-2', // Ex. ap-south-1
-      accessKey: 'AKIA24CPCGBT22ID7H5V',
-      // Ex. AKIH73GS7S7C53M46OQ
-      secretKey: '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',
-      // Ex. Pt/2hdyro977ejd/h2u8n939nh89nfdnf8hd8f8fd
-      successActionStatus: 201,
+    if(file){
+
+        await firebase.storage().ref('prescriptions/' + file.name).put(file);
+        let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
+        
+         if(url){
+            setloadinga(false)
+            setPrescription(url)
+            setprescriptiona(false)
+            localStorage.setItem('prescription', JSON.stringify(url))
+            handleClose()
+            
+            swal({
+                title: "Prescription Upload",
+                text: "uploaded prescription to server",
+                icon: "success",
+                button: "Ok",
+              });
+         }
     }
-
     
-    try {
-      console.log(options)
-      
-      // const resp = await S3.put({
-      //   // `uri` can also be a file system path (i.e. file://)
-      //   // uri: prescription.uri,
-      //   name: file.name,
-      //   type: file.type,
-      // }, options)
-
-      
-        const resp = await uploadFile(file, options)
-    
-
-      console.log(resp, "ddddddd")
-      const response = resp;
-
-      if (response.status !== 201){
-        alert('Failed to upload image to S3');
-        return setloadinga(false)
-      }
-          
-        console.log(response.body);
-        // setFilePath('');
-        let {
-          bucket,
-          etag,
-          key,
-          location
-        } = response.body.postResponse;
-
-        setPrescription(location)
-        setprescriptiona(false)
-        alert('uploaded prescription to server');
-    } catch (error) {
-      
-    }
-
-    setloadinga(false)
   }
 
   return (
@@ -167,15 +136,16 @@ function Drugs() {
                               <p className='a-head'>Ordered On:</p> 
                               <p>{new Date(item.createDate).toString().substring(0, 21)}</p>
                             </div>
-                            <div className='booked-container'>
+                            {/* <div className='booked-container'>
                               <p className='a-head'>Order Status: </p> 
-                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> </div>
+                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> 
+                            </div> */}
                             <div className='booked-container'>
                               <p className='a-head'>Ordered Type:</p> 
                               <p>{item.deliveryOption}</p> 
                               </div>
-                            <div className='divider'></div>
-                            { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''}
+                            {/* <div className='divider'></div> */}
+                            {/* { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''} */}
                             
                             </div>
                             </>
@@ -198,11 +168,9 @@ function Drugs() {
       >
         <Box sx={style}>
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
-          <input type="file" onChange={(e) => {
-            fileUpload(e.target.files[0])
-          }}/>
+          <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           <br />
-          <button className="upload-prescr-btn" onClick={() => fileUpload()}>{loadinga ? progress : "Upload Prescription"}</button>
+          <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button>
         </Box>
       </Modal>
       <div>
