@@ -48,6 +48,7 @@
     "react-select": "^5.2.2",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.3.10",
+    "toastr": "^2.1.4",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },
