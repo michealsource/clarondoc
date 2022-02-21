@@ -9,7 +9,7 @@ import { FaNotesMedical } from "react-icons/fa";
 import { FaStaylinked } from "react-icons/fa";
 import { FaTh } from "react-icons/fa";
 import { FaAlignJustify, FaHeart, FaShareAlt, FaCaretDown } from "react-icons/fa";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
@@ -26,6 +26,7 @@ export default function MainLayout({ children }) {
   const [sidebar, setSidebar] = useState(true)
   const [anchorEl, setAnchorEl] = useState(null);
   const openAction = Boolean(anchorEl);
+  const navigate = useNavigate()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,10 +83,10 @@ export default function MainLayout({ children }) {
                             <h5>Health Tips</h5>
                             </Link>
 
-                            <Link to="/call" className="blog">
+                            <button onClick={() => navigate("/call", {state: {mediaType: "audio"}})}  className="blog">
                             <FaHeart className="hrt"/> 
-                            <h5>start call</h5>
-                            </Link>
+                            <h5>Urgent Care</h5>
+                            </button>
 
                             <div className="main-profile-container">
                                 <div className="user-profile-container">

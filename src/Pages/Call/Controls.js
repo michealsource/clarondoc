@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const Controls = (props) => {
     
-    const { tracks, setStart, setInCall, useClient } = props;
+    const { tracks, setStart, setInCall, useClient, trackType } = props;
     const client = useClient();
     const [trackState, setTrackState] = useState({ video: true, audio: true });
+    const navigate = useNavigate()
+
     
     const mute = async (type) => {
-      if (type === "audio") {
+      if (type === "audio" ) {
         await tracks[0].setEnabled(!trackState.audio);
         setTrackState((ps) => {
           return { ...ps, audio: !ps.audio };
@@ -27,6 +30,7 @@ export const Controls = (props) => {
       tracks[1].close();
       setStart(false);
       setInCall(false);
+      navigate(-1)
     };
   
     return (
@@ -35,11 +39,17 @@ export const Controls = (props) => {
           onClick={() => mute("audio")}>
           {trackState.audio ? "MuteAudio" : "UnmuteAudio"}
         </p>
-        <p className={trackState.video ? "on" : ""}
-          onClick={() => mute("video")}>
-          {trackState.video ? "MuteVideo" : "UnmuteVideo"}
-        </p>
+        {
+            trackType === "audio" ? null : (
+                <p className={trackState.video ? "on" : ""}
+                onClick={() => mute("video")}>
+                {trackState.video ? "MuteVideo" : "UnmuteVideo"}
+                </p>
+            )
+        }
+
         {<p onClick={() => leaveChannel()}>Leave</p>}
+
       </div>
     );
   };

@@ -1,6 +1,7 @@
 
 import React from "react"
-import firebase from "firebase"
+import firebase from "firebase/app"
+import 'firebase/messaging';
     const config = ({
         apiKey: "AIzaSyA07_A7At-J9Mu6NMXBpoLVYcrKWR3ezy4",
         authDomain: "fcm-notify-db9b8.firebaseapp.com",
@@ -13,5 +14,25 @@ import firebase from "firebase"
     });
 
   firebase.initializeApp(config)
+  const messaging = firebase.messaging();
+
+  export const requestFirebaseNotificationPermission = () =>
+  new Promise((resolve, reject) => {
+    messaging.getToken()
+      .then((firebaseToken) => {
+        resolve(firebaseToken);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+  });
 
   export default firebase
+
