@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import ChannelForm from "./ChannelForm"
 import VideoCall from "./VideoCall"
 import axios from "axios"
+import './calls.css'
+
+import { FaPhone } from "react-icons/fa";
 import {
   ClientConfig,
   IAgoraRTCRemoteUser,
@@ -26,11 +29,7 @@ const config = {
 const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
-// const appId = "66310665192842a28975ec67dfdd536b"; //ENTER APP ID HERE
 const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
-<<<<<<< HEAD
-const token2 = "0060742c8affa02429b9622956bac0d67d0IADGZtOLnBrwHXS/vtrNXtsJDDwfjTSU6lVP4Afa1NYwfyKahLQAAAAAIgA1ELCoHocTYgQAAQAehxNiAgAehxNiAwAehxNiBAAehxNi";
-=======
 // const appId = "66310665192842a28975ec67dfdd536b"
 const token2 = "00666310665192842a28975ec67dfdd536bIADebVYlG7VXi3ZzWulAj59u7AA3trGrFHIiLGbcJpcjrZpjTicAAAAAEAAWylBUZYATYgEAAQBlgBNi";
 
@@ -51,7 +50,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
->>>>>>> 587a2e1045d3bd0751a315bdbbda67acc076821c
 
 function Index() {
   const navigate  = useNavigate()
@@ -196,13 +194,16 @@ function Index() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <p className="upload-prescribe">Stand-By Line</p>
-          <p>Please Select A Line to Route call to</p>
+          <p className="stand-by">Stand-By Line for emergency call</p>
+          {/* <p className="stand-by-select">Please Select A Line to Route call to</p> */}
 
           {
             doctors.map((doc) => {
               return (
-                <p key={doc.email} onClick={() => start_now(doc.email)}>{doc.text}</p>
+                <div className="doc-call-container">
+                  <p className="doc-btn" key={doc.email} onClick={() => start_now(doc.email)}>{doc.text} <FaPhone className="call-em"/></p>
+                </div>
+                
               )
             })
           }
@@ -210,16 +211,9 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-<<<<<<< HEAD
-        <VideoCall setInCall={setInCall} appId={appId} token={token2} channelName={"20d66bbd-c458-4122-a354-07f2c277b9ec"} useClient={useClient} useMicrophoneAndCameraTracks={useMicrophoneAndCameraTracks} />
-      ) : (
-        <ChannelForm setInCall={setInCall} appId={appId} />
-      )}
-=======
         <VideoCall setInCall={setInCall} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient} useMicrophoneAndCameraTracks={useMicrophoneAndCameraTracks} />
       ) : null
       }
->>>>>>> 587a2e1045d3bd0751a315bdbbda67acc076821c
     </div>
   );
 }

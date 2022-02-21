@@ -19,15 +19,36 @@
     
 }
 
+.hrt{
+    color: #C93111;
+    font-size: 20px;
+}
+
+.tips{
+    color: #fff;
+    padding-left: 10px !important;
+}
+
+.urgent{
+    color: #fff;
+}
+
 .blog{
     display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #16a085;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    /* display: flex;
     align-items: center;
     align-self: center;
-    background-color: #16a085;
+   
     color: whitesmoke;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+    
+    
+     */
 }
 
 .blog h4{

@@ -18,10 +18,8 @@ import { initPayment, verOtp, cardPayment } from '../../Api/paystack';
 import { facilityLabRequest, individualLabRequest, insurancefacilityLabRequest, insuranceindividualLabRequest } from '../../Api/lab';
 import { requestHomeCare, insurancerequestHomeCare, get_insurance_provider, request_payment_through_insurance } from '../../Api/homecare';
 import { buyDrugs } from '../../Api/pharmacy'
-import Modal from '@mui/material/Modal';
-import moment from 'moment';
 import swal from 'sweetalert';
-import loading from '../../images/loading.gif'
+
 
 
 const useStyles = makeStyles(theme => ({

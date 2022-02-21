@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import './Card.css'
 import {Link } from "react-router-dom"
 import moment from 'moment';
-import { userDetails, downgrade } from '../../Api/auth';
+import { userDetails, downgrade } from '../../Api/Auth';
 // import images
 import drug from '../../images/drug.png'
 import labrequest from '../../images/labrequest.png'
