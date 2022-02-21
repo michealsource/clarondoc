@@ -22,8 +22,9 @@ const config = {
 const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
+// const appId = "66310665192842a28975ec67dfdd536b"; //ENTER APP ID HERE
 const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
-// const token = "00666310665192842a28975ec67dfdd536bIAAPVs1q7EOWpSgfGA73SnUOwd6cMQV1VFg90F59VOS22ppjTicAAAAAEADbqsx09wb9YQEAAQAgXvxh";
+const token2 = "0060742c8affa02429b9622956bac0d67d0IADGZtOLnBrwHXS/vtrNXtsJDDwfjTSU6lVP4Afa1NYwfyKahLQAAAAAIgA1ELCoHocTYgQAAQAehxNiAgAehxNiAwAehxNiBAAehxNi";
 
 function Index() {
   const [inCall, setInCall] = useState(false);
@@ -43,7 +44,7 @@ function Index() {
     <div>
       <h1 className="heading">Video call to test how Agora works</h1>
       {inCall ? (
-        <VideoCall setInCall={setInCall} appId={appId} token={token} channelName={channelName} useClient={useClient} useMicrophoneAndCameraTracks={useMicrophoneAndCameraTracks} />
+        <VideoCall setInCall={setInCall} appId={appId} token={token2} channelName={"20d66bbd-c458-4122-a354-07f2c277b9ec"} useClient={useClient} useMicrophoneAndCameraTracks={useMicrophoneAndCameraTracks} />
       ) : (
         <ChannelForm setInCall={setInCall} appId={appId} />
       )}
