@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import ChannelForm from "./ChannelForm"
 import VideoCall from "./VideoCall"
 import axios from "axios"
+import './calls.css'
+
+import { FaPhone } from "react-icons/fa";
 import {
   ClientConfig,
   IAgoraRTCRemoteUser,
@@ -191,13 +194,16 @@ function Index() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <p className="upload-prescribe">Stand-By Line</p>
-          <p>Please Select A Line to Route call to</p>
+          <p className="stand-by">Stand-By Line for emergency call</p>
+          {/* <p className="stand-by-select">Please Select A Line to Route call to</p> */}
 
           {
             doctors.map((doc) => {
               return (
-                <p key={doc.email} onClick={() => start_now(doc.email)}>{doc.text}</p>
+                <div className="doc-call-container">
+                  <p className="doc-btn" key={doc.email} onClick={() => start_now(doc.email)}>{doc.text} <FaPhone className="call-em"/></p>
+                </div>
+                
               )
             })
           }

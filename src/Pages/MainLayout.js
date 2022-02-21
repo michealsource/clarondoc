@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import user1 from '../images/user.png'
 import { FaCalendarPlus, FaShareSquare } from "react-icons/fa";
 import { FaFlask } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
 import { FaAmbulance } from "react-icons/fa";
 import { FaHouzz } from "react-icons/fa";
 import { FaNotesMedical } from "react-icons/fa";
@@ -79,13 +79,13 @@ export default function MainLayout({ children }) {
                             </Link>
                             
                             <Link to="/blog" className="blog">
-                            <FaHeart className="hrt"/> 
-                            <h5>Health Tips</h5>
+                            {/* <FaHeart className="hrt"/>  */}
+                            <h5 className="tips">Health Tips</h5>
                             </Link>
 
                             <button onClick={() => navigate("/call", {state: {mediaType: "audio"}})}  className="blog">
-                            <FaHeart className="hrt"/> 
-                            <h5>Urgent Care</h5>
+                            <FaPhoneAlt className="hrt"/> 
+                            <h5 className='urgent'>Urgent Care</h5>
                             </button>
 
                             <div className="main-profile-container">

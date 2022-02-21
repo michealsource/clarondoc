@@ -1,0 +1,37 @@
+.stand-by{
+    font-size: 20px;
+    font-weight: 800;
+    color: #545958;
+    padding-bottom: 20px !important;
+}
+
+.stand-by-select{
+    font-size: 20px;;
+    font-weight: 800;
+    margin-bottom: 10px !important;
+    color: #545958;
+}
+
+.doc-btn{
+    background: #16a085;
+    color: #fff;
+    padding: 10px !important;
+    font-size: 25px;
+    border-radius: 10px !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.doc-call-container{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.call-em{
+    margin-left: 20px !important;
+    background-color:  #61cd88;
+    padding: 10px;
+    font-size: 40px;
+    border-radius: 50%;
+}

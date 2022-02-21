@@ -167,3 +167,10 @@
     display:flex;
     justify-content:space-around
 }
+
+
+.details-container{
+    position: static !important;
+    top: 0;
+
+}

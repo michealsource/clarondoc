@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import './Card.css'
 import {Link } from "react-router-dom"
+import moment from 'moment';
+import { userDetails, downgrade } from '../../Api/Auth';
 // import images
 import drug from '../../images/drug.png'
 import labrequest from '../../images/labrequest.png'
@@ -12,18 +14,68 @@ import {useNavigate } from "react-router-dom"
 function Card({sidebar}) {
     const navigate = useNavigate();
     const[user,SetUser]= useState()
+    const [expiry, setexpiry] = useState()
+  
     useEffect(()=>{
+        
         (async()=>{
-            let account = localStorage.getItem('user')
-            SetUser(JSON.parse(account))
-          })()
+          
+            try {
+                var account = await localStorage.getItem('user')
+                var token = await localStorage.getItem('access-token')
+                var key = await localStorage.getItem('api-key');
+                SetUser(JSON.parse(account))
 
-          console.log(user)
-    },[])
+                console.log('account is '+JSON.parse(account).subscription)
+                userDetails(JSON.parse(account).email, key, token).then(data=>{
+                    SetUser(data)
+                }).catch(e=>{
+                    console.log('Error: ', e)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+
+            try{
+                localStorage.setItem('subscription', JSON.parse(account).subscription);
+                checkSubscription(JSON.parse(account).subscription_end);
+            }catch(e){}
+
+        })()
+
+    }, [])
+
 
     const editPage=()=>{
         navigate('/Editpatient',{state:{user:user}});
           }
+
+        //   CHECKING USER SUBSCRIPTION 
+        const checkSubscription = async(date)=>{
+
+            if(date == null){
+                return
+            }
+    
+            const days = moment().diff(date, 'days')
+            const left = moment(date).add(1, 'day').fromNow()
+    
+            localStorage.setItem('subscription_exp_day', days);
+    
+            if(days == 0){
+                setexpiry('Your subscription ends today. Renew now to avoid losing access to services')
+            }else if (days < 0 && days > -11){
+                setexpiry(`Your subscription ends in ${left}. Renew now to avoid losing access to services`)
+            }else if(days > 0 && days < 10){
+                setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
+            }else if(days > 10){
+                let res = await downgrade()
+                console.info(res)
+                // setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
+            }
+        }
+    
+
     return (
         <MainLayout>
         <div className="main-area-card-container">
