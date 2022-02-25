@@ -7,19 +7,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { login, sociallogin } from '../../Api/Auth'
-import { AuthContext } from '../../Context/AuthContext'
 import Navbar from '../../Component/Navbar/Navbar'
-
+import { useDispatch } from 'react-redux'
+import {LOGIN} from '../../features/user'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login';
 
 function SignIn() {
+    const dispatch = useDispatch()
     let navigate = useNavigate();
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
-    const { user, dispatch } = useContext(AuthContext)
     const [value, setValue] = useState('Patient');
 
     const handleChange = (event) => {
@@ -39,7 +39,9 @@ function SignIn() {
             if (response.success && value === "Patient") {
                 setLoading(false)
                 console.log(response)
-                dispatch({type:"LOGIN_SUCCESS", payload:response})
+                let currentUser = localStorage.getItem('user');
+                // console.log(currentUser,"jjjjj")
+                dispatch(LOGIN(JSON.parse(currentUser)))
                 navigate("/userDashboard")
             }
             else if (response.success && value === "Doctor" ) {

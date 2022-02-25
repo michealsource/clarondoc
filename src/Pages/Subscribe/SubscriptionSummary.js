@@ -34,10 +34,10 @@ const useStyles = makeStyles(theme => ({
     payBtn: {
         backgroundColor: '#61cd88 !important',
         color: '#fff !important',
-        marginTop: '20px !important',
         fontSize: '18px !important',
         padding: '10px',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        marginBottom:'20px'
     },
     mobile: {
         fontSize: '20px !important',
@@ -113,7 +113,89 @@ function SubscriptionSummary() {
     };
     const handleClose = () => setOpen(false);
 
+    // CARD PAYMENT
+    const cardInsurancePayment = async()=>{
+        const card = {
+            number: number,
+            month: month,
+            year: year,
+            cvv: cvv,
+            pin: pin
+        }
+        if(card.number.length < 10){
+            setCardError('Please enter a valid card number')
+            return
+          }
+    
+          if(card.month.length < 2){
+            setCardError('Please enter a valid expiry month')
+            return
+          }
+    
+          if(card.month*1 > 12){
+            setCardError('Please enter a valid expiry month')
+            return
+          }
+    
+          if(card.year.length < 2){
+            setCardError('Please enter a valid expiry year')
+            return
+          }
+    
+          if(card.year*1 < 21){
+            setCardError('Please enter a valid expiry year')
+            return
+          }
+    
+          if(card.cvv.length < 3){
+            setCardError('Please enter a valid card cvv')
+            return
+          }
+          setLoading(true)
+          setButton('Initializing Transaction...')
+          let init = await cardPayment(card, price*1);
+          console.log(card)
 
+          if(init.status){
+            if(init.data.status === 'send_otp'){
+              setLoading(false)
+              setshowotp_field(true)
+              settnx_ref(init.data.reference)
+              setButton('Submit OTP ABOVE')
+            }else if(init.data.status === 'pay_offline'){
+              setLoading(false)
+              setButton('Awaiting for payment confirmation...')
+            }else if(init.data.status === 'success'){
+              try {
+                const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
+                console.log(sub, "sub")
+                localStorage.setItem('subscription', sub);
+              } catch (error) {
+                console.log(error)
+              }
+              setLoading(false)
+              setButton('Done')
+              swal({
+                title: "Payment successful",
+                text: `You have successfully paid for ${price === 20 ? 'Basic Plan Subscription' : price === 40 ? 'Premium Plan Subscription' : 'Family Plan Subscription'} `,
+                icon: "success",
+                button: "Ok",
+            });
+              navigate(-1)
+    
+            }else{
+              setLoading(false)
+              setButton(init.data.gateway_response)
+            }
+  
+          }else{
+            setLoading(false)
+            setButton('Subscribe Now')
+            setPhoneError(init.data.message)
+            alert(init.data.message)
+            return
+          }
+    }
 
     const momo = async ()=>{
             let network
@@ -152,13 +234,14 @@ function SubscriptionSummary() {
                   setButton('Awaiting for payment confirmation...')
                 }else if(init.data.status == 'success'){
                   try {
-                    await Upgrade_sub(name, new Date().toString().substr(0, 16))
-                    
+                    const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
+                    localStorage.setItem('subscription', sub);
                   } catch (error) {
                     console.log(error)
                   }
                   setLoading(false)
                   setButton('Done')
+                  
                   swal({
                     title: "subscription successful",
                     text: `Your ${name} subscription was successful`,
@@ -188,6 +271,9 @@ function SubscriptionSummary() {
           
     }
 
+
+    
+
     const process_otp = async()=>{
         setLoading(true)
         setButton('Initializing Verification for Otp...')
@@ -206,7 +292,8 @@ function SubscriptionSummary() {
             setButton('Awaiting for payment confirmation...')
           }else if(init.data.status == 'success'){
             try {
-              await Upgrade_sub(user.email, name, new Date().toString().substr(0, 16))
+             const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
+             localStorage.setItem('subscription', sub);
             } catch (error) {
               console.log(error)
             }
@@ -360,211 +447,109 @@ function SubscriptionSummary() {
                            
                         </AccordionSummary>
                         
+                        
                         <AccordionDetails>
-                          
-                                    <>
-                                    <p className='card-error'>{card_error?card_error:''}</p>
-                                    <Grid container spacing={2}>
-                                
-                                        <Grid item xs={6}>
-                                        
-                                            <TextField
-                                                value={number}
-                                                onChange={e => {setNumber(e.target.value) }}
-                                                id="outlined-basic"
-                                                label="Card Number"
-                                                variant="outlined"
-                                                className={classes.textField}
-                                                InputLabelProps={{
-                                                    className: classes.floatingLabelFocusStyle,
-                                                }}
-                                            />
-                                        </Grid>
+                                {
+                                    showotp_field ? (
+                                        <>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    value={otp}
+                                                    onChange={e => { setOTP(e.target.value) }}
+                                                    id="outlined-basic"
+                                                    label="OTP"
+                                                    variant="outlined"
+                                                    className={classes.textField}
+                                                    InputLabelProps={{
+                                                        className: classes.floatingLabelFocusStyle,
+                                                    }}
+                                                />
+                                            </Grid>
+                                            <Button onClick={() => process_otp()} className={classes.payBtn}>{button}</Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className='card-error'>{card_error ? card_error : ''}</p>
+                                            <Grid container spacing={2}>
 
-                                        <Grid item xs={6}>
-                                            <TextField
-                                                value={month}
-                                                onChange={e => {setMonth(e.target.value) }}
-                                                id="outlined-basic"
-                                                label="Card Month MM"
-                                                variant="outlined"
-                                                className={classes.textField}
-                                                InputLabelProps={{
-                                                    className: classes.floatingLabelFocusStyle,
-                                                }}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={6}>
-                                            <TextField
-                                                value={year}
-                                                onChange={e => {setYear(e.target.value) }}
-                                                id="outlined-basic"
-                                                label="Card Expiry YY"
-                                                variant="outlined"
-                                                className={classes.textField}
-                                                InputLabelProps={{
-                                                    className: classes.floatingLabelFocusStyle,
-                                                }}
-                                            />
-                                        </Grid>
+                                                <Grid item xs={6}>
 
-                                        <Grid item xs={6}>
-                                            <TextField
+                                                    <TextField
+                                                        value={number}
+                                                        onChange={e => { setNumber(e.target.value) }}
+                                                        id="outlined-basic"
+                                                        label="Card Number"
+                                                        variant="outlined"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            className: classes.floatingLabelFocusStyle,
+                                                        }}
+                                                    />
+                                                </Grid>
 
-                                                id="outlined-basic"
-                                                label="CVV"
-                                                value={cvv}
-                                                onChange={e => {setCvv(e.target.value) }}
-                                                variant="outlined"
-                                                className={classes.textField}
-                                                InputLabelProps={{
-                                                    className: classes.floatingLabelFocusStyle,
-                                                }}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <TextField
-                                                value={pin}
-                                                onChange={e => {setPin(e.target.value) }}
-                                                id="outlined-basic"
-                                                label="PIN"
-                                                variant="outlined"
-                                                className={classes.textField}
-                                                InputLabelProps={{
-                                                    className: classes.floatingLabelFocusStyle,
-                                                }}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                    <Button className={classes.payBtn}>{button}</Button>
-                                    </>
-                                    <>
-                                     <Grid item xs={6}>
-                                        <TextField
-                                            value={otp}
-                                            onChange={e => {setOTP(e.target.value) }}
-                                            id="outlined-basic"
-                                            label="OTP"
-                                            variant="outlined"
-                                            className={classes.textField}
-                                            InputLabelProps={{
-                                                className: classes.floatingLabelFocusStyle,
-                                            }}
-                                        />
-                                        <Button  className={classes.payBtn}>{button}</Button>
-                                    </Grid>
-                                    
-                                    </>
-                            
-                        </AccordionDetails>
-                    </Accordion>
+                                                <Grid item xs={6}>
+                                                    <TextField
+                                                        value={month}
+                                                        onChange={e => { setMonth(e.target.value) }}
+                                                        id="outlined-basic"
+                                                        label="Card Month MM"
+                                                        variant="outlined"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            className: classes.floatingLabelFocusStyle,
+                                                        }}
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                            <Grid container spacing={2}>
+                                                <Grid item xs={6}>
+                                                    <TextField
+                                                        value={year}
+                                                        onChange={e => { setYear(e.target.value) }}
+                                                        id="outlined-basic"
+                                                        label="Card Expiry YY"
+                                                        variant="outlined"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            className: classes.floatingLabelFocusStyle,
+                                                        }}
+                                                    />
+                                                </Grid>
 
+                                                <Grid item xs={6}>
+                                                    <TextField
 
-                    <Accordion>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel2a-content"
-                            id="panel2a-header"
-                        >
-                            <Box display="flex" justifyContent="space-between">
-                                <FaCreditCard className="phone" />
-                                <Typography className={classes.card} sx={{ color: 'text.secondary' }}>
-                                    INSURANCE
-                                </Typography>
-                            </Box>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Full Name"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <FormControl fullWidth variant="standard" sx={{ m: 1, }}>
-                                        <InputLabel id="demo-simple-select-standard-label" >Select Provider *</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-standard-label"
-                                            id="demo-simple-select-standard"
-                                            label="provider"
-                                        >
-                                            <MenuItem value={1}>ACACIA HEALTH INSURANCE LTD.</MenuItem>
-                                            <MenuItem value={2}>ACE MEDICAL INSURANCE</MenuItem>
-                                            <MenuItem value={3}>ATNA HEALTH INSURANCE</MenuItem>
-                                            <MenuItem value={4}>ALLIANZ WORLDWIDE CARE</MenuItem>
-                                            <MenuItem value={5}>APEX HEALTH INSRANCE LIMITED</MenuItem>
-                                            <MenuItem value={6}>BUPA</MenuItem>
-                                            <MenuItem value={7}>CIGNA</MenuItem>
-                                            <MenuItem value={8}>COSMOPOLITAN HEALTH</MenuItem>
-                                            <MenuItem value={9}>EQUITY INSURANCE</MenuItem>
-                                            <MenuItem value={10}>FIRST INSURANCE</MenuItem>
-                                            <MenuItem value={11}>GLICO HEALTH INSURANCE</MenuItem>
-                                            <MenuItem value={12}>GN HEALTH SCHEME</MenuItem>
-                                            <MenuItem value={13}>HOLLARD INSURANCE</MenuItem>
-                                            <MenuItem value={14}>KASIER GLOBAL HEALTH LIMITED</MenuItem>
-                                            <MenuItem value={15}>METROPOLITAN HEALTH INSURANCE</MenuItem>
-                                            <MenuItem value={16}>MILLENIUM INSURANCE</MenuItem>
-                                            <MenuItem value={17}>NATIONWIDE MUTUAL HEALTH CARE</MenuItem>
-                                            <MenuItem value={18}>OVAL HEALTH INSURANCE</MenuItem>
-                                            <MenuItem value={19}>PREMIER MUTUAL INSURANCE</MenuItem>
-                                            <MenuItem value={20}>UNIVERSAL HEALTH INSRANCE</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Policy No*"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Policy Type"
-                                        variant="outlined"
-                                        className={classes.textField}
-                                        InputLabelProps={{
-                                            className: classes.floatingLabelFocusStyle,
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Box>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DesktopDatePicker
-                                    label="Expiration Date"
-                                    inputFormat="MM/dd/yyyy"
-                                    value={value}
-                                    onChange={handleDateChange}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
-                            </Box>
-
-
-                        </AccordionDetails>
-                        <Button className={classes.payBtnInsurance}>Pay Insurance</Button>
-                    </Accordion>
-
-
-
+                                                        id="outlined-basic"
+                                                        label="CVV"
+                                                        value={cvv}
+                                                        onChange={e => { setCvv(e.target.value) }}
+                                                        variant="outlined"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            className: classes.floatingLabelFocusStyle,
+                                                        }}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={6}>
+                                                    <TextField
+                                                        value={pin}
+                                                        onChange={e => { setPin(e.target.value) }}
+                                                        id="outlined-basic"
+                                                        label="PIN"
+                                                        variant="outlined"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            className: classes.floatingLabelFocusStyle,
+                                                        }}
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                            <Button onClick={cardInsurancePayment} className={classes.payBtn}>{loading ? "Processing..." : `Pay GHS ${price}`}</Button>
+                                        </>
+                                    )
+                                }
+                            </AccordionDetails>
+                        </Accordion>
                 </div>
             </div>
         </div>

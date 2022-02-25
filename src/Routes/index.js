@@ -17,6 +17,7 @@ import IndividualRequest from '../Component/Forms/IndividualRequest'
 import FacilityRequest from '../Component/Forms/FacilityRequest'
 import Drugs from '../Pages/Drugs/Drugs'
 import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
+import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
 import Prescribed from '../Pages/Prescribed/Prescribed'
 import OrderReview from '../Pages/OrderReview/OrderReview'
 import HomeCareForm from '../Pages/Homecare/HomeCareForm'
@@ -30,6 +31,7 @@ import Chat from '../Pages/Chat/Chat'
 import AboutClaron from '../Pages/AboutClaron/AboutClaron'
 import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
 import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
+
 // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
 // DOCTORS PAGE IMPORT
@@ -76,6 +78,7 @@ function index() {
                 <Route exact path="/facilityrequest" element={< FacilityRequest />} />
                 <Route exact path="/drugs" element={< Drugs />}/>
                 <Route exact path="/otcdrugs" element={< OtcDrugs />} />
+                <Route exact path="/prescribedDrugs" element={< PrescribedDrugs />} />
                 <Route exact path="/prescribed" element={< Prescribed />} />
                 <Route  exact path="/OrderReview" element={< OrderReview />} />
                 <Route exact path="/HomeCareForm" element={< HomeCareForm />} />

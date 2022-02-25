@@ -14,8 +14,8 @@ function Subscribe() {
     
           let account = localStorage.getItem('user')
           let data = (JSON.parse(account))
-        //   console.log(data.email,'vvvvvv')
-     
+       
+      console.log(data.subscription)
     return (
         <MainLayout>
 <div class="snip1214">
@@ -42,7 +42,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
     <button onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Basic Plan', id: '', price: 20 } })} class="plan-select">
-    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family' || data.subscription == 'Premium' ? 'Downgrade' : 'Upgrade'}
+    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family Plan' || data.subscription == 'Premium plan' ? 'Downgrade' : 'Upgrade'}
     </button>
   </div>:<></> }
 
@@ -70,10 +70,10 @@ function Subscribe() {
     <button class="plan-select"
     onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Premium Plan', id: '', price: 40 } })}
     >  
-    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family' || data.subscription == 'Premium' ? 'Downgrade' : 'Upgrade'}</button>
+    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription === 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
 
-  { data.subscription != 'Family' ?
+  { data.subscription != 'Family Plan' ?
   <div class="plan featured">
     <h3 class="plan-title">
     Family Plan
@@ -94,7 +94,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>Health tips</li>
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
-    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : 'Upgrade'}</button>
+    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
  
 </div>

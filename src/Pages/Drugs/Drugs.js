@@ -11,6 +11,7 @@ import MainLayout from '../MainLayout';
 import * as API from '../../Api/pharmacy'
 import loading from '../../images/loading.gif'
 import swal from 'sweetalert';
+import {useNavigate} from 'react-router-dom'
 // import {S3} from 'aws-sdk'
 // import { uploadFile } from 'react-s3';
 import S3FileUpload from 'react-s3';
@@ -29,6 +30,7 @@ const style = {
   p: 4,
 };
 function Drugs() {
+  let navigate = useNavigate()
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -83,6 +85,7 @@ function Drugs() {
                 icon: "success",
                 button: "Ok",
               });
+              navigate("/prescribedDrugs")
          }
     }
     

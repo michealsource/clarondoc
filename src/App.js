@@ -13,7 +13,7 @@ function App() {
   requestFirebaseNotificationPermission()
   .then((firebaseToken) => {
     // eslint-disable-next-line no-console
-    console.log(firebaseToken);
+    // console.log(firebaseToken);
     localStorage.setItem("firebaseToken", firebaseToken)
     setToken(firebaseToken)
   })

@@ -118,7 +118,7 @@ function HomeCareForm() {
                                     label="Reason"
                                 >
                                     {reasons.map((item) => (
-                                        <MenuItem value={10}>{item}</MenuItem>
+                                        <MenuItem value={item}>{item}</MenuItem>
                                     ))}
 
                                 </Select>
