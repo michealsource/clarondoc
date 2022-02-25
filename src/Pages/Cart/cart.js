@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function CartModal({ openModal, setOpenModal, cartItem, total }) {
+function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, addToCart }) {
     const classes = useStyles();
     const [ttotal, setTotal] = useState(0)
     const [pickup, setpickup] = useState(false)
@@ -95,8 +95,8 @@ function CartModal({ openModal, setOpenModal, cartItem, total }) {
             navigate('/OrderReview', {
                 state: {
                     item: {
-                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? total : total + 5,
-                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? total : total + 5,
+                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
+                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalBill() : totalBill() + 5,
                         totalDiscount: 0,
                     },
                     data: {
@@ -183,6 +183,10 @@ function CartModal({ openModal, setOpenModal, cartItem, total }) {
                                         <h5>{product?.quantity}</h5>
                                         <p>GHS{parseFloat((product?.drug?.unitprice * product?.quantity).toFixed(2))}</p>
                                     </div>
+                                    <div className="actionBtn">
+                                        <button className="actionBtnOne" onClick={() => removeFromCart(product)}>-</button>
+                                        <button className="actionBtnTwo" onClick={() => addToCart(product)}>+</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -238,7 +242,7 @@ function CartModal({ openModal, setOpenModal, cartItem, total }) {
 
                     <div class="total_view">
                         <h2>Total:</h2>
-                        <p>{total}</p>
+                        <p>{totalBill()}</p>
                     </div>
 
 

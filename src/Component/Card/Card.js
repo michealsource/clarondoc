@@ -17,9 +17,7 @@ function Card({sidebar}) {
     const [expiry, setexpiry] = useState()
   
     useEffect(()=>{
-        
         (async()=>{
-          
             try {
                 var account = await localStorage.getItem('user')
                 var token = await localStorage.getItem('access-token')
@@ -37,8 +35,8 @@ function Card({sidebar}) {
             }
 
             try{
-                localStorage.setItem('subscription', JSON.parse(account).subscription);
-                checkSubscription(JSON.parse(account).subscription_end);
+               const sub = localStorage.getItem('subscription');
+                checkSubscription(JSON.parse(sub.subscription_end));
             }catch(e){}
 
         })()
@@ -62,7 +60,7 @@ function Card({sidebar}) {
     
             localStorage.setItem('subscription_exp_day', days);
     
-            if(days == 0){
+            if(days === 0){
                 setexpiry('Your subscription ends today. Renew now to avoid losing access to services')
             }else if (days < 0 && days > -11){
                 setexpiry(`Your subscription ends in ${left}. Renew now to avoid losing access to services`)
@@ -87,13 +85,14 @@ function Card({sidebar}) {
                     </button>
                 </div>
 
-                <div className="update-subscription">
-                    <p>Subscription: To book a doctor, you must have an active subscription</p>
+
+                {expiry ? (<div className="update-subscription">
+                    <p>{expiry}</p>
                     <Link to="/subscribe" className="subscribe-upd-btn-user">
                         Subscribe
                     </Link>
-                </div>
-
+                </div>):<></>}
+            
             </div>
 
             <div class="first-container">

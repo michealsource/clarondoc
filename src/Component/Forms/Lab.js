@@ -47,7 +47,7 @@ function Lab(props) {
             setuser(JSON.parse(account))
             let data = await getLabTests()
             data.map(s=>{
-                testnames.push({value:s.name, label:`${s.name} GHS${s.charges}`})
+                testnames.push({value:s.id, label:`${s.name} GHS${s.charges}`})
             })
         }catch(e){
             alert('Error', e.message)
@@ -55,6 +55,7 @@ function Lab(props) {
     })()
     
 }, [])
+
   return (
     <div>
         {/* <p>{total}</p> */}

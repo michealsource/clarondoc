@@ -37,3 +37,19 @@
     background-color: #368885;
     color:#fff
 }
+
+.actionBtn {
+    width: 25%;
+    display: flex;
+    /* background-color: red; */
+    justify-content: space-around;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.actionBtnOne, .actionBtnTwo {
+    width: 30%;
+    background-color: #368885;
+    color: #fff;
+    border-radius: 4px;
+}

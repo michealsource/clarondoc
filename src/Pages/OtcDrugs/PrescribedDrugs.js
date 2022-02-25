@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function OtcDrugs() {
+function PrescribedDrugs() {
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false)
   const [openCartModal, setOpenCartModal] = useState(false)
@@ -52,7 +52,7 @@ function OtcDrugs() {
   const classes = useStyles();
 
   const drugPrescription =  drugs.filter(function(data) {
-    return data.requiresPrescription === false;
+    return data.requiresPrescription === true;
   });
 
 
@@ -193,4 +193,4 @@ function OtcDrugs() {
     </MainLayout>
   )
 }
-export default OtcDrugs
+export default PrescribedDrugs

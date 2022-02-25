@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Request.css'
 import { makeStyles } from '@mui/styles';
 import { TextField, Checkbox, FormControl, Grid, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
+import TimePicker from '@mui/lab/TimePicker';
 import 'date-fns';
 import { fetchDoctors } from '../../Api/doctors';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
@@ -57,6 +57,10 @@ function FacilityRequest({ testName }) {
         setSelectedValue(Array.isArray(e) ? e.map(x => x.label) : [])
     }
 
+    const handleTimeChange = (newTime)=>{
+        setTime(newTime)
+    }
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
         // setSelectedDate(date.toDate());
@@ -65,25 +69,27 @@ function FacilityRequest({ testName }) {
 
     // MAIN FRORM STATE
     let testnames = []
-    
-  
+
+
     const [isfacility, setisfacility] = useState(false)
- 
+
     const [name, setName] = useState()
     const [user, setuser] = useState()
- 
-   
-    const [labtests, setlabtests] = useState([])
+
+
+
     const [dob, setDob] = useState(new Date())
     const [purpose, setPurpose] = useState('')
     const [doctors, setdoctors] = useState([])
-    const [value, setValue] = useState([]);
     const [doctor, setdoctor] = useState()
     const [phone, setPhone] = useState()
-    const [sex, setSex] = useState('male')
-    const [doc, setdoc] = useState('')
+    const [sex, setSex] = useState('Male')
     const [total, settotal] = useState()
-    const [selectedvalues, setSelectedValues] = useState([])
+    const [time, setTime] = useState()
+    const [address, setAddress] = useState('')
+    const [labTests, setLabTests] = useState([])
+    const [totalCost, setTotalCost] = useState(0)
+    // const [selectedvalues, setSelectedValues] = useState([])
 
     const [facility, setfacility] = useState({
         name: '',
@@ -91,20 +97,15 @@ function FacilityRequest({ testName }) {
         department: '',
         diagnosis: ''
     })
-    const [address, setAddress] = useState('')
-    const [labTests, setLabTests] = useState([])
-    const [totalCost, setTotalCost] = useState(0)
+
 
     useEffect(() => {
-
         (async () => {
-
             try {
                 let account = localStorage.getItem('user')
                 setuser(JSON.parse(account))
                 let found = await fetchDoctors()
                 setdoctors(found)
-                setdoc(found[0].firstname + ' ' + found[0].lastname)
             } catch (e) {
                 alert('Error', e.message)
             }
@@ -112,13 +113,18 @@ function FacilityRequest({ testName }) {
     }, [])
 
     const getTests = (test, total) => {
-        console.log(test, total)
-        setLabTests(test)
+       
+        let newTest = [];
+        test.map(testid=>{
+            newTest.push(testid.value)
+        })
+        setLabTests(newTest)
         setTotalCost(total)
+        console.log(newTest)
     }
 
     // console.log(labTests,totalCost, "frm arent")
-    console.log(total)
+    console.log(time)
     return (
         <MainLayout >
             <div className="individual-request-container-outer">
@@ -147,7 +153,7 @@ function FacilityRequest({ testName }) {
                                 <Select
                                     onChange={(e) => {
                                         const selectedDoctor = e.target.value;
-                                        setValue(selectedDoctor)
+                                        setdoctor(selectedDoctor)
                                     }}
                                     displayEmpty
                                     inputProps={{ 'aria-label': 'Without label' }}
@@ -167,8 +173,8 @@ function FacilityRequest({ testName }) {
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Gender</FormLabel>
                                 <RadioGroup value={sex} onChange={(e) => setSex(e.target.value)} row aria-label="gender" name="row-radio-buttons-group">
-                                    <FormControlLabel name="picked" value="female" control={<Radio />} label="Female" />
-                                    <FormControlLabel name="picked" value="male" control={<Radio />} label="Male" />
+                                    <FormControlLabel name="picked" value="Female" control={<Radio />} label="Female" />
+                                    <FormControlLabel name="picked" value="Male" control={<Radio />} label="Male" />
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
@@ -249,6 +255,12 @@ function FacilityRequest({ testName }) {
                                     renderInput={(params) => <TextField {...params} />}
                                 />
 
+                                {/* <TimePicker
+                                    label="Time"
+                                    value={time}
+                                    onChange={handleTimeChange}
+                                    renderInput={(params) => <TextField {...params} />}
+                                /> */}
 
 
                                 {/* <DateTimePicker
@@ -279,50 +291,50 @@ function FacilityRequest({ testName }) {
 
                     <button className="mobile-lab-btn"
                         onClick={() => navigate('/OrderReview',
-                        {
-                            state:{
-                                item:{
-                                    netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? (totalCost - (totalCost * 0.15)) + 5 : total + 5,
-                                    totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost : totalCost + 5,
-                                    totalDiscount: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost * 0.15 : 0,
-                                },
-                                data: isfacility ? {
-                                    patientName: name,
-                                    gender: sex,
-                                    labTests: labTests,
-                                    // address: address,
-                                    signature: true,
-                                    phone: phone,
-                                    doctor: value,
-                                    schedule: selectedDate.toISOString(),
-                                    facilityName: 'facility',
-                                    facilityLocation:address,
-                                    dob: dob,
-                                    purpose: purpose,
-                                    names: name,
-                                    type: 'facility',
-                                    serviceId: 'facilitylabrequests'
-                                } : {
-                                    patientName: name,
-                                    gender: sex,
-                                    labTests: labTests,
-                                    // address: address,
-                                    signature: true,
-                                    phone: phone,
-                                    doctor: value,
-                                    schedule: selectedDate.toISOString(),
-                                    dob: dob,
-                                    purpose: purpose,
-                                    names: name,
-                                    facilityLocation:address,
-                                    facilityName:'individual',
-                                    type: 'individual',
-                                    serviceId: 'individuallabrequests'
-                                },
-                                type: 'lab',
+                            {
+                                state: {
+                                    item: {
+                                        netTotal: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? (totalCost - (totalCost * 0.15)) + 5 : total + 5,
+                                        totalCost: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost : totalCost + 5,
+                                        totalDiscount: ['Basic', 'Premium', 'Family'].includes(user.subscription) ? totalCost * 0.15 : 0,
+                                    },
+                                    data: isfacility ? {
+                                        labTests: labTests,
+                                        tests:labTests,
+                                        schedule: new Date(selectedDate),
+                                        gender: sex,
+                                        facilityName: 'facility',
+                                        dob: new Date(dob),
+                                        purpose: purpose,
+                                        doctor: doctor,
+                                        phone: phone,
+                                        patientName: name,
+                                        names: name,
+                                        facilityLocation: "Ghana",
+                                        signature:true,
+                                        type: 'facility',
+                                        serviceId: 'facilitylabrequests'
+                                    } : {
+                                        labTests: labTests,
+                                        tests:labTests,
+                                        schedule: selectedDate.toISOString(),
+                                        gender: sex,
+                                        facilityName: 'facility',
+                                        dob: dob,
+                                        purpose: purpose,
+                                        doctor: doctor,
+                                        phone: phone,
+                                        patientName: name,
+                                        names: name,
+                                        facilityLocation: address,
+                                        signature:true,
+                                        type: 'individual',
+                                        serviceId: 'individuallabrequests'
+                                    },
+                                    type: 'lab',
+                                }
                             }
-                        }
-                        ) }>Proccessed</button>
+                        )}>Proccessed</button>
                 </div>
             </div>
         </MainLayout>

@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-export const register = async (data,dispatch) => {
+export const register = async (data) => {
     const key = await apiKey()
     try{
         const response = await axios({

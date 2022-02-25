@@ -105,7 +105,7 @@ export const insurancefacilityLabRequest = async (data) => {
             'x-api-key': key
         }
     })
-
+    console.log(response,'fffffffff')
     return response.data.requestDetails
 }
 

@@ -1,6 +1,5 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useState,useEffect} from 'react'
 import './EditPatient.css'
-import { AuthContext } from '../../Context/AuthContext';
 import { TextField, Grid, Button } from '@material-ui/core'; //importing material ui component
 import { makeStyles } from '@mui/styles';
 import image from '../../images/user-profile.jpg'
@@ -9,6 +8,8 @@ import MainLayout from '../../Pages/MainLayout';
 import { update } from '../../Api/Auth';
 import swal from 'sweetalert';
 import firebase from '../../firebaseConfig';
+import {UPDATE,UPDATEUSERINFO} from '../../features/user'
+import { useDispatch,useSelector } from 'react-redux'
 // import profile from '../../images/user.png'
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,8 +40,11 @@ const useStyles = makeStyles(theme => ({
 
 
 function Editpatient() {
+    const dispatch = useDispatch()
+    const userData = useSelector((state)=>state.user.value)
+    // const newUser = JSON.parse(userData)
+    // console.log(JSON.parse(userData),'hhhhhhhhh')
     const classes = useStyles();
-    const {company} = useContext(AuthContext);
     const location = useLocation();
     const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
     const [error, seterror] = useState()
@@ -76,6 +80,8 @@ function Editpatient() {
           }
          const response = await update(data)
          if(response.success){
+            dispatch(UPDATE(url))
+            console.log(url,'hhhhh')
             setimgloading(false)
             swal({
                 title: "Image Update",
@@ -107,6 +113,7 @@ function Editpatient() {
 
           if(data2.success){
             localStorage.setItem('user', JSON.stringify({...data}))
+            dispatch(UPDATEUSERINFO(data))
             swal({
                 title: "Update",
                 text: "updated successfully",
@@ -125,14 +132,12 @@ function Editpatient() {
                 console.log(error)
             }
       }
-
-    
     return (
         <MainLayout>
         <div className="edit-user-contaner">
-            <h2>Kndly Update Your Profile {firstname}</h2>
+            <h2>Kndly Update Your Profile {userData.firstname}</h2>
 
-            <img  src={avataru?avataru:image} alt="Profile" className="pro-img"/>
+            <img  src={userData.avatar?userData.avatar:image} alt="Profile" className="pro-img"/>
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
                 <input onChange={(e) => ImageUpload(e)} type="file" name="upfile" />

@@ -87,7 +87,7 @@ function OrderReview() {
     }, [])
     const location = useLocation();
 
-    const { item, totalCost, name, serviceCharge, discount, type, data, id } = location.state
+    const { item, totalCost, name, serviceCharge, discount, type, data, id,netTotal } = location.state
     const { serviceId } = data
 
     const classes = useStyles();
@@ -336,11 +336,12 @@ function OrderReview() {
             var dt = { id: 1 };
             // console.log(route.params.data)
             try {
-                if (type == 'lab') {
-                    if (type == 'facility') {
+                if (type === 'lab') {
+                    if (data.type === 'facility') {
                         console.log(data)
-                        console.log('that\'s dat from recieve')
+                        // console.log('that\'s dat from recieve')
                         dt = await insurancefacilityLabRequest(data)
+                        // console.log(dt)
                     } else {
                         console.log(data)
                         console.log('that\'s dat from recieve')
@@ -367,21 +368,21 @@ function OrderReview() {
 
             var serviid = (dt.id == undefined) ? 1 : dt.id;
 
-            var data = {
+            const datas = {
                 names: insuranceFirstName,
                 policyProvider: providerSelected,
                 policyNumber: insurancePolicyNo,
                 policyOption: insurancePolicyType,
                 policyExpiryDate: insurancedate,
-                amount: (item.netTotal * 1).toFixed(2),
+                amount: (item.totalCost).toFixed(2),
                 serviceId: serviid,
                 service: serviceId,
                 currency: 'GHS'
             }
 
-            console.log(data)
+            console.log(datas)
             // sent request
-            await request_payment_through_insurance(data)
+            await request_payment_through_insurance(datas)
 
             setLoading(false)
             setButton('Request Sent')
@@ -401,6 +402,7 @@ function OrderReview() {
         }
 
     }
+    
 
 
     const process_otp = async () => {
@@ -456,11 +458,6 @@ function OrderReview() {
         }
         // stop
     }
-
-
-
-
-
 
     return (
         <MainLayout>

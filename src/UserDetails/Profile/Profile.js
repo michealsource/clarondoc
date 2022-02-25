@@ -73,7 +73,7 @@ function Profile() {
                   
                     <button 
                     onClick={()=>{ user.subscription != null && user.subscription != 'Normal' ? navigate('/Sub-Summary', { state: { name: `${user.subscription} Plan`, id: '', price: prices[user.subscription] } }) : navigate("/userDashboard")}}
-                    className="upgrad-btn"> {user.subscription != null && user.subscription != 'Normal' ? `Continue with ${user.subscription} Plan` : 'Try ClaronDoc free for 14 days'}</button>
+                    className="upgrad-btn"> {user.subscription != null && user.subscription != 'Normal' ? `Upgrade Subscription` : 'Try ClaronDoc free for 14 days'}</button>
                
 
                     <button onClick={()=>{editPage()}}>

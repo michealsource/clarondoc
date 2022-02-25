@@ -14,7 +14,9 @@ import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
+import { useDispatch,useSelector } from 'react-redux'
 export default function MainLayout({ children }) {
+  const userData = useSelector((state)=>state.user.value)
    const[user,SetUser]= useState()
     useEffect(()=>{
         (async()=>{
@@ -43,10 +45,10 @@ export default function MainLayout({ children }) {
           <div className='sidabar-container'>
             <>
               <div className="profile-container">
-                <img src={user?user.avatar:''} alt="" className="user" />
+                <img src={userData.avatar?userData.avatar:''} alt="" className="user" />
               </div>
               <div className="user-detail">
-                <p className="name">{user?user.firstname:''} {user?user.lastname:''}</p>
+                <p className="name">{userData?userData.firstname:''} {userData?userData.lastname:''}</p>
                 <p className="title">Patient</p>
               </div>
             </>
@@ -66,7 +68,6 @@ export default function MainLayout({ children }) {
           <div>
           <div className="content">
                     <div className="content-container">
-
                         <div className={sidebar?'navbar-container':'navbar-container-full'}>
                             <div className="menu-container">
                                 <FaAlignJustify className="menu-icon" onClick={()=>setSidebar(!sidebar)}/>
@@ -90,7 +91,7 @@ export default function MainLayout({ children }) {
 
                             <div className="main-profile-container">
                                 <div className="user-profile-container">
-                                    <img src={user?user.avatar:''} alt="" className="user-profile" />
+                                    <img src={userData.avatar?userData.avatar:''} alt="" className="user-profile" />
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
                                 <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>

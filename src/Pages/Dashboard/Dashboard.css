@@ -41,14 +41,6 @@
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-    /* display: flex;
-    align-items: center;
-    align-self: center;
-   
-    color: whitesmoke;
-    
-    
-     */
 }
 
 .blog h4{
@@ -146,11 +138,13 @@ color: whitesmoke;
 .content{
     background-color: #EFEFEF;
     flex: 1;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    overflow: visible;
 }
 .content-container{
     display: flex;
     justify-content: space-between;
+    overflow: visible;
 }
 
 .menu-icon{
