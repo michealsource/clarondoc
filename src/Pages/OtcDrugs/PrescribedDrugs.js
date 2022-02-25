@@ -85,7 +85,7 @@ function PrescribedDrugs() {
     return cartTotal.reduce((acc, total) => acc + total)
   }
 
-  const total = getTotal()
+  const total = cartData.length ? getTotal() : 0
   console.log(total)
 
   const addToCart = (item) => {
