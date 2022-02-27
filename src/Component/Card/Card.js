@@ -79,7 +79,7 @@ function Card({sidebar}) {
         <div className="main-area-card-container">
             <div class="notifcation-container">
                 <div class="update-profile">
-                    <p>Profile Update: You should update your "Blood Group, City, Gender, State, Genotype and Date Of Birth</p>
+                    <p>Profile Update: You should update your first name,last name , email,  and phone number</p>
                     <button onClick={()=>{editPage()}} className="update-btn-user">
                         Update Profile
                     </button>

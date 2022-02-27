@@ -224,7 +224,7 @@ function SubscriptionSummary() {
       
               if(init.status){
       
-                if(init.data.status == 'send_otp'){
+                if(init.data.status === 'send_otp'){
                   setLoading(false)
                   setshowotp_field(true)
                   settnx_ref(init.data.reference)
