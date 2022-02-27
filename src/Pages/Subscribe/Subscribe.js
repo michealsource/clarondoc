@@ -42,7 +42,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
     <button onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Basic Plan', id: '', price: 20 } })} class="plan-select">
-    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family Plan' || data.subscription == 'Premium plan' ? 'Downgrade' : 'Upgrade'}
+    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family Plan' || data.subscription == 'Premium Plan' ? 'Downgrade' : 'Upgrade'}
     </button>
   </div>:<></> }
 
