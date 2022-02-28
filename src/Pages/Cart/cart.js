@@ -162,10 +162,10 @@ function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, a
                     <FaShoppingCart className="card" />
                 </Badge>
             </Link>
-            <Dialog open={openModal}>
+            <Dialog open={openModal} fullWidth>
                 <DialogTitle>
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        My Items
+                        <h2>My Items</h2>
                         <IconButton onClick={() => setOpenModal(false)}>
                             <FiX />
                         </IconButton>
@@ -180,8 +180,9 @@ function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, a
                                     <img className="cart-drug-img" src={product?.drug?.avatar} alt="drug-image" />
                                     <div class="cart-drug-name-and-price">
                                         <h4>{product?.drug?.name}</h4>
-                                        <h5>{product?.quantity}</h5>
-                                        <p>GHS{parseFloat((product?.drug?.unitprice * product?.quantity).toFixed(2))}</p>
+                                        
+                                        <p> <span>Qty:</span>{product?.quantity}</p>
+                                        <p><span>GHS</span>{parseFloat((product?.drug?.unitprice * product?.quantity).toFixed(2))}</p>
                                     </div>
                                     <div className="actionBtn">
                                         <button className="actionBtnOne" onClick={() => removeFromCart(product)}>-</button>

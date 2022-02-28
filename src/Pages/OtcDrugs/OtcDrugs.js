@@ -126,17 +126,14 @@ function OtcDrugs() {
             className: classes.floatingLabelFocusStyle,
           }}
         />
-        
-
-        <div className='cart-mm'>
+      </div>
+      <div className='cart-mm'>
         {
          cartData !== null && cartData.length ? (
             <CartModal  openModal={openCartModal} removeFromCart={removeFromCart} addToCart={addToCart} setOpenModal={setOpenCartModal} cartItem={cartData} total={total}/>
          ) : null
         }
         </div>
-        
-      </div>
       <div className="pharmacy-container">
 
         {isLoading ? (<img src={loading} alt="" className="loader-img" />) : filtered.length ? filtered.map((data) => (

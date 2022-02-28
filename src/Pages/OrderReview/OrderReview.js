@@ -671,6 +671,7 @@ function OrderReview() {
                                                         onChange={e => { setPin(e.target.value) }}
                                                         id="outlined-basic"
                                                         label="PIN"
+                                                        type="password"
                                                         variant="outlined"
                                                         className={classes.textField}
                                                         InputLabelProps={{

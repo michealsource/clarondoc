@@ -111,8 +111,9 @@ flex: 1;
   text-align: center;
   font-size: 16px;
   width: 100%;
-  max-width: 1000px;
-  margin: 50px 80px;
+  max-width: 80%;
+  margin: 0 auto;
+  margin: 50px;
   height: 100%;
 }
 .snip1214 .plan {

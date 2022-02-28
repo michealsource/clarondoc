@@ -80,10 +80,14 @@ function Profile() {
                             <button className="edit-btn"> <FaEye/> Edit Profile</button>
                     </button>
 
+
                     <Link to="/SavedDoctors">
-                   
                     <button className="saved-btn">  <FaEye/> View Saved Doctors</button>
                     </Link>
+
+                    <button onClick={()=>navigate('/ChangePassword')}>
+                            <button className="edit-btn"> <FaEye/>Update Password</button>
+                    </button>
 
                     </div>
                 </div>

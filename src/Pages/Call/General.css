@@ -1,0 +1,74 @@
+
+.controls{
+   background-color: black;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+   justify-content: space-around;
+   /* align-items: flex-end; */
+   border-radius: 20px;
+}
+
+.claron-audio-logo-container h2{
+    color: #fff !important;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.inner-control{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-content: space-around;
+}
+.mute{
+    background-color: #16a085;
+    color: #fff;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    margin-bottom: 20px !important;
+}
+
+.leav{
+    background-color: red;
+    color: #fff;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    margin-bottom: 20px !important;
+}
+
+.leav-icon, .mute-audio-control{
+    font-size: 20px !important;
+}
+
+.controls p.on{
+background-color: black !important;
+border: none !important;
+}
+
+.controls p {
+  background-color: black !important;
+  border: none !important;
+}
+
+.cal-logo-img{
+    max-width: 70%;
+    height: 40%;
+    display: block;
+    margin: 0 auto;
+}

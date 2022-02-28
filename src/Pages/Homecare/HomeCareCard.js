@@ -31,7 +31,7 @@ function HomeCareCard() {
                     
                 <div class="col-container-home">
                     
-                    {bookings.length? bookings.map((item)=>(
+                    {bookings.length > 0 && (bookings.length? bookings.map((item)=>(
                         <>
                         <div className='single-home-car'>
                         <div className="head-his">
@@ -53,7 +53,7 @@ function HomeCareCard() {
                             
                         </div>
                         </>
-                    )):(<img src={loading} alt="" className="loader-img"/>)}
+                    )):(<img src={loading} alt="" className="loader-img"/>))}
                 </div>
                 </div>
             </div>

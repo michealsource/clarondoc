@@ -108,7 +108,7 @@ function Signup() {
                         
 
                         <div className="form-wrapper">
-                            <TextField value={password} onChange={(e)=>setPassword(e.target.value)} style={{ width: '100%' }} id="outlined-basic" label="password" variant="outlined" />
+                            <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} style={{ width: '100%' }} id="outlined-basic" label="password" variant="outlined" />
                            
                         </div>
 

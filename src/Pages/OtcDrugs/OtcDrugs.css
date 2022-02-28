@@ -1,6 +1,6 @@
 .pharmacy-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem,2fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem,2fr));
     margin-left: 25px;
     margin-bottom: 100px;
 }
@@ -164,8 +164,11 @@
 }
 
 .search_field {
-    display:flex;
-    justify-content:space-around
+    /* display:flex;
+    justify-content:space-around; */
+    width: 100% !important;
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
 
@@ -177,8 +180,11 @@
     overflow: visible;
 } */
 
-/* .cart-mm{
+.cart-mm{
     position: sticky !important;
     top: 0;
-    background-color: red;
-} */
+    margin-bottom: 20px;
+    width: 70px !important;
+    height: 70px !important;
+    margin-left: 20px;
+}

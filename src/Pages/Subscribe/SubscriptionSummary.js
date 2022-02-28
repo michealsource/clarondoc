@@ -1,24 +1,22 @@
 import React, { useState,useEffect} from 'react'
 // import '../OrderReview.css'
 import { FaMobileAlt, FaCreditCard} from "react-icons/fa";
-import { InputLabel, Box, Button, Grid, FormControl, TextField, Select, MenuItem } from "@mui/material";
+import { Box, Button, Grid, TextField, Select, MenuItem } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import {UPDATESUB} from '../../features/user';
+import { useDispatch,useSelector } from 'react-redux'
 import  MainLayout from "../MainLayout"
 import 'date-fns';
 import { useLocation, useNavigate } from "react-router-dom";
 import { initPayment, verOtp, cardPayment,Upgrade_sub } from '../../Api/paystack';
-import Modal from '@mui/material/Modal';
 import moment from 'moment';
 import swal from 'sweetalert';
-import loading from '../../images/loading.gif'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -72,6 +70,7 @@ const style = {
 
 function SubscriptionSummary() {
     const {state} = useLocation();
+    const dispatch = useDispatch()
     const { name, id,price } = state;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -167,14 +166,14 @@ function SubscriptionSummary() {
               setButton('Awaiting for payment confirmation...')
             }else if(init.data.status === 'success'){
               try {
-                const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
-                console.log(sub, "sub")
-                localStorage.setItem('subscription', sub);
+                await Upgrade_sub( name, moment(new Date().toString().substr(0, 16)).add(1,"months"))
+                
               } catch (error) {
                 console.log(error)
               }
               setLoading(false)
               setButton('Done')
+              dispatch(UPDATESUB(name))
               swal({
                 title: "Payment successful",
                 text: `You have successfully paid for ${price === 20 ? 'Basic Plan Subscription' : price === 40 ? 'Premium Plan Subscription' : 'Family Plan Subscription'} `,
@@ -224,7 +223,7 @@ function SubscriptionSummary() {
       
               if(init.status){
       
-                if(init.data.status == 'send_otp'){
+                if(init.data.status === 'send_otp'){
                   setLoading(false)
                   setshowotp_field(true)
                   settnx_ref(init.data.reference)
@@ -232,16 +231,16 @@ function SubscriptionSummary() {
                 }else if(init.data.status == 'pay_offline'){
                   setLoading(false)
                   setButton('Awaiting for payment confirmation...')
-                }else if(init.data.status == 'success'){
+                }else if(init.data.status === 'success'){
                   try {
-                    const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
-                    localStorage.setItem('subscription', sub);
+                     await Upgrade_sub( name, moment(new Date().toString().substr(0, 16)).add(1,"months"))
+                     
                   } catch (error) {
                     console.log(error)
                   }
                   setLoading(false)
                   setButton('Done')
-                  
+                  dispatch(UPDATESUB(name))
                   swal({
                     title: "subscription successful",
                     text: `Your ${name} subscription was successful`,
@@ -292,7 +291,7 @@ function SubscriptionSummary() {
             setButton('Awaiting for payment confirmation...')
           }else if(init.data.status == 'success'){
             try {
-             const sub = await Upgrade_sub( name, new Date().toString().substr(0, 16))
+             const sub = await Upgrade_sub( name, moment(new Date().toString().substr(0, 16)).add(1,"months"))
              localStorage.setItem('subscription', sub);
             } catch (error) {
               console.log(error)
@@ -536,6 +535,7 @@ function SubscriptionSummary() {
                                                         onChange={e => { setPin(e.target.value) }}
                                                         id="outlined-basic"
                                                         label="PIN"
+                                                        type="password"
                                                         variant="outlined"
                                                         className={classes.textField}
                                                         InputLabelProps={{

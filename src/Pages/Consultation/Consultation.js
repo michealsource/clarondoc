@@ -251,10 +251,10 @@ const favorite = async(email)=>{
                                 <FaHeart className="doctor-icon" />
                                 <span>Favourite</span>
                             </div>
-                            <div onClick={()=>setCall(!call)} class="action-container">
+                            {/* <div onClick={()=>setCall(!call)} class="action-container">
                                 <FaPhoneAlt className="doctor-icon" />
                                 <span>Call</span>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
@@ -319,10 +319,10 @@ const favorite = async(email)=>{
                            <span> { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove' : 'Save'}</span>
                            {/* <span>Favourite</span> */}
                        </div>
-                       <div onClick={() => setCall(!call)} class="action-container">
+                       {/* <div onClick={() => setCall(!call)} class="action-container">
                            <FaPhoneAlt className="doctor-icon" />
                            <span>Call</span>
-                       </div>
+                       </div> */}
                    </div>
                </div>
    
