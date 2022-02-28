@@ -44,6 +44,7 @@ function Editpatient() {
     const userData = useSelector((state)=>state.user.value)
     // const newUser = JSON.parse(userData)
     // console.log(JSON.parse(userData),'hhhhhhhhh')
+   
     const classes = useStyles();
     const location = useLocation();
     const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
@@ -81,7 +82,6 @@ function Editpatient() {
          const response = await update(data)
          if(response.success){
             dispatch(UPDATE(url))
-            console.log(url,'hhhhh')
             setimgloading(false)
             swal({
                 title: "Image Update",
@@ -136,8 +136,7 @@ function Editpatient() {
         <MainLayout>
         <div className="edit-user-contaner">
             <h2>Kndly Update Your Profile {userData.firstname}</h2>
-
-            <img  src={userData.avatar?userData.avatar:image} alt="Profile" className="pro-img"/>
+            <img src={userData.avatar !== "undefined"? userData.avatar:image} alt="" className="pro-img" />
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
                 <input onChange={(e) => ImageUpload(e)} type="file" name="upfile" />

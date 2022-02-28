@@ -96,6 +96,7 @@ function Drugs() {
     <div className="drugs-container">
       <div className="cards">
         <div class="card-container">
+
           <Link to="/otcdrugs" class="card-box">
             <img src={drug} alt="" />
             <h4>Get OTC Drugsy</h4>
@@ -117,12 +118,10 @@ function Drugs() {
         <h2>Drugs Order History</h2>
 
         <section class="two-column">
-        <div class="histry-box">
           <div class="drugs-hisory-container">
               <div className="his-container-cont-drug">
-               
                   <>
-                {bookings.length? bookings.map((item)=>(
+                {bookings.length > 0 && (bookings.length? bookings.map((item)=>(
                             <>
                             <div className='single-drug-history'>
                             <h6>PHARMACY ORDER</h6>  
@@ -152,16 +151,12 @@ function Drugs() {
                             
                             </div>
                             </>
-                        )):(<img src={loading} alt="" className="loader-img"/>)}
+                        )):(<img src={loading} alt="" className="loader-img"/>))}
                   </>
               </div>
             </div>
-          </div>
+      
         </section>
-
-
-
-
       </div>
       <Modal
         open={open}

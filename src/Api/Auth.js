@@ -30,6 +30,106 @@ export const register = async (data) => {
     }
 }
 
+export const resetpassword = async(email)=>{
+    const key = await apiKey()
+
+    try{
+        const response = await axios({
+            method: 'GET',
+            url: 'https://api.clarondoc.com/otp/get/'+email,
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': key
+            },
+            options: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        
+        
+        return response.data
+    }catch(e){
+        return {
+            message: e.message,//'The credentials you provided are not associated with any account',
+            success: false
+        }
+    }
+}
+
+// OTP
+
+export const checkotp = async(reset_code)=>{
+    const key = await apiKey()
+
+    try{
+        const response = await axios({
+            method: 'GET',
+            url: 'https://api.clarondoc.com/otp/confirm/'+reset_code,
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': key
+            },
+            options: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        
+        
+        return response.data
+    }catch(e){
+        return {
+            message: e.message,//'The credentials you provided are not associated with any account',
+            success: false
+        }
+    }
+}
+
+
+// CHANGE PASSWORD
+export const changePasswordd = async (data, auth) => {
+    const key = await apiKey()
+    // const auth = await AsyncStorage.getItem('access-token');
+    const response = await axios.default.put('https://api.clarondoc.com/users/update/password',
+        data,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`,
+                'x-api-key': key
+            },
+            options: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    )
+
+    console.log(response.data)
+    return response.data
+}
+
+// UPDATE PASSWORD
+export const updatePassword = async (data) => {
+    const key = await apiKey()
+    const auth = localStorage.getItem('access-token');
+    const response = await axios.default.put('https://api.clarondoc.com/users/update/password',
+        data,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`,
+                'x-api-key': key
+            },
+            options: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    )
+
+    console.log(response.data)
+    return response.data
+}
+
+
 export const update = async (data) => {
     const key = await apiKey()
     const auth = localStorage.getItem('access-token');
@@ -86,7 +186,9 @@ export const login = async (email, password) => {
 }
 
 // GETTING USER DETAILS
-export const userDetails = async (email, key, auth) => {
+export const userDetails = async (email) => {
+    const key = await apiKey();
+    const auth = localStorage.getItem('access-token');
     const response = await axios({
         method: 'GET',
         url: 'https://api.clarondoc.com/users/'+email,

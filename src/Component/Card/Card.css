@@ -93,8 +93,8 @@
 /* CARD STYLING */
 .cards .card-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem,1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
+    gap: 1rem;
     margin: 20px;
     margin-top: 30px;
     margin-bottom: 100px;

@@ -2,16 +2,19 @@ import  React,{useContext} from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link,useNavigate } from "react-router-dom"
-// import { AuthContext } from '../../Context/AuthContext';
+import {LOGOUT} from '../../features/user'
+import { useDispatch} from 'react-redux'
 export default function UserProfileDropDown({ handleClose, anchorEl, openAction }) {
-    // const {user,dispatch} = useContext(AuthContext)
+    
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const logOut = ()=>{
         localStorage.removeItem("email")
         localStorage.removeItem("access-token")
         localStorage.removeItem("api-key")
         localStorage.removeItem("login-expiry")
         localStorage.removeItem("user")
+        dispatch(LOGOUT())
         navigate("/")
     }
     return (

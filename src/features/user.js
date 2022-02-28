@@ -10,10 +10,17 @@ const userSlice = createSlice({
         LOGIN: (state,action)=>{
             state.value = action.payload
         },
+        LOGOUT:(state)=>{
+            state.value ={}
+        },
         UPDATE: (state,action)=>{
-            console.log(state.value,'sssssss')
             state.value.avatar = action.payload
         },
+
+        UPDATESUB: (state,action)=>{
+            state.value.subscription = action.payload
+        },
+
         UPDATEUSERINFO: (state,action)=>{
             state.value = action.payload
         },
@@ -44,5 +51,5 @@ const userSlice = createSlice({
         },
     }
 })
-export const {LOGIN, UPDATE,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY} = userSlice.actions
+export const {LOGIN,LOGOUT,UPDATE,UPDATESUB,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY} = userSlice.actions
 export default userSlice.reducer;

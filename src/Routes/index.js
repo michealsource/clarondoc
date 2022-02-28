@@ -58,6 +58,7 @@ import SignIn from '../Pages/SignIn/SignIn'
 import About from '../Pages/Settings/About'
 import LandingPage from '../Pages/landingPage.js/LandingPage'
 import TermsandCondition from '../Pages/Settings/TermsandCondition'
+import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 // import Navbar from '../Component/Navbar/Navbar'
 function index() {
     return (
@@ -93,6 +94,7 @@ function index() {
                 <Route exact path="/ClaronTerms" element={< ClaronTerms />} />
                 <Route exact path="/Sub-Summary" element={< SubscriptionSummary />} />
                 <Route exact path="/call" element={< Call />} />
+                <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
                 
                 {/* DOCTOR ROUTES */}
                 <Route exact path="/doctorDashboard" element={<Home />}></Route>
@@ -117,6 +119,8 @@ function index() {
                 <Route exact path="/" element={<LandingPage />}></Route>
                 <Route exact path="/SignIn" element={<SignIn/>}></Route>
                 <Route exact path="/SignUp" element={<SignUp />}></Route>
+      
+                
                 <Route exact path="/about" element={<About />}></Route>
                 <Route exact path="/privacy" element={<TermsandCondition />}></Route>
            </Routes>

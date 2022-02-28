@@ -14,7 +14,8 @@ import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
-import { useDispatch,useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { userDetails} from '../Api/Auth';
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
    const[user,SetUser]= useState()
@@ -22,6 +23,7 @@ export default function MainLayout({ children }) {
         (async()=>{
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
+
           })()
     },[])
   const [open, setOpen] = useState(false)
@@ -45,7 +47,7 @@ export default function MainLayout({ children }) {
           <div className='sidabar-container'>
             <>
               <div className="profile-container">
-                <img src={userData.avatar?userData.avatar:''} alt="" className="user" />
+                <img src={userData.avatar !== "undefined"? userData.avatar:user1} alt="" className="user" />
               </div>
               <div className="user-detail">
                 <p className="name">{userData?userData.firstname:''} {userData?userData.lastname:''}</p>
@@ -91,7 +93,8 @@ export default function MainLayout({ children }) {
 
                             <div className="main-profile-container">
                                 <div className="user-profile-container">
-                                    <img src={userData.avatar?userData.avatar:''} alt="" className="user-profile" />
+                                <img src={userData.avatar !== "undefined"? userData.avatar:user1} alt="" className="user-profile" />
+                                   
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
                                 <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>

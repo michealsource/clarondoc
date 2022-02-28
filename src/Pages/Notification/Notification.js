@@ -29,7 +29,8 @@ function Notification() {
         <div className="notification-top-container">
         <h4>Notifications</h4>
             <div>
-                {notifications.length > 0 ? notifications.map((item)=>{
+
+                {notifications.length > 0 && (notifications.length > 0 ? notifications.map((item)=>{
                     return(
                 <div class="notification-container"
                 onClick={
@@ -46,7 +47,7 @@ function Notification() {
                 {/* {data.status? <p>{data.prescription}<button className="btn-notfi" onClick={()=>setOpen(true)}>{data.status}</button></p>:''} */}
               </div>
                     )
-                }):(<img src={loading} alt="" className="loader-img"/>)}
+                }):(<img src={loading} alt="" className="loader-img"/>))}
                 {/* <FollowDrugsModal open={open} setOpen={setOpen}/>
                 <FollowLabModal/> */}
             </div>

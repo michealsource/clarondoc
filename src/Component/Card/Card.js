@@ -10,23 +10,49 @@ import ambulance from '../../images/ambulance.png'
 import homecare from '../../images/homecare.png'
 import MainLayout from '../../Pages/MainLayout'
 import {useNavigate } from "react-router-dom"
-// import {userDetails} from '../../Api/Auth'
+
+import { useSelector } from 'react-redux'
 function Card({sidebar}) {
     const navigate = useNavigate();
-    const[user,SetUser]= useState()
+    const userData = useSelector((state)=>state.user.value)
     const [expiry, setexpiry] = useState()
+
+            //   CHECKING USER SUBSCRIPTION 
+            const checkSubscription = async(date)=>{
+
+                if(date == null){
+                    return
+                }
+        
+                const days = moment().diff(date, 'days')
+                const left = moment(date).add(1, 'day').fromNow()
+                console.log(days,'gggggg')
+                localStorage.setItem('subscription_exp_day', days);
+        
+                if(days === 0){
+                    setexpiry('Your subscription ends today. Renew now to avoid losing access to services')
+                }else if (days < 0 && days > -11){
+                    setexpiry(`Your subscription ends in ${left}. Renew now to avoid losing access to services`)
+                }else if(days > 0 && days < 10){
+                    setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
+                }else if(days > 10){
+                    let res = await downgrade()
+                    console.info(res)
+                    // setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
+                }
+            }
+         
   
     useEffect(()=>{
         (async()=>{
             try {
-                var account = await localStorage.getItem('user')
-                var token = await localStorage.getItem('access-token')
-                var key = await localStorage.getItem('api-key');
-                SetUser(JSON.parse(account))
-
+                var account = localStorage.getItem('user')
+                // SetUser(JSON.parse(account))
                 console.log('account is '+JSON.parse(account).subscription)
-                userDetails(JSON.parse(account).email, key, token).then(data=>{
-                    SetUser(data)
+                userDetails(JSON.parse(account).email).then(data=>{
+                    console.log(data,'gggggggggg')
+                    localStorage.setItem('subscription',data.subscription);
+                    checkSubscription(data.subscription_end);
                 }).catch(e=>{
                     console.log('Error: ', e)
                 })
@@ -34,45 +60,15 @@ function Card({sidebar}) {
                 console.log(error)
             }
 
-            try{
-               const sub = localStorage.getItem('subscription');
-                checkSubscription(JSON.parse(sub.subscription_end));
-            }catch(e){}
-
         })()
 
     }, [])
 
 
+
     const editPage=()=>{
-        navigate('/Editpatient',{state:{user:user}});
+        navigate('/Editpatient',{state:{user:userData}});
           }
-
-        //   CHECKING USER SUBSCRIPTION 
-        const checkSubscription = async(date)=>{
-
-            if(date == null){
-                return
-            }
-    
-            const days = moment().diff(date, 'days')
-            const left = moment(date).add(1, 'day').fromNow()
-    
-            localStorage.setItem('subscription_exp_day', days);
-    
-            if(days === 0){
-                setexpiry('Your subscription ends today. Renew now to avoid losing access to services')
-            }else if (days < 0 && days > -11){
-                setexpiry(`Your subscription ends in ${left}. Renew now to avoid losing access to services`)
-            }else if(days > 0 && days < 10){
-                setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
-            }else if(days > 10){
-                let res = await downgrade()
-                console.info(res)
-                // setexpiry(`Your subscription ended ${left}. Renew now to avoid losing access to services`)
-            }
-        }
-    
 
     return (
         <MainLayout>
@@ -97,7 +93,7 @@ function Card({sidebar}) {
 
             <div class="first-container">
                 <div class="name-container">
-                    <h4>Hi, {user?user.firstname:''}</h4>
+                    <h4>Hi, {userData?userData.firstname:''}</h4>
                     <p>Welcome Back!</p>
                 </div>
 

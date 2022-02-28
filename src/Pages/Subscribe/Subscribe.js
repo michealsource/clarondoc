@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { FaCheckCircle} from "react-icons/fa";
 import { useNavigate} from "react-router-dom"
+import {useSelector } from 'react-redux'
 import './Subscribe.css'
 import MainLayout from '../MainLayout';
 const prices = []
@@ -11,16 +12,14 @@ prices['Family'] = 100
 function Subscribe() {
     // const [user, setUser] = useState()
     let navigate = useNavigate()
+    const userData = useSelector((state)=>state.user.value)
     
-          let account = localStorage.getItem('user')
-          let data = (JSON.parse(account))
-       
-      console.log(data.subscription)
+      console.log(userData,'fffff')
     return (
         <MainLayout>
 <div class="snip1214">
 
-{ data.subscription != 'Basic Plan' ?
+{ userData.subscription != 'Basic Plan' ?
   <div class="plan">
     <h3 class="plan-title">
       Basic  
@@ -42,11 +41,11 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
     <button onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Basic Plan', id: '', price: 20 } })} class="plan-select">
-    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family Plan' || data.subscription == 'Premium Plan' ? 'Downgrade' : 'Upgrade'}
+    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family Plan' || userData.subscription == 'Premium Plan' ? 'Downgrade' : 'Upgrade'}
     </button>
   </div>:<></> }
 
-  { data.subscription != 'Premium Plan' ?
+  { userData.subscription != 'Premium Plan' ?
   <div class="plan">
     <h3 class="plan-title">
     Premium Plan
@@ -70,10 +69,10 @@ function Subscribe() {
     <button class="plan-select"
     onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Premium Plan', id: '', price: 40 } })}
     >  
-    { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription === 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
+    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription === 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
 
-  { data.subscription != 'Family Plan' ?
+  { userData.subscription != 'Family Plan' ?
   <div class="plan featured">
     <h3 class="plan-title">
     Family Plan
@@ -94,7 +93,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>Health tips</li>
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
-    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { data.subscription == null || data.subscription == 'Normal' ? 'Subscribe' : data.subscription == 'Family' ? 'Downgrade' : 'Upgrade'}</button>
+    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
  
 </div>

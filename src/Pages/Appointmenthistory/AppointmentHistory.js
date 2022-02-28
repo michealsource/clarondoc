@@ -182,7 +182,7 @@ function AppointmentHistory() {
                 <div class="col-container">
                     
                              <div class="his-container-cont-lab">
-                             {upcoming.length? upcoming.map((item)=>(
+                             {upcoming.length> 0 && (upcoming.length? upcoming.map((item)=>(
                                  <>
                                  <div className='single-ambulance'>
                                   <div>
@@ -200,7 +200,7 @@ function AppointmentHistory() {
                                       </div>
                                  </div>
                                  </>
-                             )):upcoming.length===0?'No appointments to show': (<img src={loading} alt="" className="loader-img"/>)}
+                             )):upcoming.length===0?'No appointments to show': (<img src={loading} alt="" className="loader-img"/>))}
                              
                          </div>
                   
@@ -218,7 +218,7 @@ function AppointmentHistory() {
                 <div className="column-his-1">
                 <div class="col-container">
                 <div class="his-container-cont-lab">
-                        {filtered.length? filtered.map((item)=>(
+                        {filtered.length > 0 && (filtered.length? filtered.map((item)=>(
                             <>
                             <div className='single-ambulance'>
                              <div>
@@ -231,7 +231,7 @@ function AppointmentHistory() {
                             </div>  
                             </div>
                             </>
-                        )):(<img src={loading} alt="" className="loader-img"/>)}
+                        )):(<img src={loading} alt="" className="loader-img"/>))}
                     </div>
                 </div>
 
