@@ -4,16 +4,16 @@ import {
   } from "agora-rtc-sdk-ng";
   
 function Videos(props) {
-    const { users, tracks } = props;
+    const { users, videoTrack } = props;
     return (
         <div>
         <div id="videos">
-          <AgoraVideoPlayer className='vid' videoTrack={tracks[1]} />
+          <AgoraVideoPlayer className='vid' videoTrack={videoTrack[1]} />
           {users.length > 0 &&
             users.map((user) => {
-              if (user.videoTrack) {
+              if (videoTrack) {
                 return (
-                  <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} key={user.uid} />
+                  <AgoraVideoPlayer className='vid' videoTrack={videoTrack} key={user.uid} />
                 );
               } else return null;
             })}

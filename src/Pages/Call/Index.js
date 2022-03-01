@@ -11,11 +11,7 @@ import {
   ICameraVideoTrack,
   IMicrophoneAudioTrack,
 } from "agora-rtc-sdk-ng";
-import {
-  AgoraVideoPlayer,
-  createClient,
-  createMicrophoneAndCameraTracks,
-} from "agora-rtc-sdk-ng";
+import {createClient} from "agora-rtc-sdk-ng";
 import { useLocation, useNavigate } from "react-router-dom";
 import firebase from "../../firebaseConfig"
 import Box from '@mui/material/Box';
@@ -25,6 +21,10 @@ const config = {
   mode: "rtc", codec: "vp8",
 };
 
+ const rtc = {
+  // For the local client
+  client: createClient(config),
+};
 
 const useClient = createClient(config);
 // const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
@@ -64,8 +64,6 @@ function Index() {
   const [trackType, setTrackType] = useState()
   const location = useLocation()
 
-  console.log(trackType)
-
   let countt_r = useRef(0)
   countt_r.current = 0;
   const email_r = useRef('')
@@ -101,8 +99,9 @@ function Index() {
   const startUrgent = async()=>{
     try{
       
-      console.log(userDetail)
+      
       let res = await axios.get('https://api.clarondoc.com/urgent/token')
+      console.log(res, "ffff")
 
       setChannelName(res.data.RTCChannel)
       setToken(res.data.RTCAccessToken)
@@ -211,7 +210,7 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <VideoCall setInCall={setInCall} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient}  />
+        <VideoCall setInCall={setInCall} rtc={rtc} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient}  />
       ) : null
       }
     </div>
