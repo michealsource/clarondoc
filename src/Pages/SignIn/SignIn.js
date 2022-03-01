@@ -11,10 +11,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FcGoogle } from "react-icons/fc";
 import TextField from '@mui/material/TextField';
-import { login, sociallogin,resetpassword,checkotp,changePasswordd } from '../../Api/Auth'
+import { login, sociallogin, resetpassword, checkotp, changePasswordd } from '../../Api/Auth'
 import Navbar from '../../Component/Navbar/Navbar'
 import { useDispatch } from 'react-redux'
-import {LOGIN} from '../../features/user'
+import { LOGIN } from '../../features/user'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login';
 const style = {
@@ -27,7 +27,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
 function SignIn() {
     const dispatch = useDispatch()
@@ -36,26 +36,28 @@ function SignIn() {
     const [password, setPassword] = useState()
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
-    const [value, setValue] = useState('Patient');
+    const [loadingf, setLoadingf] = useState(false)
+    const [value, setValue] = useState();
     const [open, setOpen] = React.useState(false);
     // RESERT PASSWORD STATE
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
     const [show_forget_p, setshow_forget_p] = useState(false)
     const [forget_p_text, setforget_p_text] = useState('')
+    const [disablebtn,setDisableBtn]= useState(true)
     const [forget_p_text_holder, setforget_p_text_holder] = useState('Resent Password')
     const [forget_p_error, setforget_p_error] = useState(false)
-    const [forget_p_page, setforget_p_page] = useState(1)
     const [reset_code, setreset_code] = useState('')
     const [reset_passworda, setreset_passworda] = useState('')
-    const [forget_p_error1, setforget_p_error1] = useState(false)
-    const [forget_p_error2, setforget_p_error2] = useState(false)
+    const [forgotEmail, setForgotEmail] = useState()
+    const [hide,setHide]= useState(true)
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const handleChange = (event) => {
         setValue(event.target.value);
+        setDisableBtn(false)
     };
 
     const loginUser = async () => {
@@ -75,24 +77,29 @@ function SignIn() {
                 dispatch(LOGIN(JSON.parse(currentUser)))
                 navigate("/userDashboard")
             }
-            else if (response.success && value === "Doctor" ) {
-                navigate("/doctorDashboard")
-            }
+            // else if (value === "Doctor") {
+            //     navigate("/doctorDashboard")
+            // }
             else {
-                setError(response.message,'fffff')
+                setError(response.message, 'fffff')
                 setLoading(false)
             }
         } catch (e) {
-            setError(e.message,'rrrrrr')
+            setError(e.message, 'rrrrrr')
             setLoading(false)
         }
+
+    }
+
+    const loginDoctor = async () => {
+        navigate("/doctorDashboard")
 
     }
 
     // GOOGLE LOGIN Authentication
     const loginSuccess = async (res) => {
         const response = await sociallogin(res.profileObj.email)
-        
+
         if (response.success) {
             let currentUser = localStorage.getItem('user');
             dispatch(LOGIN(JSON.parse(currentUser)))
@@ -109,7 +116,7 @@ function SignIn() {
 
     // FACEBOOK LOGIN
 
-    const componentClicked =(data)=>{
+    const componentClicked = (data) => {
         console.warn(data)
     }
     const facebook = async (res) => {
@@ -125,71 +132,63 @@ function SignIn() {
     }
 
     // RESERT PASSWORD
-    const reset_password_confirm = async()=>{
+    const reset_password_confirm = async () => {
         setLoading(true)
         try {
             // send otp to server to get code
             // use code to reset connection
             const response = await checkotp(reset_code);
-            if(response.success){
+            if (response.success) {
                 var token = response.token;
+                const respon = await changePasswordd({ password: reset_passworda }, token);
 
-                const respon = await changePasswordd({password: reset_passworda}, token);
-
-                if(respon.success){
+                if (respon.success) {
                     setforget_p_error(false)
                     setforget_p_text_holder('Password Changed');
                     alert('Password Changed');
-                }else{
+                } else {
                     setforget_p_error(false)
                     setforget_p_text_holder('Password Error')
                 }
-            }else{
+            } else {
                 setforget_p_error(false)
                 setforget_p_text_holder('Code MisMatch')
             }
         } catch (e) {
             setforget_p_error(false)
-                setforget_p_text_holder('Network error')
+            setforget_p_text_holder('Network error')
         }
 
         setLoading(false)
     }
 
     // RESERT PASSWORD FIRST CLICK
-    const reset_password = async()=>{
-   
+    const reset_password = async () => {
         setEmailError(false)
         setPasswordError(false)
 
-        if(forget_p_text.length < 6){
+        if (forgotEmail < 6) {
             setforget_p_error(true)
             setshow_forget_p(false)
             // setError('Please provide a valid email address.')
             return
         }
 
-        setLoading(true)
+        setLoadingf(true)
 
-        try{
-            const response = await resetpassword(forget_p_text)
-            if(response.success){
-                setforget_p_error(false)
-                setshow_forget_p(true)
-                setforget_p_text_holder('Change Password')
-                setforget_p_page(2)
+        try {
+            const response = await resetpassword(forgotEmail)
+            if (response.success) {
+                setHide(false)
                 console.log(response)
-            }else{
+            } else {
                 setforget_p_error(false)
-                setforget_p_text_holder('Account not found')
             }
-        }catch(e){
-            setforget_p_error(false)
-            setshow_forget_p(false)
+        } catch (e) {
             setError(e.message)
         }
 
-        setLoading(false)
+        setLoadingf(false)
     }
 
     return (
@@ -202,19 +201,27 @@ function SignIn() {
                     <div className="inputContainer">
                         <img src={logo} alt="logo" className="logo-img" />
                         <p style={{ color: 'red', marginTop: 5, textAlign: 'center', fontSize: 20, paddingBottom: 10 }}>{error ? error : ''}</p>
-                        <input type="email"
+                        
+                        <TextField
+                            value={email}
+                            type="email"
+                            className='text-field'
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email Address" className="input-field" />
-
-                        <input
+                            fullWidth id="outlined-basic" label="Email Address" variant="outlined" />
+                            
+                        <TextField
+                            value={password}
+                            type="password"
                             onChange={(e) => setPassword(e.target.value)}
-                            type="password" placeholder="Password" className="input-field" />
+                            fullWidth id="outlined-basic" label="Password" variant="outlined" />
 
                         <Radio value={value} handleChange={handleChange} />
 
                         <div className="passForgotContainer">
                             <p onClick={handleOpen}>forgot Password</p>
-                            <button className="sigInBtn" onClick={loginUser}>{loading ? 'Please wait...' : 'Login'}</button>
+                            {/* <button  className="sigInBtn" onClick={loginUser}>{loading ? 'Please wait...' : 'Login'}</button> */}
+
+                            <Button disabled={disablebtn} onClick={ value==="Doctor"?loginDoctor:loginUser}  className={!disablebtn ? 'sigInBtn':null} variant="contained">{loading ? 'Please wait...' : 'Login'}</Button>
                         </div>
                         <p className="or">Or</p>
                     </div>
@@ -239,51 +246,40 @@ function SignIn() {
             </div>
 
             <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        fullWidth
-      >
-        <Box sx={style}>
-            <>
-{
-show_forget_p? "":<div>
-<p>
-we would send a reset link to your email provided
-</p>
-<TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
-<br/><br/>
-<Button  disabled={loading} onClick={()=>reset_password()}  className='change-btn-password' variant="contained">Change Password</Button>
-</div>
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                fullWidth
+            >
+                <Box sx={style}>
+                   {hide?<div>
+                            <p>
+                                we would send a reset link to your email provided
+                            </p>
+                            <TextField
+                                value={forgotEmail}
+                                onChange={(e) => setForgotEmail(e.target.value)}
+                                fullWidth id="outlined-basic" label="Email" variant="outlined" />
+                            <br /><br />
+                            <Button disabled={loadingf} onClick={() => reset_password()} className='change-btn-password' variant="contained">Request Link</Button>
+                        </div>:<div>
+                        <p>
+                            We have sent a reset code to your provided email address
+                        </p><br />
+                        <TextField
+                            value={forget_p_text}
 
-            }
-  
-            </>
+                            onChange={(e) => setforget_p_text(e.target.value)}
 
-        {
-            show_forget_p? (
-            <div>
-          <p>
-           We have sent a reset code to your provided email address
-          </p>
-          <TextField
-          value={forget_p_text}
-
-          onChange={(e) => setforget_p_text(e.target.value)}
-
-          fullWidth id="outlined-basic" label="Enter the reset code" variant="outlined" />
-          <br/><br/>
-          <TextField fullWidth id="outlined-basic" label="Enter new Password" variant="outlined" />
-          <br/><br/>
-          <Button   className='change-btn-password' variant="contained">Change Password</Button>
-          </div>
-            ):''
-
-        }
-          
-        </Box>
-      </Modal>
+                            fullWidth id="outlined-basic" label="Enter the reset code" variant="outlined" />
+                        <br /><br /><br />
+                        <TextField fullWidth id="outlined-basic" label="Enter new Password" variant="outlined" />
+                        <br /><br />
+                        <Button className='change-btn-password' variant="contained">Change Password</Button>
+                    </div>}
+                </Box>
+            </Modal>
         </>
     )
 }
