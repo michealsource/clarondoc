@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { update,userDetails } from '../../Api/Auth';
+import { updatePassword,userDetails } from '../../Api/Auth';
 import { useNavigate, useRoutes } from "react-router-dom";
 import './ChangePassword.css'
 import MainLayout from '../../Pages/MainLayout'
@@ -31,18 +31,6 @@ function ChangePassword() {
 
     //   SUBMIT REQUEST
     const savePassword = async ()=>{
-        // get old password
-        var oldpas = await localStorage.getItem('password');
-        if(oldpas == null){
-    
-        }else{
-          if(password != oldpas){
-            return setresponse({
-              error: true,
-              message: 'Old Password doesn\'t match'
-            })
-          }
-        }
     
         if(password.length == 0){
           return setresponse({
@@ -69,19 +57,20 @@ function ChangePassword() {
         if(newpassword == confirmpassword){
           try{
             setloading(true)
-            let data = await update({password: newpassword})
-    
+            let data = await updatePassword({password: newpassword})
             setloading(false)
-    
             if(data.success){
-              localStorage.setItem('user', JSON.stringify({...account, ...{ phone: account.phoneNumber }}));
               setresponse({
                 error: false,
                 message: 'Your password was successfully updated!'
               })
-              alert('password changes successfully')
+              swal({
+                title: "Password update",
+                text: "Password updated successfully",
+                icon: "success",
+                button: "Ok",
+            });
     
-              // console.log(await AsyncStorage.getAllKeys());
             }else{
               setresponse({
                 error: true,
@@ -115,17 +104,16 @@ function ChangePassword() {
           data()
       },[])
    
-      console.log(user,'ffffffffff')
     return (
         <MainLayout>
         <div className='changepassword-container'>
             <h2>Change Password</h2>
-            <TextField
+            {/* <TextField
                 onChange={(e) => setpassword(e.target.value)}
                 value={password}
                 className='change'
                 id="demo-helper-text-misaligned-no-helper"
-                label="Current Password" />
+                label="Current Password" /> */}
             <TextField
                 onChange={(e) => setnewpassword(e.target.value)}
                 value={newpassword}

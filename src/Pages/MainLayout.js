@@ -55,11 +55,11 @@ export default function MainLayout({ children }) {
               </div>
             </>
             <div className="services-container">
-              <Link to="/userDashboard" className="service">Dashboard<FaTh className="icon-single" /></Link>
-              <Link to="/consultation" className="service">Consultation <FaCalendarPlus /></Link>
-              <Link to="/laboratory" className="service"> Laboratory<FaFlask className="icon-single" /></Link>
-              <Link to="/AppointmentHistory" className="service"> Appointment History<FaFlask className="icon-single" /></Link>
-              <Link to="/ambulance" className="service">Ambulance<FaAmbulance className="icon-single" /></Link>
+              <Link to="/userDashboard" className="service"> <span>Dashboard</span><FaTh className="icon-single" /></Link>
+              <Link to="/consultation" className="service"><span></span> Consultation <FaCalendarPlus className="icon-single"/></Link>
+              <Link to="/laboratory" className="service"> <span></span> Laboratory<FaFlask className="icon-single" /></Link>
+              <Link to="/AppointmentHistory" className="service"> <span></span> Appointment History<FaFlask className="icon-single" /></Link>
+              <Link to="/ambulance" className="service"> <span></span>Ambulance<FaAmbulance className="icon-single" /></Link>
               <Link to="/homecare" className="service"> Home Care<FaHouzz className="icon-single" /></Link>
               <Link to="/drugs" className="service">Pharmacy Buy' Drugs<FaNotesMedical className="icon-single" /></Link>
               <Link to="/subscribe" className="service">Subscribe Now! <FaStaylinked className="icon-single" /></Link>
@@ -72,7 +72,7 @@ export default function MainLayout({ children }) {
                     <div className="content-container">
                         <div className={sidebar?'navbar-container':'navbar-container-full'}>
                             <div className="menu-container">
-                                <FaAlignJustify className="menu-icon" onClick={()=>setSidebar(!sidebar)}/>
+                                <FaAlignJustify className="menu-icon"/>
                             </div>
                             
                             <Link to="/notification" className="notification">
@@ -108,8 +108,6 @@ export default function MainLayout({ children }) {
             <div className='individual-content-lg'>
              {children}
             </div>
-            
-    
         </div>
       </div>
     </>
