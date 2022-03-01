@@ -3104,16 +3104,10 @@
     "clean-stack" "^2.0.0"
     "indent-string" "^4.0.0"
 
-"agora-rtc-react@git://github.com/AgoraIO-Community/agora-rtc-react#v1.0.0":
-  "resolved" "git+ssh://git@github.com/AgoraIO-Community/agora-rtc-react.git#89b689e77fa01cac7187e5d6106f4fc2e6e8f2e6"
-  "version" "1.0.0"
-  dependencies:
-    "agora-rtc-sdk-ng" "^4.3.0"
-
-"agora-rtc-sdk-ng@^4.3.0":
-  "integrity" "sha512-H5qAgTe8cn0+BN6/KOcrtGl1Lc+We7K/eD7U5DiWnBY0n/bs30isGrjIex5IXqRTJv55khSN3pqgVmEkpR3ozQ=="
-  "resolved" "https://registry.npmjs.org/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.8.2.tgz"
-  "version" "4.8.2"
+"agora-rtc-sdk@^3.6.9":
+  "integrity" "sha512-+EkZMfH1DNoppYMhOmxrbukwe43V2aYcvm1SwubumoAWqvzLD/VUb50I8wJXdfUjlRrOLwGJ1g9B12J/lnwbdg=="
+  "resolved" "https://registry.npmjs.org/agora-rtc-sdk/-/agora-rtc-sdk-3.6.9.tgz"
+  "version" "3.6.9"
 
 "ajv-errors@^1.0.0":
   "integrity" "sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ=="
@@ -6076,11 +6070,6 @@
   dependencies:
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
-
-"file-uri-to-path@1.0.0":
-  "integrity" "sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw=="
-  "resolved" "https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz"
-  "version" "1.0.0"
 
 "filefy@0.1.10":
   "integrity" "sha512-VgoRVOOY1WkTpWH+KBy8zcU1G7uQTVsXqhWEgzryB9A5hg2aqCyZ6aQ/5PSzlqM5+6cnVrX6oYV0XqD3HZSnmQ=="
@@ -11056,7 +11045,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.3.0 || ^16.0.0", "react@^15.4.0 || ^16.0.0", "react@^16 || ^17", "react@^16.0.0", "react@^16.3.0", "react@^16.7.0 || ^17.0.0-0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^16.8.4", "react@^16.8.4 || ^17.0.0", "react@^16.8.5", "react@^16.9.0 || ^17.0.0 || 18.0.0-beta", "react@^17.0.0", "react@^17.0.2", "react@>= 0.14.7", "react@>= 16", "react@>= 16.13.1", "react@>= 16.9.0", "react@>=0.14.0", "react@>=15 || ^0.14.7", "react@>=15.0.0", "react@>=16.0.0", "react@>=16.14.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.9.0", "react@17.0.2":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.3.0 || ^16.0.0", "react@^15.4.0 || ^16.0.0", "react@^16 || ^17", "react@^16.0.0", "react@^16.3.0", "react@^16.7.0 || ^17.0.0-0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^16.8.4", "react@^16.8.4 || ^17.0.0", "react@^16.8.5", "react@^16.9.0 || ^17.0.0 || 18.0.0-beta", "react@^17.0.0", "react@^17.0.2", "react@>= 0.14.7", "react@>= 16", "react@>= 16.13.1", "react@>= 16.9.0", "react@>=0.14.0", "react@>=15 || ^0.14.7", "react@>=15.0.0", "react@>=16.0.0", "react@>=16.14.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.9.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
