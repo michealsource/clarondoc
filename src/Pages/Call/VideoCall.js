@@ -2,21 +2,30 @@ import React, {useState, useEffect} from 'react'
 import {Controls} from "./Controls"
 import Videos from "./Videos"
 import Audio from "./Audio"
+import AgoraRTC from "agora-rtc-sdk-ng";
 
 function VideoCall(props) {
     const { setInCall, channelName, useClient, useMicrophoneAndCameraTracks, token, appId, trackType } = props;
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
-    const client = useClient();
+    // const client = useClient();
     const { ready, tracks } = useMicrophoneAndCameraTracks();
 
+    let rtc
+    // Create an audio track from the audio captured by a microphone
+rtc.localAudioTrack = AgoraRTC.createMicrophoneAudioTrack();
+// Create a video track from the video captured by a camera
+rtc.localVideoTrack = AgoraRTC.createCameraVideoTrack();
+// Play localStream
+rtc.localVideoTrack.play("local-stream");
+
     
-console.log(tracks,"trackstrackstracks")
+console.log(rtc,"trackstrackstracks")
     useEffect(() => {
         // function to initialise the SDK
         let init = async (name) => {
-          client.on("user-published", async (user, mediaType) => {
-            await client.subscribe(user, mediaType);
+          rtc.client.on("user-published", async (user, mediaType) => {
+            await rtc.client.subscribe(user, mediaType);
             console.log(user, "subscribe success");
           
             if (mediaType === "video") {
@@ -24,12 +33,13 @@ console.log(tracks,"trackstrackstracks")
                 return [...prevUsers, user];
               });
             }
+            
             if (mediaType === "audio" ) {
               user.audioTrack?.play();
             }
           });
     
-          client.on("user-unpublished", (user, type) => {
+          rtc.client.on("user-unpublished", (user, type) => {
             console.log("unpublished", user, type);
             if (type === "audio" ) {
               user.audioTrack?.stop();
@@ -41,20 +51,20 @@ console.log(tracks,"trackstrackstracks")
             }
           });
     
-          client.on("user-left", (user) => {
+          rtc.client.on("user-left", (user) => {
             console.log("leaving", user);
             setUsers((prevUsers) => {
               return prevUsers.filter((User) => User.uid !== user.uid);
             });
           });
     
-          await client.join(appId, name, token, null);
+          await rtc.client.join(appId, name, token, null);
           if (tracks && trackType === "audio") {
                 await tracks[1].close()
-                await client.publish([tracks[0]]);
+                await rtc.client.publish([tracks[0]]);
                 setStart(true);
             }else if(tracks && trackType !== "audio"){
-                await client.publish([tracks[0], tracks[1]]);
+                await rtc.client.publish([tracks[0], tracks[1]]);
                 setStart(true);
             }
             
@@ -65,7 +75,7 @@ console.log(tracks,"trackstrackstracks")
           init(channelName);
         }
     
-      }, [channelName, client, ready, tracks]);
+      }, [channelName, ready, tracks]);
 
     return (
         <div className="App">
