@@ -3104,6 +3104,11 @@
     "clean-stack" "^2.0.0"
     "indent-string" "^4.0.0"
 
+"agora-rtc-sdk-ng@^4.9.1":
+  "integrity" "sha512-Jogn3TQC7VdA7uZjGYmaAs0XzgYBgGs6nGA67/dQVjqC7kiwAfkQsAuvbevE/qxrVJmLfqtDTNxP40IFvnTlgQ=="
+  "resolved" "https://registry.npmjs.org/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.9.1.tgz"
+  "version" "4.9.1"
+
 "agora-rtc-sdk@^3.6.9":
   "integrity" "sha512-+EkZMfH1DNoppYMhOmxrbukwe43V2aYcvm1SwubumoAWqvzLD/VUb50I8wJXdfUjlRrOLwGJ1g9B12J/lnwbdg=="
   "resolved" "https://registry.npmjs.org/agora-rtc-sdk/-/agora-rtc-sdk-3.6.9.tgz"

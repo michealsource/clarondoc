@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     AgoraVideoPlayer
-  } from "agora-rtc-react";
+  } from "agora-rtc-sdk-ng";
   
 function Videos(props) {
     const { users, tracks } = props;

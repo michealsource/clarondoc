@@ -15,7 +15,7 @@ import {
   AgoraVideoPlayer,
   createClient,
   createMicrophoneAndCameraTracks,
-} from "agora-rtc-react";
+} from "agora-rtc-sdk-ng";
 import { useLocation, useNavigate } from "react-router-dom";
 import firebase from "../../firebaseConfig"
 import Box from '@mui/material/Box';
@@ -27,7 +27,7 @@ const config = {
 
 
 const useClient = createClient(config);
-const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
+// const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
 // const appId = "66310665192842a28975ec67dfdd536b"
@@ -211,7 +211,7 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <VideoCall setInCall={setInCall} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient} useMicrophoneAndCameraTracks={useMicrophoneAndCameraTracks} />
+        <VideoCall setInCall={setInCall} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient}  />
       ) : null
       }
     </div>
