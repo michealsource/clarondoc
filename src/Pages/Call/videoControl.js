@@ -6,17 +6,16 @@ import image from '../../images/logo.png'
 import MainLayout from '../../Pages/MainLayout'
 export const Controls = (props) => {
 
-  const { tracks, rtc, setStart, audioTrack, videoTrack, setInCall, client, useClient, trackType } = props;
-  // const client = useClient();
+  const { setStart, audioTrack, videoTrack, setInCall, client, trackType } = props;
   const [trackState, setTrackState] = useState({ video: true, audio: true });
   const navigate = useNavigate()
 
 
   const mute = async (type) => {
     if (type === "audio") {
-      await audioTrack.setEnabled(!trackState.audio);
+     await videoTrack.setEnabled(!trackState.video);
       setTrackState((ps) => {
-        return { ...ps, audio: !ps.audio };
+        return { ...ps, video: !ps.video };
       });
     } else if (type === "video") {
       await videoTrack.setEnabled(!trackState.video);
@@ -26,13 +25,10 @@ export const Controls = (props) => {
     }
   };
 
-  const leaveChannel = async () => {
-    // await client.leave();
-    // client.removeAllListeners();
+  const leaveChannel = async () => {;
     videoTrack.close();
     audioTrack.close();
     await client.leave();
-      // rtc.localVideoTrack.close();
     setStart(false);
     setInCall(false);
     navigate(-1)

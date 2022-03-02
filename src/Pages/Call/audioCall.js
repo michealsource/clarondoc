@@ -1,22 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import {Controls} from "./videoControl"
-import Videos from "./Videos"
+import {Controls} from "./audioControls"
+import Audio from "./Audio"
 import AgoraRTC from "agora-rtc-sdk-ng";
 
-function VideoCall(props) {
-    const { setInCall, rtc, channelName, useClient, useMicrophoneAndCameraTracks, token, appId, trackType } = props;
+function AudioCall(props) {
+    const { setInCall, rtc, channelName, token, appId, trackType } = props;
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const [audioTrack, setAudioTrack] = useState(null);
-    const [videoTrack, setVideoTrack] = useState(null);
 
     useEffect(() => {
         
          const getTracks = async() => {
             const audioTrack =  await AgoraRTC.createMicrophoneAudioTrack();
-            const videoTrack = await AgoraRTC.createCameraVideoTrack();
             setAudioTrack(audioTrack)
-            setVideoTrack(videoTrack)
           }
 
           getTracks()
@@ -59,26 +56,27 @@ function VideoCall(props) {
     
           await rtc.client.join(appId, name, token, null);
 
-          if (videoTrack && audioTrack && trackType === "video") {
-              await audioTrack.setEnabled(true);
-              await rtc.client.publish([videoTrack, audioTrack]);
-              setStart(true);
+          if (audioTrack && trackType === "audio") {
+                await audioTrack.setEnabled(true);
+                await rtc.client.publish([audioTrack]);
+                setStart(true);
             }
+            
         };
 
         init(channelName);
-    
     
       }, []);
 
     return (
         <div className="App">
-        { audioTrack && videoTrack && (
-          <Controls  audioTrack={audioTrack} videoTrack={videoTrack} setStart={setStart} client={rtc.client} useClient={useClient} setInCall={setInCall} trackType={trackType} />
+        { audioTrack && (
+          <Controls  audioTrack={audioTrack}  setStart={setStart} client={rtc.client} setInCall={setInCall} trackType={trackType} />
         )}
-        {start && audioTrack && videoTrack && trackType === "video" ?  (<Videos users={users} videoTrack={videoTrack} />) : null}
+        {start && audioTrack && trackType === "audio" ? (<Audio users={users} audioTrack={audioTrack} />) : null}
+       
       </div>
     )
 }
 
-export default VideoCall
+export default AudioCall
