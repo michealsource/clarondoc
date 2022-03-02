@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import ChannelForm from "./ChannelForm"
+import AudioCall from "./audioCall"
 import VideoCall from "./VideoCall"
 import axios from "axios"
 import './calls.css'
@@ -30,8 +31,6 @@ const useClient = createClient(config);
 // const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
-// const appId = "66310665192842a28975ec67dfdd536b"
-const token2 = "00666310665192842a28975ec67dfdd536bIADebVYlG7VXi3ZzWulAj59u7AA3trGrFHIiLGbcJpcjrZpjTicAAAAAEAAWylBUZYATYgEAAQBlgBNi";
 
 let _engine
 let call_id
@@ -101,8 +100,7 @@ function Index() {
       
       
       let res = await axios.get('https://api.clarondoc.com/urgent/token')
-      console.log(res, "ffff")
-
+     
       setChannelName(res.data.RTCChannel)
       setToken(res.data.RTCAccessToken)
    
@@ -194,7 +192,6 @@ function Index() {
       >
         <Box sx={style}>
           <p className="stand-by">Stand-By Line for emergency call</p>
-          {/* <p className="stand-by-select">Please Select A Line to Route call to</p> */}
 
           {
             doctors.map((doc) => {
@@ -210,7 +207,7 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <VideoCall setInCall={setInCall} rtc={rtc} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient}  />
+        <AudioCall setInCall={setInCall} rtc={rtc} appId={appId} trackType={trackType} token={token} channelName={channelName}   />
       ) : null
       }
     </div>
