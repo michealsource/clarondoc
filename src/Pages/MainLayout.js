@@ -39,7 +39,6 @@ export default function MainLayout({ children }) {
     setAnchorEl(null);
   };
 
-
   return (
     <>
       <div className="static-dashboard">
@@ -56,15 +55,15 @@ export default function MainLayout({ children }) {
             </>
             <div className="services-container">
               <Link to="/userDashboard" className="service"> <span>Dashboard</span><FaTh className="icon-single" /></Link>
-              <Link to="/consultation" className="service"><span></span> Consultation <FaCalendarPlus className="icon-single"/></Link>
-              <Link to="/laboratory" className="service"> <span></span> Laboratory<FaFlask className="icon-single" /></Link>
-              <Link to="/AppointmentHistory" className="service"> <span></span> Appointment History<FaFlask className="icon-single" /></Link>
-              <Link to="/ambulance" className="service"> <span></span>Ambulance<FaAmbulance className="icon-single" /></Link>
-              <Link to="/homecare" className="service"> Home Care<FaHouzz className="icon-single" /></Link>
-              <Link to="/drugs" className="service">Pharmacy Buy' Drugs<FaNotesMedical className="icon-single" /></Link>
-              <Link to="/subscribe" className="service">Subscribe Now! <FaStaylinked className="icon-single" /></Link>
-              <Link to="/referral" className="service"> Referral<FaShareAlt className="icon-single" /></Link>
-            </div>
+              <Link to="/consultation" className="service"><span> Consultation</span> <FaCalendarPlus className="icon-single"/></Link>
+              <Link to="/laboratory" className="service"> <span>Laboratory</span> <FaFlask className="icon-single" /></Link>
+              <Link to="/AppointmentHistory" className="service"> <span>Appointment History</span> <FaFlask className="icon-single" /></Link>
+              <Link to="/ambulance" className="service"> <span>Ambulance</span><FaAmbulance className="icon-single" /></Link>
+              <Link to="/homecare" className="service"> <span>Home Care</span> <FaHouzz className="icon-single" /></Link>
+              <Link to="/drugs" className="service"> <span>Pharmacy Buy' Drugs</span><FaNotesMedical className="icon-single" /></Link>
+              <Link to="/subscribe" className="service"><span> Subscribe Now! </span><FaStaylinked className="icon-single" /></Link>
+              <Link to="/referral" className="service"> <span>Referral</span> <FaShareAlt className="icon-single" /></Link>
+            </div>        
 
           </div>
           <div>
