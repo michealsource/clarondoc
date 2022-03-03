@@ -30,6 +30,9 @@ const useClient = createClient(config);
 // const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
 const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
+const tesId = "66310665192842a28975ec67dfdd536b";
+const testToken = "00666310665192842a28975ec67dfdd536bIADrIa/rFt/X+n35AvA3iQU0KzMqg1vzR9bA6W7dauYOnTLRTXgAAAAAEAAqKWnB4+ghYgEAAQDj6CFi";
+const channelNameTest = "Test";
 // const appId = "66310665192842a28975ec67dfdd536b"
 const token2 = "00666310665192842a28975ec67dfdd536bIADebVYlG7VXi3ZzWulAj59u7AA3trGrFHIiLGbcJpcjrZpjTicAAAAAEAAWylBUZYATYgEAAQBlgBNi";
 
@@ -210,7 +213,7 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <VideoCall setInCall={setInCall} rtc={rtc} appId={appId} trackType={trackType} token={token} channelName={channelName} useClient={useClient}  />
+        <VideoCall setInCall={setInCall} rtc={rtc} appId={tesId} trackType={trackType} token={testToken} channelName={channelNameTest} useClient={useClient}  />
       ) : null
       }
     </div>
