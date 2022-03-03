@@ -8,7 +8,7 @@ function Videos(props) {
     return (
         <div>
         <div id="videos">
-          <AgoraVideoPlayer className='vid' videoTrack={videoTrack[1]} />
+          <AgoraVideoPlayer className='vid' videoTrack={videoTrack} />
           {users.length > 0 &&
             users.map((user) => {
               if (videoTrack) {
