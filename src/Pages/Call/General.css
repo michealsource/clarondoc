@@ -72,3 +72,8 @@ border: none !important;
     display: block;
     margin: 0 auto;
 }
+
+.initialize {
+    color:#16a085;
+    font-style: italic;
+}

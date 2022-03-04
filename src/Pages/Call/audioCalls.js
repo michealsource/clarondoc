@@ -51,6 +51,7 @@ function Index() {
   const [localStream, setLocalStream] = useState(null);
   const [trackState, setTrackState] = useState({ video: true, audio: true });
   const [muteAudio, setMuteAudio] = useState(false);
+  const [initializing, setInitializing] = useState(false)
 
   let countt_r = useRef(0)
   countt_r.current = 0;
@@ -147,8 +148,10 @@ function Index() {
 
 
   const startUrgent = async()=>{
+
+    setInitializing(true)
+    
     try{
-      
       
       let res = await axios.get('https://api.clarondoc.com/urgent/token')
      
@@ -180,6 +183,7 @@ function Index() {
     email_r.current = email;
     
     await startUrgent();
+    
 
       firebase.firestore().collection('calls').doc(email).onSnapshot(async snapshot=>{
          
@@ -214,6 +218,7 @@ function Index() {
                 }
   
                 countt_r.current+=1;
+                setInitializing(false)
                 setOpen(false)
                 setInCall(true)
 
@@ -247,6 +252,7 @@ function Index() {
         <div className="closeBtn">
           <h2 onClick={() => handleGoBack()}>X</h2>
         </div>
+        <h4 className="initialize">{initializing ? "Initializing call... Please wait!" : null }</h4>
           <p className="stand-by">Stand-By Line for emergency call</p>
 
           {
