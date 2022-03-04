@@ -226,3 +226,8 @@
   .item-doc p{
     padding-left: 10px !important;
   }
+
+  .doctors{
+      height: 100%;
+      overflow-y: scroll;
+  }

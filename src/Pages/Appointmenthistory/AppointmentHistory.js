@@ -127,7 +127,7 @@ function AppointmentHistory() {
     
     return (
         <MainLayout>
-        <div>
+       
             <div class="ambulance">
                 <div class="heading-container">
                     <h2 class="ambulanc-heading">APPOINTMENTS REQUEST OVERVIEWS</h2>
@@ -246,7 +246,7 @@ function AppointmentHistory() {
             </div>
                 
             </div>
-        </div>
+        
         </MainLayout>
     )
 }

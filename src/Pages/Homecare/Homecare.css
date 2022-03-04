@@ -127,3 +127,8 @@
       font-size: 20px;
       cursor: pointer;
   }
+
+.home-care-container-1{
+    height: 100%;
+    overflow-y: scroll;
+}

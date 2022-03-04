@@ -3,13 +3,14 @@ import './EditPatient.css'
 import { TextField, Grid, Button } from '@material-ui/core'; //importing material ui component
 import { makeStyles } from '@mui/styles';
 import image from '../../images/user-profile.jpg'
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import MainLayout from '../../Pages/MainLayout';
 import { update } from '../../Api/Auth';
 import swal from 'sweetalert';
 import firebase from '../../firebaseConfig';
 import {UPDATE,UPDATEUSERINFO} from '../../features/user'
 import { useDispatch,useSelector } from 'react-redux'
+import {BiArrowBack} from "react-icons/bi"
 // import profile from '../../images/user.png'
 const useStyles = makeStyles(theme => ({
     root: {
@@ -44,7 +45,7 @@ function Editpatient() {
     const userData = useSelector((state)=>state.user.value)
     // const newUser = JSON.parse(userData)
     // console.log(JSON.parse(userData),'hhhhhhhhh')
-   
+   const navigate = useNavigate()
     const classes = useStyles();
     const location = useLocation();
     const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
@@ -135,6 +136,9 @@ function Editpatient() {
     return (
         <MainLayout>
         <div className="edit-user-contaner">
+            <div className='gobackBtn' onClick={() => navigate(-1)}>
+                <p><BiArrowBack /> Back</p>
+            </div>
             <h2>Kndly Update Your Profile {userData.firstname}</h2>
             <img src={userData.avatar !== "undefined"? userData.avatar:image} alt="" className="pro-img" />
             <div class="parent-div">

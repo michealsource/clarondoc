@@ -6,6 +6,7 @@ import { useNavigate, useRoutes } from "react-router-dom";
 import './ChangePassword.css'
 import MainLayout from '../../Pages/MainLayout'
 import swal from 'sweetalert';
+import {BiArrowBack} from "react-icons/bi"
 function ChangePassword() {
     const navigate = useNavigate()
     const [password, setpassword] = useState('')
@@ -31,6 +32,7 @@ function ChangePassword() {
 
     //   SUBMIT REQUEST
     const savePassword = async ()=>{
+     
     
         if(password.length == 0){
           return setresponse({
@@ -107,6 +109,9 @@ function ChangePassword() {
     return (
         <MainLayout>
         <div className='changepassword-container'>
+        <div className='gobackBtn' onClick={() => navigate(-1)}>
+                <p><BiArrowBack /> Back</p>
+            </div>
             <h2>Change Password</h2>
             {/* <TextField
                 onChange={(e) => setpassword(e.target.value)}

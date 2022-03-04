@@ -162,3 +162,8 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
       border-radius: 5px;
       cursor: pointer;
   }
+
+  .ambulance{
+    height: 100%;
+    overflow-y: scroll;
+}

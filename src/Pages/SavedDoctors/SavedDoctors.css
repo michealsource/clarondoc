@@ -95,3 +95,11 @@ color: #1c1d1d;
 .radio-input:checked + .time-btn{
     background: #0c5d4d;
 }
+
+.gobackBtn{
+    color: rgb(163, 116, 99);
+    display: flex;
+    /* align-self: flex-start; */
+    cursor: pointer;
+    margin: 30px 0px 0px 30px;
+  }

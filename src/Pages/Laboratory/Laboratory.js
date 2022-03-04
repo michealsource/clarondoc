@@ -88,7 +88,7 @@ function Laboratory() {
 
     return (
         <MainLayout>
-            <div>
+            
                 <div class="ambulance">
                     <div class="heading-container">
                         <h2 class="ambulanc-heading">LABORATORY REQUEST OVERVIEWS</h2>
@@ -223,7 +223,7 @@ function Laboratory() {
                     </div>
 
                 </div>
-            </div>
+            
         </MainLayout>
     )
 }
