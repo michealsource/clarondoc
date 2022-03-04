@@ -16,13 +16,19 @@ import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
 import { useSelector } from 'react-redux'
 import { userDetails} from '../Api/Auth';
+import { fetchNotifications } from '../Api/notifications';
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
+  const [notifications, setNotifications] = useState([])
    const[user,SetUser]= useState()
     useEffect(()=>{
         (async()=>{
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
+
+            let response = await fetchNotifications();
+            
+            setNotifications(response)
 
           })()
     },[])
@@ -70,12 +76,13 @@ export default function MainLayout({ children }) {
           <div className="content">
                     <div className="content-container">
                         <div className={sidebar?'navbar-container':'navbar-container-full'}>
+
                             <div className="menu-container">
                                 <FaAlignJustify className="menu-icon"/>
                             </div>
                             
                             <Link to="/notification" className="notification">
-                                <Badge badgeContent={4} color="success">
+                                <Badge badgeContent={notifications.length} color="success">
                                     <NotificationsIcon color="action" />
                                 </Badge>
                             </Link>

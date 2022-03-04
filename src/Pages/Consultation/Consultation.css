@@ -11,6 +11,9 @@
 .others{
     margin-top: 10px !important;
 }
+
+
+
 .doctors .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
