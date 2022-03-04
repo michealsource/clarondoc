@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import MainLayout from '../MainLayout'
+import "./ClaronTerms.css"
 const axios = require('axios');
 function ClaronTerms() {
 

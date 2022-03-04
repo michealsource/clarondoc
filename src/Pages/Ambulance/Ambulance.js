@@ -133,7 +133,7 @@ function Ambulance() {
       console.log(bookings)
     return (
         <MainLayout>
-        <div>
+       
             <div class="ambulance">
                 <div class="heading-container">
                     <h2 class="ambulanc-heading">AMBULANCE REQUEST OVERVIEW</h2>
@@ -310,7 +310,7 @@ function Ambulance() {
                 
             </div>
             
-        </div>
+       
         </MainLayout>
     )
 }

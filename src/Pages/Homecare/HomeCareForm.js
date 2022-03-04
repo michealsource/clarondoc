@@ -86,12 +86,19 @@ function HomeCareForm() {
     })()
 }, [])
 
+const handleGoBack = () => {
+    navigate(-1)
+  }
+
 // console.log(selectedvalue)
     return (
         <MainLayout>
             <div className="individual-request-container-outer">
                 <div class="inner-individual-container-request">
-                    <h2>HOME CARE REQUEST</h2>
+                <div className="closeBtn">
+                    <h2  onClick={() => handleGoBack()}>X</h2>
+                </div>
+                    <h1>HOME CARE REQUEST</h1>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <TextField

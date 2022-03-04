@@ -14,22 +14,25 @@ import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { userDetails} from '../Api/Auth';
 import { fetchNotifications } from '../Api/notifications';
+import { NOTIFICATIONS } from '../features/user'
+
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
-  const [notifications, setNotifications] = useState([])
    const[user,SetUser]= useState()
+   const [notifications, setNotifications] = useState([])
+   const dispatch = useDispatch()
+    
     useEffect(()=>{
         (async()=>{
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
-
             let response = await fetchNotifications();
-            
+            console.log(response)
+            dispatch(NOTIFICATIONS(response))
             setNotifications(response)
-
           })()
     },[])
   const [open, setOpen] = useState(false)
@@ -76,7 +79,6 @@ export default function MainLayout({ children }) {
           <div className="content">
                     <div className="content-container">
                         <div className={sidebar?'navbar-container':'navbar-container-full'}>
-
                             <div className="menu-container">
                                 <FaAlignJustify className="menu-icon"/>
                             </div>

@@ -7,22 +7,25 @@ import MainLayout from '../MainLayout'
 import { fetchNotifications } from '../../Api/notifications';
 import loading from '../../images/loading.gif'
 import {useNavigate } from 'react-router-dom'
+import { useSelector} from 'react-redux'
 
 function Notification() {
     let navigate = useNavigate()
     const [open, setOpen] = useState(false);
     const [notifications, setNotifications] = useState([])
-    useEffect(()=>{
+    const notificationsData = useSelector((state)=>state.user.notifications)
+    // useEffect(()=>{
 
-        (async()=>{
-          let response = await fetchNotifications();
-          console.log(response)
-          setNotifications(response)
+    //     (async()=>{
+    //       let response = await fetchNotifications();
+    //       console.log(response)
+    //       setNotifications(response)
           
-        })()
+    //     })()
        
-    }, [])
+    // }, [])
     
+    console.log(notificationsData, "notificationsDatanotificationsData")
     return (
         <MainLayout>
         
@@ -30,9 +33,9 @@ function Notification() {
         <h4>Notifications</h4>
             <div>
 
-                {notifications.length > 0 && (notifications.length > 0 ? notifications.map((item)=>{
+                {notificationsData.length > 0 && (notificationsData.length > 0 ? notificationsData.map((item)=>{
                     return(
-                <div class="notification-container"
+                <div className={item.status === "Unread" ? "notification-container" : "notification-container-read"}
                 onClick={
                     ()=>item.body.includes('appointment') ? navigate('/AppointmentHistory'):
                     item.body.includes('Ambulance')? navigate('/ambulance'):item.body.includes('drugs')?

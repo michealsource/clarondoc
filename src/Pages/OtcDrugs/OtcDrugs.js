@@ -3,7 +3,7 @@ import './OtcDrugs.css'
 import { FaShareAlt } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom"
+import { Link , useNavigate} from "react-router-dom"
 import MainLayout from "../MainLayout"
 import DrugDetailsModal from './DrugDetailsModal';
 import CartModal from "../Cart/cart"
@@ -12,6 +12,7 @@ import loading from '../../images/loading.gif'
 import { TextField } from '@material-ui/core';
 import {UPDATECARTINFO, UPDATECARTQUANTITY, REMOVEFROMCART} from '../../features/user'
 import { useDispatch,useSelector } from 'react-redux'
+import {BiArrowBack} from "react-icons/bi"
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -38,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 function OtcDrugs() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [openModal, setOpenModal] = useState(false)
   const [openCartModal, setOpenCartModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -85,8 +87,8 @@ function OtcDrugs() {
     return cartTotal.reduce((acc, total) => acc + total)
   }
 
-  const total = getTotal()
-  console.log(total)
+  const total = cartData.length ? getTotal() : 0
+  
 
   const addToCart = (item) => {
    
@@ -110,10 +112,14 @@ function OtcDrugs() {
     dispatch(REMOVEFROMCART(item))
   }
 
-
-  
   return (
     <MainLayout >
+      <div className='container-main'>
+
+      <div className='gobackBtn' onClick={() => navigate(-1)}>
+                <p><BiArrowBack /> Back</p>
+            </div>
+
       <div className="search_field">
         <TextField
           multiline
@@ -186,6 +192,7 @@ function OtcDrugs() {
         ))}
 
         <DrugDetailsModal openModal={openModal} setOpenModal={setOpenModal} product={product} />
+      </div>
       </div>
     </MainLayout>
   )

@@ -56,3 +56,10 @@
     background: #16a085;
     color: #fff;
   }
+
+  .gobackBtn{
+    color: rgb(163, 116, 99);
+    display: flex;
+    align-self: flex-start;
+    cursor: pointer;
+  }
