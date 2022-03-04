@@ -123,13 +123,21 @@ function FacilityRequest({ testName }) {
         console.log(newTest)
     }
 
+    const handleGoBack = () => {
+        navigate(-1)
+      }
+
     // console.log(labTests,totalCost, "frm arent")
     console.log(time)
     return (
         <MainLayout >
             <div className="individual-request-container-outer">
+                  
                 <div class="inner-individual-container-request">
-                    <h2>LABORATORY</h2>
+                <div className="closeBtn">
+                    <h2  onClick={() => handleGoBack()}>X</h2>
+                </div>
+                    <h1>LABORATORY</h1>
 
 
                     <Grid container spacing={2}>

@@ -4,16 +4,30 @@
     margin: 30px;
     margin-top: 30px;
     margin-bottom: 50px;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .notification-container{
     background: #fff;
+    padding: 20px;
+    color:#888a88 !important;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.notification-container-read{
+    background: #fff;
+    color:#888a88 !important;
     padding: 20px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
     margin-top: 30px;
     margin-bottom: 10px;
 }
+
 
 .notification-title{
     color: #0d2344;

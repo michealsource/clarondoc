@@ -193,3 +193,10 @@
     height: 70px !important;
     margin-left: 20px;
 }
+
+.gobackBtn{
+    color: rgb(163, 116, 99);
+    display: flex;
+    align-self: flex-start;
+    cursor: pointer;
+  }
