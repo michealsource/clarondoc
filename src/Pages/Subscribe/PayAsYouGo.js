@@ -68,10 +68,10 @@ const style = {
     p: 4,
 };
 
-function SubscriptionSummary() {
+function PayAsYouGo() {
     const {state} = useLocation();
     const dispatch = useDispatch()
-    const { name, id,price } = state;
+    const { name,doctor,price } = state;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [user, setUser] = useState()
@@ -89,7 +89,7 @@ function SubscriptionSummary() {
     const [showotp_field, setshowotp_field] = useState(false)
     const [otperror, setotperror] = useState(false)
     const [tnx_ref, settnx_ref] = useState('')
-    const [button, setButton] = useState('Subscribe Now')
+    const [button, setButton] = useState('Pay Now')
     const [open, setOpen] = useState(false);
     
     const [phone_error, setPhoneError] = useState()
@@ -233,22 +233,14 @@ function SubscriptionSummary() {
                   setLoading(false)
                   setButton('Awaiting for payment confirmation...')
                 }else if(init.data.status === 'success'){
-                  try {
-                     await Upgrade_sub( name, moment(new Date().toString().substr(0, 16)).add(1,"months"))
-                     
-                  } catch (error) {
-                    console.log(error)
-                  }
-                  setLoading(false)
-                  setButton('Done')
-                  dispatch(UPDATESUB(name))
+
                   swal({
-                    title: "subscription successful",
-                    text: `Your ${name} subscription was successful`,
+                    title: "Payment successful",
+                    text: `Your ${name} subscription was successful click Ok`,
                     icon: "success",
                     button: "Ok",
                   });
-                  navigate(-1)
+                  navigate('/Book',{state:{doctor}})
                
                 }else{
                   setLoading(false)
@@ -330,19 +322,18 @@ function SubscriptionSummary() {
         })()
     
       }, [])
+   
     return (
         <MainLayout>
         <div class="order-container">
             <div class="payment-review-container">
                 <div class="title-of-pay">
                     <div class="first-title-pay">
-                        <p>subscription</p>
-                        <p>Subscription Start Date</p>
+                        <p>Payment</p>
+                       
                     </div>
 
                     <div class="discount-price">
-                        <p>Next Payment</p>
-                        <p>Renewal Amount</p>
                         <p>Total</p>
                     </div>
                 </div>
@@ -350,13 +341,10 @@ function SubscriptionSummary() {
                 <div class="price-of-pay">
                     <div class="first-price">
                     <p style={{ color: '#61cd88' }}>{name}</p>
-                    <p style={{ color: '#61cd88' }}>{new Date().toString().substr(0, 16)} </p>
-                    <p style={{ color: '#61cd88' }}>{new Date().toString().substr(0, 16)}</p>
                         
                     </div>
 
                     <div class="second-price">
-                        <p style={{ color: '#cb2938' }}>GHS {price.toFixed(2)}</p>
                         <p style={{ color: '#cb2938' }}>GHS {price.toFixed(2)}</p>
                     </div>
 
@@ -558,4 +546,4 @@ function SubscriptionSummary() {
     )
 }
 
-export default SubscriptionSummary
+export default PayAsYouGo

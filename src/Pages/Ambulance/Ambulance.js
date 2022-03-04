@@ -84,6 +84,7 @@ function Ambulance() {
             try{
                 let res
                 res = await API.myAmbulanceRequests()
+                
                 setBookings(res.requests)
                 setFiltered(res.requests.filter(request=>request.status === 'Completed'))
                 console.log(filtered)
@@ -107,7 +108,8 @@ function Ambulance() {
       const submitRequest = async()=>{
         try{
           setloading(true)
-          await API.requestAmbulance(address, cases, comment)
+         const data = await API.requestAmbulance(address, cases, comment)
+        console.log(data)
           swal({
             title: "Request Sent",
             text: "We have received your ambulance request, an ambulance will be dispatched to your address soon.",
@@ -128,6 +130,7 @@ function Ambulance() {
         }
       }
     
+      console.log(bookings)
     return (
         <MainLayout>
         <div>
@@ -199,10 +202,10 @@ function Ambulance() {
                                             id="demo-simple-select"
                                             label="emergency"
                                         >
-                                            <MenuItem value={10}>Fatal Accident</MenuItem>
-                                            <MenuItem value={20}>Asthma Attack</MenuItem>
-                                            <MenuItem value={30}>Going Into Labour</MenuItem>
-                                            <MenuItem value={30}>Other</MenuItem>
+                                            <MenuItem value="Fatal Acciden">Fatal Accident</MenuItem>
+                                            <MenuItem value="Asthma Attac">Asthma Attack</MenuItem>
+                                            <MenuItem value="Going Into Labour">Going Into Labour</MenuItem>
+                                            <MenuItem value="Other">Other</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </div>

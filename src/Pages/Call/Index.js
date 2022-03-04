@@ -6,12 +6,7 @@ import axios from "axios"
 import './calls.css'
 
 import { FaPhone } from "react-icons/fa";
-import {
-  ClientConfig,
-  IAgoraRTCRemoteUser,
-  ICameraVideoTrack,
-  IMicrophoneAudioTrack,
-} from "agora-rtc-sdk-ng";
+import AgoraRTC from 'agora-rtc-sdk'
 import {createClient} from "agora-rtc-sdk-ng";
 import { useLocation, useNavigate } from "react-router-dom";
 import firebase from "../../firebaseConfig"
@@ -22,15 +17,26 @@ const config = {
   mode: "rtc", codec: "vp8",
 };
 
- const rtc = {
-  // For the local client
-  client: createClient(config),
-};
+//  const rtc = {
+//   // For the local client
+//   client: createClient(config),
+// };
 
-const useClient = createClient(config);
+const appId = "0742c8affa02429b9622956bac0d67d0"
+
+let client = AgoraRTC.createClient(config);
+
+client.init(appId, function() {
+  console.log("client initialized");
+}, function(err) {
+  console.log("client init failed ", err);
+});
+
 // const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
-
-const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
+// const  = "66310665192842a28975ec67dfdd536b"; //ENTER APP ID HERE
+const testToken = "0060742c8affa02429b9622956bac0d67d0IAAQCGttDQPStDqj40rXXxEtwgr6dRweg7e540nq+qTmRy1YJdMAAAAAIgDzaiE4nUMiYgQAAQCdQyJiAgCdQyJiAwCdQyJiBACdQyJi"
+const testChannelName = "ae5e190e-9b87-4b07-95fe-10d70cc7d935"
+const appIdTest = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
 
 let _engine
 let call_id
@@ -207,7 +213,7 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <AudioCall setInCall={setInCall} rtc={rtc} appId={appId} trackType={trackType} token={token} channelName={channelName}   />
+        <AudioCall setInCall={setInCall} client={client} appId={appIdTest} trackType={trackType} token={testToken} channelName={testChannelName}   />
       ) : null
       }
     </div>
