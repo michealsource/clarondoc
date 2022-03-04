@@ -14,16 +14,25 @@ import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { userDetails} from '../Api/Auth';
+import { fetchNotifications } from '../Api/notifications';
+import { NOTIFICATIONS } from '../features/user'
+
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
    const[user,SetUser]= useState()
+   const [notifications, setNotifications] = useState([])
+   const dispatch = useDispatch()
+    
     useEffect(()=>{
         (async()=>{
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
-
+            let response = await fetchNotifications();
+            console.log(response)
+            dispatch(NOTIFICATIONS(response))
+            setNotifications(response)
           })()
     },[])
   const [open, setOpen] = useState(false)
@@ -75,7 +84,7 @@ export default function MainLayout({ children }) {
                             </div>
                             
                             <Link to="/notification" className="notification">
-                                <Badge badgeContent={4} color="success">
+                                <Badge badgeContent={notifications.length} color="success">
                                     <NotificationsIcon color="action" />
                                 </Badge>
                             </Link>

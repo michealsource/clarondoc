@@ -4,7 +4,8 @@ const userSlice = createSlice({
     name:"user",
     initialState:{
         value:{},
-        cart: []
+        cart: [],
+        notifications: []
     },
     reducers:{
         LOGIN: (state,action)=>{
@@ -32,10 +33,7 @@ const userSlice = createSlice({
             state.cart[state.cart.indexOf(state.cart.filter(d => d.drugId === action.payload.drugId)[0])].total +=  action.payload.drug.unitprice
             
         },
-       
         REMOVEFROMCART: (state,action)=>{
-            // console.log(action.payload, "payload")
-            // console.log(state.cart, "pay")
             
             for(let i = 0; i < state.cart.length; i++){
                 console.log(state.cart[i], "pay")
@@ -46,10 +44,12 @@ const userSlice = createSlice({
                     state.cart.splice(i, 1)
                 }
             }
-            // state.cart[state.cart.indexOf(state.cart.filter(d => d.drugId == action.payload.drugId)[0])].quantity -= 1
-            // state.cart.splice(state.cart[action.payload.index], 1)
+        },
+
+        NOTIFICATIONS: (state,action)=>{
+            state.notifications = action.payload
         },
     }
 })
-export const {LOGIN,LOGOUT,UPDATE,UPDATESUB,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY} = userSlice.actions
+export const {LOGIN,LOGOUT,UPDATE,UPDATESUB,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY, NOTIFICATIONS} = userSlice.actions
 export default userSlice.reducer;
