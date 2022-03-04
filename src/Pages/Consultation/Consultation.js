@@ -25,7 +25,7 @@ import { fetchDoctors } from '../../Api/doctors';
 import { makeBooking } from '../../Api/doctors';
 import doctorDefault from '../../images/doctor.png'
 import loading from '../../images/loading.gif'
-import DocCard from './DocCard';
+import {useSelector } from 'react-redux'
 const style = {
     position: 'absolute',
     top: '50%',
@@ -38,6 +38,7 @@ const style = {
     p: 4,
 };
 function Consultation() {
+    const userData = useSelector((state)=>state.user.value)
     const [openModal, setOpenModal] = useState(false)
     const [open, setOpen] = useState(false);
     const[call, setCall] = useState(false)
@@ -205,6 +206,7 @@ const favorite = async(email)=>{
     }
     setloading(false)
 }
+
     return (
         <MainLayout >
         <div className="doctors">
@@ -292,7 +294,7 @@ const favorite = async(email)=>{
                    <div key={doctor.email} class="box" id={doctor.email}>
                    {doctor.availability === 'Online' ? <div className="active-state">Active</div> : ''}
                 
-                   <img src={doctor.avatar && doctor.avatar !=="undefined" ?doctor.avatar:doctorDefault} alt="" />
+                   <img src={doctor.avatar && doctor.avatar !=="undefined" ?doctor.avatar:doctorDefault} alt="avatar" />
 
                    <h6 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h6>
                    <span className="title">{doctor.department}</span>
@@ -308,8 +310,8 @@ const favorite = async(email)=>{
                            <BsFillChatSquareTextFill className="doctor-icon" />
                            <span>Chat</span>
                        </div>
-   
-                       <div onClick={() => handleOpen(doctor)} class="action-container">
+                      
+                       <div onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): handleOpen(doctor)} class="action-container">
                            <FaRegCalendarAlt className="doctor-icon" />
                            <span>Book</span>
                        </div>
@@ -373,7 +375,7 @@ const favorite = async(email)=>{
                
             </div>
             )}
-            <DoctorProfile selectedData={selectedData} openP={openP} handleCloseProfile={handleCloseProfile} />
+            <DoctorProfile  selectedData={selectedData} openP={openP} handleCloseProfile={handleCloseProfile} />
             <ActionsModal call={call} setCall={setCall}/>
         </div>
         </MainLayout>

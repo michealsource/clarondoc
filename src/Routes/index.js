@@ -31,7 +31,8 @@ import Chat from '../Pages/Chat/Chat'
 import AboutClaron from '../Pages/AboutClaron/AboutClaron'
 import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
 import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
-
+import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
+import Book from '../Pages/Book/Book'
 // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
 // DOCTORS PAGE IMPORT
@@ -93,6 +94,8 @@ function index() {
                 <Route exact path="/AboutClaron" element={< AboutClaron />} />
                 <Route exact path="/ClaronTerms" element={< ClaronTerms />} />
                 <Route exact path="/Sub-Summary" element={< SubscriptionSummary />} />
+                <Route exact path="/PayAsYouGo" element={< PayAsYouGo />} />
+                <Route exact path="/Book" element={< Book />} />
                 <Route exact path="/call" element={< Call />} />
                 <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
                 

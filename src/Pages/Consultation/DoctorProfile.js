@@ -4,7 +4,12 @@ import React,{useState,useEffect} from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { FaRegCommentDots,FaCalendarAlt,FaHeart } from "react-icons/fa";
+import { useNavigate } from 'react-router';
+import doctorDefault from '../../images/doctor.png'
+import {useSelector } from 'react-redux'
 function DoctorProfile({openP,handleCloseProfile,selectedData}) {
+  const doctor =selectedData;
+  const userData = useSelector((state)=>state.user.value)
     const style = {
         position: 'absolute',
         top: '50%',
@@ -21,17 +26,17 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
       const [loading, setloading] = useState(false)
       const [favorites, setfavorites] = useState([])
       const [loaded, setloaded] = useState(false)
-  
+      const navigate = useNavigate()
       const favorite = async()=>{
 
           setloading(true)
-          if(favorites.includes(selectedData.email)){
-              setfavorites(favorites.filter(fav=>fav!=selectedData.email))
-              localStorage.setItem('saved', favorites.filter(fav=>fav!=selectedData.email).toString())
+          if(favorites.includes(doctor.email)){
+              setfavorites(favorites.filter(fav=>fav!=doctor.email))
+              localStorage.setItem('saved', favorites.filter(fav=>fav!=doctor.email).toString())
               console.log(favorites)
           }else{
-              setfavorites([...favorites, ...[selectedData.email]])
-              localStorage.setItem('saved', [...favorites, ...[selectedData.email]].toString())
+              setfavorites([...favorites, ...[doctor.email]])
+              localStorage.setItem('saved', [...favorites, ...[doctor.email]].toString())
           }
           setloading(false)
       }
@@ -62,25 +67,27 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
         >
           <Box sx={style}>
             <div class="doc-profile-dash">
-              <img src={selectedData.avatar} alt=""/>
-              <h2 className="profile-name-dash">{selectedData.firstname} {selectedData.lastname}</h2>
-              <span className='doc-department-dash'>{selectedData.department}</span>
+            <img src={doctor.avatar && doctor.avatar !=="undefined" ?doctor.avatar:doctorDefault} alt="avatar" />
+              <h2 className="profile-name-dash">{doctor.firstname} {doctor.lastname}</h2>
+              <span className='doc-department-dash'>{doctor.department}</span>
               <div className='bio-container-dash'>
-                <p className='doc-bio'>{selectedData.bio}</p>
+                <p className='doc-bio'>{doctor.bio}</p>
               </div>
 
               <div class="claron-doc-online-actions">
                 <div class="item-doc" disabled={loading} onClick={favorite}>
                   <FaHeart/>
                      <p>
-                     { loading ? 'Saving...' : favorites.includes(selectedData.email) ? 'Remove from Account' : 'Save to Account'}
+                     { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove from Account' : 'Save to Account'}
                    </p>
                    </div>
-                <div class="item-doc">
+                <div
+                onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): navigate('/Book',{state:{doctor}})}
+                class="item-doc">
                   <FaCalendarAlt/>
                   <p>Check Availability</p>
                   </div>
-                <div class="item-doc">
+                <div onClick={()=>navigate('/chat',{state:doctor})} class="item-doc">
                   <FaRegCommentDots/>
                   <p>Chat</p>
                   </div>
