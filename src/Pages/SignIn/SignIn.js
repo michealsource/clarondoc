@@ -99,8 +99,9 @@ function SignIn() {
     // GOOGLE LOGIN Authentication
     const loginSuccess = async (res) => {
         const response = await sociallogin(res.profileObj.email)
-
+        console.log(response)
         if (response.success) {
+          
             let currentUser = localStorage.getItem('user');
             dispatch(LOGIN(JSON.parse(currentUser)))
             navigate("/userDashboard")

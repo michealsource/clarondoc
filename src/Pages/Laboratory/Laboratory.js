@@ -62,7 +62,7 @@ function Laboratory() {
     const classes = useStyles();
 
     const [bookings, setBookings] = useState([])
-
+    const [bookingsF, setBookingsF] = useState([])
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
 
@@ -70,8 +70,10 @@ function Laboratory() {
 
             if (!loaded) {
                 try {
-                    let res
+                    let res,faciility
                     res = await API.myLabTests('individual')
+                    faciility = await API.myLabTests('facility')
+                    setBookingsF(faciility)
                     setBookings(res.requests)
                     console.log(bookings)
                 } catch (e) {
@@ -82,6 +84,7 @@ function Laboratory() {
 
         })()
     })
+    console.log(bookings,"fffff")
 
     return (
         <MainLayout>
@@ -174,36 +177,39 @@ function Laboratory() {
 
                                     </div>
                                 </Panel>
-                                <Panel value={index} index={1}>
+                                <Panel value={index} index={0}>
                                     <div className="top-history-container">
                                         <div class="row-his">
                                             <div className="column-his-1">
                                                 <div class="col-container">
-                                                    <div class="his-container-cont-lab">
-                                                        {bookings.lenth > 0 && (bookings.map((item) => (
-                                                            <>
-                                                                <div className='single-ambulance'>
-                                                                    <div>
-                                                                        <p style={{ color: '#2d8f88' }}>REQUESTED TESTS</p>
-                                                                        {item.labTests.map(test => (
-                                                                            <div className='request-test'>
-                                                                                <p>{test.labtest}</p>
-                                                                                <p>GHS {test.charge}</p>
-                                                                            </div>
-                                                                        ))}
-                                                                    </div>
-                                                                    <div className='divider'></div>
-                                                                    <div className='booked-container'>
-                                                                        <p className='a-head'>Booked On:</p>
-                                                                        <p>{new Date(item.createDate).toString().substring(0, 21)}</p> </div>
-                                                                    <div className='booked-container'>
-                                                                        <p className='a-head'>Booked For: </p>
-                                                                        <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p> </div>
+                                                    {bookings.length > 0 && (bookings.length ? (
+                                                        <div class="his-container-cont-lab">
+                                                            {bookings.map((item) => (
+                                                                <>
+                                                                    <div className='single-ambulance'>
+                                                                        <div>
+                                                                            <p style={{ color: '#2d8f88' }}>REQUESTED TESTS</p>
+                                                                            {item.labTests.map(test => (
+                                                                                <div className='request-test'>
+                                                                                    <p>{test.labtest}</p>
+                                                                                    <p>GHS {test.charge}</p>
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+                                                                        <div className='divider'></div>
+                                                                        <div className='booked-container'>
+                                                                            <p className='a-head'>Booked On:</p>
+                                                                            <p>{new Date(item.createDate).toString().substring(0, 21)}</p> </div>
+                                                                        <div className='booked-container'>
+                                                                            <p className='a-head'>Booked For: </p>
+                                                                            <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p> </div>
 
-                                                                </div>
-                                                            </>
-                                                        )))}
-                                                    </div>
+                                                                    </div>
+                                                                </>
+                                                            ))}
+
+                                                        </div>
+                                                    ) : (<img src={loading} alt="" className="loader-img" />))}
                                                 </div>
 
                                             </div>
