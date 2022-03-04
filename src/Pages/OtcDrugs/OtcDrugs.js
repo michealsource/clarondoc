@@ -85,8 +85,8 @@ function OtcDrugs() {
     return cartTotal.reduce((acc, total) => acc + total)
   }
 
-  const total = getTotal()
-  console.log(total)
+  const total = cartData.length ? getTotal() : 0
+  
 
   const addToCart = (item) => {
    

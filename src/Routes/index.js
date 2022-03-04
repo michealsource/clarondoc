@@ -52,7 +52,7 @@ import Consultations from '../DoctorPages/Consultations/Consultations';
 import TermsD from '../DoctorPages/Terms/Terms'
 import AboutD from '../DoctorPages/About/About'
 import CartModal from '../DoctorPages/Modals/CartModal'
-import Call from '../Pages/Call/Index'
+import Call from '../Pages/Call/audioCalls'
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'

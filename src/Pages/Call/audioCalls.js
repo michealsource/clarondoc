@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import ChannelForm from "./ChannelForm"
-import AudioCall from "./audioCall"
-import VideoCall from "./VideoCall"
 import axios from "axios"
 import './calls.css'
-
+import './General.css'
+import { FaPhoneSlash, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import image from '../../images/logo.png'
 import { FaPhone } from "react-icons/fa";
-import AgoraRTC from 'agora-rtc-sdk'
-import {createClient} from "agora-rtc-sdk-ng";
+import Agora from "agora-rtc-sdk";
 import { useLocation, useNavigate } from "react-router-dom";
 import firebase from "../../firebaseConfig"
 import Box from '@mui/material/Box';
@@ -17,26 +15,7 @@ const config = {
   mode: "rtc", codec: "vp8",
 };
 
-//  const rtc = {
-//   // For the local client
-//   client: createClient(config),
-// };
-
-const appId = "0742c8affa02429b9622956bac0d67d0"
-
-let client = AgoraRTC.createClient(config);
-
-client.init(appId, function() {
-  console.log("client initialized");
-}, function(err) {
-  console.log("client init failed ", err);
-});
-
-// const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
-// const  = "66310665192842a28975ec67dfdd536b"; //ENTER APP ID HERE
-const testToken = "0060742c8affa02429b9622956bac0d67d0IAAQCGttDQPStDqj40rXXxEtwgr6dRweg7e540nq+qTmRy1YJdMAAAAAIgDzaiE4nUMiYgQAAQCdQyJiAgCdQyJiAwCdQyJiBACdQyJi"
-const testChannelName = "ae5e190e-9b87-4b07-95fe-10d70cc7d935"
-const appIdTest = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
+const appId = "0742c8affa02429b9622956bac0d67d0"; //ENTER APP ID HERE
 
 let _engine
 let call_id
@@ -59,8 +38,6 @@ const style = {
 function Index() {
   const navigate  = useNavigate()
   const [inCall, setInCall] = useState(false);
-  const [channelName, setChannelName] = useState("");
-  const [token, setToken] = useState("");
   const [recp, setrecp] = useState(email)
   const [picked, setpicked] = useState(false)
   const [open, setOpen] = React.useState(false);
@@ -68,10 +45,17 @@ function Index() {
   const handleClose = () => setOpen(false);
   const [trackType, setTrackType] = useState()
   const location = useLocation()
+  const [client, setClient] = useState(null);
+  const [clientInstance, setClientInstance] = useState(null);
+  const [uid, setUid] = useState(null);
+  const [localStream, setLocalStream] = useState(null);
+  const [trackState, setTrackState] = useState({ video: true, audio: true });
+  const [muteAudio, setMuteAudio] = useState(false);
 
   let countt_r = useRef(0)
   countt_r.current = 0;
   const email_r = useRef('')
+
 
   const doctors = [
     {
@@ -91,14 +75,75 @@ function Index() {
     },
   ]
 
+
   useEffect(() => {
-    const type = location.state.mediaType
-    setTrackType(type)
-   setOpen(true)
+
+    const getClienInstance = async() => {
+      let clientInstance = await Agora.createClient(config);
+      const type = location.state.mediaType
+      setTrackType(type)
+     setOpen(true)
+  
+      setClient(clientInstance);
+      setClientInstance(clientInstance)
+    }
+    getClienInstance()
+   
   }, [])
 
   let user = localStorage.getItem('user')
   const userDetail = JSON.parse(user)
+
+  const join = async(channelName, token) => {
+    if(client){
+    clientInstance.init(appId, () => {
+      clientInstance.join(token, channelName, null, (uid) => {
+        let localStreamInstance = Agora.createStream({
+          streamID: uid,
+          audio: true,
+          video: false,
+          screen: false
+        });
+        setLocalStream(localStreamInstance);
+        localStreamInstance.init(() => {
+          clientInstance.publish(localStreamInstance);
+          localStreamInstance.play("local_stream");
+        });
+
+        clientInstance.on("stream-added", (evt) => {
+          let remoteStream = evt.stream;
+          const id = remoteStream.getId();
+          client.subscribe(remoteStream);
+        });
+
+        clientInstance.on("stream-subscribed", (evt) => {
+          let remoteStream = evt.stream;
+          remoteStream.play("remote_stream");
+        });
+      });
+    });
+  }
+  };
+
+
+  const mute = async () => {
+    if(muteAudio){
+      await localStream.unmuteAudio()
+      setMuteAudio(false)
+    }else {
+      await localStream.muteAudio()
+      setMuteAudio(true)
+    }
+    
+    
+  };
+
+  const leaveChannel = async () => {
+    await localStream.close()
+    await client.leave();
+    setInCall(false);
+    navigate(-1)
+  };
 
 
   const startUrgent = async()=>{
@@ -107,9 +152,6 @@ function Index() {
       
       let res = await axios.get('https://api.clarondoc.com/urgent/token')
      
-      setChannelName(res.data.RTCChannel)
-      setToken(res.data.RTCAccessToken)
-   
       let doc = await firebase.firestore().collection('calls').doc(recp).set({data: {
         time: new Date(),
         recipient: recp,
@@ -119,7 +161,7 @@ function Index() {
         token: res.data.RTCAccessToken
       }})
       call_id = (recp)
-
+      await join(res.data.RTCChannel,res.data.RTCAccessToken)
       console.log('started')
 
     }catch(e){
@@ -186,6 +228,10 @@ function Index() {
     // stop
   }
 
+  const handleGoBack = () => {
+    handleClose()
+    navigate(-1)
+  }
 
 
   return (
@@ -196,7 +242,11 @@ function Index() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        
         <Box sx={style}>
+        <div className="closeBtn">
+          <h2 onClick={() => handleGoBack()}>X</h2>
+        </div>
           <p className="stand-by">Stand-By Line for emergency call</p>
 
           {
@@ -213,7 +263,36 @@ function Index() {
         </Box>
       </Modal>
       {inCall ? (
-        <AudioCall setInCall={setInCall} client={client} appId={appIdTest} trackType={trackType} token={testToken} channelName={testChannelName}   />
+         <>
+         <div className="controls">
+         <div class="claron-audio-logo-container">
+           <h2>Urgents Care</h2>
+           <img className='cal-logo-img' src={image} alt="" />
+         </div>
+         <div id="local_stream"></div>
+          <div id="remote_stream"></div>
+           <div class="inner-control">
+           <p className={trackState.audio ? "on" : ""}
+             onClick={() => mute("audio")}>
+   
+             {!muteAudio ? <button className='mute'><FaVolumeMute className='mute-audio-control' />Mute</button> : <button className='mute'><FaVolumeUp className='mute-audio-control' />Unmute</button>}
+   
+   
+           </p>
+           {
+             trackType === "audio" ? null : (
+               <p className={trackState.video ? "on" : ""}
+                 onClick={() => mute("video")}>
+                 {trackState.video ? "MuteVideo" : "UnmuteVideo"}
+               </p>
+             )
+           }
+   
+           {<button className='leav' onClick={() => leaveChannel()}><FaPhoneSlash className='leav-icon' />End Call</button>}
+           </div>
+       </div>
+       </>
+        
       ) : null
       }
     </div>
