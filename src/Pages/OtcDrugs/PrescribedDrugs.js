@@ -114,6 +114,7 @@ function PrescribedDrugs() {
   
   return (
     <MainLayout >
+      <div className='container-main'>
       <div className="search_field">
         <TextField
           multiline
@@ -189,6 +190,7 @@ function PrescribedDrugs() {
         ))}
 
         <DrugDetailsModal openModal={openModal} setOpenModal={setOpenModal} product={product} />
+      </div>
       </div>
     </MainLayout>
   )

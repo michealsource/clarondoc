@@ -175,10 +175,19 @@ function DemandBooking() {
     }
 
   }
+
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
   return (
     <MainLayout>
       <div>
         <div className="demand-booking-modal-container">
+
+        <div className="onDemandCloseBtn">
+          <h2 onClick={() => handleGoBack()}>X</h2>
+        </div>
           <div class="specialist-heading">
             <p style={{color:'red'}}>{error?error:''}</p>
             <h4>Choose Services</h4>

@@ -152,3 +152,24 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
 }
+
+.onDemandCloseBtn {
+  width:40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ align-self: flex-end;
+ background-color: #eceeed;
+ border-radius: 5px;
+}
+
+.onDemandCloseBtn:hover {
+ background-color: #545958;
+ cursor: pointer;
+ width:40px;
+ border-radius: 15px;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}

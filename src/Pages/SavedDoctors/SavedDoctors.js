@@ -16,7 +16,9 @@ import './SavedDoctors.css'
 import MainLayout from '../MainLayout';
 import { fetchDoctors } from '../../Api/doctors';
 import { makeBooking } from '../../Api/doctors';
+import {BiArrowBack} from "react-icons/bi"
 import load from '../../images/loading.gif'
+import {useNavigate} from 'react-router-dom';
 
 const style = {
     position: 'absolute',
@@ -42,6 +44,7 @@ function SavedDoctors() {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+    const navigate = useNavigate()
 
     const [loading, setloading] = useState(true)
     const [doctors, setDoctors] = useState([])
@@ -106,6 +109,9 @@ function SavedDoctors() {
     return (
         <MainLayout>
             <div className="doctors">
+            <div className='gobackBtn' onClick={() => navigate(-1)}>
+                <p><BiArrowBack /> Back</p>
+            </div>
                 <div class="demand-container">
                     <h1 class="heading-fav">List of Your Favourite<span> Doctors</span></h1>
                 </div>
