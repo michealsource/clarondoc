@@ -3,7 +3,7 @@ import './Chat.css'
 import { FaTelegramPlane, FaRegArrowAltCircleUp } from "react-icons/fa";
 import MainLayout from '../MainLayout';
 import { useLocation } from 'react-router-dom'
-import { sendMessage } from '../../Api/chats';
+import { sendMessage} from '../../Api/chats';
 import { userDetails } from '../../Api/Auth'
 import firebase from 'firebase'
 import { formatRelative } from 'date-fns'
@@ -44,60 +44,44 @@ function Chat() {
     const [image, setImage] = useState(null)
     const emailR = useRef(null);
 
-    //FUNCTION TO UPLOAD ATTACHEMENT
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
-        }
-    }
+    const allInputs = {imgUrl: ''}
+    const [imageAsFile, setImageAsFile] = useState('')
+    const [imageAsUrl, setImageAsUrl] = useState(allInputs)
+    console.log(imageAsFile)
 
-    const uriToBlob = (uri) => {
-        return new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            // return the blob
-            resolve(xhr.response);
-          };
-          
-          xhr.onerror = function() {
-            // something went wrong
-            reject(new Error('uriToBlob failed'));
-          };
-          // this helps us get a blob
-          xhr.responseType = 'blob';
-          xhr.open('GET', uri, true);
-          
-          xhr.send();
-        });
-      }
+    const handleImageAsFile = (e) => {
+        const image = e.target.files[0]
+        setImageAsFile(imageFile => (image))
+    }
+    // //FUNCTION TO UPLOAD ATTACHEMENT
+    // const onImageChange = (event) => {
+    //     if (event.target.files && event.target.files[0]) {
+    //         setImage(URL.createObjectURL(event.target.files[0]));
+    //     }
+      
+    // }
 
     const chat_code = (patient, doctor) => {
         return patient + '-' + doctor;
     }
     // FUNCTION FOR SENDING MESSAGE
     const send = async () => {
-        let url = ''; let type = '';
+        let type = '';
+        let url ='';
         var messag = message;
         if (message.length === 0) {
             messag = 'Media Attachment';
         }
         setsendingNow(true)
+        try{
 
-        if (attachment) {
-            type = attachment.type
-            // var name = getFileName(attachment.name, path);
-
-            try {
-                var blob = await uriToBlob(attachment.image);
-                // let attached = await firebase.storage().ref(`new-attaches/${name}`).put(blob, {contentType: type})
-                // url = await firebase.storage().ref(`new-attaches`).child(name).getDownloadURL()
-                console.log(url)
-                setsendingNow(false)
-                return false;
-            } catch (e) {
-                console.log('*****')
-                console.log(e)
-            }
+             await firebase.storage().ref(`new-attaches/${imageAsFile.name}`).put(imageAsFile)
+            url = await firebase.storage().ref(`new-attaches`).child(imageAsFile.name).getDownloadURL()
+            console.log(url,'gggggggg')
+            // return false;
+        }catch(e){
+            console.log('*****')
+            console.log(e)
         }
 
         try {
@@ -115,12 +99,13 @@ function Chat() {
             };
 
             sendMessage(sen)
-
+            
             await firebase.firestore().collection('newSMessages').doc(chat_code(user.email, state.email)).collection('messages').add(sen);
 
             if (true) {
                 setmessage('')
                 setattachment(null)
+                alert('file uploaded successfully')
                 // setloading(true)
                 // startStream()
             } else {
@@ -137,8 +122,7 @@ function Chat() {
 
     // LOAD FIREBASE CHAT FUNCTION
     const loadfirebasechat = async (data) => {
-        console.log(chat_code(data.email, state.email))
-        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.email)).collection('messages').orderBy('timeStamp', 'desc').onSnapshot(snapshot => {
+        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.email)).collection('messages').orderBy('timeStamp', 'asc').onSnapshot(snapshot => {
             var r = snapshot.docs.map(doc => {
                 return (doc.data())
             });
@@ -150,6 +134,7 @@ function Chat() {
             console.log(error)
         });
     }
+
     useEffect(() => {
         (async () => {
             let account = localStorage.getItem("user")
@@ -165,6 +150,34 @@ function Chat() {
         })()
     }, [])
 
+    function timeSince(date) {
+
+        var seconds = Math.floor((new Date() - date) / 1000);
+      
+        var interval = seconds / 31536000;
+      
+        if (interval > 1) {
+          return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+      }
+      
  
     return (
         <MainLayout>
@@ -174,17 +187,17 @@ function Chat() {
                 <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname}</span></h4>
 
                 {conversation.length> 0? conversation.map(chat => {
-                    
+console.log(chat.file_type,'attttttt')
                     return (
                         <>
-                            <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-user' : 'chat-msg-doc'}`}>
+                            <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-doc' : 'chat-msg-user'}`}>
                                 {chat.attachment != null && chat.file_type.includes('image') ?
                                     <div>
                                         <img src={chat.attachment} alt="" className='msg-img' />
                                     </div> : null
                                 }
                                 <p>{chat.message ? chat.message : 'loading chat'}</p>
-                                <p>{formatRelative(new Date(chat.createDate), new Date())}</p>
+                                <p> about {timeSince(new Date(chat.createDate))} ago</p>
                             </div>
 
                         </>
@@ -197,7 +210,7 @@ function Chat() {
 
                     <textarea value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text"></textarea>
                     <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>
-                    <input type="file" onChange={onImageChange} id="fileimg" className="file-upload-file" />
+                    <input type="file" onChange={handleImageAsFile}id="fileimg" className="file-upload-file" />
 
                     <FaTelegramPlane onClick={send} className="upload-icon" />
                 </div>

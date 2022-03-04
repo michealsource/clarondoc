@@ -11,10 +11,9 @@
 }
 
 .chat-msg-user{
-    background: #61cd88;
-    border-radius: 10px;
+    background: #e6e4de;
+    border-radius: 10px 20px 5px;
     padding: 20px;
-    color: #fff;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
@@ -23,7 +22,7 @@
 
 .chat-msg-doc{
     background: #16a085;
-    border-radius: 10px;
+    border-radius: 20px 5px 10px;
     padding: 20px;
     color: #fff;
     font-size: 20px;
