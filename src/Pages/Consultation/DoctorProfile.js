@@ -87,7 +87,9 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
                   <FaCalendarAlt/>
                   <p>Check Availability</p>
                   </div>
-                <div onClick={()=>navigate('/chat',{state:doctor})} class="item-doc">
+                <div
+                onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): navigate('/chat',{state:{doctor}})}
+                class="item-doc">
                   <FaRegCommentDots/>
                   <p>Chat</p>
                   </div>
