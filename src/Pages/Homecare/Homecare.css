@@ -1,6 +1,8 @@
 .home-care-container-1{
     margin: 30px;
     margin-top: 60px;
+    width: 95%;
+    padding: 20px !important;
 }
 
 .homecare-inner-container-2{
@@ -13,6 +15,9 @@
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     border-radius: 10px;
+}
+.individual-request{
+    margin-top: 10px !important;
 }
 
 .his-header{

@@ -3,28 +3,14 @@ import firebase from "../../firebaseConfig"
 import './AppointmentHistory.css'
 import Modal from 'react-modal'
 import { FaTimes } from "react-icons/fa";
-import {
-    TextField,
-    FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    Grid,
-    InputLabel,
-    Select,
-    MenuItem,
-    Checkbox
-} from '@material-ui/core';
+
 import {Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {Link} from 'react-router-dom'
 import MainLayout from '../MainLayout';
 import moment from 'moment';
-import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+
 import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import * as API from '../../Api/pharmacy'
 import { myBookings,DeleteBooking,respondRequest } from '../../Api/doctors';
 import loading from '../../images/loading.gif'
 

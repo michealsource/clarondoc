@@ -27,6 +27,7 @@ function Chat() {
 
 
     const { state } = useLocation();
+    const { age } = state;
     const [email, setemail] = useState('')
     const [user, setUser] = useState({})
     const [message, setmessage] = useState('')
@@ -44,23 +45,10 @@ function Chat() {
     const [image, setImage] = useState(null)
     const emailR = useRef(null);
 
-    const allInputs = {imgUrl: ''}
-    const [imageAsFile, setImageAsFile] = useState('')
-    const [imageAsUrl, setImageAsUrl] = useState(allInputs)
-    console.log(imageAsFile)
-
     const handleImageAsFile = (e) => {
         const image = e.target.files[0]
-        setImageAsFile(imageFile => (image))
+        setImage(image)
     }
-    // //FUNCTION TO UPLOAD ATTACHEMENT
-    // const onImageChange = (event) => {
-    //     if (event.target.files && event.target.files[0]) {
-    //         setImage(URL.createObjectURL(event.target.files[0]));
-    //     }
-      
-    // }
-
     const chat_code = (patient, doctor) => {
         return patient + '-' + doctor;
     }
@@ -75,9 +63,9 @@ function Chat() {
         setsendingNow(true)
         try{
 
-             await firebase.storage().ref(`new-attaches/${imageAsFile.name}`).put(imageAsFile)
-            url = await firebase.storage().ref(`new-attaches`).child(imageAsFile.name).getDownloadURL()
-            console.log(url,'gggggggg')
+             await firebase.storage().ref(`new-attaches/${image.name}`).put(image)
+             url = await firebase.storage().ref(`new-attaches`).child(image.name).getDownloadURL()
+            
             // return false;
         }catch(e){
             console.log('*****')
@@ -85,8 +73,6 @@ function Chat() {
         }
 
         try {
-
-            // let email = localStorage.getItem('email')
             let sen = {
                 message: messag.trim(),
                 recipient: state.email,
@@ -128,7 +114,6 @@ function Chat() {
             });
 
             setconversation(r)
-            console.log(r)
             setloading(false)
         }, error => {
             console.log(error)
@@ -184,10 +169,9 @@ function Chat() {
             
             <div className="chart-cantaner">
 
-                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname}</span></h4>
+                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname} {age}</span></h4>
 
                 {conversation.length> 0? conversation.map(chat => {
-console.log(chat.file_type,'attttttt')
                     return (
                         <>
                             <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-doc' : 'chat-msg-user'}`}>

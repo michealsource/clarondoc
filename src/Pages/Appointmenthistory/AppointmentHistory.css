@@ -44,24 +44,32 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
 .appointment-box{
     color: #fff;
     display: flex;
-    padding: 30px;
+    padding: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
 }
 .appointment-box>p{
-    font-size: 25px;
+    font-size: 15px;
+    padding-bottom: 15px !important;
 }
 
 .upcoming-num{
     background-color: #339999;
-    padding: 20px;
+    /* padding: 20px; */
     font-size: 30px;
     font-weight: bold;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
-   margin-bottom: 30px; 
+   margin-bottom: 20px; 
+   display: flex;
+   text-align: center;
+   align-content: center;
+   justify-content: center;
+   align-items: center;
 }
 
 .pending-num{
@@ -70,8 +78,15 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
     font-size: 30px;
     font-weight: bold;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
    margin-bottom: 30px;
+   display: flex;
+   text-align: center;
+   align-content: center;
+   justify-content: center;
+   align-items: center;
 }
 
 .completed-num{
@@ -80,8 +95,15 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
     font-size: 30px;
     font-weight: bold;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
    margin-bottom: 30px;
+   display: flex;
+   text-align: center;
+   align-content: center;
+   justify-content: center;
+   align-items: center;
 }
 
 .cancelled-num{
@@ -90,8 +112,15 @@ background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, F
     font-size: 30px;
     font-weight: bold;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
    box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
    margin-bottom: 30px;
+   display: flex;
+   text-align: center;
+   align-content: center;
+   justify-content: center;
+   align-items: center;
 }
 
 .appointment-input-container{

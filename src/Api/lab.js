@@ -152,3 +152,39 @@ export const insurancegetLabTests = async () => {
     return response.data.tests
 }
 
+export const getLabTestIndividual = async (email) => {
+    const key = await apiKey()
+    const auth = localStorage.getItem('access-token');
+    const response = await axios({
+        method: 'GET',
+        url: `https://api.clarondoc.com/requests/tests/individual/users/${email}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data
+}
+
+
+export const getLabTestFacility = async (email) => {
+    const key = await apiKey()
+
+    const auth = localStorage.getItem('access-token');
+
+    const response = await axios({
+        method: 'GET',
+        url: `https://api.clarondoc.com/requests/tests/facility/users/${email}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth}`,
+            'x-api-key': key
+        }
+    })
+
+    return response.data
+}
+
+
