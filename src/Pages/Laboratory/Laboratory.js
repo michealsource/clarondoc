@@ -1,28 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './Laboratory.css'
 import Modal from 'react-modal'
-import { FaTimes } from "react-icons/fa";
-import {
-    TextField,
-    FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    Grid,
-    InputLabel,
-    Select,
-    MenuItem,
-    Checkbox
-} from '@material-ui/core';
+
 import { Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom'
 import MainLayout from '../MainLayout';
 import 'date-fns';
 import * as API from '../../Api/pharmacy'
+import {getLabTestIndividual,getLabTestFacility} from '../../Api/lab'
 import loading from '../../images/loading.gif'
-
+import { useSelector } from 'react-redux'
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
@@ -60,22 +48,22 @@ function Laboratory() {
     };
 
     const classes = useStyles();
-
-    const [bookings, setBookings] = useState([])
-    const [bookingsF, setBookingsF] = useState([])
+    const userData = useSelector((state) => state.user.value)    
     const [loaded, setLoaded] = useState(false)
+    const [individual, setIndividual]=useState([])
+    const [facility,setFacility] = useState([])
     useEffect(() => {
 
         (async () => {
 
             if (!loaded) {
                 try {
-                    let res,faciility
-                    res = await API.myLabTests('individual')
-                    faciility = await API.myLabTests('facility')
-                    setBookingsF(faciility)
-                    setBookings(res.requests)
-                    console.log(bookings)
+                 const dataIndividual =   await getLabTestIndividual(userData.email);
+                 setIndividual(dataIndividual.requests)
+                 
+                 const dataIndFacility =   await getLabTestFacility(userData.email); 
+                 setFacility(dataIndFacility.requests)
+    
                 } catch (e) {
                     console.log(e)
                 }
@@ -84,8 +72,8 @@ function Laboratory() {
 
         })()
     })
-    console.log(bookings,"fffff")
 
+    console.log(individual,'individual')
     return (
         <MainLayout>
             
@@ -106,26 +94,26 @@ function Laboratory() {
                         </div>
                     </div>
 
-                    <div class="ambulance-container">
+                        <div class="ambulance-container">
                         <div class="appointment-container-box">
                             <div class="appointment-box one">
-                                <div className="upcoming-num">0</div>
-                                <p>Upcoming Request</p>
+                                <div className="upcoming-num">{individual.length}</div>
+                                <p>Pending Individual Request</p>
                             </div>
 
                             <div class="appointment-box two">
                                 <div className="pending-num">0</div>
-                                <p>Pending Request</p>
+                                <p>Completed Individual Request</p>
                             </div>
 
                             <div class="appointment-box three">
-                                <div className="completed-num">0</div>
-                                <p>Completed Request</p>
+                                <div className="completed-num">{facility.length}</div>
+                                <p>Pending Facility Request</p>
                             </div>
 
                             <div class="appointment-box four">
                                 <div className="cancelled-num">0</div>
-                                <p>Cancelled Request</p>
+                                <p>Completed Facility Request</p>
                             </div>
                         </div>
                     </div>
@@ -136,14 +124,15 @@ function Laboratory() {
                                 <Tab className={classes.tab} label="Facility" />
                             </Tabs>
                             <div class="history-content">
+                                
                                 <Panel value={index} index={0}>
                                     <div className="top-history-container">
                                         <div class="row-his">
                                             <div className="column-his-1">
                                                 <div class="col-container">
-                                                    {bookings.length > 0 && (bookings.length ? (
+                                                    {individual.length > 0 && (individual.length ? (
                                                         <div class="his-container-cont-lab">
-                                                            {bookings.map((item) => (
+                                                            {individual.map((item) => (
                                                                 <>
                                                                     <div className='single-ambulance'>
                                                                         <div>
@@ -151,7 +140,7 @@ function Laboratory() {
                                                                             {item.labTests.map(test => (
                                                                                 <div className='request-test'>
                                                                                     <p>{test.labtest}</p>
-                                                                                    <p>GHS {test.charge}</p>
+                                                                                    <p>GHSsss {test.charge}</p>
                                                                                 </div>
                                                                             ))}
                                                                         </div>
@@ -177,14 +166,17 @@ function Laboratory() {
 
                                     </div>
                                 </Panel>
-                                <Panel value={index} index={0}>
+
+
+
+                                <Panel value={index} index={1}>
                                     <div className="top-history-container">
                                         <div class="row-his">
                                             <div className="column-his-1">
                                                 <div class="col-container">
-                                                    {bookings.length > 0 && (bookings.length ? (
+                                                    {facility.length > 0 && (facility.length ? (
                                                         <div class="his-container-cont-lab">
-                                                            {bookings.map((item) => (
+                                                            {facility.map((item) => (
                                                                 <>
                                                                     <div className='single-ambulance'>
                                                                         <div>

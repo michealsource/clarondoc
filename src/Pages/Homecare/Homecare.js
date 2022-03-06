@@ -1,9 +1,32 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from "react-router-dom"
 import './Homecare.css'
 import HomeCareCard from './HomeCareCard'
 import MainLayout from '../MainLayout';
+import * as API from '../../Api/pharmacy'
 function Homecare() {
+
+    const [bookings, setBookings] = useState([])
+    const [loaded, setLoaded] = useState(false)
+    useEffect(()=>{
+        (async()=>{
+    
+          if(!loaded){
+            try{
+                let res
+                res = await API.myHomecareRequests()
+                setBookings(res.requests)
+                console.log(bookings)
+                
+            }catch(e){
+              console.log(e)
+            }
+            setLoaded(true)
+          }
+    
+        })()
+      })
+      console.log(bookings,'hhhhhh')
     return (
         <MainLayout>
         <div className="home-care-container-1">
@@ -17,13 +40,9 @@ function Homecare() {
             </div>
 
             <div class="appointment-container-box">
-                <div class="appointment-box one">
-                    <div className="upcoming-num">0</div>
-                    <p>Upcoming Request</p>
-                </div>
 
                 <div class="appointment-box two">
-                    <div className="pending-num">0</div>
+                    <div className="pending-num">{bookings.length}</div>
                     <p>Pending Request</p>
                 </div>
 
@@ -32,10 +51,6 @@ function Homecare() {
                     <p>Completed Request</p>
                 </div>
 
-                <div class="appointment-box four">
-                    <div className="cancelled-num">0</div>
-                    <p>Cancelled Request</p>
-                </div>
             </div>
 
             <HomeCareCard/>
