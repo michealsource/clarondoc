@@ -163,6 +163,7 @@ color: whitesmoke;
     width: 50px;
     height: 50px;
     border-radius: 2px;
+    margin-right: 10px;
 }
 
 .navbar-container{
@@ -216,6 +217,7 @@ color: whitesmoke;
     padding-left: 10px;
     font-weight: bold;
     color: #767676;
+    padding-right: 10px;
 }
 
 
@@ -286,6 +288,28 @@ color: whitesmoke;
     height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+
+  .hover-menu{
+      background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      display: flex;
+      flex-direction: column;
+      right: 20px;
+      box-sizing:border-box;
+      position: absolute;
+      border-radius: 2px;
+
+  }
+
+  .hover-menu span{
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .hover-menu a{
+      padding: 10px;
+      cursor: pointer;
   }
 
 
