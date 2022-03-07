@@ -5,7 +5,8 @@ import MainLayout from '../MainLayout';
 import { useLocation } from 'react-router-dom'
 import { sendMessage} from '../../Api/chats';
 import { userDetails } from '../../Api/Auth'
-import firebase from 'firebase'
+import firebase from 'firebase';
+import loader from '../../images/spinner.gif'
 import { formatRelative } from 'date-fns'
 let interval
 
@@ -31,7 +32,7 @@ function Chat() {
     const [email, setemail] = useState('')
     const [user, setUser] = useState({})
     const [message, setmessage] = useState('')
-    const [loading, setloading] = useState(true)
+    const [loading, setloading] = useState(false)
     const [conversation, setconversation] = useState([])
     const [attachment, setattachment] = useState()
     const [attachments, setattachments] = useState([])
@@ -42,12 +43,21 @@ function Chat() {
     const [sendingNow, setsendingNow] = useState(false)
     const [sendingNowAA, setsendingNowAA] = useState(false)
     const [loadingChat, setloadingChat] = useState(false)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState("")
     const emailR = useRef(null);
 
-    const handleImageAsFile = (e) => {
+    const handleImageAsFile = async(e) => {
+        setloading(true)
         const image = e.target.files[0]
-        setImage(image)
+       await firebase.storage().ref(`new-attaches/${image.name}`).put(image);
+     
+       const url = await firebase.storage().ref(`new-attaches`).child(image.name).getDownloadURL()
+        
+
+        if(url){
+            setImage(url)
+            setloading(false)
+          }
     }
     const chat_code = (patient, doctor) => {
         return patient + '-' + doctor;
@@ -55,28 +65,18 @@ function Chat() {
     // FUNCTION FOR SENDING MESSAGE
     const send = async () => {
         let type = '';
-        let url ='';
+        // let url ='';
         var messag = message;
         if (message.length === 0) {
             messag = 'Media Attachment';
         }
         setsendingNow(true)
-        try{
-
-             await firebase.storage().ref(`new-attaches/${image.name}`).put(image)
-             url = await firebase.storage().ref(`new-attaches`).child(image.name).getDownloadURL()
-            
-            // return false;
-        }catch(e){
-            console.log('*****')
-            console.log(e)
-        }
 
         try {
             let sen = {
                 message: messag.trim(),
                 recipient: state.email,
-                attachment: url,
+                attachment: image,
                 file_type: type,
                 sender: user.email,
                 symptoms: [],
@@ -90,10 +90,9 @@ function Chat() {
 
             if (true) {
                 setmessage('')
-                setattachment(null)
-                alert('file uploaded successfully')
-                // setloading(true)
-                // startStream()
+                // setattachment(null)
+                setImage("")
+                // alert('file uploaded successfully')
             } else {
                 seterror('There was an error sending your message')
             }
@@ -163,7 +162,7 @@ function Chat() {
         return Math.floor(seconds) + " seconds";
       }
       
- 
+ console.log(conversation, 'rrrrrr')
     return (
         <MainLayout>
             
@@ -175,28 +174,35 @@ function Chat() {
                     return (
                         <>
                             <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-doc' : 'chat-msg-user'}`}>
-                                {chat.attachment != null && chat.file_type.includes('image') ?
+                                {chat.message && chat.attachment === "" ? (<p>{chat.message}</p>) : chat.message && chat.attachment != "" ?
                                     <div>
                                         <img src={chat.attachment} alt="" className='msg-img' />
                                     </div> : null
                                 }
-                                <p>{chat.message ? chat.message : 'loading chat'}</p>
+                                {/* <p>{chat.message ? chat.message : 'loading chat'}</p> */}
                                 <p> about {timeSince(new Date(chat.createDate))} ago</p>
                             </div>
 
                         </>
                     )
                 }):'Loading Chat'}
-                <div>
-                    {image ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
-                            </div>
+                
                 <div class="input-chat-conatiner">
 
-                    <textarea value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text"></textarea>
-                    <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>
-                    <input type="file" onChange={handleImageAsFile}id="fileimg" className="file-upload-file" />
+                {loading? '':(<div className='img_upload_user' style={{display: image ? "block" : "none"}}>
+                    {image !=="" ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
+                </div>)}
 
-                    <FaTelegramPlane onClick={send} className="upload-icon" />
+
+                    <textarea style={{display: image || loading ? "none" : "block"}} value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text">
+
+                    </textarea>
+                    {loading || image !==""? '': <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>}
+                   
+
+                   {loading && image == ""? <img className='loader-img-file' src={loader} alt=""/> :(<><input type="file" onChange={handleImageAsFile}id="fileimg" className="file-upload-file" />
+                    <FaTelegramPlane onClick={send} className="upload-icon" /></>)}
+
                 </div>
             </div>
         </MainLayout>

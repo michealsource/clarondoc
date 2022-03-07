@@ -114,25 +114,25 @@ function Card({ sidebar }) {
                         <Link to="/drugs" class="card-box">
                             <img src={drug} alt="" />
                             <h4>Drugs Order History</h4>
-                            <span>No Order made yet</span>
+                            {/* <span>No Order made yet</span> */}
                         </Link>
 
                         <Link to="/laboratory" class="card-box">
                             <img src={labrequest} alt="" />
                             <h4>Lab Request History</h4>
-                            <span>No request made yet</span>
+                            {/* <span>No request made yet</span> */}
                         </Link>
 
                         <Link to="/ambulance" class="card-box">
                             <img src={ambulance} alt="" />
                             <h4>Ambulance Request History</h4>
-                            <span>No request made yet</span>
+                            {/* <span>No request made yet</span> */}
                         </Link>
 
                         <Link to="/homecare" class="card-box">
                             <img src={homecare} alt="" />
                             <h4>HomeCare Request History</h4>
-                            <span>No request made yet</span>
+                            {/* <span>No request made yet</span> */}
                         </Link>
                     </div>
                 </div>
