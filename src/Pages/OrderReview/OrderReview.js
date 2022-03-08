@@ -19,6 +19,8 @@ import { facilityLabRequest, individualLabRequest, insurancefacilityLabRequest, 
 import { requestHomeCare, insurancerequestHomeCare, get_insurance_provider, request_payment_through_insurance } from '../../Api/homecare';
 import { buyDrugs } from '../../Api/pharmacy'
 import swal from 'sweetalert';
+import {CLEARCARTINFO} from '../../features/user'
+import { useDispatch} from 'react-redux'
 
 
 
@@ -72,6 +74,7 @@ const style = {
 };
 
 function OrderReview() {
+    const dispatch = useDispatch()
     useEffect(()=>{
         (async()=>{
         let account = await localStorage.getItem('user')
@@ -109,7 +112,6 @@ function OrderReview() {
     const [otperror, setotperror] = useState(false)
     const [tnx_ref, settnx_ref] = useState('')
     const [button, setButton] = useState('Pay Now')
-
     const [open, setOpen] = useState(false);
 
     // INSURANCE STATE
@@ -147,6 +149,7 @@ function OrderReview() {
 
     // HANDLE MOMO PAYMENT
     const momopayment = async () => {
+        const purpose = type == 'drug' ? 'Pharmacy Order' : type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
         if (phone.length < 10) {
             setPhoneError('Please enter a valid number')
             return
@@ -179,15 +182,30 @@ function OrderReview() {
                     setLoading(false)
                     setButton('Awaiting for payment confirmation...')
                 } else if (init.data.status === 'success') {
+                    
 
-                    alert('payment successful')
+                    if(type == 'drug'){
+                        dispatch(CLEARCARTINFO())
+                    }
+                    swal({
+                        title: "Payment successful",
+                        text: `You have successfully paid GHS ${totalCost ? totalCost : item.totalCost} for ${purpose}. \n Your trasaction reference is ${init.data.reference}.`,
+                        icon: "success",
+                        button: "Ok",
+                    });
+                    navigate(-1)
                     setLoading(false)
                     setButton('Done')
 
                 } else {
                     setLoading(false)
                     setButton(init.data.gateway_response)
-                    alert('payment not successful')
+                    swal({
+                        title: "Payment not successful",
+                        text: `Your attempt to pay  GHS ${totalCost ? totalCost : item.totalCost} for ${purpose} failed. \n Please try again.`,
+                        icon: "error",
+                        button: "Ok",
+                    });
                 }
 
             } else {
@@ -284,10 +302,13 @@ function OrderReview() {
                     localStorage.removeItem("prescription")
                 }
 
-                const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
+                const purpose = type == 'drug' ? 'Pharmacy Order' : type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
 
                 setLoading(false)
                 setButton('Done')
+                if(type == 'drug'){
+                    dispatch(CLEARCARTINFO())
+                }
                 swal({
                     title: "Payment successful",
                     text: `You have successfully paid GHS ${totalCost ? totalCost : item.totalCost} for ${purpose}. \n Your trasaction reference is ${init.data.reference}.`,
@@ -435,9 +456,12 @@ function OrderReview() {
                     await buyDrugs(location.state.data)
                 }
 
-                const purpose = location.type == 'drug' ? 'Pharmacy Order' : location.type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
+                const purpose = type == 'drug' ? 'Pharmacy Order' : type == 'lab' ? 'Laboratory Test(s)' : 'Home Care Service'
                 setLoading(false)
                 setButton('Done')
+                if(type == 'drug'){
+                    dispatch(CLEARCARTINFO())
+                }
                 swal({
                     title: "Payment successful",
                     text: `You have successfully paid GHS ${totalCost ? totalCost : item.total} for ${purpose}. \n Your trasaction reference is ${init.data.reference}.`,
@@ -459,6 +483,7 @@ function OrderReview() {
         // stop
     }
 
+    console.log(location.type,'ttttttttt')
     return (
         <MainLayout>
         <div class="order-container">

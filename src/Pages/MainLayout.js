@@ -17,7 +17,7 @@ import UserProfileDropDown from './Dashboard/UserProfileDropDown';
 import { useSelector, useDispatch } from 'react-redux'
 import {LOGOUT} from '../features/user'
 import { fetchNotifications } from '../Api/notifications';
-import { NOTIFICATIONS } from '../features/user'
+import { NOTIFICATIONS, } from '../features/user'
 
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
@@ -30,7 +30,7 @@ export default function MainLayout({ children }) {
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
             let response = await fetchNotifications();
-            console.log(response)
+            // console.log(response)
             dispatch(NOTIFICATIONS(response))
             setNotifications(response)
           })()
@@ -101,7 +101,7 @@ export default function MainLayout({ children }) {
                             <h5 className="tips">Health Tips</h5>
                             </Link>
 
-                            <button onClick={() => navigate("/call", {state: {mediaType: "audio"}})}  className="blog">
+                            <button onClick={() => userData.subscription =="Premium" || userData.subscription == "Family Plan" ? navigate("/call", {state: {mediaType: "audio"}}): navigate("/Subscribe")}  className="blog">
                             <FaPhoneAlt className="hrt"/> 
                             <h5 className='urgent'>Urgent Care</h5>
                             </button>

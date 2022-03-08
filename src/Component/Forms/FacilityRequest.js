@@ -256,7 +256,7 @@ function FacilityRequest({ testName }) {
                         <Grid item xs={6}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
-                                    label="Date desktop"
+                                    label="Lab Date"
                                     inputFormat="MM/dd/yyyy"
                                     value={selectedDate}
                                     onChange={handleDateChange}

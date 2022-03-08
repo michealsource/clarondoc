@@ -2,14 +2,13 @@ import React, { useState,useEffect } from 'react'
 import firebase from "../../firebaseConfig"
 import './AppointmentHistory.css'
 import Modal from 'react-modal'
-import { FaTimes } from "react-icons/fa";
+import swal from 'sweetalert';
 
 import {Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {Link} from 'react-router-dom'
 import MainLayout from '../MainLayout';
 import moment from 'moment';
-
+import useForceUpdate from 'use-force-update';
 import 'date-fns';
 import { myBookings,DeleteBooking,respondRequest } from '../../Api/doctors';
 import loading from '../../images/loading.gif'
@@ -45,6 +44,7 @@ const Panel = (props) => (
 
 function AppointmentHistory() {
     // HANDLES DATE STATE
+    const forceUpdate = useForceUpdate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [index, setIndex] = useState(0);
 
@@ -66,7 +66,10 @@ function AppointmentHistory() {
     const [upcoming, setUpcoming]=useState([])
     const [loaded, setLoaded] = useState(false)
     const [loadinga, setloadinga] = useState(true);
+    const [pending,setPending]= useState()
+
     
+
     useEffect(()=>{
      
         (async()=>{
@@ -90,7 +93,9 @@ function AppointmentHistory() {
           }
     
         })()
-      })
+      },[])
+
+      const orderedItemNames = bookings.filter(b => b.status =="Pending")
 
       const cancelAppointment = async (id) =>{
         // console.log(filtered);
@@ -98,9 +103,13 @@ function AppointmentHistory() {
           setloadinga(true)
           const email = localStorage.getItem('email');
           await firebase.firestore().collection('deletedAppointment').doc(email).collection('list').add({id: id});
-          // let resa = await DeleteBooking(id)
-          // console.log(resa.data)
-          alert('deleted successfully')
+          swal({
+            title: "Request successful",
+            text: `Appointment Deleted Successfully`,
+            icon: "success",
+            button: "Ok",
+        });  
+        forceUpdate();
           await respondRequest('Rejected', id);
         //   loadData();
         }catch(e){
@@ -110,7 +119,7 @@ function AppointmentHistory() {
     
       }
     
-    
+    // console.log(orderedItemNames,'upppp')
     return (
         <MainLayout>
        
@@ -134,19 +143,19 @@ function AppointmentHistory() {
                 <div class="ambulance-container">
                 <div class="appointment-container-box">
                 <div class="appointment-box one">
-                    <div className="upcoming-num">0</div>
+                    <div className="upcoming-num">{upcoming.length}</div>
                     <p>Upcoming Appointments</p>
                 </div>
 
                 <div class="appointment-box two">
-                    <div className="pending-num">0</div>
+                    <div className="pending-num">{orderedItemNames.length}</div>
                     <p>Pending Appointments</p>
                 </div>
 
-                <div class="appointment-box three">
+                {/* <div class="appointment-box three">
                     <div className="completed-num">0</div>
                     <p>Completed Appointments</p>
-                </div>
+                </div> */}
 
                 <div class="appointment-box four">
                     <div className="cancelled-num">0</div>
