@@ -107,7 +107,7 @@ function Chat() {
 
     // LOAD FIREBASE CHAT FUNCTION
     const loadfirebasechat = async (data) => {
-        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.email)).collection('messages').orderBy('timeStamp', 'asc').onSnapshot(snapshot => {
+        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.doctor.email)).collection('messages').orderBy('timeStamp', 'asc').onSnapshot(snapshot => {
             var r = snapshot.docs.map(doc => {
                 return (doc.data())
             });
@@ -162,13 +162,13 @@ function Chat() {
         return Math.floor(seconds) + " seconds";
       }
       
- console.log(conversation, 'rrrrrr')
+//  console.log(conversation, 'rrrrrr')
     return (
         <MainLayout>
             
             <div className="chart-cantaner">
 
-                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname} {age}</span></h4>
+                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.doctor.firstname} {age}</span></h4>
 
                 {conversation.length> 0? conversation.map(chat => {
                     return (
@@ -185,7 +185,7 @@ function Chat() {
 
                         </>
                     )
-                }):'Loading Chat'}
+                }): 'No chat history'}
                 
                 <div class="input-chat-conatiner">
 

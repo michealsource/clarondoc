@@ -4,6 +4,7 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import Box from '@mui/material/Box';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
+import doctorDefault from '../../images/doctor.png'
 import MomentUtils from '@date-io/moment';
 import 'date-fns';
 import Modal from '@mui/material/Modal';
@@ -19,7 +20,7 @@ import { makeBooking } from '../../Api/doctors';
 import {BiArrowBack} from "react-icons/bi"
 import load from '../../images/loading.gif'
 import {useNavigate} from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux'
 const style = {
     position: 'absolute',
     top: '50%',
@@ -33,6 +34,7 @@ const style = {
 };
 function SavedDoctors() {
     const [openModal, setOpenModal] = useState(false)
+    const userData = useSelector((state)=>state.user.value)
     const [open, setOpen] = useState(false);
     const handleOpen = (doc) => {
         setOpen(true);
@@ -108,6 +110,7 @@ function SavedDoctors() {
     console.log(date)
     return (
         <MainLayout>
+            {/* <img src={doctorDefault} alt=""/> */}
             <div className="doctors">
             <div className='gobackBtn' onClick={() => navigate(-1)}>
                 <p><BiArrowBack /> Back</p>
@@ -122,15 +125,19 @@ function SavedDoctors() {
                                 : filtered.map(doc => (
                                     <div class="box-saved" id={doc.email}>
                                         <div class="sav-img-container">
-                                            <img className='saved-doc-img' src={doc.avatar} alt="" />
+                                            <img className='saved-doc-img' src={doc.avatar && doc.avatar !=="undefined" ?doc.avatar:doctorDefault} alt="" />
                                             <div class="saved-inner-container">
 
-                                                <div class="saved-action-share">
+                                                <div
+                                                 onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50, doctor:doc} }): navigate('/chat',{state:{doctor:doc}}) }
+                                                class="saved-action-share">
                                                     <BsFillChatSquareTextFill />
                                                     <p>Chat</p>
                                                 </div>
 
-                                                <div onClick={() => handleOpen(doc)} class="saved-action-share">
+                                                <div
+                                                onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor:doc} }): handleOpen(doc)}
+                                                 class="saved-action-share">
                                                     <FaRegCalendarAlt />
                                                     <p>Book</p>
                                                 </div>

@@ -307,7 +307,7 @@ const favorite = async(email)=>{
                        </div>
    
                        <div 
-                       onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50,doctor} }): navigate('/chat',{state:doctor,age:12}) }
+                       onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50,doctor} }): navigate('/chat',{state:{doctor}}) }
                        class="action-container">
                            <BsFillChatSquareTextFill className="doctor-icon" />
                            <span>Chat</span>

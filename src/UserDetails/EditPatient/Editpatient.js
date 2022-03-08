@@ -48,7 +48,7 @@ function Editpatient() {
    const navigate = useNavigate()
     const classes = useStyles();
     const location = useLocation();
-    const {firstname,lastname,phone,email,avatar,sex,address,age}= location.state.user
+    const {firstname,lastname,phone,email,avatar,sex,address,age}= userData
     const [error, seterror] = useState()
     const [loading, setloading] = useState(false)
     const [response, setresponse] = useState({
