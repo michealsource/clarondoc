@@ -2,19 +2,20 @@
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
+    width: 93%;
     height: auto;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     margin-top: 50px;
-    margin-left: 20px;
+    margin-left: 25px;
     margin-bottom: 100px;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .chat-msg-user{
-    background: #61cd88;
-    border-radius: 10px;
+    background: #e6e4de;
+    border-radius: 10px 20px 5px;
     padding: 20px;
-    color: #fff;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
@@ -22,8 +23,8 @@
 }
 
 .chat-msg-doc{
-    background: #16a085;
-    border-radius: 10px;
+    background: #b3e8c6;
+    border-radius: 20px 5px 10px;
     padding: 20px;
     color: #fff;
     font-size: 20px;
@@ -43,6 +44,7 @@
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
+    margin-left: 40px;
 }
 
 .input-chat-conatiner{
@@ -55,7 +57,7 @@
     font-size: 45px;
     color: #fff;
     margin-left: 5px;
-    cursor: pointer;
+    cursor: pointer !important;
     background: #61cd88;;
     padding: 5px;
     border-radius: 4px;
@@ -81,12 +83,30 @@
 }
 
 .msg-img{
-    width: 200px;
-    height: 300px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    /* object-fit: contain;  */
 }
 
 .upload-image-attachment{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     margin-top: 10px;
+    margin-top: -10px;
+    /* background-color: red; */
+}
+
+.img_upload_user{
+    width: 50%;
+    border-radius: 4px;
+    height: 50px;
+    margin-left: 40px;
+}
+
+.loader-img-file{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 5%;
 }

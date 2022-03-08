@@ -3,9 +3,10 @@ import './Chat.css'
 import { FaTelegramPlane, FaRegArrowAltCircleUp } from "react-icons/fa";
 import MainLayout from '../MainLayout';
 import { useLocation } from 'react-router-dom'
-import { sendMessage } from '../../Api/chats';
+import { sendMessage} from '../../Api/chats';
 import { userDetails } from '../../Api/Auth'
-import firebase from 'firebase'
+import firebase from 'firebase';
+import loader from '../../images/spinner.gif'
 import { formatRelative } from 'date-fns'
 import moment from 'moment';
 let interval
@@ -28,10 +29,11 @@ function Chat() {
 
 
     const { state } = useLocation();
+    const { age } = state;
     const [email, setemail] = useState('')
     const [user, setUser] = useState({})
     const [message, setmessage] = useState('')
-    const [loading, setloading] = useState(true)
+    const [loading, setloading] = useState(false)
     const [conversation, setconversation] = useState([])
     const [attachment, setattachment] = useState()
     const [attachments, setattachments] = useState([])
@@ -42,72 +44,40 @@ function Chat() {
     const [sendingNow, setsendingNow] = useState(false)
     const [sendingNowAA, setsendingNowAA] = useState(false)
     const [loadingChat, setloadingChat] = useState(false)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState("")
     const emailR = useRef(null);
 
-    //FUNCTION TO UPLOAD ATTACHEMENT
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
-        }
+    const handleImageAsFile = async(e) => {
+        setloading(true)
+        const image = e.target.files[0]
+       await firebase.storage().ref(`new-attaches/${image.name}`).put(image);
+     
+       const url = await firebase.storage().ref(`new-attaches`).child(image.name).getDownloadURL()
+        
+
+        if(url){
+            setImage(url)
+            setloading(false)
+          }
     }
-
-    const uriToBlob = (uri) => {
-        return new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            // return the blob
-            resolve(xhr.response);
-          };
-          
-          xhr.onerror = function() {
-            // something went wrong
-            reject(new Error('uriToBlob failed'));
-          };
-          // this helps us get a blob
-          xhr.responseType = 'blob';
-          xhr.open('GET', uri, true);
-          
-          xhr.send();
-        });
-      }
-
     const chat_code = (patient, doctor) => {
         return patient + '-' + doctor;
     }
     // FUNCTION FOR SENDING MESSAGE
     const send = async () => {
-        let url = ''; let type = '';
+        let type = '';
+        // let url ='';
         var messag = message;
         if (message.length === 0) {
             messag = 'Media Attachment';
         }
         setsendingNow(true)
 
-        if (attachment) {
-            type = attachment.type
-            // var name = getFileName(attachment.name, path);
-
-            try {
-                var blob = await uriToBlob(attachment.image);
-                // let attached = await firebase.storage().ref(`new-attaches/${name}`).put(blob, {contentType: type})
-                // url = await firebase.storage().ref(`new-attaches`).child(name).getDownloadURL()
-                console.log(url)
-                setsendingNow(false)
-                return false;
-            } catch (e) {
-                console.log('*****')
-                console.log(e)
-            }
-        }
-
         try {
-
-            // let email = localStorage.getItem('email')
             let sen = {
                 message: messag.trim(),
                 recipient: state.email,
-                attachment: url,
+                attachment: image,
                 file_type: type,
                 sender: user.email,
                 symptoms: [],
@@ -116,14 +86,14 @@ function Chat() {
             };
 
             sendMessage(sen)
-
+            
             await firebase.firestore().collection('newSMessages').doc(chat_code(user.email, state.email)).collection('messages').add(sen);
 
             if (true) {
                 setmessage('')
-                setattachment(null)
-                // setloading(true)
-                // startStream()
+                // setattachment(null)
+                setImage("")
+                // alert('file uploaded successfully')
             } else {
                 seterror('There was an error sending your message')
             }
@@ -138,19 +108,18 @@ function Chat() {
 
     // LOAD FIREBASE CHAT FUNCTION
     const loadfirebasechat = async (data) => {
-        console.log(chat_code(data.email, state.email))
-        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.email)).collection('messages').orderBy('timeStamp', 'desc').onSnapshot(snapshot => {
+        firebase.firestore().collection('newSMessages').doc(chat_code(data.email, state.doctor.email)).collection('messages').orderBy('timeStamp', 'asc').onSnapshot(snapshot => {
             var r = snapshot.docs.map(doc => {
                 return (doc.data())
             });
 
             setconversation(r)
-            console.log(r)
             setloading(false)
         }, error => {
             console.log(error)
         });
     }
+
     useEffect(() => {
         (async () => {
             let account = localStorage.getItem("user")
@@ -167,42 +136,75 @@ function Chat() {
     }, [])
     
 
-    const sortedConversation = conversation.length ? conversation.sort((a, b) => formatRelative(new Date(b.createDate), new Date()) - formatRelative(new Date(a.createDate), new Date())) : []
- 
+    function timeSince(date) {
+
+        var seconds = Math.floor((new Date() - date) / 1000);
+      
+        var interval = seconds / 31536000;
+      
+        if (interval > 1) {
+          return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+      }
+      
+//  console.log(conversation, 'rrrrrr')
     return (
         <MainLayout>
             
             <div className="chart-cantaner">
 
-                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname}</span></h4>
+                <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.doctor.firstname} {age}</span></h4>
 
-                {sortedConversation.length> 0? sortedConversation.map(chat => {
-                    
+                {conversation.length> 0? conversation.map(chat => {
                     return (
                         <>
-                            <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-user' : 'chat-msg-doc'}`}>
-                                {chat.attachment != null && chat.file_type.includes('image') ?
+                            <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-doc' : 'chat-msg-user'}`}>
+                                {chat.message && chat.attachment === "" ? (<p>{chat.message}</p>) : chat.message && chat.attachment != "" ?
                                     <div>
                                         <img src={chat.attachment} alt="" className='msg-img' />
                                     </div> : null
                                 }
-                                <p>{chat.message ? chat.message : 'loading chat'}</p>
-                                <p>{formatRelative(new Date(chat.createDate), new Date())}</p>
+                                {/* <p>{chat.message ? chat.message : 'loading chat'}</p> */}
+                                <p> about {timeSince(new Date(chat.createDate))} ago</p>
                             </div>
 
                         </>
                     )
-                }):'Loading Chat'}
-                <div>
-                    {image ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
-                            </div>
+                }): 'No chat history'}
+                
                 <div class="input-chat-conatiner">
 
-                    <textarea value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text"></textarea>
-                    <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>
-                    <input type="file" onChange={onImageChange} id="fileimg" className="file-upload-file" />
+                {loading? '':(<div className='img_upload_user' style={{display: image ? "block" : "none"}}>
+                    {image !=="" ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
+                </div>)}
 
-                    <FaTelegramPlane onClick={send} className="upload-icon" />
+
+                    <textarea style={{display: image || loading ? "none" : "block"}} value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text">
+
+                    </textarea>
+                    {loading || image !==""? '': <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>}
+                   
+
+                   {loading && image == ""? <img className='loader-img-file' src={loader} alt=""/> :(<><input type="file" onChange={handleImageAsFile}id="fileimg" className="file-upload-file" />
+                    <FaTelegramPlane onClick={send} className="upload-icon" /></>)}
+
                 </div>
             </div>
         </MainLayout>

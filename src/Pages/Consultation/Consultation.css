@@ -11,15 +11,41 @@
 .others{
     margin-top: 10px !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #61cd88;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #16a085 !important;
+    border-radius: 10px;
+  }
+
+.doctors{
+    height: 100%;
+    overflow-y: scroll;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 100px !important;
+    overflow-x: hidden;
+}
+
+
 .doctors .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
     margin: 20px;
     margin-bottom: 100px;
-    width: 93%;
-    margin-right: auto;
-    margin-left: auto;
-    
+    width: 100%;
 }
 
 .doctors .box-container .box{
@@ -225,9 +251,4 @@
   }
   .item-doc p{
     padding-left: 10px !important;
-  }
-
-  .doctors{
-      height: 100%;
-      overflow-y: scroll;
   }

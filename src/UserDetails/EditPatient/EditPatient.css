@@ -63,3 +63,15 @@
     align-self: flex-start;
     cursor: pointer;
   }
+
+  .edit-input-beda{
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .top-beda-edit{
+    margin-top: 30px !important;
+  }

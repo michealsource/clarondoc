@@ -93,7 +93,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>Health tips</li>
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
-    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family' ? 'Downgrade' : 'Upgrade'}</button>
+    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
  
 </div>

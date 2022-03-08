@@ -15,9 +15,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import UserProfileDropDown from './Dashboard/UserProfileDropDown';
 import { useSelector, useDispatch } from 'react-redux'
-import { userDetails} from '../Api/Auth';
+import {LOGOUT} from '../features/user'
 import { fetchNotifications } from '../Api/notifications';
-import { NOTIFICATIONS } from '../features/user'
+import { NOTIFICATIONS, } from '../features/user'
 
 export default function MainLayout({ children }) {
   const userData = useSelector((state)=>state.user.value)
@@ -30,7 +30,7 @@ export default function MainLayout({ children }) {
             let account = localStorage.getItem('user')
             SetUser(JSON.parse(account))
             let response = await fetchNotifications();
-            console.log(response)
+            // console.log(response)
             dispatch(NOTIFICATIONS(response))
             setNotifications(response)
           })()
@@ -42,11 +42,18 @@ export default function MainLayout({ children }) {
   const navigate = useNavigate()
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    // setAnchorEl(event.currentTarget);
+    setOpen(!open)
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const logOut = ()=>{
+    localStorage.removeItem("email")
+    localStorage.removeItem("access-token")
+    localStorage.removeItem("api-key")
+    localStorage.removeItem("login-expiry")
+    localStorage.removeItem("user")
+    dispatch(LOGOUT())
+    navigate("/")
+}
 
   return (
     <>
@@ -94,7 +101,7 @@ export default function MainLayout({ children }) {
                             <h5 className="tips">Health Tips</h5>
                             </Link>
 
-                            <button onClick={() => navigate("/call", {state: {mediaType: "audio"}})}  className="blog">
+                            <button onClick={() => userData.subscription =="Premium" || userData.subscription == "Family Plan" ? navigate("/call", {state: {mediaType: "audio"}}): navigate("/Subscribe")}  className="blog">
                             <FaPhoneAlt className="hrt"/> 
                             <h5 className='urgent'>Urgent Care</h5>
                             </button>
@@ -105,7 +112,17 @@ export default function MainLayout({ children }) {
                                    
                                     <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
                                 </div>
-                                <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/>
+                                {
+                                  open?<div className='hover-menu'>
+                                  <Link to="/profile">Profile</Link>
+                                  <Link to="/AboutClaron">About Us</Link>
+                                  <Link to="/ClaronTerms">Terms and Condition</Link>
+                                  <span onClick={logOut}>Logout</span>
+                                  {/* <h3>Home</h3> */}
+                                </div>:null
+                                }
+                                
+                                {/* <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/> */}
                             </div>
                         </div>
                     </div>

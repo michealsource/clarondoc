@@ -9,7 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import {useNavigate } from 'react-router-dom';
 import {register} from '../../Api/Auth'
 import Navbar from '../../Component/Navbar/Navbar';
-
+import { useDispatch } from 'react-redux'
+import { LOGIN } from '../../features/user'
+import swal from 'sweetalert';
 function Signup() {
     const [firstName, setFirstName] = useState('')
     const [LastName, setLastName] = useState('')
@@ -22,11 +24,11 @@ function Signup() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-
+    const dispatch = useDispatch()
 
     const handleSignup = async (e)=>{
         e.preventDefault();
-    
+       
         if(!firstName){
             return setError('Please provide a valid first name.')
         }
@@ -60,11 +62,14 @@ function Signup() {
             });
         if(response.success){
             navigate("/userDashboard")
+            let currentUser = localStorage.getItem('user');
+            dispatch(LOGIN(JSON.parse(currentUser)))
             setLoading(false)
      
         }else{
             setError(response.message)
-            alert('error inserting data try again')
+            swal("Network Error!", "You dont have internet connection!", "error");
+            alert('error inserting data no ')
             setLoading(false)
         }
         } catch (e) {

@@ -152,8 +152,8 @@ function PayAsYouGo() {
           }
           setLoading(true)
           setButton('Initializing Transaction...')
-          let init = await cardPayment(card, price*1);
-          console.log(card)
+          let init = await cardPayment(card, price);
+          // console.log(card)
 
           if(init.status){
             if(init.data.status === 'send_otp'){
@@ -165,19 +165,11 @@ function PayAsYouGo() {
               setLoading(false)
               setButton('Awaiting for payment confirmation...')
             }else if(init.data.status === 'success'){
-              
-              try {
-                await Upgrade_sub( name, moment(new Date().toString().substr(0, 16)).add(1,"months"))
-                
-              } catch (error) {
-                console.log(error)
-              }
               setLoading(false)
               setButton('Done')
-              dispatch(UPDATESUB(name))
               swal({
                 title: "Payment successful",
-                text: `You have successfully paid for ${price === 20 ? 'Basic Plan Subscription' : price === 40 ? 'Premium Plan Subscription' : 'Family Plan Subscription'} `,
+                text: `You have successfully paid ${price}'} `,
                 icon: "success",
                 button: "Ok",
             });
@@ -236,11 +228,16 @@ function PayAsYouGo() {
 
                   swal({
                     title: "Payment successful",
-                    text: `Your ${name} subscription was successful click Ok`,
+                    text: `Your ${name} was successful click Ok`,
                     icon: "success",
                     button: "Ok",
                   });
-                  navigate('/Book',{state:{doctor}})
+                  if(name === "Pay As You go"){
+                    navigate('/Book',{state:{doctor}})
+                  }else{
+                    navigate('/chat',{state:{doctor}})
+                  }
+                  
                
                 }else{
                   setLoading(false)

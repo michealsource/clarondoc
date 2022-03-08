@@ -28,6 +28,10 @@ const userSlice = createSlice({
         UPDATECARTINFO: (state,action)=>{
             state.cart.push(action.payload)
         },
+
+        CLEARCARTINFO: (state,action)=>{
+            state.cart = []
+        },
         UPDATECARTQUANTITY: (state,action)=>{
             state.cart[state.cart.indexOf(state.cart.filter(d => d.drugId === action.payload.drugId)[0])].quantity += 1
             state.cart[state.cart.indexOf(state.cart.filter(d => d.drugId === action.payload.drugId)[0])].total +=  action.payload.drug.unitprice
@@ -51,5 +55,5 @@ const userSlice = createSlice({
         },
     }
 })
-export const {LOGIN,LOGOUT,UPDATE,UPDATESUB,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY, NOTIFICATIONS} = userSlice.actions
+export const {LOGIN,LOGOUT,UPDATE,UPDATESUB,UPDATEUSERINFO,UPDATECARTINFO,REMOVEFROMCART, UPDATECARTQUANTITY, NOTIFICATIONS,CLEARCARTINFO} = userSlice.actions
 export default userSlice.reducer;

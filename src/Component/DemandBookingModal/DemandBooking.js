@@ -93,16 +93,17 @@ function DemandBooking() {
   const [success, setsuccess] = useState(false)
   const [error, seterror] = useState()
   const [loading, setloading] = useState(false)
+  const [policyExpiryDate, setPolicyExpiryDate] = useState(new Date())
   const [insurance, setinsurance] = useState({
     amount: 50, 
     currency: 'GHS',
-    names: 'vincent', 
-    policyProvider: 'Ghana', 
-    policyNumber: '23453322',
-    policyOption: 'card', 
+    names: '', 
+    policyProvider: '', 
+    policyNumber: '',
+    policyOption: '', 
     serviceId: Math.floor(Math.random() * 100), 
     service: 'On Demand Booking', 
-    policyExpiryDate: new Date()
+    policyExpiryDate: policyExpiryDate
   })
   const handleDateChange = (newDate) => {
     setDate(newDate);
@@ -112,9 +113,14 @@ function DemandBooking() {
     setSpecialist(event.target.value);
   };
 
-  // const onChangeValue(event) {
-  //   console.log(event.target.value);
-  // }
+  const onChangeValueInsurance = (event) => {
+    const {name, value} = event.target
+    setinsurance({
+      ...insurance,
+      [name]: value
+    })
+    // console.log(event.target.value);
+  }
 
   const onChangPayment = (event)=>{
     setpay(event.target.value)
@@ -172,6 +178,7 @@ function DemandBooking() {
     }catch(e){
       setloading(false)
       alert(e.message)
+      console.log(e, "hhhhh")
     }
 
   }
@@ -180,6 +187,7 @@ function DemandBooking() {
     navigate(-1)
   }
 
+  console.log(insurance,'gggg')
   return (
     <MainLayout>
       <div>
@@ -226,7 +234,7 @@ function DemandBooking() {
                 <MenuItem value="Parent/Gurdian">Parent/Gurdian</MenuItem>
                 <MenuItem value="Family">Family</MenuItem>
                 <MenuItem value="Friend">Friend</MenuItem>
-                <MenuItem value="Friend">Other</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -266,14 +274,15 @@ function DemandBooking() {
               <div class="insurance-form-contaner">
               <h3 style={{textAlign:'center'}}>Insurance Details</h3>
               <div class="insurance-form-container">
-                <TextField value={insurance.names} onChange={txt=>setinsurance({...insurance, ...{names: txt}})} style={{marginTop:10}} id="outlined-basic" label="Full Name" variant="outlined" />
-                <TextField value={insurance.policyNumber} onChange={txt=>setinsurance({...insurance, ...{policyNumber: txt}})} style={{marginTop:10}} id="outlined-basic" label="Policy No" variant="outlined" />
-                <TextField value={insurance.policyOption} onChange={txt=>setinsurance({...insurance, ...{policyOption: txt}})} style={{marginTop:10}} id="outlined-basic" label="Policy Type" variant="outlined" />
+                <TextField value={insurance.names} name="names" onChange={txt=>onChangeValueInsurance(txt)} style={{marginTop:10}} id="outlined-basic" label="Full Name" variant="outlined" />
+                <TextField value={insurance.policyNumber} name ="policyNumber" onChange={txt=>onChangeValueInsurance(txt)} style={{marginTop:10}} id="outlined-basic" label="Policy No" variant="outlined" />
+                <TextField value={insurance.policyProvider} name ="policyProvider" onChange={txt=>onChangeValueInsurance(txt)} style={{marginTop:10}} id="outlined-basic" label="Policy Provider" variant="outlined" />
+                <TextField value={insurance.policyOption} name="policyOption" onChange={txt=>onChangeValueInsurance(txt)} style={{marginTop:10}} id="outlined-basic" label="Policy Type" variant="outlined" />
                 <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
               <DesktopDatePicker
                 label="Select Date"
                 minDate={date}
-                value={insurance.policyExpiryDate} onChange={date=>setinsurance({...insurance, ...{policyExpiryDate: date}})}
+                value={policyExpiryDate} name="policyExpiryDate" onChange={txt=>setPolicyExpiryDate(txt)}
                 inputFormat="MM/dd/yyyy"
                 renderInput={(params) => <TextField {...params} />}
               />

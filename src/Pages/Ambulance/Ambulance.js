@@ -84,10 +84,9 @@ function Ambulance() {
             try{
                 let res
                 res = await API.myAmbulanceRequests()
-                
                 setBookings(res.requests)
                 setFiltered(res.requests.filter(request=>request.status === 'Completed'))
-                console.log(filtered)
+               
                 
             }catch(e){
               console.log(e)

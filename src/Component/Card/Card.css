@@ -7,6 +7,16 @@
     --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
     --border:.2rem solid var(--green);
 }
+
+.app-header{
+    padding-left: 20px !important;
+}
+
+.main-area-card-container{
+    overflow-y: scroll;
+    height: 100%;
+}
+
 .notifcation-container{
     margin: 20px;
     margin-top: 40px;
@@ -173,4 +183,14 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+}
+
+
+.his-container-cont-lab{
+    width: 100% !important;
+}
+
+.his-title{
+    color: #2d8f88 !important;
+    padding-bottom: 5px !important;
 }
