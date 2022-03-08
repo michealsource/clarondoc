@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import './signup.css'
 import signupimage from '../../images/signup.svg'
+import {Link } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -143,7 +144,7 @@ function Signup() {
                             <TextField value={address} onChange={(e)=>setAddress(e.target.value)} style={{ width: '100%' }} id="outlined-multiline-flexible" label="Physical Address" multiline maxRows={4} />
                         </div>
                         <button disabled={loading}   className="sign-up-button">{ loading ? 'Please wait...' : 'Create Account'}</button>
-                        <p className="terms">By Sign In you agree with our <span style={{ color: '#1BCC88', cursor: 'pointer' }}>Terms</span></p>
+                        <p className="terms">By Sign In you agree with our <Link to="/privacy" style={{ color: '#1BCC88', cursor: 'pointer' }}>Terms</Link></p>
                     </form>
                 </div>
             </div>
