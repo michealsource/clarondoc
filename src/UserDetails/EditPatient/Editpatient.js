@@ -106,7 +106,7 @@ function Editpatient() {
              phoneNumber:phoneNumber
           }
 
- 
+
             try {
           setloading(true)
           let data2 = await update(data)
@@ -145,7 +145,7 @@ function Editpatient() {
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
                 <input onChange={(e) => ImageUpload(e)} type="file" name="upfile" />
             </div>
-            <Grid container spacing={2}>
+            {/* <Grid container spacing={2}>
                 <p>{error?error:''}</p>
                 <Grid item xs={6}>
                     <TextField
@@ -173,21 +173,10 @@ function Editpatient() {
                         }}
                     />
                 </Grid>
-            </Grid>
-
+            </Grid> */}
+{/* 
             <Grid container spacing={2}>
-                {/* <Grid item xs={6}>
-                    <Grid item xs={6}>
-                        <FormControl component="fieldset" className={classes.gender}>
-                            <FormLabel component="legend">Gender</FormLabel>
-                            <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-                                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                </Grid> */}
-
+        
                 <Grid item xs={6}>
                     <TextField
                         id="outlined-basic"
@@ -200,31 +189,10 @@ function Editpatient() {
                         }}
                     />
                 </Grid>
-            </Grid>
+            </Grid> */}
 
-            <Grid container spacing={2}>
-                {/* <Grid item xs={3}>
-                    <TextField
-                        id="outlined-basic"
-                        label="28"
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
-                    />
-                </Grid> */}
-                {/* <Grid item xs={3}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Abuja"
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
-                    />
-                </Grid> */}
+            {/* <Grid container spacing={2}>
+              
 
                 <Grid item xs={6}>
 
@@ -239,7 +207,28 @@ function Editpatient() {
                         }}
                     />
                 </Grid>
-            </Grid>
+            </Grid> */}
+              <TextField
+                        id="outlined-basic"
+                        value={phoneNumber}
+                        onChange={(e)=>setPhoneNumber(e.target.value)}
+                        variant="outlined"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            className: classes.floatingLabelFocusStyle,
+                        }}
+                    />
+
+<TextField
+                        id="outlined-basic"
+                        value={emailu}
+                        onChange={(e)=>setEmal(e.target.value)}
+                        variant="outlined"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            className: classes.floatingLabelFocusStyle,
+                        }}
+                    />
             <Button
              disabled={loading}
              onClick={saveAccount} 
