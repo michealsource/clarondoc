@@ -10,6 +10,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaCcAmazonPay } from "react-icons/fa";
 import { FaAddressCard } from "react-icons/fa";
+import { useDispatch,useSelector } from 'react-redux'
 
 const prices = []
 prices['Basic'] = 20
@@ -18,9 +19,9 @@ prices['Family'] = 100
 
 function Profile() {
     const navigate = useNavigate();
-
-    let account = localStorage.getItem('user')
-    let user = (JSON.parse(account))
+    const user = useSelector((state)=>state.user.value)
+    // let account = localStorage.getItem('user')
+    // let user = (JSON.parse(account))
     // const[user,SetUser]= useState()
     // useEffect(()=>{
     //     (async()=>{
