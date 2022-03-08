@@ -139,7 +139,7 @@ function Editpatient() {
             <div className='gobackBtn' onClick={() => navigate(-1)}>
                 <p><BiArrowBack /> Back</p>
             </div>
-            <h2>Kndly Update Your Profile {userData.firstname}</h2>
+            <h2>Kndly Update Your Profile MR PLEASE {userData.firstname}</h2>
             <img src={userData.avatar !== "undefined"? userData.avatar:image} alt="" className="pro-img" />
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
@@ -208,7 +208,7 @@ function Editpatient() {
                     />
                 </Grid>
             </Grid> */}
-              <TextField
+              {/* <TextField
                         id="outlined-basic"
                         value={phoneNumber}
                         onChange={(e)=>setPhoneNumber(e.target.value)}
@@ -228,8 +228,8 @@ function Editpatient() {
                         InputLabelProps={{
                             className: classes.floatingLabelFocusStyle,
                         }}
-                    />
-                    <h1>Checking</h1>
+                    /> */}
+                    <h1>Checking {phone}</h1>
             <Button
              disabled={loading}
              onClick={saveAccount} 
