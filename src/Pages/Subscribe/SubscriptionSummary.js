@@ -299,6 +299,7 @@ function SubscriptionSummary() {
             }
             setLoading(false)
             setButton('Done')
+            dispatch(UPDATESUB(name))
             swal({
                 title: "Payment successful",
                 text: `You have successfully paid GHS ${price} for ${name}.`,
@@ -306,8 +307,7 @@ function SubscriptionSummary() {
                 button: "Ok",
               });
               navigate(-1)
-            // navigation.pop()
-            // navigation.replace('PaymentResult', {purpose: price == 20 ? 'Basic Plan Subscription' : price == 20 ? 'Premium Plan Subscription' : 'Family Plan Subscription', amount: price, reference, date: init.data.transaction_date})
+            
           }else{
             setLoading(false)
             setButton(init.data.gateway_response)

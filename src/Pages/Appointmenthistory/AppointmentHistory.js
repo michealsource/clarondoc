@@ -8,7 +8,6 @@ import {Tab, Tabs, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MainLayout from '../MainLayout';
 import moment from 'moment';
-import useForceUpdate from 'use-force-update';
 import 'date-fns';
 import { myBookings,DeleteBooking,respondRequest } from '../../Api/doctors';
 import loading from '../../images/loading.gif'
@@ -44,7 +43,6 @@ const Panel = (props) => (
 
 function AppointmentHistory() {
     // HANDLES DATE STATE
-    const forceUpdate = useForceUpdate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [index, setIndex] = useState(0);
 
@@ -109,7 +107,6 @@ function AppointmentHistory() {
             icon: "success",
             button: "Ok",
         });  
-        forceUpdate();
           await respondRequest('Rejected', id);
         //   loadData();
         }catch(e){

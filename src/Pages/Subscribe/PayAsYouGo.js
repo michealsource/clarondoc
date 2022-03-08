@@ -173,7 +173,11 @@ function PayAsYouGo() {
                 icon: "success",
                 button: "Ok",
             });
-              navigate(-1)
+            if(name === "Pay As You go"){
+              navigate('/Book',{state:{doctor}})
+            }else{
+              navigate('/chat',{state:{doctor}})
+            }
     
             }else{
               setLoading(false)
@@ -294,7 +298,11 @@ function PayAsYouGo() {
                 icon: "success",
                 button: "Ok",
               });
-              navigate(-1)
+              if(name === "Pay As You go"){
+                navigate('/Book',{state:{doctor}})
+              }else{
+                navigate('/chat',{state:{doctor}})
+              }
             // navigation.pop()
             // navigation.replace('PaymentResult', {purpose: price == 20 ? 'Basic Plan Subscription' : price == 20 ? 'Premium Plan Subscription' : 'Family Plan Subscription', amount: price, reference, date: init.data.transaction_date})
           }else{
