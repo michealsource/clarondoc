@@ -139,97 +139,58 @@ function Editpatient() {
             <div className='gobackBtn' onClick={() => navigate(-1)}>
                 <p><BiArrowBack /> Back</p>
             </div>
-            <h2>Kndly Update Your Profile MR PLEASE {userData.firstname}</h2>
+            <h2>Kndly Update Your Profile {userData.firstname}</h2>
             <img src={userData.avatar !== "undefined"? userData.avatar:image} alt="" className="pro-img" />
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
                 <input onChange={(e) => ImageUpload(e)} type="file" name="upfile" />
             </div>
-            {/* <Grid container spacing={2}>
+            <Grid className='top-beda-edit' container spacing={2}>
                 <p>{error?error:''}</p>
                 <Grid item xs={6}>
-                    <TextField
+                    <input
                         value={fname}
                         onChange={(e)=>setFname(e.target.value)}
-                        // defaultValue={firstname}
-                        id="outlined-basic"
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
+                        className="edit-input-beda"
                     />
                 </Grid>
 
                 <Grid item xs={6}>
-                    <TextField
+                    <input
                         value={lname}
-                        id="outlined-basic"
+                        className="edit-input-beda"
                         onChange={(e)=>setlname(e.target.value)}
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
+                        
                     />
                 </Grid>
-            </Grid> */}
-{/* 
+            </Grid>
+
             <Grid container spacing={2}>
         
                 <Grid item xs={6}>
-                    <TextField
-                        id="outlined-basic"
+                    <input
+                        className="edit-input-beda"
                         value={emailu}
                         onChange={(e)=>setEmal(e.target.value)}
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
+                      
+                    
                     />
                 </Grid>
-            </Grid> */}
+            </Grid>
 
-            {/* <Grid container spacing={2}>
+            <Grid container spacing={2}>
               
 
                 <Grid item xs={6}>
 
-                    <TextField
-                        id="outlined-basic"
+                    <input
+                        className="edit-input-beda"
                         value={phoneNumber}
                         onChange={(e)=>setPhoneNumber(e.target.value)}
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
+                      
                     />
                 </Grid>
-            </Grid> */}
-              {/* <TextField
-                        id="outlined-basic"
-                        value={phoneNumber}
-                        onChange={(e)=>setPhoneNumber(e.target.value)}
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
-                    />
-
-<TextField
-                        id="outlined-basic"
-                        value={emailu}
-                        onChange={(e)=>setEmal(e.target.value)}
-                        variant="outlined"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            className: classes.floatingLabelFocusStyle,
-                        }}
-                    /> */}
-                    <h1>Checking {phone}</h1>
+            </Grid>
             <Button
              disabled={loading}
              onClick={saveAccount} 
