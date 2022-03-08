@@ -35,7 +35,7 @@ function Notification() {
 
                 {notificationsData.length > 0 && (notificationsData.length > 0 ? notificationsData.map((item)=>{
                     return(
-                <div className={item.status === "Unread" ? "notification-container" : "notification-container-read"}
+                <div className={`${item.status === "Unread" ? "notification-container" :  "notification-container-read"}`  }
                 onClick={
                     ()=>item.body.includes('appointment') ? navigate('/AppointmentHistory'):
                     item.body.includes('Ambulance')? navigate('/ambulance'):item.body.includes('drugs')?

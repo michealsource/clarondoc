@@ -7,6 +7,7 @@ import { sendMessage } from '../../Api/chats';
 import { userDetails } from '../../Api/Auth'
 import firebase from 'firebase'
 import { formatRelative } from 'date-fns'
+import moment from 'moment';
 let interval
 
 function Chat() {
@@ -164,7 +165,9 @@ function Chat() {
             })
         })()
     }, [])
+    
 
+    const sortedConversation = conversation.length ? conversation.sort((a, b) => formatRelative(new Date(b.createDate), new Date()) - formatRelative(new Date(a.createDate), new Date())) : []
  
     return (
         <MainLayout>
@@ -173,7 +176,7 @@ function Chat() {
 
                 <h4 className="dr-chat-detail">You are Chatting with <span>Dr {state.firstname}</span></h4>
 
-                {conversation.length> 0? conversation.map(chat => {
+                {sortedConversation.length> 0? sortedConversation.map(chat => {
                     
                     return (
                         <>
