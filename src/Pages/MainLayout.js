@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-dom"
 import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
-import UserProfileDropDown from './Dashboard/UserProfileDropDown';
 import { useSelector, useDispatch } from 'react-redux'
 import {LOGOUT} from '../features/user'
 import { fetchNotifications } from '../Api/notifications';
