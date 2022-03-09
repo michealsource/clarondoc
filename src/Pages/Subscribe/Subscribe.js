@@ -14,7 +14,7 @@ function Subscribe() {
     let navigate = useNavigate()
     const userData = useSelector((state)=>state.user.value)
     
-      console.log(userData,'fffff')
+      // console.log(userData,'fffff')
     return (
         <MainLayout>
 <div class="snip1214">

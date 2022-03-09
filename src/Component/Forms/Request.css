@@ -77,3 +77,6 @@
     align-items: center;
     color: #fff;
   }
+  .individual-request-container-outer{
+    overflow-y: auto
+  }

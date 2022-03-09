@@ -122,8 +122,6 @@ function index() {
                 <Route exact path="/" element={<LandingPage />}></Route>
                 <Route exact path="/SignIn" element={<SignIn/>}></Route>
                 <Route exact path="/SignUp" element={<SignUp />}></Route>
-      
-                
                 <Route exact path="/about" element={<About />}></Route>
                 <Route exact path="/privacy" element={<TermsandCondition />}></Route>
            </Routes>
