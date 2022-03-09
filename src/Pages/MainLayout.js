@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-dom"
 import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
-import UserProfileDropDown from './Dashboard/UserProfileDropDown';
 import { useSelector, useDispatch } from 'react-redux'
 import {LOGOUT} from '../features/user'
 import { fetchNotifications } from '../Api/notifications';
@@ -101,7 +100,7 @@ export default function MainLayout({ children }) {
                             <h5 className="tips">Health Tips</h5>
                             </Link>
 
-                            <button onClick={() => userData.subscription =="Premium" || userData.subscription == "Family Plan" ? navigate("/call", {state: {mediaType: "audio"}}): navigate("/Subscribe")}  className="blog">
+                            <button onClick={() => userData.subscription =="Premium" || userData.subscription == "Family" ? navigate("/call", {state: {mediaType: "audio"}}): navigate("/Subscribe")}  className="blog">
                             <FaPhoneAlt className="hrt"/> 
                             <h5 className='urgent'>Urgent Care</h5>
                             </button>

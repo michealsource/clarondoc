@@ -13,11 +13,35 @@
 .sidabar-container{
     background-color: #16a085;
     height: 100vh;
+    overflow: hidden;
     width: 20%;
     display: flex;
     flex-direction: column;
-    
 }
+
+.services-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    height: 100vh;
+}
+
+
+/* 
+.sidabar-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sidabar-container::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.sidabar-container::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+} */
+
+
+
 
 .hrt{
     color: #C93111;
@@ -70,8 +94,8 @@
 
 .profile-container{
     background-color: #61CD88;
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     border-radius: 60%;
     align-self: center;
     display: flex;
@@ -109,20 +133,14 @@
 .title{
 color: whitesmoke;
 }
-.services-container{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    position: sticky;
-    overflow-y: scroll;
-}
+
 .service{
     background-color: #61CD88;
     font-size: 16px;
-    padding: 20px;
+    padding: 15px;
     color: #fff;
     border-radius: 5px;
-    margin: 5px;
+    margin: 4px;
     display: flex;
     justify-content: space-between;
     box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;

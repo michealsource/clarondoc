@@ -190,7 +190,7 @@ function DemandBooking() {
   console.log(insurance,'gggg')
   return (
     <MainLayout>
-      <div>
+      <div className="demand-booking-outer-container">
         <div className="demand-booking-modal-container">
 
         <div className="onDemandCloseBtn">

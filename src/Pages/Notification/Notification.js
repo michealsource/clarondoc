@@ -24,8 +24,7 @@ function Notification() {
     //     })()
        
     // }, [])
-    
-    console.log(notificationsData, "notificationsDatanotificationsData")
+  
     return (
         <MainLayout>
         
