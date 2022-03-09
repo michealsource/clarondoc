@@ -45,7 +45,7 @@ function Subscribe() {
     </button>
   </div>:<></> }
 
-  { userData.subscription != 'Premium Plan' ?
+  { userData.subscription != 'Premium' ?
   <div class="plan">
     <h3 class="plan-title">
     Premium Plan
