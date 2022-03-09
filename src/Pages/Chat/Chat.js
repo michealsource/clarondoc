@@ -8,6 +8,7 @@ import { userDetails } from '../../Api/Auth'
 import firebase from 'firebase';
 import loader from '../../images/spinner.gif'
 import { formatRelative } from 'date-fns'
+import moment from 'moment';
 let interval
 
 function Chat() {
@@ -75,7 +76,7 @@ function Chat() {
         try {
             let sen = {
                 message: messag.trim(),
-                recipient: state.email,
+                recipient: state.doctor.email,
                 attachment: image,
                 file_type: type,
                 sender: user.email,
@@ -86,7 +87,7 @@ function Chat() {
 
             sendMessage(sen)
             
-            await firebase.firestore().collection('newSMessages').doc(chat_code(user.email, state.email)).collection('messages').add(sen);
+            await firebase.firestore().collection('newSMessages').doc(chat_code(user.email, state.doctor.email)).collection('messages').add(sen);
 
             if (true) {
                 setmessage('')
@@ -133,6 +134,7 @@ function Chat() {
             })
         })()
     }, [])
+    
 
     function timeSince(date) {
 

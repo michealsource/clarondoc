@@ -19,7 +19,7 @@ function Subscribe() {
         <MainLayout>
 <div class="snip1214">
 
-{ userData.subscription != 'Basic Plan' ?
+{ userData.subscription != 'Basic' ?
   <div class="plan">
     <h3 class="plan-title">
       Basic  
@@ -40,8 +40,8 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>Health tips</li>
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
-    <button onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Basic Plan', id: '', price: 20 } })} class="plan-select">
-    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family Plan' || userData.subscription == 'Premium Plan' ? 'Downgrade' : 'Upgrade'}
+    <button onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Basic', id: '', price: 20 } })} class="plan-select">
+    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family' || userData.subscription == 'Premium' ? 'Downgrade' : 'Upgrade'}
     </button>
   </div>:<></> }
 
@@ -67,12 +67,12 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
     <button class="plan-select"
-    onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Premium Plan', id: '', price: 40 } })}
+    onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Premium', id: '', price: 40 } })}
     >  
-    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription === 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
+    { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription === 'Family' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
 
-  { userData.subscription != 'Family Plan' ?
+  { userData.subscription != 'Family' ?
   <div class="plan featured">
     <h3 class="plan-title">
     Family Plan
@@ -93,7 +93,7 @@ function Subscribe() {
       <li><i class="ion-checkmark"> </i>Health tips</li>
       <li><i class="ion-checkmark"> </i>24/7 Support</li>
     </ul>
-    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family Plan', id: '', price: 100 } })}> { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family Plan' ? 'Downgrade' : 'Upgrade'}</button>
+    <button class="plan-select"  onClick={()=>navigate("/Sub-Summary",{ state: { name: 'Family', id: '', price: 100 } })}> { userData.subscription == null || userData.subscription == 'Normal' ? 'Subscribe' : userData.subscription == 'Family' ? 'Downgrade' : 'Upgrade'}</button>
   </div>:<></> }
  
 </div>

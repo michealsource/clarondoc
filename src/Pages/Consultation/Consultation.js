@@ -232,33 +232,35 @@ const favorite = async(email)=>{
                         <h3 className='doc-name-consult'>{doctor.firstname} {doctor.lastname}</h3>
                         <span className="title">{doctor.department}</span>
                         <div class="share">
-                            <div class="action-container" onClick={handleOpenProfile}
->
-                                <FaInfo className="doctor-icon" />
-                                <span> About</span>
-                            </div>
-
-
-                            <Link to="/chat" class="action-container">
-                                <BsFillChatSquareTextFill className="doctor-icon" />
-                                <span>Chat</span>
-                            </Link>
-
-                            <div onClick={() => handleOpen(doctor)} class="action-container">
-                                <FaRegCalendarAlt className="doctor-icon" />
-                                <span>Book</span>
-                            </div>
-
-                            <div class="action-container">
-                                <FaHeart className="doctor-icon" />
-                                <span>Favourite</span>
-                            </div>
-                            {/* <div onClick={()=>setCall(!call)} class="action-container">
-                                <FaPhoneAlt className="doctor-icon" />
-                                <span>Call</span>
-                            </div> */}
-
-                        </div>
+                       <div class="action-container"
+                           onClick={()=>handleOpenProfile(doctor)}
+                       >
+                           <FaInfo className="doctor-icon" />
+                           <span> About</span>
+                       </div>
+   
+                       <div 
+                       onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'  || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50,doctor} }): navigate('/chat',{state:{doctor}}) }
+                       class="action-container">
+                           <BsFillChatSquareTextFill className="doctor-icon" />
+                           <span>Chat</span>
+                       </div>
+                      
+                       <div onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): handleOpen(doctor)} class="action-container">
+                           <FaRegCalendarAlt className="doctor-icon" />
+                           <span>Book</span>
+                       </div>
+   
+                       <div class="action-container">
+                           <FaHeart onClick={()=>favorite(doctor.email)} className="doctor-icon" />
+                           <span> { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove' : 'Save'}</span>
+                           {/* <span>Favourite</span> */}
+                       </div>
+                       {/* <div onClick={() => setCall(!call)} class="action-container">
+                           <FaPhoneAlt className="doctor-icon" />
+                           <span>Call</span>
+                       </div> */}
+                   </div>
                     </div>
                     
                 )):(<img src={loading} alt="" className="loader-img"/>)}
@@ -307,13 +309,13 @@ const favorite = async(email)=>{
                        </div>
    
                        <div 
-                       onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50,doctor} }): navigate('/chat',{state:{doctor}}) }
+                       onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'  || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50,doctor} }): navigate('/chat',{state:{doctor}}) }
                        class="action-container">
                            <BsFillChatSquareTextFill className="doctor-icon" />
                            <span>Chat</span>
                        </div>
                       
-                       <div onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): handleOpen(doctor)} class="action-container">
+                       <div onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): handleOpen(doctor)} class="action-container">
                            <FaRegCalendarAlt className="doctor-icon" />
                            <span>Book</span>
                        </div>

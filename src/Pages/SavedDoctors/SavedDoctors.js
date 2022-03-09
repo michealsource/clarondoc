@@ -129,14 +129,14 @@ function SavedDoctors() {
                                             <div class="saved-inner-container">
 
                                                 <div
-                                                 onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50, doctor:doc} }): navigate('/chat',{state:{doctor:doc}}) }
+                                                 onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Chat', price: 50, doctor:doc} }): navigate('/chat',{state:{doctor:doc}}) }
                                                 class="saved-action-share">
                                                     <BsFillChatSquareTextFill />
                                                     <p>Chat</p>
                                                 </div>
 
                                                 <div
-                                                onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor:doc} }): handleOpen(doc)}
+                                                onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor:doc} }): handleOpen(doc)}
                                                  class="saved-action-share">
                                                     <FaRegCalendarAlt />
                                                     <p>Book</p>
