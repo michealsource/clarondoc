@@ -104,11 +104,9 @@ export default function MainLayout({ children }) {
                 </li>
 
                 <li className='service-d'>
-                    <Link to="/referral"><span class="las la-book-medical"></span>
-                    <span>Referral</span></Link>
-                </li>
-
-                
+                    <a href="whatsapp://send?text=Hey! Join me on this awesome health care app and cut on trips to the hospital. http://onelink.to/clarondoc" target="_blank"><span class="las la-book-medical"></span>
+                    <span>Share</span></a>
+                </li>                
             </ul>
         </div>
     </div>
@@ -154,11 +152,12 @@ export default function MainLayout({ children }) {
                 </div>
             </div>
         </header>
-    </div>
-
-    <main>
+        <main>
     {children}
     </main>
+    </div>
+
+    
 
      </>
   )
