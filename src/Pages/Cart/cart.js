@@ -154,6 +154,7 @@ function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, a
           }
         }
       }
+      console.log(cartItem,'hhhhh')
 
     return (
         <div className="details-container">

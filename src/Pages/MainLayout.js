@@ -153,7 +153,7 @@ export default function MainLayout({ children }) {
             </div>
         </header>
         <main>
-    {children}
+       {children}
     </main>
     </div>
 

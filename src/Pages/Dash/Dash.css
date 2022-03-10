@@ -25,6 +25,7 @@
     transition: width 300ms;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 header {
@@ -187,13 +188,13 @@ header label span {
 
 main {
     margin-top: 10px;
-    padding: 2rem 1.5rem;
-    background: #f1f5f9;
+    /* padding: 2rem 1.5rem; */
+    padding-left: 12rem !important;
+    background: #F4F4F5;
     position: fixed;
-    margin-left: 9%;
-    width: calc(100% - 150px);
+    width: calc(100% - 20px);
     height: 100%;
-    top: 20px;
+    top: 60px;
 }
 
 
