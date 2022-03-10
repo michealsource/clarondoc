@@ -117,7 +117,7 @@ header {
 }
 
 #nav-toggle:checked~.main-content {
-    margin-left: 70px;
+    margin-left: -150px;
 }
 
 #nav-toggle:checked~.main-content header {
@@ -126,9 +126,11 @@ header {
 }
 
 
+
 .main-content {
     transition: margin-left 300ms;
-    margin-left: 250px;
+    margin-left: 20px;
+    /* background-color: red !important; */
 }
 
 
@@ -188,12 +190,10 @@ main {
     padding: 2rem 1.5rem;
     background: #f1f5f9;
     position: fixed;
-    margin-left: 13%;
+    margin-left: 9%;
     width: calc(100% - 150px);
     height: 100%;
     top: 20px;
-    overflow-y: scroll;
-
 }
 
 
@@ -324,4 +324,7 @@ main {
 .service-d span{
     font-size: 16px;
 }
+
+
+/* testing */
 
