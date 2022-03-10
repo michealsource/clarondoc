@@ -60,11 +60,11 @@ export default function MainLayout({ children }) {
         <div class="sidebar">
         <div className="profile-container">
                 <img src={userData.avatar !== "undefined" ? userData.avatar : user1} alt="" className="user" />
-                {/* <p className="name"></p>
-                <p className="title">Patient</p> */}
         </div>
+        <div className='responsive-title'>
         <p className="name">{userData ? userData.firstname : ''} {userData ? userData.lastname : null}</p>
-        <p className="title">Patient</p>        
+        <p className="title">Patient</p>  
+        </div>      
         <div class="sidebar-menu">
             <ul>
 
@@ -115,7 +115,7 @@ export default function MainLayout({ children }) {
 
     <div class="main-content">
         <header className='main-content-toggle'>
-            <div>
+            <div className='nav-okay'>
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label> 

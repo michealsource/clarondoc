@@ -93,6 +93,20 @@ header {
     width: 60px !important;
 }
 
+#nav-toggle:checked+.sidebar .sidebar-brand,
+#nav-toggle:checked+.sidebar .profile-container {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+#nav-toggle:checked+.sidebar .sidebar-brand,
+#nav-toggle:checked+.sidebar .responsive-title {
+    display: none;
+}
+
+
+
 #nav-toggle:checked+.sidebar li a {
     padding-left: 0rem;
 }
@@ -110,6 +124,7 @@ header {
     width: calc(100% - 70px);
     left: 70px;
 }
+
 
 .main-content {
     transition: margin-left 300ms;

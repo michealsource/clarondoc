@@ -16,8 +16,9 @@
     overflow-y: scroll;
     height: 100%;
     overflow-x: hidden;
+    width: calc(100% - 250px);
     /* width: calc(100% - 150px); */
-    width: 95% !important;
+    /* width: 95% !important; */
     /* margin-left: 2%; */
 }
 
@@ -211,3 +212,9 @@
     color: #2d8f88 !important;
     padding-bottom: 5px !important;
 }
+
+/* #nav-toggle:checked~.main-content .main-area-card-container {
+    width: calc(100% - 70px) !important;
+    left: 70px !important;
+    
+} */
