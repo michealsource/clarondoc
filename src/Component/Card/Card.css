@@ -34,7 +34,7 @@
     margin-top: 50px;
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 150px);
+    /* width: calc(100% - 150px); */
     margin-left: 5%;
 }
 .name-container h4{
@@ -50,8 +50,10 @@
     border-top-right-radius: 10px;
     display: flex;
     justify-content: space-between;
-    width: 86%;
-    margin-left: 20px;
+    /* width: calc(100% - 20px); */
+    width: 92%;
+    /* width: 86%; */
+    /* margin-left: 40px; */
 }
 
 .update-btn-user{
@@ -115,8 +117,10 @@
 /* CARD STYLING */
 
 .cards{
-    width: calc(100% - 150px);
-    margin-left: 3%;
+    /* width: calc(100% - 150px); */
+    /* margin-left: 3%; */
+    width: 95%;
+    margin-left: 2rem;
 }
 .cards .card-container{
     display: grid;
@@ -161,10 +165,10 @@
 } */
 
 .over-view{
-    margin: 20px;
+    /* margin: 20px; */
     height: auto;
     margin-bottom: 100px;
-    width: 90%;
+    width: 95%;
     margin-left: 50px !important;
 }
 
