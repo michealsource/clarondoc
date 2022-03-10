@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Card.css'
+import '../../Pages/Dash/Dash.css'
 import { Link } from "react-router-dom"
 import moment from 'moment';
 import { userDetails, downgrade } from '../../Api/Auth';
