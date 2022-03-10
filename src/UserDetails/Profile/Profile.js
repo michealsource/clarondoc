@@ -10,7 +10,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaCcAmazonPay } from "react-icons/fa";
 import { FaAddressCard } from "react-icons/fa";
-import { useDispatch,useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const prices = []
 prices['Basic'] = 20
@@ -45,7 +45,7 @@ function Profile() {
 
                     <div class="profile-card-container">
                         <div class="patient-profile-pic">
-                            <img src={profile} alt="" />
+                            <img src={user.avatar !== "undefined" ? user.avatar : profile}  alt="" />
                         </div>
                     </div>
 
@@ -81,11 +81,13 @@ function Profile() {
                             <button className="edit-btn"> <FaEye/> Edit Profile</button>
                     </button>
 
-
+                    <div>
                     <Link to="/SavedDoctors">
                     <button className="saved-btn">  <FaEye/> View Saved Doctors</button>
                     </Link>
-
+                    </div>
+                   
+                    
                     <button onClick={()=>navigate('/ChangePassword')}>
                             <button className="edit-btn"> <FaEye/>Update Password</button>
                     </button>

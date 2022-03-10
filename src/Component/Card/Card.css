@@ -15,19 +15,25 @@
 .main-area-card-container{
     overflow-y: scroll;
     height: 100%;
-    width: 96% !important;
-    margin-left: 15px;
+    overflow-x: hidden;
+    /* width: calc(100% - 150px); */
+    width: 95% !important;
+    /* margin-left: 2%; */
 }
 
 .notifcation-container{
     margin: 20px;
     margin-top: 40px;
+    width: 100%;
+    margin-left: 50px;
 }
 .first-container{
     margin: 20px;
     margin-top: 50px;
     display: flex;
     justify-content: space-between;
+    width: calc(100% - 150px);
+    margin-left: 5%;
 }
 .name-container h4{
     font-size: 27.2px;
@@ -42,6 +48,8 @@
     border-top-right-radius: 10px;
     display: flex;
     justify-content: space-between;
+    width: 86%;
+    margin-left: 20px;
 }
 
 .update-btn-user{
@@ -105,7 +113,8 @@
 /* CARD STYLING */
 
 .cards{
-    width: 98%;
+    width: calc(100% - 150px);
+    margin-left: 3%;
 }
 .cards .card-container{
     display: grid;
@@ -153,6 +162,8 @@
     margin: 20px;
     height: auto;
     margin-bottom: 100px;
+    width: 90%;
+    margin-left: 50px !important;
 }
 
 .over-view p{

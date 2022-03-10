@@ -33,6 +33,7 @@ import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
 import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
 import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
 import Book from '../Pages/Book/Book'
+import Dash from '../Pages/Dash/Dash'
 // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
 // DOCTORS PAGE IMPORT
@@ -98,6 +99,7 @@ function index() {
                 <Route exact path="/Book" element={< Book />} />
                 <Route exact path="/call" element={< Call />} />
                 <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
+                <Route exact path="/Dash" element={<Dash/>}></Route>
                 
                 {/* DOCTOR ROUTES */}
                 <Route exact path="/doctorDashboard" element={<Home />}></Route>

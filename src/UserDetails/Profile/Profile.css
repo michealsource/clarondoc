@@ -1,6 +1,8 @@
 .patient-profile-container{
-    margin-top: 30px;
-    margin-left: 20px;
+    margin-top: 50px;
+    margin-left: 80px;
+    width: 95%;
+    margin-right: 70px;
 }
 
 .patient-profile-pic>img{
@@ -94,6 +96,8 @@
     font-size: 14px;
     border-radius: 10px;
     cursor: pointer;
+    margin-left: 10px;
+    outline: none !important;
 }
 
 .medical-history-container{
@@ -132,4 +136,9 @@
 
 .sub-histort-title{
     color: #7a7a7a;
+}
+
+.plan-profile{
+    display: flex;
+    justify-content: space-between;
 }
