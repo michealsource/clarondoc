@@ -13,6 +13,7 @@ height: 50px;
     align-items: center;
     justify-content: space-between;
     background: #fff;
+    width: 100%;
 }
 
 .login-signup-container a{

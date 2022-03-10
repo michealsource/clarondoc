@@ -10,7 +10,9 @@ root{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 .landing-page-home{
     display: flex;
