@@ -1,6 +1,8 @@
 .drugs-container{
     margin: 20px;
     margin-top: 40px;
+    width: calc(100% - 100px);
+    margin-left: 4%;
 }
 
 .drugs_btn_container{

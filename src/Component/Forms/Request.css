@@ -78,5 +78,6 @@
     color: #fff;
   }
   .individual-request-container-outer{
-    overflow-y: auto
+    overflow-y: auto;
+    margin-left: 25px;
   }

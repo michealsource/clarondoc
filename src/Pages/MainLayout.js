@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React,{useState,useEffect} from 'react'
+import '../Pages/Dash/Dash.css'
 import user1 from '../images/user.png'
 import { FaCalendarPlus, FaShareSquare } from "react-icons/fa";
 import { FaFlask } from "react-icons/fa";
@@ -14,28 +15,28 @@ import '../Pages/Dashboard/Dashboard.css'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import { useSelector, useDispatch } from 'react-redux'
-import {LOGOUT} from '../features/user'
+import { LOGOUT } from '../features/user'
 import { fetchNotifications } from '../Api/notifications';
 import { NOTIFICATIONS, } from '../features/user'
 
 export default function MainLayout({ children }) {
-  const userData = useSelector((state)=>state.user.value)
-   const[user,SetUser]= useState()
-   const [notifications, setNotifications] = useState([])
-   const dispatch = useDispatch()
-    
-    useEffect(()=>{
-        (async()=>{
-            let account = localStorage.getItem('user')
-            SetUser(JSON.parse(account))
-            let response = await fetchNotifications();
-            // console.log(response)
-            dispatch(NOTIFICATIONS(response))
-            setNotifications(response)
-          })()
-    },[])
+  const userData = useSelector((state) => state.user.value)
+  const [user, SetUser] = useState()
+  const [notifications, setNotifications] = useState([])
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    (async () => {
+      let account = localStorage.getItem('user')
+      SetUser(JSON.parse(account))
+      let response = await fetchNotifications();
+      // console.log(response)
+      dispatch(NOTIFICATIONS(response))
+      setNotifications(response)
+    })()
+  }, [])
   const [open, setOpen] = useState(false)
-  const [sidebar, setSidebar] = useState(true)
+  const [sidebar, setSidebar] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   const openAction = Boolean(anchorEl);
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ export default function MainLayout({ children }) {
     // setAnchorEl(event.currentTarget);
     setOpen(!open)
   };
-  const logOut = ()=>{
+  const logOut = () => {
     localStorage.removeItem("email")
     localStorage.removeItem("access-token")
     localStorage.removeItem("api-key")
@@ -52,88 +53,113 @@ export default function MainLayout({ children }) {
     localStorage.removeItem("user")
     dispatch(LOGOUT())
     navigate("/")
-}
-
+  }
   return (
-    <>
-      <div className="static-dashboard">
-        <div className="dashboard-container" >
-          <div className='sidabar-container'>
-            <>
-              <div className="profile-container">
-                <img src={userData.avatar !== "undefined"? userData.avatar:user1} alt="" className="user" />
-              </div>
-              <div className="user-detail">
-                <p className="name">{userData?userData.firstname:''} {userData?userData.lastname:''}</p>
-                <p className="title">Patient</p>
-              </div>
-            </>
-            <div className="services-container">
-              <Link to="/userDashboard" className="service"> <span>Dashboard</span><FaTh className="icon-single" /></Link>
-              <Link to="/consultation" className="service"><span> Consultation</span> <FaCalendarPlus className="icon-single"/></Link>
-              <Link to="/laboratory" className="service"> <span>Laboratory</span> <FaFlask className="icon-single" /></Link>
-              <Link to="/AppointmentHistory" className="service"> <span>Appointment History</span> <FaFlask className="icon-single" /></Link>
-              <Link to="/ambulance" className="service"> <span>Ambulance</span><FaAmbulance className="icon-single" /></Link>
-              <Link to="/homecare" className="service"> <span>Home Care</span> <FaHouzz className="icon-single" /></Link>
-              <Link to="/drugs" className="service"> <span>Pharmacy Buy' Drugs</span><FaNotesMedical className="icon-single" /></Link>
-              <Link to="/subscribe" className="service"><span> Subscribe Now! </span><FaStaylinked className="icon-single" /></Link>
-              <Link to="/referral" className="service"> <span>Referral</span> <FaShareAlt className="icon-single" /></Link>
-            </div>        
-
-          </div>
-          <div>
-          <div className="content">
-                    <div className="content-container">
-                        <div className={sidebar?'navbar-container':'navbar-container-full'}>
-                            <div className="menu-container">
-                                <FaAlignJustify className="menu-icon"/>
-                            </div>
-                            
-                            <Link to="/notification" className="notification">
-                                <Badge badgeContent={notifications.length} color="success">
-                                    <NotificationsIcon color="action" />
-                                </Badge>
-                            </Link>
-                            
-                            <Link to="/blog" className="blog">
-                            {/* <FaHeart className="hrt"/>  */}
-                            <h5 className="tips">Health Tips</h5>
-                            </Link>
-
-                            <button onClick={() => userData.subscription =="Premium" || userData.subscription == "Family" ? navigate("/call", {state: {mediaType: "audio"}}): navigate("/Subscribe")}  className="blog">
-                            <FaPhoneAlt className="hrt"/> 
-                            <h5 className='urgent'>Urgent Care</h5>
-                            </button>
-
-                            <div className="main-profile-container">
-                                <div className="user-profile-container">
-                                <img src={userData.avatar !== "undefined"? userData.avatar:user1} alt="" className="user-profile" />
-                                   
-                                    <p className="user-name"  onClick={handleClick}> <span className="profile-sm">Profile</span> <FaCaretDown /></p>
-                                </div>
-                                {
-                                  open?<div className='hover-menu'>
-                                  <Link to="/profile">Profile</Link>
-                                  <Link to="/AboutClaron">About Us</Link>
-                                  <Link to="/ClaronTerms">Terms and Condition</Link>
-                                  <span onClick={logOut}>Logout</span>
-                                  {/* <h3>Home</h3> */}
-                                </div>:null
-                                }
-                                
-                                {/* <UserProfileDropDown handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} openAction={openAction}/> */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-          </div>
-       
-            <div />
-            <div className='individual-content-lg'>
-             {children}
-            </div>
+      <>
+        <input type="checkbox" id="nav-toggle"/>
+        <div class="sidebar">
+        <div className="profile-container">
+                <img src={userData.avatar !== "undefined" ? userData.avatar : user1} alt="" className="user" />
+                {/* <p className="name"></p>
+                <p className="title">Patient</p> */}
         </div>
-      </div>
-    </>
-  );
+        <p className="name">{userData ? userData.firstname : ''} {userData ? userData.lastname : null}</p>
+        <p className="title">Patient</p>        
+        <div class="sidebar-menu">
+            <ul>
+
+                <li className='service-d'>
+                    <Link to="/userDashboard"><span class="las la-stethoscope"></span>
+                    <span>Dashboard</span></Link>
+                </li>
+                <li className='service-d'>
+                    <Link to="/consultation"><span class="las la-user"></span>
+                    <span>Consultation</span></Link>
+                </li>
+                <li className='service-d'>
+                    <Link to="/laboratory"><span class="las la-user-injured"></span>
+                    <span>Laboratory</span></Link>
+                </li>
+                <li className='service-d'>
+                    <Link to="/AppointmentHistory"><span class="las la-history"></span>
+                    <span>Appointment History</span></Link>
+                </li>
+                <li className='service-d'>
+                    <Link to="/ambulance"><span class="las la-search"></span>
+                    <span>Ambulance</span></Link>
+                </li>
+                <li className='service-d'>
+                    <Link to="/homecare"><span class="las la-book-medical"></span>
+                    <span>Home Care</span></Link>
+                </li>
+
+                <li className='service-d'>
+                    <Link to="/drugs"><span class="las la-book-medical"></span>
+                    <span>Pharmacy Buy' Drugs</span></Link>
+                </li>
+
+                <li className='service-d'>
+                    <Link to="/subscribe"><span class="las la-book-medical"></span>
+                    <span>Subscribe Now!</span></Link>
+                </li>
+
+                <li className='service-d'>
+                    <Link to="/referral"><span class="las la-book-medical"></span>
+                    <span>Referral</span></Link>
+                </li>
+
+                
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header className='main-content-toggle'>
+            <div>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label> 
+            </div>
+
+            <Link to="/notification" className="notification">
+                <Badge badgeContent={notifications.length} color="success">
+                  <NotificationsIcon color="action" />
+                </Badge>
+              </Link>
+
+              <Link to="/blog" className="blog">
+                {/* <FaHeart className="hrt"/>  */}
+                <h5 className="tips">Health Tips</h5>
+              </Link>
+
+              <button onClick={() => userData.subscription == "Premium" || userData.subscription == "Family Plan" ? navigate("/call", { state: { mediaType: "audio" } }) : navigate("/Subscribe")} className="blog">
+                <FaPhoneAlt className="hrt" />
+                <h5 className='urgent'>Urgent Care</h5>
+              </button>
+
+            <div class="user-wrapper">
+                <img src={userData.avatar !== "undefined" ? userData.avatar : user1}  width="40px" height="40px" alt="user"/>
+                <div>
+                    <h4 onClick={handleClick}>Profile <FaCaretDown /></h4>
+                    {
+                  open ? <div className='hover-menu'>
+                    <Link to="/profile">Profile</Link>
+                    <Link to="/AboutClaron">About Us</Link>
+                    <Link to="/ClaronTerms">Terms and Condition</Link>
+                    <span onClick={logOut}>Logout</span>
+                    {/* <h3>Home</h3> */}
+                  </div> : null
+                }
+                    {/* <small>Super Admin</small> */}
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <main>
+    {children}
+    </main>
+
+     </>
+  )
 }

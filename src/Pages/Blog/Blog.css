@@ -4,6 +4,7 @@
     margin: 30px;
     height: 100%;
     overflow-y: scroll;
+    width: 98%;
 }
 
 .blog-row{

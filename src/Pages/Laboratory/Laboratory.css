@@ -55,6 +55,12 @@
     padding: 15px;
 }
 
+.ambulance{
+    margin-left: 25px !important;
+    width: 95%;
+    margin-top: 30px;
+}
+
 .request-test{
     display: flex;
     flex-direction: row;

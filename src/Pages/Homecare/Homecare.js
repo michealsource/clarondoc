@@ -26,7 +26,7 @@ function Homecare() {
     
         })()
       })
-      console.log(bookings,'hhhhhh')
+     
     return (
         <MainLayout>
         <div className="home-care-container-1">
