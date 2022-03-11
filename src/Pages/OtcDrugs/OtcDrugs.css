@@ -5,13 +5,17 @@
     overflow-x: hidden;
     margin-left: 50px;
     margin-top: 40px;
+    /* margin-bottom: 200px !important;
+    background-color: red !important; */
 }
 
 .pharmacy-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem,2fr));
     margin-left: 25px;
-    margin-bottom: 100px;
+    margin-top: -80px;
+    margin-bottom: 100px !important;
+
     /* height: 100%;
     overflow-y: scroll; */
 }
