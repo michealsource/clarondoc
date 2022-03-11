@@ -1,7 +1,8 @@
+
 .patient-profile-container{
     margin-top: 50px;
-    margin-left: 80px;
-    width: 95%;
+    margin-left: 10px;
+    width: 100%;
     margin-right: 70px;
 }
 
@@ -23,6 +24,7 @@
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     padding: 20px;
 }
 /* DATA STYLING */

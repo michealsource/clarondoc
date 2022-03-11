@@ -78,25 +78,25 @@ function Profile() {
                
 
                     <button onClick={()=>{editPage()}}>
-                            <button className="edit-btn"> <FaEye/> Edit Profile</button>
+                            <button className="edit-btn txt"> Edit Profile</button>
                     </button>
 
                     <div>
                     <Link to="/SavedDoctors">
-                    <button className="saved-btn">  <FaEye/> View Saved Doctors</button>
+                    <button className="saved-btn txt">   View Saved Doctors</button>
                     </Link>
                     </div>
                    
                     
                     <button onClick={()=>navigate('/ChangePassword')}>
-                            <button className="edit-btn"> <FaEye/>Update Password</button>
+                            <button className="edit-btn txt"> Update Password</button>
                     </button>
 
                     </div>
                 </div>
             </div>
 
-            <div class="medical-history-container">
+            {/* <div class="medical-history-container">
                 <h3>Medical History</h3>
                 <div className="straght-line"></div>
 
@@ -135,7 +135,7 @@ function Profile() {
 
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
         </MainLayout>
     )
