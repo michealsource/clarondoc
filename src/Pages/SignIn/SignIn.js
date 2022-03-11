@@ -16,6 +16,7 @@ import Navbar from '../../Component/Navbar/Navbar'
 import { useDispatch } from 'react-redux'
 import { LOGIN } from '../../features/user'
 import { GoogleLogin } from 'react-google-login'
+import swal from 'sweetalert';
 import FacebookLogin from 'react-facebook-login';
 const style = {
     position: 'absolute',
@@ -51,7 +52,7 @@ function SignIn() {
     const [reset_passworda, setreset_passworda] = useState('')
     const [forgotEmail, setForgotEmail] = useState()
     const [hide,setHide]= useState(true)
-
+    
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -92,8 +93,8 @@ function SignIn() {
     }
 
     const loginDoctor = async () => {
-        navigate("/doctorDashboard")
-
+        // navigate("/doctorDashboard")
+        swal ( "Oops" ,  "You dont have accesss to this page" ,  "error" )
     }
 
     // GOOGLE LOGIN Authentication
