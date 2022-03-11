@@ -139,7 +139,7 @@ function Editpatient() {
             <div className='gobackBtn' onClick={() => navigate(-1)}>
                 <p><BiArrowBack /> Back</p>
             </div>
-            <h2>Kndly Update Your Profile {userData.firstname}</h2>
+            <h2 className='update-kindly'>Kndly Update Your Profile {userData.firstname}</h2>
             <img src={userData.avatar !== "undefined"? userData.avatar:image} alt="" className="pro-img" />
             <div class="parent-div">
                 <button class="btn-upload" >{imgloading ? "Uploading" : "Change Photo"}</button>
