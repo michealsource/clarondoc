@@ -12,6 +12,11 @@
     margin-top: 10px !important;
 }
 
+.modal-book-container{
+    margin-left: 120px;
+    margin-top: 20px;
+}
+
 .doctors{
     height: 100%;
     overflow-y: auto;
