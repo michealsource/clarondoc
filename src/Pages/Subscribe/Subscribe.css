@@ -12,6 +12,7 @@
 .price-discount-f{
     color: #ffffff;
 }
+
 .snip1214 {
   font-family: 'Raleway', Arial, sans-serif;
   color: #000000;
@@ -30,10 +31,12 @@
   float: left;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
+ 
 }
 .snip1214 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+ 
 }
 .snip1214 header {
   position: relative;
@@ -151,4 +154,10 @@
     background-color: #16a085;
     padding: 10px;
     color: #ffffff;
+}
+
+.subscription-main-container{
+  width: 90%;
+  height: 100%;
+  overflow-y: scroll;
 }

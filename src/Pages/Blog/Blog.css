@@ -5,6 +5,7 @@
     height: 100%;
     overflow-y: scroll;
     width: 98%;
+  
 }
 
 .blog-row{
@@ -13,6 +14,7 @@
     gap: 2rem;
     margin: 20px;
     margin-bottom: 20px;
+    margin-bottom: 100px !important;
  }
 
 .blog-column{

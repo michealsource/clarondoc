@@ -17,8 +17,8 @@ function Subscribe() {
       // console.log(userData,'fffff')
     return (
         <MainLayout>
+          <div className='subscription-main-container'>
 <div class="snip1214">
-
 { userData.subscription != 'Basic' ?
   <div class="plan">
     <h3 class="plan-title">
@@ -97,7 +97,7 @@ function Subscribe() {
   </div>:<></> }
  
 </div>
-    
+</div>
         </MainLayout>
     )
 }
