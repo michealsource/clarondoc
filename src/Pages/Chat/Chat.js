@@ -195,16 +195,18 @@ function Chat() {
                     {image !=="" ? <img src={image} alt="" className='upload-image-attachment'/> : ''}
                 </div>)}
 
-
+                    <div className='message-container-outer'>
                     <textarea style={{display: image || loading ? "none" : "block"}} value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text">
 
                     </textarea>
+                    <div className='chat-upload'>
                     {loading || image !==""? '': <label for="fileimg"><FaRegArrowAltCircleUp className="upload-icon" /></label>}
                    
-
                    {loading && image == ""? <img className='loader-img-file' src={loader} alt=""/> :(<><input type="file" onChange={handleImageAsFile}id="fileimg" className="file-upload-file" />
                     <FaTelegramPlane onClick={send} className="upload-icon" /></>)}
+                    </div>
 
+                    </div>
                 </div>
             </div>
         </MainLayout>

@@ -1,12 +1,20 @@
+.message-container-outer{
+    width: 100%;
+    display: flex;
+}
+
+.chat-upload{
+    display: flex;
+}
 .chart-cantaner{
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 93%;
+    width: 90%;
     height: auto;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     margin-top: 50px;
-    margin-left: 25px;
+    margin-left: 70px;
     margin-bottom: 100px;
     overflow-y: scroll;
     height: 100%;
@@ -45,6 +53,7 @@
     font-size: 16px;
     resize: none;
     margin-left: 40px;
+    margin-bottom: 80px;
 }
 
 .input-chat-conatiner{

@@ -341,8 +341,9 @@ const favorite = async(email)=>{
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                         fullWidth
+                        
                     >
-                        <Box sx={style} style={{ width: 1000 }} >
+                        <Box sx={style} style={{ width: 1000 }} className="modal-book-container" >
                             <h2 style={{marginBottom:20}}>{value ? value.firstname: ''} Availability</h2>
                             <div>
                                 <TextField
