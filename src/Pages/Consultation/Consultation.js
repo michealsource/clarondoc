@@ -251,8 +251,8 @@ const favorite = async(email)=>{
                            <span>Book</span>
                        </div>
    
-                       <div class="action-container">
-                           <FaHeart onClick={()=>favorite(doctor.email)} className="doctor-icon" />
+                       <div onClick={()=>favorite(doctor.email)} class="action-container">
+                           <FaHeart  className="doctor-icon" />
                            <span> { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove' : 'Save'}</span>
                            {/* <span>Favourite</span> */}
                        </div>
@@ -320,8 +320,8 @@ const favorite = async(email)=>{
                            <span>Book</span>
                        </div>
    
-                       <div class="action-container">
-                           <FaHeart onClick={()=>favorite(doctor.email)} className="doctor-icon" />
+                       <div onClick={()=>favorite(doctor.email)} class="action-container">
+                           <FaHeart  className="doctor-icon" />
                            <span> { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove' : 'Save'}</span>
                            {/* <span>Favourite</span> */}
                        </div>
