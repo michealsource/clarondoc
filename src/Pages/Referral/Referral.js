@@ -34,6 +34,7 @@ function Referral() {
     
     return (
         <MainLayout>
+            <div class="referal-beda-container">
         <div className="referral-upper-container">
             <div class="referal-actions">
                 <h1>Your Referrals</h1>
@@ -111,6 +112,7 @@ function Referral() {
                 <h4>Doctors Referred</h4>
                 </div>
             </div>
+        </div>
         </div>
         </MainLayout>
     )
