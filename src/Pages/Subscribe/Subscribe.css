@@ -27,12 +27,17 @@
 }
 .snip1214 .plan {
   margin: 0;
+ 
   width: 30%;
   position: relative;
   float: left;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
  
+}
+
+.plan {
+  margin-top: 40px !important;
 }
 .snip1214 * {
   -webkit-box-sizing: border-box;
