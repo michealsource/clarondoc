@@ -69,11 +69,12 @@ export default function MainLayout({ children }) {
             <ul>
 
                 <li className='service-d'>
-                    <Link to="/userDashboard"><span class="las la-stethoscope"></span>
+                
+                    <Link to="/userDashboard"><span class="las la-table"></span>
                     <span>Dashboard</span></Link>
                 </li>
                 <li className='service-d'>
-                    <Link to="/consultation"><span class="las la-user"></span>
+                    <Link to="/consultation"><span class="las la-stethoscope"></span>
                     <span>Consultation</span></Link>
                 </li>
                 <li className='service-d'>
@@ -81,31 +82,37 @@ export default function MainLayout({ children }) {
                     <span>Laboratory</span></Link>
                 </li>
                 <li className='service-d'>
+              
                     <Link to="/AppointmentHistory"><span class="las la-history"></span>
                     <span>Appointment History</span></Link>
                 </li>
                 <li className='service-d'>
-                    <Link to="/ambulance"><span class="las la-search"></span>
+                
+                    <Link to="/ambulance"><span class="las la-ambulance"></span>
                     <span>Ambulance</span></Link>
                 </li>
                 <li className='service-d'>
-                    <Link to="/homecare"><span class="las la-book-medical"></span>
+                
+                    <Link to="/homecare"><span class="las la-clinic-medical"></span>
                     <span>Home Care</span></Link>
                 </li>
 
                 <li className='service-d'>
-                    <Link to="/drugs"><span class="las la-book-medical"></span>
+                
+                    <Link to="/drugs"><span class="las la-capsules"></span>
                     <span>Pharmacy Buy' Drugs</span></Link>
                 </li>
 
                 <li className='service-d'>
-                    <Link to="/subscribe"><span class="las la-book-medical"></span>
+                
+                    <Link to="/subscribe"><span class="las la-money-bill-wave"></span>
                     <span>Subscribe Now!</span></Link>
                 </li>
 
 
                 <li className='service-d'>
-                <Link to="/Referral"><span class="las la-book-medical"></span>
+               
+                <Link to="/Referral"><span class="las la-share"></span>
                     <span>Referral</span></Link>
                 </li>
 
