@@ -7,9 +7,10 @@ import { sendMessage} from '../../Api/chats';
 import { userDetails } from '../../Api/Auth'
 import firebase from 'firebase';
 import loader from '../../images/spinner.gif'
-import { formatRelative } from 'date-fns'
-import moment from 'moment';
-let interval
+// import { formatRelative } from 'date-fns'
+// import moment from 'moment';
+
+// let interval
 
 function Chat() {
     if (!firebase.apps.length) {
@@ -35,15 +36,11 @@ function Chat() {
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
     const [conversation, setconversation] = useState([])
-    const [attachment, setattachment] = useState()
-    const [attachments, setattachments] = useState([])
-    const [attachmenttype, setattachmenttype] = useState()
-    const [attachmentsize, setattachmentsize] = useState()
+  
     const [error, seterror] = useState()
-    const [selected, setSelected] = useState()
+
     const [sendingNow, setsendingNow] = useState(false)
-    const [sendingNowAA, setsendingNowAA] = useState(false)
-    const [loadingChat, setloadingChat] = useState(false)
+    
     const [image, setImage] = useState("")
     const emailR = useRef(null);
 
@@ -72,7 +69,6 @@ function Chat() {
             messag = 'Media Attachment';
         }
         setsendingNow(true)
-
         try {
             let sen = {
                 message: messag.trim(),
@@ -196,7 +192,11 @@ function Chat() {
                 </div>)}
 
                     <div className='message-container-outer'>
-                    <textarea style={{display: image || loading ? "none" : "block"}} value={message} onChange={(e) => setmessage(e.target.value)} placeholder="type your message" className="chat-text">
+                    <textarea style={{display: image || loading ? "none" : "block"}} 
+                    value={message} onChange={(e) => setmessage(e.target.value)}
+                     placeholder="type your message" className="chat-text"
+                     autofocus 
+                     >
 
                     </textarea>
                     <div className='chat-upload'>
