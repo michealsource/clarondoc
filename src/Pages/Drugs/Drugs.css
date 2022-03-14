@@ -1,7 +1,11 @@
+.drugs-main-container{
+    width: 100%;
+}
 .drugs-container{
     margin: 20px;
     margin-top: 40px;
-    width: calc(100% - 100px);
+    width: 96%;
+    /* width: calc(100% - 100px); */
     margin-left: 4%;
 }
 

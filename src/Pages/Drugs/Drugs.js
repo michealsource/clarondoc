@@ -93,6 +93,7 @@ function Drugs() {
 
   return (
     <MainLayout>
+      <div class="drugs-main-container">
     <div className="drugs-container">
       <div className="cards">
         <div class="card-container">
@@ -173,6 +174,7 @@ function Drugs() {
       </Modal>
       <div>
       </div>
+    </div>
     </div>
     </MainLayout>
   )

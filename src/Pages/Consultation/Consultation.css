@@ -20,9 +20,10 @@
 .doctors{
     height: 100%;
     overflow-y: auto;
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    width: 100%;
+    margin-left: 50px;
+    /* margin-right: auto;
+    margin-left: auto; */
     margin-bottom: 100px !important;
     overflow-x: hidden;
     margin-top: 20px;

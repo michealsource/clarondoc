@@ -29,6 +29,7 @@ function Homecare() {
      
     return (
         <MainLayout>
+    <div className='homecare-main-container'>
         <div className="home-care-container-1">
             <div class="homecare-inner-container-2">
                 <h2>HOME CARE OVERVIEW</h2>
@@ -54,6 +55,8 @@ function Homecare() {
             </div>
 
             <HomeCareCard/>
+        </div>
+        
         </div>
         </MainLayout>
     )
