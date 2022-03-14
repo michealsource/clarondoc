@@ -1,10 +1,37 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from "react-router-dom"
 import './Referral.css'
 import { FaUserFriends,FaUserPlus,FaWallet } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
 import MainLayout from '../MainLayout';
 function Referral() {
+    const [code, setCode] = useState("")
+
+
+    useEffect(() =>{
+        createCode(6)
+    }, [])
+
+    const clickToCopy = () => {
+        navigator.clipboard.writeText("Hey! Join me on this awesome health care app and cut on trips to the hospital. http://onelink.to/clarondoc")
+        alert("Copied")
+    }
+    const createCode = (length) => {
+
+        const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+            let result = ' ';
+            const charactersLength = characters.length;
+            for ( let i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            setCode(result)
+            return result;
+    }
+
+   
+
+    
     return (
         <MainLayout>
         <div className="referral-upper-container">
@@ -12,7 +39,7 @@ function Referral() {
                 <h1>Your Referrals</h1>
                 <div>
                     <Link to="/Wallet" className="referral-btn">Manage Wallet</Link>
-                    <Link to="" className="referral-btn">Create Code</Link>
+                    <button onClick={() => createCode(6)} className="referral-btn">Create Code</button>
                 </div>
             </div>
 
@@ -61,12 +88,16 @@ function Referral() {
 
                 <div className="ref-code">
                     <p>Copy The Link Below To Refer Users</p>
-                    <p>Ref Code: <span className="code">V5XEV6</span></p>
+                    <p>Ref Code: <span className="code">{code}</span></p>
                 </div>
 
                 <div class="link-share-container">
-                <TextField fullWidth id="outlined-size-small" defaultValue="https://clarondoc.com/signup?ref=V5XEV6" size="small"/>
-                <button>Copy</button>
+                <TextField fullWidth id="outlined-size-small" 
+                inputProps={
+					{ readOnly: true, }
+				} 
+                value={`https://clarondoc.com/signup?ref=${code}`} size="small"/>
+                <button onClick={() => clickToCopy()}>Copy</button>
                 </div>
                 
             </div>
