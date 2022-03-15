@@ -16,8 +16,7 @@
 
 .wrapper{
     min-height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,4 +91,56 @@
 }
 .terms{
     padding-top: 20px !important;
+}
+
+.first-input-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* MEDIA QUERY */
+@media  (max-width: 500px) {
+    .wrapper{
+        margin-top: 150px;
+    }
+    .inner{
+        flex-direction: column;
+    }
+    .form-group{
+        flex-direction: column;
+        margin: 0 !important;
+    }
+    .inner form{
+        width: 90%;
+        margin: 10px;
+        padding-top: 0 !important;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: 30px;
+    }
+
+    .sign-up-img{
+        display: none;
+    }
+  
+    .first-input-sign-up{
+        margin-bottom: 10px !important;
+        width: 100% !important;
+    }
+    .first-input-container{
+      flex-direction: column;
+    }
+
+    .form-group{
+        margin-top: 15px !important;
+    }
+
+   .age-input{
+       width: 100% !important;
+       margin-bottom: 15px;
+   }
+   .sign-up-form h3{
+       margin-top: 0 !important;
+   }
+    
 }

@@ -162,3 +162,63 @@ footer{
     color: #fff;
     font-size: 20px;
 }
+
+/* MEDIA QUERY */
+@media  (max-width: 500px) {
+   .landing-page-home{
+       flex-direction: column;
+   }
+
+   .home-img{
+       width: 100% !important;
+   }
+
+   .landingpage-image{
+    flex: 2;
+   }
+
+   .landing-page-content>h3{
+       font-size: 20px;
+       text-align: center;
+       padding-left: 0 !important;
+   }
+
+   .landing-page-content>p{
+    font-size: 20px;
+    text-align: center;
+    padding:10px
+}
+
+.section-1-container{
+    flex-direction: column;
+    margin-top: 20px;
+    /* text-align: center; */
+    width: 100%;
+    margin-left: 0 !important;
+    padding: 20px;
+}
+
+.visit-heade{
+    font-size: 15px;
+}
+.section-2-container{
+    flex-direction: column;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.play-store-container-img{
+    width: 100% !important;
+    margin-bottom: 20px !important;
+}
+
+.play-store-conatiner{
+    flex-direction: column;
+    margin: 0 !important;
+    padding: 20px;
+}
+.online-pharmacy-container{
+    flex-direction: column;
+}
+   
+}

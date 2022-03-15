@@ -26,9 +26,50 @@ height: 50px;
     color: #61CD88;
 }
 
+.bars-menu{
+    font-size: 30px;
+    color: #777;
+    display: none;
+}
+.bar{
+    display: none;
+}
 /* MEDIA QUERY */
-@media only screen and (max-width: 737px) {
-    .header{
+@media  (max-width: 500px) {
+   
+    /* .bars-menu:checked + .login-signup-container{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        left: 0px;
+        background-color: #fff;
+    } */
+
+    .login-signup-container{
         display: none;
+        width: 100%;
+    }
+
+    #toggle:checked + .login-signup-container{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        left: 0px;
+        background-color: #fff;
+        transition: width 5s;
+    }
+  
+
+    .login-signup-container a{
+        font-size: 25px;
+        padding-bottom: 15px;
+    }
+
+    .bars-menu{
+        display: block;
     }
 }

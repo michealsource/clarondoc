@@ -301,14 +301,7 @@ main {
     }
 }
 
-@media only screen and (max-width: 560px) {
-    .cards {
-        grid-template-columns: 100%;
-    }
-}
-
 /* CUSTOM STYLINGS */
-
 .service-d{
     background-color: #61CD88;
     font-size: 16px;
@@ -326,6 +319,18 @@ main {
     font-size: 16px;
 }
 
+/* RESPONSIVENESS */
+@media only screen and (max-width: 560px) {
+    #nav-toggle:checked+.sidebar {
+        left: 0 !important;
+        z-index: 100;
+        width: 70px;
+    }
 
-/* testing */
+    main{
+        width: 800px !important;
+    }
+ 
+
+}
 

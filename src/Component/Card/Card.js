@@ -141,7 +141,7 @@ function Card({ sidebar }) {
                 <div class="over-view">
                     <h1 className="app-header">Overview</h1>
                     <div class="inner-over-view">
-                        <div class="over-view-header appointment">
+                        <div class="over-view-header">
                             <h3 className="app-header">Appointments</h3>
                             {/* <div class="prescription-conent">
                            

@@ -1,8 +1,9 @@
 .about-us-doc-container{
-    margin-top: 50px;
+    margin-top: 150px;
     margin-right: auto;
     margin-left: auto;
     width: 98%;
+    text-align: center;
 }
 .about-us-doc-container h4{
     text-align: center;
