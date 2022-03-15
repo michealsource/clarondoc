@@ -115,6 +115,19 @@ color: #61CD88;
 }
 
 /* MEDIA QUERY */
+
+/* MEDIA QUERY */
+@media  (max-width: 500px) {
+    .container{
+        margin-top: 160px !important;
+        height: 100%;
+    }
+    .dont-have-account{
+        text-align: center;
+        padding-top: 10px;
+    }
+}
+
 @media only screen and (max-width: 737px) {
     .SignIn-Img{
         display: none;
@@ -146,3 +159,4 @@ color: #61CD88;
         margin-right: auto;
       }
 }
+

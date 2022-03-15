@@ -201,7 +201,7 @@ function SignIn() {
 
                 <div className="loginContainer">
                     <div className="inputContainer">
-                        <img src={logo} alt="logo" className="logo-img" />
+                        
                         <p style={{ color: 'red', marginTop: 5, textAlign: 'center', fontSize: 20, paddingBottom: 10 }}>{error ? error : ''}</p>
                         
                         <TextField

@@ -151,7 +151,11 @@ export default function MainLayout({ children }) {
             <div class="user-wrapper">
                 <img src={userData.avatar !== "undefined" ? userData.avatar : user1}  width="40px" height="40px" alt="user"/>
                 <div>
-                    <h4 onClick={handleClick}>Profile <FaCaretDown /></h4>
+                  <div className='responsive-mobile-profile'>
+                  <h4 onClick={handleClick}>Profile</h4>
+                  <FaCaretDown />
+                  </div>
+                   
                     {
                   open ? <div className='hover-menu'>
                     <Link to="/profile">Profile</Link>
@@ -167,7 +171,7 @@ export default function MainLayout({ children }) {
         </header>
         <main>
        {children}
-    </main>
+       </main>
     </div>
 
     

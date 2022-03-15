@@ -18,7 +18,7 @@ function LandingPage() {
         <div className="landing-container">
             <section className="landing-page-home">
                 <div className="landingpage-image">
-                    <img src={homeImage} alt="home" />
+                    <img src={homeImage} alt="home" className='home-img'/>
                 </div>
                 <div className="landing-page-content">
                     <h3>Skip the travel! Take Online Doctor Consultation</h3>
@@ -28,7 +28,7 @@ function LandingPage() {
 
             <div className="section-1-container">
                 <div className="col-1" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" data-aos-duration="600">
-                <h2>Visit a doctor from the comfort of your home with ClaronDoc</h2>
+                <h2 className='visit-heade'>Visit a doctor from the comfort of your home with ClaronDoc</h2>
                     <p>The fastest killer in developing countries are usually the treatable illnesses and diseases. Too many people are dying unnecessarily because of mis-diagnosis and lack of instant access to qualify health professionals.
 
                         Would it not be great if you can easily get a second opinion about your diagnosis or prescribed medication from the comfort of your home?
@@ -66,14 +66,14 @@ function LandingPage() {
             </div>
 
             <div className="play-store-conatiner">
-                <img src={playstore} alt="" data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600"/>
+                <img className='play-store-container-img' src={playstore} alt="" data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600"/>
                 <div>
                     <p data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem, quis vitae, voluptas esse suscipit atque fuga necessitatibus sunt, facere distinctio iste quas officiis reiciendis voluptatum? Minima autem suscipit in? Id voluptas quia voluptatem explicabo sed, deserunt obcaecati. Eveniet similique dolores suscipit labore porro, ullam odit, ipsam vero magnam quos ex expedita repudiandae excepturi voluptatum voluptates iste quia dolor voluptas facilis laborum consectetur esse id deserunt. Ut culpa amet odio est ex ipsum deleniti sed accusamus. Provident, sint temporibus. Saepe at sequi unde totam deserunt, cum vitae hic quaerat distinctio alias pariatur neque doloribus odio accusamus id, minima incidunt atque quod quam esse ab modi, vel reprehenderit! Modi tempora, aut eligendi debitis voluptatum natus perferendis ad aspernatur reiciendis suscipit itaque eius! Ut provident repellendus beatae sint quos distinctio hic pariatur,</p>
                 </div>
             </div>
 
             <div className="online-pharmacy-container">
-            <img src={call} alt=""  data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600"/>
+            <img className='play-store-container-img' src={call} alt=""  data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600"/>
                 <div>
                     <h3>Call or chat verified doctors</h3>
                     <p data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600" >With ClaronDoc, you can now talk to a licensed doctor online, through chat, audio call, or video conference and get instant feedback and prescriptions on the go with your mobile phone.</p>
