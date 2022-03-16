@@ -80,4 +80,24 @@
   .individual-request-container-outer{
     overflow-y: auto;
     margin-left: 25px;
+    width: 100%;
+  }
+
+  /* RESPONSIVENESS */
+  @media (max-width: 569px){
+
+    .date-style{
+      margin-bottom: 10px !important;
+    }
+
+    .individual-request-container-outer{
+      width: 100% !important;
+      margin-left: -30px;
+      padding-left: 5px;
+    }
+
+    .inner-individual-container-request{
+      width: 99% !important;
+      margin-left: 2px;
+    }
   }

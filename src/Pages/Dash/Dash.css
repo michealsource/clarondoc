@@ -321,14 +321,40 @@ main {
 
 /* RESPONSIVENESS */
 @media only screen and (max-width: 560px) {
+    ::-webkit-scrollbar { display: none; }
+
     #nav-toggle:checked+.sidebar {
         left: 0 !important;
         z-index: 100;
         width: 70px;
     }
 
-    main{
+   .main-content{
+       width: 90% !important;
+       margin: 0 auto !important;
+   }
+
+    .sidebar-menu{
+        margin-top: 20px;
+    }
+
+    /* main{
         width: 800px !important;
+    } */
+
+    #nav-toggle:checked~.main-content {
+        margin-left: 10px;
+        /* padding-left: 100px; */
+    }
+
+    main{
+        margin-top: 10px;
+        padding-left: 0.5rem !important;
+        background: #F4F4F5;
+        position: fixed;
+        width: 100% !important;
+        height: 100%;
+        top: 60px;
     }
  
 
