@@ -78,108 +78,93 @@ function Card({ sidebar }) {
 
     return (
         <MainLayout>
-            <div className="main-area-card-container">
-                <div class="notifcation-container">
-                    <div class="update-profile">
-                        <p>Profile Update: You should update your first name,last name , email,  and phone number</p>
-                        <button onClick={() => { editPage() }} className="update-btn-user">
-                            Update Profile
-                        </button>
+            <>
+                <div className="dashboar-higher-container">
+                    <div class="notifcation-container">
+                        <div class="update-profile">
+                            <p className='update-profile-head-text'>Profile Update: You should update your first name,last name , email,  and phone number</p>
+                            <button onClick={() => { editPage() }} className="update-btn-user">
+                                Update Profile
+                            </button>
+                        </div>
+
+
+                        {expiry ? (<div className="update-subscription">
+                            <p>{expiry}</p>
+                            <Link to="/subscribe" className="subscribe-upd-btn-user">
+                                Subscribe
+                            </Link>
+                        </div>) : <></>}
                     </div>
 
+                    <div class="first-container">
+                        <div class="name-container">
+                            <h4>Hi, {userData ? userData.firstname : ''}</h4>
+                            <p>Welcome Back!</p>
+                        </div>
 
-                    {expiry ? (<div className="update-subscription">
-                        <p>{expiry}</p>
-                        <Link to="/subscribe" className="subscribe-upd-btn-user">
-                            Subscribe
-                        </Link>
-                    </div>) : <></>}
-
-                </div>
-
-                <div class="first-container">
-                    <div class="name-container">
-                        <h4>Hi, {userData ? userData.firstname : ''}</h4>
-                        <p>Welcome Back!</p>
+                        <div>
+                            <Link to="/consultation" className="book-btn-doc">Book a Doctor</Link>
+                        </div>
                     </div>
 
-                    <div class="doctor-book-btn">
-                        <Link to="/consultation" className="demand-booking-btn">Book a Doctor</Link>
-                    </div>
-                </div>
-
-
-                <div className="cards">
                     <div class="card-container">
-                        <Link to="/drugs" class="card-box">
+                      
+                        <Link to="/drugs" class="card-box-history">
                             <img src={drug} alt="" />
                             <h4>Drugs Order History</h4>
-                           
+
                         </Link>
 
-                        <Link to="/laboratory" class="card-box">
+                        <Link to="/laboratory" class="card-box-history">
                             <img src={labrequest} alt="" />
                             <h4>Lab Request History</h4>
-                            
+
                         </Link>
 
-                        <Link to="/ambulance" class="card-box">
+                        <Link to="/ambulance" class="card-box-history">
                             <img src={ambulance} alt="" />
                             <h4>Ambulance Request History</h4>
-                            
-                        </Link>
 
-                        <Link to="/homecare" class="card-box">
+                        </Link>
+                        <Link to="/homecare" class="card-box-history">
                             <img src={homecare} alt="" />
                             <h4>HomeCare Request History</h4>
-                         
+
                         </Link>
+
                     </div>
-                </div>
 
-                {/* APPOINTMENT STRUCTURE */}
-                <div class="over-view">
-                    <h1 className="app-header">Overview</h1>
+                    {/* APPOINTMENT HISTORY SECTION */}
+
+                    <div class="over-view">
+                    <h1>Overview</h1>
                     <div class="inner-over-view">
-                        <div class="over-view-header">
-                            <h3 className="app-header">Appointments</h3>
-                            {/* <div class="prescription-conent">
-                           
-                        </div> */}
+                    {/* <h3>Appointments</h3> */}
 
-                            <div>
+                    <div className="his-container-cont-lab">
+                    {bookings.length > 0 && (bookings.length ? bookings.map((item) => (
+
+                            <>
+                            <div className='single-ambulance'>
                                 <div>
-                                    <div>
-                                        <div>
-                                            <div class="his-container-cont-lab">
-                                                {bookings.length > 0 && (bookings.length ? bookings.map((item) => (
-                                                    <>
-                                                        <div className='single-ambulance'>
-                                                            <div>
-                                                                <p className="his-title">{item.physician.fullName}</p>
-                                                                <div className='request-test'>
-                                                                    <p>Was on</p>
-                                                                    <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                )) : (<img src={loading} alt="" className="loader-img" />))}
-                                            </div>
-                                        </div>
-
+                                    <p className="his-title">{item.physician.fullName}</p>
+                                    <div className='request-test'>
+                                        <p>Was on</p>
+                                        <p>{new Date(item.scheduledFor).toString().substring(0, 21)}</p>
                                     </div>
 
                                 </div>
-
                             </div>
-
-                        </div>
+                            </>
+                             )) : (<img src={loading} alt="" className="loader-img" />))}
 
                     </div>
+                    </div>
+                    </div>
                 </div>
-            </div>
+            </>
+
         </MainLayout>
     )
 }

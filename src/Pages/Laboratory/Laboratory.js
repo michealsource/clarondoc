@@ -72,8 +72,6 @@ function Laboratory() {
 
         })()
     })
-
-    console.log(individual,'individual')
     return (
         <MainLayout>
             
@@ -81,17 +79,10 @@ function Laboratory() {
                     <div class="heading-container">
                         <h2 class="ambulanc-heading">LABORATORY REQUEST OVERVIEWS</h2>
 
-                        <div class="laboratory-container-btn">
-                            {/* <div class="individual-request">
-                        <Link to="/individualRequest" className="individual-btn">INDIVIDUAL REQUEST</Link>
-                    </div> */}
-
                             <div class="medical-facility">
                                 <Link to="/facilityrequest" className="facility-btn">LABORATORY REQUEST</Link>
                             </div>
 
-
-                        </div>
                     </div>
 
                         <div class="ambulance-container">

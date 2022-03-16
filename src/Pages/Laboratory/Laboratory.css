@@ -92,3 +92,30 @@
 .amblance-history-container{
     width: 95% !important;
 }
+
+
+/* RESPOSIVENESSS */
+
+@media  (max-width: 560px)  {
+
+    .ambulance{
+        margin-left: -35px !important;
+    }
+
+    .ambulanc-heading{
+        font-size: 15px;
+    }
+
+    .facility-btn{
+        background: #3399cc;
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 5px;
+        margin-left: 20px;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+    }
+
+}

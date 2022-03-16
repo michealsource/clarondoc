@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
     textField: {
         width: '100%',
-        marginBottom: '25px !important'
+        marginBottom: '10px !important'
     },
     dateTime: {
         marginTop: 20,
@@ -132,7 +132,6 @@ function FacilityRequest({ testName }) {
     return (
         <MainLayout >
             <div className="individual-request-container-outer">
-                  
                 <div class="inner-individual-container-request">
                 <div className="closeBtn">
                     <h2  onClick={() => handleGoBack()}>X</h2>
@@ -141,7 +140,7 @@ function FacilityRequest({ testName }) {
 
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 label="Enter Patient Name"
@@ -155,7 +154,7 @@ function FacilityRequest({ testName }) {
                             />
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
 
                             <FormControl sx={{ minWidth: 150 }} fullWidth>
                                 <Select
@@ -177,7 +176,7 @@ function FacilityRequest({ testName }) {
                     </Grid>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Gender</FormLabel>
                                 <RadioGroup value={sex} onChange={(e) => setSex(e.target.value)} row aria-label="gender" name="row-radio-buttons-group">
@@ -187,7 +186,7 @@ function FacilityRequest({ testName }) {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12} className="date-style">
                             <div className="date">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DesktopDatePicker
@@ -207,7 +206,7 @@ function FacilityRequest({ testName }) {
 
                     <Grid container spacing={2}>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 value={address}
                                 onChange={e => { setAddress(e.target.value) }}
@@ -221,7 +220,7 @@ function FacilityRequest({ testName }) {
                             />
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 value={phone}
                                 onChange={e => { setPhone(e.target.value) }}
@@ -239,7 +238,7 @@ function FacilityRequest({ testName }) {
 
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 value={purpose}
                                 onChange={e => { setPurpose(e.target.value) }}
@@ -253,7 +252,7 @@ function FacilityRequest({ testName }) {
                             />
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12} className="date-style">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DesktopDatePicker
                                     label="Lab Date"

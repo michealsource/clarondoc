@@ -174,5 +174,22 @@ p{
 .ambulance{
     height: 100%;
     overflow-y: auto;
+}
+
+/* RESPONSIVENESS */
+
+@media (max-width:500px){
+    .ambulance{
+        margin-top: -20px !important;
+    }
+
+    .heading-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start !important;
+        margin-left: 20px;
+        
+    }
     
 }
