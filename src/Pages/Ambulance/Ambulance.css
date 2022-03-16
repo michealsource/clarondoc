@@ -220,5 +220,24 @@ p{
         z-index: 100;
         border-radius: 5px;
       }
+      .his-container-cont{
+          display: flex;
+          flex-direction: column;
+
+      }
+
+      .row-his{
+        
+          width: 100%;
+      }
+
+      .column-his-1{
+          margin-left: 25px;
+          width: 95%;
+      }
+
+      .head-his{
+          padding: 10px;
+      }
     
 }
