@@ -99,7 +99,7 @@ function Card({ sidebar }) {
 
                     <div class="first-container">
                         <div class="name-container">
-                            <h4>Hi, {userData ? userData.firstname : ''}</h4>
+                            <h4 className='welcome-name'>Hi, {userData ? userData.firstname : ''}</h4>
                             <p>Welcome Back!</p>
                         </div>
 
