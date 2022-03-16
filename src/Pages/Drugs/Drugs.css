@@ -236,3 +236,21 @@ padding: 5px;
     height: 100%;
     overflow-y: scroll;
 }
+
+@media(max-width:569px){
+    .his-container-cont-drug{
+        display: flex;
+        flex-direction: column;
+    }
+    .drugs-hisory-container{
+        margin-left: 5px;
+    }
+    .two-column{
+        width: 100%;
+      }
+
+    .drugs-order-history{
+        width: 100% !important;
+
+    }
+}

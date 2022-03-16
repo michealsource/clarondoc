@@ -33,11 +33,11 @@ function Homecare() {
         <div className="home-care-container-1">
             <div class="homecare-inner-container-2">
                 <h2>HOME CARE OVERVIEW</h2>
-                <div class="laboratory-container-btn">
+                
                     <div class="individual-request">
                         <Link to="/HomeCareForm" className="individual-btn">Request Home Care</Link>
                     </div>
-                </div>
+                
             </div>
 
             <div class="appointment-container-box">
