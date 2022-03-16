@@ -22,8 +22,9 @@
   max-width: 80%;
   margin: 0 auto;
   margin: 50px;
-  height: 100%;
-  margin-top: 50px !important;
+  height: 100vh;
+  margin-top: 30px !important;
+  margin-bottom: 200px !important;
 }
 .snip1214 .plan {
   margin: 0;
@@ -114,6 +115,7 @@
   color: #ffffff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   z-index: 1;
+  margin-bottom: 200px !important;
 }
 .snip1214 .featured .plan-title,
 .snip1214 .featured .plan-price {
@@ -150,10 +152,23 @@
     margin-top: 0;
   }
 }
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 569px) {
   .snip1214 .plan {
     width: 100%;
   }
+
+  .snip1214 {
+    margin-top: 0px !important;
+  }
+
+  .plan-features{
+    height: 50% !important;
+  }
+
+  .plan {
+    margin-top: 35px !important;
+  }
+ 
 }
 
 .try-continue{

@@ -16,9 +16,6 @@
     margin-left: 25px;
     margin-top: -80px;
     margin-bottom: 100px !important;
-
-    /* height: 100%;
-    overflow-y: scroll; */
 }
 
 
@@ -212,4 +209,26 @@
     display: flex;
     align-self: flex-start;
     cursor: pointer;
+  }
+
+  @media(max-width: 569px){
+      .container-main{
+          margin-left: -16px !important;
+      }
+
+      .pharmacy-container{
+       display: flex;
+       justify-content: space-between;
+       flex-wrap: wrap;
+       gap: 1px; 
+    }
+
+    .drugs-container-out{
+      width: 48%;
+    }
+/*     
+    .drug-img{
+        width: 100%;
+        height: 100%;
+    } */
   }

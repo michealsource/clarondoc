@@ -73,3 +73,16 @@
     color: #fff;
     border-radius: 4px;
 }
+
+@media(max-width:569px){
+    .cart-drug-img {
+        width: 30px;
+        height: 30px;
+    }
+    .total_view{
+        margin-left: -30px !important;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem
+    }
+}

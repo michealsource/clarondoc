@@ -154,7 +154,6 @@ function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, a
           }
         }
       }
-      console.log(cartItem,'hhhhh')
 
     return (
         <div className="details-container">
@@ -244,7 +243,7 @@ function CartModal({ openModal, setOpenModal, cartItem, total, removeFromCart, a
 
                     <div class="total_view">
                         <h2>Total:</h2>
-                        <p>{totalBill()}</p>
+                        <p> GHS {totalBill()}</p>
                     </div>
 
 

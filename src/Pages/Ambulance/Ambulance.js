@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
     tab: {
         color: "#525252",
-        fontSize: '20px !important'
+        fontSize: '15px !important'
     },
 }));
 
@@ -244,10 +244,10 @@ function Ambulance() {
                         <div className="top-history-container">
             <div class="row-his">
                 <div className="column-his-1">
-                    <div className="head-his">
-                        <h4>REQUEST DETAILS</h4>
+                    
+                        <h4 className="head-his">REQUEST DETAILS</h4>
                         {/* <p>Processing</p> */}
-                </div>
+                
 
                 <div >
              
