@@ -258,6 +258,9 @@
         width: 100%;
     }
 
+    .welcome-name{
+        font-size: 15px !important;
+    }
     .dashboar-higher-container{
         width: 100%;
         height: 100%;
