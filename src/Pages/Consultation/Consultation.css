@@ -242,3 +242,52 @@
   .item-doc p{
     padding-left: 10px !important;
   }
+
+  @media(max-width:569px){
+      .doctors{
+          margin-left: 20px !important;
+      }
+
+      .heading{
+          margin: 20px;
+          font-size: 20px !important;
+      }
+
+      .demand-booking-btn{
+          font-size: 13px !important;
+          display: flex;
+          align-items: center;
+          padding: 10px !important;
+          margin-top: 0 !important;
+          text-align: center;
+      }
+
+      .doctor-input-container input{
+        width: 80%;
+        outline: 0;
+        border: none;
+        background: none;
+        padding: 5px;
+        font-size: 12px;
+        border-bottom: 1px solid #999999;
+        margin-left: 5px;
+        margin-bottom: 20px;
+    }
+
+    .item-doc{
+        font-size: 20px !important;
+        padding: 10px !important;
+    }
+   
+
+    .claron-doc-online-actions{
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px !important;
+        width: 100%;
+    }
+    /* .octor-profile-modal{
+        width: 50% !important;
+    } */
+    
+  }
