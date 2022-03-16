@@ -16,11 +16,12 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
         left: '50%',
         overFlowY: 'auto',
         transform: 'translate(-50%, -50%)',
-        width: 600,
+        width: '95%',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
+       
       };
 
       const [loading, setloading] = useState(false)
@@ -64,8 +65,9 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
           onClose={handleCloseProfile}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+         
         >
-          <Box sx={style}>
+          <Box sx={style}  className="doctor-profile-modal">
             <div class="doc-profile-dash">
             <img src={doctor.avatar && doctor.avatar !=="undefined" ?doctor.avatar:doctorDefault} alt="avatar" />
               <h2 className="profile-name-dash">{doctor.firstname} {doctor.lastname}</h2>
@@ -76,7 +78,7 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
 
               <div class="claron-doc-online-actions">
                 <div class="item-doc" disabled={loading} onClick={favorite}>
-                  <FaHeart/>
+                  <FaHeart className='icon-phone'/>
                      <p>
                      { loading ? 'Saving...' : favorites.includes(doctor.email) ? 'Remove from Account' : 'Save to Account'}
                    </p>
@@ -84,13 +86,13 @@ function DoctorProfile({openP,handleCloseProfile,selectedData}) {
                 <div
                 onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): navigate('/Book',{state:{doctor}})}
                 class="item-doc">
-                  <FaCalendarAlt/>
+                  <FaCalendarAlt  className='icon-phone'/>
                   <p>Check Availability</p>
                   </div>
                 <div
                 onClick={ ()=>userData.subscription === null || userData.subscription === 'Normal' || userData.subscription === 'Pay As You go'? navigate('/PayAsYouGo',{ state: { name: 'Pay As You go', price: 50,doctor} }): navigate('/chat',{state:{doctor}})}
                 class="item-doc">
-                  <FaRegCommentDots/>
+                  <FaRegCommentDots  className='icon-phone'/>
                   <p>Chat</p>
                   </div>
               </div>
