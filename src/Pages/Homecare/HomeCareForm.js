@@ -98,9 +98,9 @@ const handleGoBack = () => {
                 <div className="closeBtn">
                     <h2  onClick={() => handleGoBack()}>X</h2>
                 </div>
-                    <h1>HOME CARE REQUEST</h1>
+                    <h1 className='homecare-header-title'>HOME CARE REQUEST</h1>
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 label="Enter Patient Name"
@@ -114,8 +114,8 @@ const handleGoBack = () => {
                             />
                         </Grid>
 
-                        <Grid item xs={6}>
-                            <FormControl variant="standard" sx={{ m: 1, minWidth: 400 }}>
+                        <Grid item  md={6} xs={12}>
+                            <FormControl className='making-request-for' variant="standard" sx={{ m: 1, minWidth: 400 }}>
                                 <InputLabel id="demo-simple-select-standard-label">Reason for service</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-standard-label"
@@ -134,8 +134,8 @@ const handleGoBack = () => {
                     </Grid>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <FormControl variant="standard" sx={{ m: 1, minWidth: 400 }}>
+                        <Grid item  md={6} xs={12}>
+                            <FormControl className='making-request-for' variant="standard" sx={{ m: 1, minWidth: 400 }}>
                                 <InputLabel id="demo-simple-select-standard-label">Making Request for</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-standard-label"
@@ -151,9 +151,10 @@ const handleGoBack = () => {
 
                         </Grid>
 
-                        <Grid item xs={3}>
-                            <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
+                        <Grid  md={3} xs={12} item >
+                            <LocalizationProvider  dateAdapter={AdapterDateFns} fullWidth>
                                 <DesktopDatePicker
+                                    
                                     label="Select Date"
                                     value={date}
                                     minDate={date}
@@ -164,7 +165,7 @@ const handleGoBack = () => {
                             </LocalizationProvider>
                         </Grid>
 
-                        <Grid item xs={3}>
+                        <Grid item md={3} xs={12}>
                             <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
                                 <TimePicker
                                     label="Time"
@@ -178,7 +179,7 @@ const handleGoBack = () => {
                     </Grid>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item  md={6} xs={12}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Gender</FormLabel>
                                 <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
@@ -202,7 +203,7 @@ const handleGoBack = () => {
 
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 label="Physical Address"
@@ -218,7 +219,7 @@ const handleGoBack = () => {
                     </Grid>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 multiline
@@ -234,7 +235,7 @@ const handleGoBack = () => {
                         </Grid>
                         
                                 
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 multiline
@@ -252,7 +253,7 @@ const handleGoBack = () => {
                     </Grid>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 id="outlined-basic"
                                 value={privateDoctor}
@@ -267,7 +268,7 @@ const handleGoBack = () => {
 
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid className='symptoms' item md={6} xs={12}>
                             <label for="">Symptoms</label>
                             <HomeCareMultiSelect 
                             user={user}

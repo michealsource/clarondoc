@@ -172,3 +172,51 @@ margin-left: 20px;
       overflow-y: scroll;
       width: 98%;
   }
+
+  @media (max-width:569px){
+      .homecare-main-container{
+          margin-left: -30px !important;
+      }
+
+      .making-request-for{
+          min-width: 300px !important;
+      }
+
+
+      .symptoms{
+          margin-bottom: 20px !important;
+      }
+
+      .homecare-header-title{
+          font-size: 20px !important;
+      }
+
+      .appointment-container-box{
+          margin-left: 10px !important;
+      }
+      .homecare-inner-container-2{
+          display: flex;
+          flex-direction: column;
+          margin-left: 15px !important;
+          margin-top: -20px !important;
+      }
+
+      .individual-btn{
+          margin-top: 20px !important;
+      }
+
+      .col-container-home{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+      }
+
+      .booked-container-home{
+          font-size: 13px !important;
+      }
+
+      .booked-container-home{
+          flex-direction: column;
+      }
+      
+  }

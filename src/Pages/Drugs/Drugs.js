@@ -95,25 +95,25 @@ function Drugs() {
     <MainLayout>
       <div class="drugs-main-container">
     <div className="drugs-container">
-      <div className="cards">
+    
         <div class="card-container">
 
-          <Link to="/otcdrugs" class="card-box">
+          <Link to="/otcdrugs" class="card-box-history">
             <img src={drug} alt="" />
             <h4>Get OTC Drugsy</h4>
           </Link>
 
-          <div onClick={handleOpen} class="card-box">
+          <div onClick={handleOpen} class="card-box-history">
             <img src={labrequest} alt="" />
             <h4>Get Prescribed Drugs</h4>
           </div>
 
-          <Link to="/consultation" class="card-box">
+          <Link to="/consultation" class="card-box-history">
             <img src={pharmacist} alt="" />
             <h4>Consult with Pharmacist</h4>
           </Link>
         </div>
-      </div>
+      
 
       <div class="drugs-order-history">
         <h2>Drugs Order History</h2>
