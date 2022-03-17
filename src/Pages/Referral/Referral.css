@@ -1,5 +1,4 @@
 .referal-beda-container{
-    
     width: 97.5%;
 }
 .referral-upper-container{
@@ -143,4 +142,65 @@ color: #4d607b;
     border-radius: 10px;
     width: 350px;
     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+@media(max-width:569px){
+    .referal-beda-container{
+        width: 100% !important;
+        margin-left: -45px !important;
+        margin-top: -50px !important;
+    }
+    .referal-actions h1{
+        font-size: 14px !important;
+    }
+    .referral-btn{
+        font-size: 10px !important;
+    }
+    .referral-upper-container{
+        margin: 40px;
+        height: 100%;
+        overflow-y: auto;
+        width: 99%;
+        padding: 30px;
+        /* margin-left: 30px; */
+    }
+    .referal-content h3{
+        padding: 0 !important;
+        font-size: 15px;
+    }
+
+    .referal-content{
+        font-size: 15px;
+    }
+
+    .referal-history-container{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ref-num{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .ref-num p{
+        padding-right: 10px !important;
+        font-size: 20px;
+    }
+
+    .referral-link-container{
+        width: 100% !important;
+    }
+
+    .ref-code p{
+        font-size: 10px !important;
+    }
+    .code{
+        margin-left: 70px !important;
+    }
+
+    .patien-doc-ref-table-container{
+        flex-direction: column;
+        gap: 10px;
+    }
 }

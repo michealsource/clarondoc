@@ -67,11 +67,9 @@ export default function MainLayout({ children }) {
         </div>      
         <div class="sidebar-menu">
             <ul>
-
                 <li className='service-d'>
-                
                     <Link to="/userDashboard"><span class="las la-table"></span>
-                    <span>Dashboard</span></Link>
+                    <span className='dash-mobile'>Dashboard</span></Link>
                 </li>
                 <li className='service-d'>
                     <Link to="/consultation"><span class="las la-stethoscope"></span>

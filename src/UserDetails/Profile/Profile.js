@@ -20,16 +20,6 @@ prices['Family'] = 100
 function Profile() {
     const navigate = useNavigate();
     const user = useSelector((state)=>state.user.value)
-    // let account = localStorage.getItem('user')
-    // let user = (JSON.parse(account))
-    // const[user,SetUser]= useState()
-    // useEffect(()=>{
-    //     (async()=>{
-    //         let account = localStorage.getItem('user')
-    //         SetUser(JSON.parse(account))
-    //       })()
-    // },[])
-
     const editPage=()=>{
         navigate('/Editpatient',{state:{user:user}});
           }
@@ -74,9 +64,9 @@ function Profile() {
                   
                     <button 
                     onClick={()=>{ user.subscription != null && user.subscription != 'Normal' ? navigate('/Sub-Summary', { state: { name: `${user.subscription} Plan`, id: '', price: prices[user.subscription] } }) : navigate("/userDashboard")}}
-                    className="upgrad-btn"> {user.subscription != null && user.subscription != 'Normal' ? `Continue with ${user.subscription} Plan` : 'Try ClaronDoc free for 14 days'}</button>
+                    className="upgrad-btn txt"> {user.subscription != null && user.subscription != 'Normal' ? `Continue with ${user.subscription} Plan` : 'Try ClaronDoc free for 14 days'}</button>
                
-
+                    
                     <button onClick={()=>{editPage()}}>
                             <button className="edit-btn txt"> Edit Profile</button>
                     </button>

@@ -147,7 +147,7 @@ function Editpatient() {
             </div>
             <Grid className='top-beda-edit' container spacing={2}>
                 <p>{error?error:''}</p>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <input
                         value={fname}
                         onChange={(e)=>setFname(e.target.value)}
@@ -155,7 +155,7 @@ function Editpatient() {
                     />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <input
                         value={lname}
                         className="edit-input-beda"
@@ -167,7 +167,7 @@ function Editpatient() {
 
             <Grid container spacing={2}>
         
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <input
                         className="edit-input-beda"
                         value={emailu}
@@ -181,7 +181,7 @@ function Editpatient() {
             <Grid container spacing={2}>
               
 
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
 
                     <input
                         className="edit-input-beda"
