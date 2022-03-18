@@ -5,6 +5,11 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:800);
 
 
+.order-container{
+  margin-left: 30px;
+  width: 95%;
+  overflow-y: auto;
+}
 .price-discount{
     color: red;
 }
@@ -167,6 +172,14 @@
 
   .plan {
     margin-top: 35px !important;
+  }
+  .support-header{
+    font-size: 15px;
+  }
+
+  .order-container{
+    margin: 0 !important;
+    width: 100%;
   }
  
 }

@@ -172,13 +172,13 @@ function Chat() {
                     return (
                         <>
                             <div key={chat.sender} className={`${chat.sender === user.email ? 'chat-msg-doc' : 'chat-msg-user'}`}>
-                                {chat.message && chat.attachment === "" ? (<p>{chat.message}</p>) : chat.message && chat.attachment != "" ?
+                                {chat.message && chat.attachment === "" ? (<p className='chat-msg'>{chat.message}</p>) : chat.message && chat.attachment != "" ?
                                     <div>
                                         <img src={chat.attachment} alt="" className='msg-img' />
                                     </div> : null
                                 }
                                 {/* <p>{chat.message ? chat.message : 'loading chat'}</p> */}
-                                <p> about {timeSince(new Date(chat.createDate))} ago</p>
+                                <p className='created-date'> about {timeSince(new Date(chat.createDate))} ago</p>
                             </div>
 
                         </>

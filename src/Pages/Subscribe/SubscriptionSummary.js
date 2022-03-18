@@ -386,7 +386,7 @@ function SubscriptionSummary() {
                             <Grid container spacing={2}>
                                     {
                                     button === "Submit OTP" ? (
-                                        <Grid item xs={6} >
+                                        <Grid item xs={12} md={6} >
                                     <TextField
                                         id="outlined-basic"
                                         label="Enter OTP"
@@ -401,7 +401,7 @@ function SubscriptionSummary() {
                                     
                                 </Grid>
                                     ): (
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                         
                                         <TextField
                                             id="outlined-basic"
@@ -452,7 +452,7 @@ function SubscriptionSummary() {
                                 {
                                     showotp_field ? (
                                         <>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} md={6}>
                                                 <TextField
                                                     value={otp}
                                                     onChange={e => { setOTP(e.target.value) }}
@@ -472,7 +472,7 @@ function SubscriptionSummary() {
                                             <p className='card-error'>{card_error ? card_error : ''}</p>
                                             <Grid container spacing={2}>
 
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12} md={6}>
 
                                                     <TextField
                                                         value={number}
@@ -487,7 +487,7 @@ function SubscriptionSummary() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12} md={6}>
                                                     <TextField
                                                         value={month}
                                                         onChange={e => { setMonth(e.target.value) }}
@@ -502,7 +502,7 @@ function SubscriptionSummary() {
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12} md={6}>
                                                     <TextField
                                                         value={year}
                                                         onChange={e => { setYear(e.target.value) }}
@@ -516,7 +516,7 @@ function SubscriptionSummary() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12} md={6}>
                                                     <TextField
 
                                                         id="outlined-basic"
@@ -530,7 +530,7 @@ function SubscriptionSummary() {
                                                         }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12} md={6}>
                                                     <TextField
                                                         value={pin}
                                                         onChange={e => { setPin(e.target.value) }}

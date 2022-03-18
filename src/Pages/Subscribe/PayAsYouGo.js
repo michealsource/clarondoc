@@ -76,7 +76,6 @@ function PayAsYouGo() {
     const [expanded, setExpanded] = React.useState(false);
     const [user, setUser] = useState()
     // const [card, setCard] = useState({number: '',month: '',year: '',cvv: ''})
-
     const [number, setNumber] = useState('')
     const [cvv, setCvv] = useState('')
     const [pin, setPin] = useState('')
@@ -379,7 +378,7 @@ function PayAsYouGo() {
                             <Grid container spacing={2}>
                                     {
                                     button === "Submit OTP" ? (
-                                        <Grid item xs={6} >
+                                        <Grid item md={6} xs={12} >
                                     <TextField
                                         id="outlined-basic"
                                         label="Enter OTP"
@@ -394,7 +393,7 @@ function PayAsYouGo() {
                                     
                                 </Grid>
                                     ): (
-                                        <Grid item xs={6}>
+                                        <Grid item md={6} xs={12}>
                                         
                                         <TextField
                                             id="outlined-basic"
@@ -425,7 +424,7 @@ function PayAsYouGo() {
                         </AccordionDetails>
                     </Accordion>
 
-                    <Accordion>
+                    <Accordion className='card-payment-mobile'>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
@@ -445,7 +444,7 @@ function PayAsYouGo() {
                                 {
                                     showotp_field ? (
                                         <>
-                                            <Grid item xs={6}>
+                                            <Grid item md={6} xs={12}>
                                                 <TextField
                                                     value={otp}
                                                     onChange={e => { setOTP(e.target.value) }}
@@ -465,7 +464,7 @@ function PayAsYouGo() {
                                             <p className='card-error'>{card_error ? card_error : ''}</p>
                                             <Grid container spacing={2}>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
 
                                                     <TextField
                                                         value={number}
@@ -480,7 +479,7 @@ function PayAsYouGo() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={month}
                                                         onChange={e => { setMonth(e.target.value) }}
@@ -495,7 +494,7 @@ function PayAsYouGo() {
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={year}
                                                         onChange={e => { setYear(e.target.value) }}
@@ -509,7 +508,7 @@ function PayAsYouGo() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
 
                                                         id="outlined-basic"
@@ -523,7 +522,7 @@ function PayAsYouGo() {
                                                         }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={pin}
                                                         onChange={e => { setPin(e.target.value) }}
