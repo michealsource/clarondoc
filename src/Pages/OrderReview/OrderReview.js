@@ -548,7 +548,7 @@ function OrderReview() {
 
                                     {
                                         button === "Submit OTP" ? (
-                                            <Grid item xs={6} >
+                                            <Grid item md={6} xs={12} >
                                                 <p className='phone-error'>{phone_error ? phone_error : ''}</p>
                                                 <TextField
                                                     id="outlined-basic"
@@ -564,7 +564,7 @@ function OrderReview() {
 
                                             </Grid>
                                         ) : (
-                                            <Grid item xs={6}>
+                                            <Grid item md={6} xs={12}>
                                                 <p className='phone-error'>{phone_error ? phone_error : ''}</p>
                                                 <TextField
                                                     id="outlined-basic"
@@ -612,7 +612,7 @@ function OrderReview() {
                                 {
                                     showotp_field ? (
                                         <>
-                                            <Grid item xs={6}>
+                                            <Grid item md={6} xs={12}>
                                                 <TextField
                                                     value={otp}
                                                     onChange={e => { setOTP(e.target.value) }}
@@ -632,7 +632,7 @@ function OrderReview() {
                                             <p className='card-error'>{card_error ? card_error : ''}</p>
                                             <Grid container spacing={2}>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
 
                                                     <TextField
                                                         value={number}
@@ -647,7 +647,7 @@ function OrderReview() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={month}
                                                         onChange={e => { setMonth(e.target.value) }}
@@ -662,7 +662,7 @@ function OrderReview() {
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={year}
                                                         onChange={e => { setYear(e.target.value) }}
@@ -676,7 +676,7 @@ function OrderReview() {
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
 
                                                         id="outlined-basic"
@@ -690,7 +690,7 @@ function OrderReview() {
                                                         }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={6}>
+                                                <Grid item md={6} xs={12}>
                                                     <TextField
                                                         value={pin}
                                                         onChange={e => { setPin(e.target.value) }}

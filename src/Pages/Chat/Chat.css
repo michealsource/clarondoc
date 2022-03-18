@@ -120,3 +120,46 @@
     margin-right: auto;
     width: 5%;
 }
+
+@media(max-width:569px){
+    .chart-cantaner{
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 99%;
+        height: auto;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        margin-top: 50px;
+        margin-left: 0 !important;
+        margin-bottom: 100px;
+        overflow-y: scroll;
+        height: 100%;
+    }
+
+    .created-date{
+        font-size: 15px;
+       padding-left: 150px !important;
+       padding-top: 10px !important;
+    }
+
+    .chat-msg{
+        font-size: 15px;
+        margin-right: 10px !important;
+    }
+
+    .chat-msg-user{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .chat-msg-doc{
+        background: #b3e8c6;
+        border-radius: 20px 5px 10px;
+        padding: 20px;
+        color: #fff;
+        display: block !important;
+        margin-top: 20px;
+        margin-left: 40px;
+    }
+    
+}
