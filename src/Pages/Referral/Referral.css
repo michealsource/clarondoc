@@ -175,7 +175,7 @@ color: #4d607b;
 
     .referal-history-container{
         flex-direction: column;
-        gap: 10px;
+        gap: 30px;
     }
 
     .ref-num{
@@ -201,6 +201,6 @@ color: #4d607b;
 
     .patien-doc-ref-table-container{
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
     }
 }
