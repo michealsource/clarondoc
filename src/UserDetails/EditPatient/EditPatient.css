@@ -119,4 +119,10 @@
   .parent-div{
     padding-bottom: 10px !important;
   }
+
+  .btn-upload{
+    margin-bottom: 100px !important;
+    font-size: 10px !important;
+    padding: 8px;
+  }
   }
