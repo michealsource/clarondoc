@@ -286,8 +286,18 @@
         gap: 10px !important;
         width: 100%;
     }
-    /* .octor-profile-modal{
-        width: 50% !important;
-    } */
+
+  
+    .modal-book-container{
+        width: 95% !important;
+        margin-left: 10px !important;
+        
+    }
+
+    .avilability-booking-input{
+        width: 100% !important;
+    }
     
   }
+
+  
