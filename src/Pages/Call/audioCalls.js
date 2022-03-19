@@ -248,7 +248,7 @@ function Index() {
         aria-describedby="modal-modal-description"
       >
         
-        <Box sx={style}>
+        <Box sx={style} className="call-container-modal">
         <div className="closeBtn">
           <h2 onClick={() => handleGoBack()}>X</h2>
         </div>

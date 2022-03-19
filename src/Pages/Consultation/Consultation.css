@@ -243,6 +243,15 @@
     padding-left: 10px !important;
   }
 
+  .close-avali-container{
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+      align-content: center;
+     margin-bottom: 10px;
+  }
+
   @media(max-width:569px){
       .doctors{
           margin-left: 20px !important;
@@ -290,12 +299,18 @@
   
     .modal-book-container{
         width: 95% !important;
-        margin-left: 10px !important;
+        margin-left: 5px !important;
+        overflow-y: auto;
         
     }
 
     .avilability-booking-input{
         width: 100% !important;
+    }
+
+    .availibility-header{
+        padding-top: 30px !important;
+        font-size: 18px;
     }
     
   }

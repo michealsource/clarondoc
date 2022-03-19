@@ -125,7 +125,7 @@ function FacilityRequest({ testName }) {
 
     const handleGoBack = () => {
         navigate(-1)
-      }
+    }
 
     // console.log(labTests,totalCost, "frm arent")
     console.log(time)

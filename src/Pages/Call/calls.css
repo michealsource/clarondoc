@@ -130,3 +130,13 @@
      align-items: center;
      color: #fff;
  }
+
+ @media(max-width:569px){
+     .call-container-modal{
+         width: 95% !important;
+     }
+
+     .doc-btn{
+         font-size: 20px;
+     }
+ }
