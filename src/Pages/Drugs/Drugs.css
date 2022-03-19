@@ -256,11 +256,15 @@ padding: 5px;
     }
 
     .upload-pres-modal{
-        width: 100% !important;
+        width: 95% !important;
     }
     .upload-prescribe{
-        font-size: 15px;
+        font-size: 13px;
         padding-bottom: 10px !important;
         font-weight: bold;
+    }
+
+    .upload-prescr-btn{
+        padding: 8px;
     }
 }
