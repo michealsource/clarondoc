@@ -1,0 +1,10 @@
+@media(max-width:569px){
+    .book-container-pay-as-go{
+        overflow-y: auto;
+        background-color: red !important;
+    }
+
+    .modal-book-container{
+        
+    }
+}

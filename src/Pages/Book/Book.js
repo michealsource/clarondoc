@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { makeBooking } from '../../Api/doctors';
 import swal from 'sweetalert';
 import Button from '@mui/material/Button';
+import {FaTimes } from "react-icons/fa";
 
 const style = {
     position: 'absolute',
@@ -59,15 +60,29 @@ function Book() {
             setError(e)
         }
     }
+
+    const handleGoBack = () => {
+        navigate(-1)
+    }
   return (
       <MainLayout>
-           <Box sx={style} style={{ width: 1000 }} >
-                            <h2 style={{marginBottom:20}}>{doctor ? doctor.firstname: ''} Availability</h2>
+          <div className='book-container-pay-as-go'>
+
+        
+           <Box sx={style} style={{ width: 1000 }} className="modal-book-container" >
+                <div class="close-avali-container">
+                <h2 style={{marginBottom:20}}>{doctor ? doctor.firstname: ''} Availability</h2>
+                  
+                                    <FaTimes className='cloxe' onClick={() => handleGoBack()}/>
+
+                </div>
+
                             <div>
                                 <TextField
                                     id="date"
                                     label="Book Date"
                                     type="date"
+                                    className='avilability-booking-input'
                                     defaultValue={date}
                                     fullWidth
                                     onChange={(e)=>setDate(e.target.value)}
@@ -92,6 +107,7 @@ function Book() {
                                 <Button onClick={book} style={{marginTop:20, background:'#16a085'}} variant="contained">CONFIRM BOOKING</Button>
                             </div>
                         </Box>
+                        </div>
       </MainLayout>
    
   )

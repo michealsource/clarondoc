@@ -75,6 +75,7 @@
     color: #9f5a61;
     display: flex;
     justify-content: space-between;
+    width: 92%;
 }
 
 .subscribe-upd-btn-user{
@@ -339,6 +340,10 @@
         padding: 10px;
         cursor: pointer;
         width: 50%;
+    }
+    
+    .update-subscription p{
+        font-size: 12px;
     }
 
 }

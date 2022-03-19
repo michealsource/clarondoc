@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaInfo } from "react-icons/fa";
-import { FaRegCalendarAlt, FaHeart, FaPhoneAlt } from "react-icons/fa";
+import { FaRegCalendarAlt, FaHeart,FaTimes } from "react-icons/fa";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -351,10 +351,8 @@ function Consultation() {
                             >
                                 <Box sx={style} style={{ width: 1000 }} className="modal-book-container" >
                                     <div class="close-avali-container">
-                                    <h2 className='availibility-header' style={{ marginBottom: 20 }}>{value ? value.firstname : ''} Availability</h2>    
-                                    <div className="closeBtn">
-                                        <h2 onClick={() => handleGoBack()}>X</h2>
-                                    </div>
+                                    <h2 className='availibility-header'>{value ? value.firstname : ''} Availability</h2>    
+                                    <FaTimes className='cloxe' onClick={() => handleGoBack()}/>
                                 </div>
                                     
                                     
