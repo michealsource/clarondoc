@@ -63,7 +63,9 @@ function Drugs() {
     })()
   }, [])
 
-
+  const handleGoBack = () => {
+    setOpen(false)
+}
 
   const prescriptionUpload = async(e)=>{
     setloadinga(true)
@@ -165,7 +167,10 @@ function Drugs() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="upload-pres-modal">
+        <div className="closeBtn">
+                    <h2  onClick={() => handleGoBack()}>X</h2>
+          </div>
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
           <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           <br />

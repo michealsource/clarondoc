@@ -254,4 +254,13 @@ padding: 5px;
         width: 100% !important;
 
     }
+
+    .upload-pres-modal{
+        width: 100% !important;
+    }
+    .upload-prescribe{
+        font-size: 15px;
+        padding-bottom: 10px !important;
+        font-weight: bold;
+    }
 }
