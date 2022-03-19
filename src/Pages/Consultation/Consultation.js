@@ -341,6 +341,7 @@ const favorite = async(email)=>{
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                         fullWidth
+                        className="modal-book-container"
                         
                     >
                         <Box sx={style} style={{ width: 1000 }} className="modal-book-container" >
@@ -350,6 +351,7 @@ const favorite = async(email)=>{
                                     id="date"
                                     label="Book Date"
                                     type="date"
+                                    className='avilability-booking-input'
                                     defaultValue={date}
                                     fullWidth
                                     onChange={(e)=>setDate(e.target.value)}

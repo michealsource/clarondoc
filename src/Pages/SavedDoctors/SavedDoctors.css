@@ -103,3 +103,19 @@ color: #1c1d1d;
     cursor: pointer;
     margin: 30px 0px 0px 30px;
   }
+
+  @media(max-width:569px){
+    .time-availability{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .time-btn{
+        background: #16a085;
+        color: #fff;
+        margin: 5px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+  }
