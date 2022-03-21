@@ -1,3 +1,8 @@
+/* body{
+    background-color: black !important;
+    width: 100% !important;
+} */
+
 .stand-by{
     font-size: 20px;
     font-weight: 800;
@@ -139,4 +144,43 @@
      .doc-btn{
          font-size: 20px;
      }
+
+     .controls{
+        
+         height: 90% !important;
+         margin-bottom: 30px !important;
+        position: absolute !important;
+        top: 50px !important;
+        width: 100% !important;
+     }
+
+     .mute{
+        background-color: #16a085;
+        color: #fff;
+        padding: 15px;
+        cursor: pointer;
+        display: flex;
+        font-size: 15px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 50%;
+        margin-bottom: 20px !important;
+    }
+    
+    .leav{
+        background-color: red;
+        color: #fff;
+        padding: 15px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 50%;
+        margin-bottom: 20px !important;
+    }
+
+   
  }

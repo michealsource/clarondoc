@@ -339,6 +339,12 @@
       text-align: center;
   }
 
+  .responsive-mobile-profile{
+    display: flex;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
   /* RESPONSIVENESS */
 
   /* MEDIA QUERY */
