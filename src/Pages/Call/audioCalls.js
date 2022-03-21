@@ -240,7 +240,7 @@ function Index() {
 
 
   return (
-    <div>
+    <div className="out-container-call">
      <Modal
         open={open}
         onClose={handleClose}
