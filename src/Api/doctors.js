@@ -10,6 +10,9 @@ export const fetchDoctors = async () => {
         url: 'https://api.clarondoc.com/physicians',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         },
@@ -36,6 +39,9 @@ export const makeBooking = async (data) => {
         data,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         }
@@ -56,6 +62,9 @@ export const onDemandBooking = async (data) => {
             data,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             }
@@ -78,6 +87,9 @@ export const myBookings = async () => {
         url: `https://api.clarondoc.com/requests/physicians/consultations/users/${email}`,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         }
@@ -101,6 +113,9 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
             }
         })
 
@@ -123,6 +138,9 @@ export const DeleteBooking = async (id) => {
         data: {schedule: 'Wed Jan 13 2021 15:30'},
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         }
@@ -144,6 +162,9 @@ export const respondRequest = async (response, id)=>{
         }, {
             headers: {
                 'x-api-key': key,
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${token}`
             }
         });

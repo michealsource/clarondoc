@@ -33,6 +33,10 @@ export const sendMessage = async (data)=>{
         let res = await axios.post(`https://api.clarondoc.com/chats`, data, {
             headers: {
                 'x-api-key': key,
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${token}`
             }
         })
@@ -59,6 +63,9 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
             }
         })
 

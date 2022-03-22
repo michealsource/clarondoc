@@ -103,7 +103,10 @@ export const initPayment = async(price, phone, network)=>{
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${sk_key}`
+                    'Authorization': `Bearer ${sk_key}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': true,
                 }
             }
         )
@@ -133,7 +136,10 @@ export const verOtp = async(tnx_ref, otp)=>{
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${sk_key}`
+                    'Authorization': `Bearer ${sk_key}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': true,
                 }
             }
         )
@@ -180,7 +186,10 @@ export const cardPayment = async(card, amount)=>{
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${sk_key}`
+                    'Authorization': `Bearer ${sk_key}`,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': true,
                 }
             }
         )
@@ -212,6 +221,9 @@ export const Upgrade_sub = async(plan, end)=>{
         },
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         }
@@ -236,6 +248,9 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
             }
         })
 

@@ -13,6 +13,9 @@ export const fetchNotifications = async () => {
             url: `https://api.clarondoc.com/notifications/users/${email}`,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             }
@@ -47,6 +50,9 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
             }
         })
 
