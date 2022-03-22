@@ -194,7 +194,7 @@ function SignIn() {
     }
 
     return (
-        <>
+        <div className='signin-container'>
             <Navbar />
             <div className="container">
                 <img src={signIn} alt="login" style={{ width: '500px', height: 400 }} className="SignIn-Img" />
@@ -282,7 +282,7 @@ function SignIn() {
                     </div>}
                 </Box>
             </Modal>
-        </>
+        </div>
     )
 }
 export default SignIn

@@ -4,17 +4,22 @@
     height: 100px;
     display: none;
 }
+
 .container{
     display: flex;
-    margin-top: 150px;
+    margin-top: 30px;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100vh;
+    background-color: #fff !important;
+    overflow-y: auto;
 }
 
 .inputContainer{
     width: 60%;
 }
+
 
 .text-field{
     margin-bottom: 20px !important;

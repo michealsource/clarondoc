@@ -42,10 +42,10 @@
 }
 
 .controls{
-    background-color: black;
+    background-color: green !important;
      height: 100%;
-     width: 100%;
-     position: absolute;
+     width: 100vw;
+     /* position: absolute; */
      display: flex;
      flex-direction: column;
     justify-content: space-around;
@@ -184,3 +184,6 @@
 
    
  }
+
+
+ /* CALL PAGE STYLING */

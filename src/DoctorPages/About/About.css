@@ -1,10 +1,16 @@
 .about-us-doc-container{
-    margin-top: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 98%;
+    margin-top: 110px;
+    /* margin-right: auto;
+    margin-left: auto; */
+    width: 100%;
     text-align: center;
+    height: 100vh;
+    background-color: #fff;
+    padding-top: 50px;
+    max-height: 100vh;
 }
+
+
 .about-us-doc-container h4{
     text-align: center;
     font-size: 30px;

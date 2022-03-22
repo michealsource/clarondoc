@@ -45,13 +45,12 @@
 
 /* TERMS AND PRIVACY PAGE */
 .terms-and-privacy-container{
-    margin-top: 150px;
-    height: 100%;
-    width: 80%;
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
     color: #0d2344;
-    margin-bottom: 100px;
+
+    background-color: #fff !important;
 }
 
 .terms-and-privacy-container h2{
