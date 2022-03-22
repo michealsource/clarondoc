@@ -10,7 +10,7 @@ root{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-
+    background-color: #fff !important;
     overflow-y: hidden;
     overflow-x: hidden;
 }
