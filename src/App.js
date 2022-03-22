@@ -1,4 +1,4 @@
-
+import "core-js/stable";
 import './App.css';
 import React from 'react'
 import IndexRoutes from './Routes/index'
