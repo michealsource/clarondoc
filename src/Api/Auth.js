@@ -9,6 +9,9 @@ export const register = async (data) => {
             data,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'x-api-key': key
             },
             options: {
@@ -39,6 +42,9 @@ export const resetpassword = async(email)=>{
             url: 'https://api.clarondoc.com/otp/get/'+email,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'x-api-key': key
             },
             options: {
@@ -67,6 +73,9 @@ export const checkotp = async(reset_code)=>{
             url: 'https://api.clarondoc.com/otp/confirm/'+reset_code,
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'x-api-key': key
             },
             options: {
@@ -94,6 +103,9 @@ export const changePasswordd = async (data, auth) => {
         {
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             },
@@ -116,6 +128,9 @@ export const updatePassword = async (data) => {
         {
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             },
@@ -138,6 +153,9 @@ export const update = async (data) => {
         {
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'Authorization': `Bearer ${auth}`,
                 'x-api-key': key
             },
@@ -164,6 +182,9 @@ export const login = async (email, password) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': true,
                 'x-api-key': key
             },
             options: {
@@ -194,6 +215,9 @@ export const userDetails = async (email) => {
         url: 'https://api.clarondoc.com/users/'+email,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': true,
             'Authorization': `Bearer ${auth}`,
             'x-api-key': key
         },
@@ -217,6 +241,9 @@ export const downgrade = async () => {
             {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Credentials': true,
                     'Authorization': `Bearer ${auth}`,
                     'x-api-key': key
                 },
@@ -248,6 +275,8 @@ export const apiKey = async (data) => {
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
                 'Access-Control-Allow-Credentials':true
             }
         })
@@ -274,6 +303,8 @@ export const sociallogin = async (email) => {
             headers: {
                 'Content-Type': 'application/json',
                 'x-api-key': key,
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
                 'Access-Control-Allow-Credentials':true
             },
             options: {
