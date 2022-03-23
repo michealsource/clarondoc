@@ -3,57 +3,57 @@ import React from 'react'
 import { Routes, Route, Link } from "react-router-dom"
 import PatientRoute from './PatientRoute'
 // PAGES
-import Card from '../Component/Card/Card'
-import Consultation from '../Pages/Consultation/Consultation'
-import Subscribe from '../Pages/Subscribe/Subscribe'
-import Homecare from '../Pages/Homecare/Homecare'
-import Ambulance from '../Pages/Ambulance/Ambulance'
-import Laboratory from '../Pages/Laboratory/Laboratory'
-import AppointmentHistory from '../Pages/Appointmenthistory/AppointmentHistory'
-import UserProfile from '../UserDetails/Profile/Profile'
-import Editpatient from '../UserDetails/EditPatient/Editpatient'
-import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
-import IndividualRequest from '../Component/Forms/IndividualRequest'
-import FacilityRequest from '../Component/Forms/FacilityRequest'
-import Drugs from '../Pages/Drugs/Drugs'
-import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
-import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
-import Prescribed from '../Pages/Prescribed/Prescribed'
-import OrderReview from '../Pages/OrderReview/OrderReview'
-import HomeCareForm from '../Pages/Homecare/HomeCareForm'
-import Blog from '../Pages/Blog/Blog'
-import PendingOrders from '../Pages/PendingOrders/PendingOrders'
-import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
-import Referral from '../Pages/Referral/Referral'
-import Wallet from '../Pages/Wallet/Wallet'
-import Notification from '../Pages/Notification/Notification'
-import Chat from '../Pages/Chat/Chat'
-import AboutClaron from '../Pages/AboutClaron/AboutClaron'
-import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
-import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
-import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
-import Book from '../Pages/Book/Book'
-import Dash from '../Pages/Dash/Dash'
-// import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
+// import Card from '../Component/Card/Card'
+// import Consultation from '../Pages/Consultation/Consultation'
+// import Subscribe from '../Pages/Subscribe/Subscribe'
+// import Homecare from '../Pages/Homecare/Homecare'
+// import Ambulance from '../Pages/Ambulance/Ambulance'
+// import Laboratory from '../Pages/Laboratory/Laboratory'
+// import AppointmentHistory from '../Pages/Appointmenthistory/AppointmentHistory'
+// import UserProfile from '../UserDetails/Profile/Profile'
+// import Editpatient from '../UserDetails/EditPatient/Editpatient'
+// import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
+// import IndividualRequest from '../Component/Forms/IndividualRequest'
+// import FacilityRequest from '../Component/Forms/FacilityRequest'
+// import Drugs from '../Pages/Drugs/Drugs'
+// import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
+// import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
+// import Prescribed from '../Pages/Prescribed/Prescribed'
+// import OrderReview from '../Pages/OrderReview/OrderReview'
+// import HomeCareForm from '../Pages/Homecare/HomeCareForm'
+// import Blog from '../Pages/Blog/Blog'
+// import PendingOrders from '../Pages/PendingOrders/PendingOrders'
+// import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
+// import Referral from '../Pages/Referral/Referral'
+// import Wallet from '../Pages/Wallet/Wallet'
+// import Notification from '../Pages/Notification/Notification'
+// import Chat from '../Pages/Chat/Chat'
+// import AboutClaron from '../Pages/AboutClaron/AboutClaron'
+// import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
+// import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
+// import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
+// import Book from '../Pages/Book/Book'
+// import Dash from '../Pages/Dash/Dash'
+// // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
 
-// DOCTORS PAGE IMPORT
-import Home from '../DoctorPages/Home/Home'
-import LabRequest from '../DoctorPages/LabRequest/LabRequest'
-import PrescribeDrugs from '../DoctorPages/PrescribedDrugs/PrescribeDrugs'
-import Settings from '../DoctorPages/Settings/Settings'
-import DocDrugs from '../DoctorPages/PrescribedDrugs/DocDrugs'
-import DoctorNotification from '../DoctorPages/DoctorNotification/DoctorNotification'
-import ChatD from '../DoctorPages/Chat/Chat'
-import DrugHistory from '../DoctorPages/DrugPrescriptionHistory/DrugHistory'
-import LabRequestDoctor from '../DoctorPages/LabRequestDoctor/LabRequestDoctor'
-import Actions from '../DoctorPages/Actions/Actions'
-import DocFacilityRequest from '../DoctorPages/DocFacilityRequest/DocFacilityRequest'
-import UpdateProfile from '../DoctorPages/Settings/UpdateProfile'
-import Consultations from '../DoctorPages/Consultations/Consultations';
-import TermsD from '../DoctorPages/Terms/Terms'
-import AboutD from '../DoctorPages/About/About'
-import CartModal from '../DoctorPages/Modals/CartModal'
-import Call from '../Pages/Call/audioCalls'
+// // DOCTORS PAGE IMPORT
+// import Home from '../DoctorPages/Home/Home'
+// import LabRequest from '../DoctorPages/LabRequest/LabRequest'
+// import PrescribeDrugs from '../DoctorPages/PrescribedDrugs/PrescribeDrugs'
+// import Settings from '../DoctorPages/Settings/Settings'
+// import DocDrugs from '../DoctorPages/PrescribedDrugs/DocDrugs'
+// import DoctorNotification from '../DoctorPages/DoctorNotification/DoctorNotification'
+// import ChatD from '../DoctorPages/Chat/Chat'
+// import DrugHistory from '../DoctorPages/DrugPrescriptionHistory/DrugHistory'
+// import LabRequestDoctor from '../DoctorPages/LabRequestDoctor/LabRequestDoctor'
+// import Actions from '../DoctorPages/Actions/Actions'
+// import DocFacilityRequest from '../DoctorPages/DocFacilityRequest/DocFacilityRequest'
+// import UpdateProfile from '../DoctorPages/Settings/UpdateProfile'
+// import Consultations from '../DoctorPages/Consultations/Consultations';
+// import TermsD from '../DoctorPages/Terms/Terms'
+// import AboutD from '../DoctorPages/About/About'
+// import CartModal from '../DoctorPages/Modals/CartModal'
+// import Call from '../Pages/Call/audioCalls'
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
@@ -67,7 +67,7 @@ function index() {
         <div>
             <Routes>
                 {/* PATIENT ROUTES */}
-                <Route exact path="/userDashboard" element={<Card/>} />
+                {/* <Route exact path="/userDashboard" element={<Card/>} />
                 <Route exact path="/ambulance" element={<Ambulance />} />
                 <Route exact path="/homecare" element={<Homecare />} />
                 <Route exact path="/laboratory" element={<Laboratory />} />
@@ -99,10 +99,10 @@ function index() {
                 <Route exact path="/Book" element={< Book />} />
                 <Route exact path="/call" element={< Call />} />
                 <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
-                <Route exact path="/Dash" element={<Dash/>}></Route>
+                <Route exact path="/Dash" element={<Dash/>}></Route> */}
                 
                 {/* DOCTOR ROUTES */}
-                <Route exact path="/doctorDashboard" element={<Home />}></Route>
+                {/* <Route exact path="/doctorDashboard" element={<Home />}></Route>
                     <Route exact path="/LabRequestUser" element={<LabRequest />}></Route>
                     <Route exact path="/PrescribeDrugsUser" element={<PrescribeDrugs />}></Route>
                     <Route exact path="/Settings" element={<Settings />}></Route>
@@ -117,7 +117,7 @@ function index() {
                     <Route exact path="/Consultations" element={<Consultations />}></Route>
                     <Route exact path="/Terms" element={<TermsD/>}></Route>
                     <Route exact path="/About" element={<AboutD />}></Route>
-                    <Route exact path="/CartModal" element={<CartModal />}></Route>
+                    <Route exact path="/CartModal" element={<CartModal />}></Route> */}
 
                 {/* PUBLIC PAGES */}
                 
