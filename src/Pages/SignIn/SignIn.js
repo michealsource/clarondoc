@@ -15,7 +15,7 @@ import { login, sociallogin, resetpassword, checkotp, changePasswordd } from '..
 import Navbar from '../../Component/Navbar/Navbar'
 import { useDispatch } from 'react-redux'
 import { LOGIN } from '../../features/user'
-import { GoogleLogin } from 'react-google-login'
+// import { GoogleLogin } from 'react-google-login'
 import swal from 'sweetalert';
 import FacebookLogin from 'react-facebook-login';
 const style = {
@@ -98,22 +98,22 @@ function SignIn() {
     }
 
     // GOOGLE LOGIN Authentication
-    const loginSuccess = async (res) => {
-        const response = await sociallogin(res.profileObj.email)
-        console.log(response)
-        if (response.success) {
+    // const loginSuccess = async (res) => {
+    //     const response = await sociallogin(res.profileObj.email)
+    //     console.log(response)
+    //     if (response.success) {
           
-            let currentUser = localStorage.getItem('user');
-            dispatch(LOGIN(JSON.parse(currentUser)))
-            navigate("/userDashboard")
+    //         let currentUser = localStorage.getItem('user');
+    //         dispatch(LOGIN(JSON.parse(currentUser)))
+    //         navigate("/userDashboard")
 
-        } else {
-            alert('error trying to navigate')
-        }
-    }
-    const loginFaliure = (res) => {
-        console.log('login failed', res)
-    }
+    //     } else {
+    //         alert('error trying to navigate')
+    //     }
+    // }
+    // const loginFaliure = (res) => {
+    //     console.log('login failed', res)
+    // }
 
 
     // FACEBOOK LOGIN
@@ -236,12 +236,12 @@ function SignIn() {
                             onClick={componentClicked}
                             callback={facebook} /> */}
                         {/* <button className="google"><FcGoogle className="icon" />Sign in with Google</button> */}
-                        <GoogleLogin
+                        {/* <GoogleLogin
                             clientId="975805596889-071l5f7rtmfbeqjov22r8i03m6rh5q2j.apps.googleusercontent.com"
                             onSuccess={loginSuccess}
                             onFaliure={loginFaliure}
                             cookiePolicy={"single_host_origin"}
-                        />
+                        /> */}
                     </div>
                     <p className="dont-have-account">Don't have account? <Link to="/SignUp" className="sign-up">Sign Up</Link></p>
                 </div>
