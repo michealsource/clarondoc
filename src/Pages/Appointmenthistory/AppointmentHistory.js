@@ -179,7 +179,7 @@ function AppointmentHistory() {
                                   </div>
                                   <div className="divider"></div>
                                   <div className="booked-container">
-                                    {/* <p onClick={()=>cancelAppointment(item.id)} className='cancel-booking-btn'>Cancel Booking</p> */}
+                                    <p onClick={()=>cancelAppointment(item.id)} className='cancel-booking-btn'>Cancel Booking</p>
                                   </div>
                                 </div>
                               </>
