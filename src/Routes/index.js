@@ -4,7 +4,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import PatientRoute from './PatientRoute'
 // PAGES
 import Card from '../Component/Card/Card'
-import Consultation from '../Pages/Consultation/Consultation'
+// import Consultation from '../Pages/Consultation/Consultation'
 // import Subscribe from '../Pages/Subscribe/Subscribe'
 import Homecare from '../Pages/Homecare/Homecare'
 import Ambulance from '../Pages/Ambulance/Ambulance'
@@ -71,7 +71,7 @@ function index() {
                 <Route exact path="/ambulance" element={<Ambulance />} />
                 <Route exact path="/homecare" element={<Homecare />} />
                 <Route exact path="/laboratory" element={<Laboratory />} />
-                <Route exact path="/consultation" element={<Consultation />} />
+                {/* <Route exact path="/consultation" element={<Consultation />} /> */}
                 <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} />
                 {/* 
                
