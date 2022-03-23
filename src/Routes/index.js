@@ -6,9 +6,9 @@ import PatientRoute from './PatientRoute'
 import Card from '../Component/Card/Card'
 // import Consultation from '../Pages/Consultation/Consultation'
 // import Subscribe from '../Pages/Subscribe/Subscribe'
-// import Homecare from '../Pages/Homecare/Homecare'
-// import Ambulance from '../Pages/Ambulance/Ambulance'
-// import Laboratory from '../Pages/Laboratory/Laboratory'
+import Homecare from '../Pages/Homecare/Homecare'
+import Ambulance from '../Pages/Ambulance/Ambulance'
+import Laboratory from '../Pages/Laboratory/Laboratory'
 // import AppointmentHistory from '../Pages/Appointmenthistory/AppointmentHistory'
 // import UserProfile from '../UserDetails/Profile/Profile'
 // import Editpatient from '../UserDetails/EditPatient/Editpatient'
@@ -68,6 +68,9 @@ function index() {
             <Routes>
                 {/* PATIENT ROUTES */}
                 <Route exact path="/userDashboard" element={<Card/>} />
+                <Route exact path="/ambulance" element={<Ambulance />} />
+                <Route exact path="/homecare" element={<Homecare />} />
+                <Route exact path="/laboratory" element={<Laboratory />} />
                 {/* 
                 <Route exact path="/ambulance" element={<Ambulance />} />
                 <Route exact path="/homecare" element={<Homecare />} />
