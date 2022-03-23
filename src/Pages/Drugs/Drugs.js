@@ -124,7 +124,7 @@ function Drugs() {
           <div class="drugs-hisory-container">
               <div className="his-container-cont-drug">
                   <>
-                {bookings.length > 0 && (bookings.length? bookings.map((item)=>(
+                {bookings.length ? bookings.map((item)=>(
                             <>
                             <div className='single-drug-history'>
                             <h6>PHARMACY ORDER</h6>  
@@ -154,7 +154,7 @@ function Drugs() {
                             
                             </div>
                             </>
-                        )):(<img src={loading} alt="" className="loader-img"/>))}
+                        )):(<img src={loading} alt="" className="loader-img"/>)}
                   </>
               </div>
             </div>

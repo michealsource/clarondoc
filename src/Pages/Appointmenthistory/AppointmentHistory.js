@@ -70,30 +70,23 @@ function AppointmentHistory() {
 
     useEffect(()=>{
      
-        (async()=>{
-            
-          if(!loaded){
-            try{
-                
-                let res = await myBookings()
-                // setData(resu.requests)
-                // console.log(data)
-                // res = await API.myLabTests('individual')
-                setBookings(res.requests)
-                setFiltered(res.requests.filter(booking=>moment().isAfter(new Date(booking.scheduledFor))))
-                
-                setUpcoming(res.requests.filter(booking=>moment().isBefore(new Date(booking.scheduledFor))))
-                
-            }catch(e){
-              console.log(e)
-            }
+        const getBookings = async()=>{
             setLoaded(true)
-          }
-    
-        })()
+        
+                let res = await myBookings()
+                if(res){
+                    setBookings(res.requests)
+                    setFiltered(res.requests.filter(booking=>moment().isAfter(new Date(booking.scheduledFor))))
+                    
+                    setUpcoming(res.requests.filter(booking=>moment().isBefore(new Date(booking.scheduledFor))))
+                    setLoaded(false)
+                }
+     }
+
+        getBookings()
       },[])
 
-      const orderedItemNames = bookings.filter(b => b.status =="Pending")
+      const orderedItemNames = bookings.length ? bookings.filter(b => b.status =="Pending") : []
 
       const cancelAppointment = async (id) =>{
         // console.log(filtered);
@@ -174,7 +167,7 @@ function AppointmentHistory() {
                 <div class="col-container">
                     
                              <div class="his-container-cont-lab">
-                             {upcoming.length> 0 && (upcoming.length? upcoming.map((item)=>(
+                             {!upcoming.length  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : upcoming.length ? upcoming.map((item)=>(
                                  <>
                                  <div className='single-ambulance'>
                                   <div>
@@ -192,7 +185,7 @@ function AppointmentHistory() {
                                       </div>
                                  </div>
                                  </>
-                             )):upcoming.length===0?'No appointments to show': (<img src={loading} alt="" className="loader-img"/>))}
+                             )): 'No appointments to show'}
                              
                          </div>
                   
@@ -210,7 +203,7 @@ function AppointmentHistory() {
                 <div className="column-his-1">
                 <div class="col-container">
                 <div class="his-container-cont-lab">
-                        {filtered.length > 0 && (filtered.length? filtered.map((item)=>(
+                        {!filtered.length  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : filtered.length ? filtered.map((item)=>(
                             <>
                             <div className='single-ambulance'>
                              <div>
@@ -223,7 +216,7 @@ function AppointmentHistory() {
                             </div>  
                             </div>
                             </>
-                        )):(<img src={loading} alt="" className="loader-img"/>))}
+                        )):"No pending appointments"}
                     </div>
                 </div>
 
