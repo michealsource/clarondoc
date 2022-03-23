@@ -14,7 +14,7 @@ import Laboratory from '../Pages/Laboratory/Laboratory'
 // import Editpatient from '../UserDetails/EditPatient/Editpatient'
 // import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
 // import IndividualRequest from '../Component/Forms/IndividualRequest'
-// import FacilityRequest from '../Component/Forms/FacilityRequest'
+import FacilityRequest from '../Component/Forms/FacilityRequest'
 // import Drugs from '../Pages/Drugs/Drugs'
 // import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
 // import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
@@ -74,6 +74,7 @@ function index() {
                 <Route exact path="/consultation" element={<Consultation />} />
                 {/* <Route exact path="/drugs" element={< Drugs />}/> */}
                 <Route exact path="/Subscribe" element={<Subscribe />} />
+                <Route exact path="/facilityrequest" element={< FacilityRequest />} />
                 {/* <Route exact path="/Referral" element={< Referral />} /> */}
                 {/* <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} /> */}
                 {/* 
@@ -85,7 +86,7 @@ function index() {
                 <Route exact path="/Editpatient" element={<Editpatient />} />
                 <Route exact path="/demandbooking"  element={< DemandBooking />} />
                 <Route exact path="/individualRequest" element={< IndividualRequest />}/>
-                <Route exact path="/facilityrequest" element={< FacilityRequest />} />
+                
                 
                 <Route exact path="/otcdrugs" element={< OtcDrugs />} />
                 <Route exact path="/prescribedDrugs" element={< PrescribedDrugs />} />
