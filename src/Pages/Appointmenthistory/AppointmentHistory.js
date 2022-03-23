@@ -133,11 +133,6 @@ function AppointmentHistory() {
               <p>Pending Appointments</p>
             </div>
 
-            {/* <div class="appointment-box three">
-                    <div className="completed-num">0</div>
-                    <p>Completed Appointments</p>
-                </div> */}
-
             <div class="appointment-box four">
               <div className="cancelled-num">0</div>
               <p>Cancelled Appointments</p>
