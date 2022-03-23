@@ -64,31 +64,31 @@ function Drugs() {
     setOpen(false)
 }
 
-  // const prescriptionUpload = async(e)=>{
-  //   setloadinga(true)
-  //   if(file){
+  const prescriptionUpload = async(e)=>{
+    setloadinga(true)
+    if(file){
 
-  //       await firebase.storage().ref('prescriptions/' + file.name).put(file);
-  //       let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
+        await firebase.storage().ref('prescriptions/' + file.name).put(file);
+        let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
         
-  //        if(url){
-  //           setloadinga(false)
-  //           setPrescription(url)
-  //           setprescriptiona(false)
-  //           localStorage.setItem('prescription', JSON.stringify(url))
-  //           handleClose()
+         if(url){
+            setloadinga(false)
+            setPrescription(url)
+            setprescriptiona(false)
+            localStorage.setItem('prescription', JSON.stringify(url))
+            handleClose()
             
-  //           swal({
-  //               title: "Prescription Upload",
-  //               text: "uploaded prescription to server",
-  //               icon: "success",
-  //               button: "Ok",
-  //             });
-  //             navigate("/prescribedDrugs")
-  //        }
-  //   }
+            swal({
+                title: "Prescription Upload",
+                text: "uploaded prescription to server",
+                icon: "success",
+                button: "Ok",
+              });
+              navigate("/prescribedDrugs")
+         }
+    }
     
-  // }
+  }
 
   return (
     <MainLayout>
@@ -102,7 +102,7 @@ function Drugs() {
             <h4>Get OTC Drugsy</h4>
           </Link>
 
-          <div onClick={handleOpen} class="card-box-history">
+          <div onClick={() => handleOpen()} class="card-box-history">
             <img src={labrequest} alt="" />
             <h4>Get Prescribed Drugs</h4>
           </div>
@@ -114,7 +114,7 @@ function Drugs() {
         </div>
       
 
-      <div class="drugs-order-history">
+      {/* <div class="drugs-order-history">
         <h2>Drugs Order History</h2>
 
         <section class="two-column">
@@ -138,17 +138,10 @@ function Drugs() {
                               <p className='a-head'>Ordered On:</p> 
                               <p>{new Date(item.createDate).toString().substring(0, 21)}</p>
                             </div>
-                            {/* <div className='booked-container'>
-                              <p className='a-head'>Order Status: </p> 
-                              <p className={item.status=='Pending'?'pending':item.status == 'Cancelled'?'danger':item.status == 'Completed' ? 'success' : 'info'}>{item.status}</p> 
-                            </div> */}
                             <div className='booked-container'>
                               <p className='a-head'>Ordered Type:</p> 
                               <p>{item.deliveryOption}</p> 
                               </div>
-                            {/* <div className='divider'></div> */}
-                            {/* { item.status === 'Pending' ?<div><Link to="/OrderReview" className="drug-his-btn">Make Payment</Link></div>:''} */}
-                            
                             </div>
                             </>
                         )):<p>No Drugs Yet</p>}
@@ -157,7 +150,7 @@ function Drugs() {
             </div>
       
         </section>
-      </div>
+      </div> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -171,7 +164,7 @@ function Drugs() {
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
           <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           <br />
-          {/* <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button> */}
+          <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button>
         </Box>
       </Modal>
       <div>
