@@ -19,10 +19,10 @@ function Navbar() {
             <input type="checkbox" id='toggle' className='bar'/>
             
             <nav className="login-signup-container">
-                <Link to="/SignIn">Sign In</Link>
-                <Link to="/SignUp">Sign Up</Link>
-                <Link to="/about">About Us</Link>
-                <Link to="/privacy">Terms and Privacy</Link>
+                <a href="/SignIn">Sign In</a>
+                <a href="/SignUp">Sign Up</a>
+                <a href="/about">About Us</a>
+                <a href="/privacy">Terms and Privacy</a>
             </nav>    
         </header>
     </>
