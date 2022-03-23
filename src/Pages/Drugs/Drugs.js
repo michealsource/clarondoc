@@ -45,53 +45,50 @@ function Drugs() {
   const [progress , setProgress] = useState(0);
 
   useEffect(()=>{
-    (async()=>{
-
-      if(!loaded){
-        try{
-            let res
-            res = await API.myPharmacyOrders()
-            setBookings(res.orders)
-            setFiltered(res.orders)
-            console.log(bookings)
-        }catch(e){
-          console.log(e)
-        }
-        setLoaded(true)
+    const getPharmacyOrder = async()=>{
+      setLoaded(true)
+      const res = await API.myPharmacyOrders()
+          
+      if(res){
+        setBookings(res.orders)
+        setFiltered(res.orders)
+        console.log(bookings)
+        setLoaded(false)
       }
 
-    })()
+    }
+    getPharmacyOrder()
   }, [])
 
   const handleGoBack = () => {
     setOpen(false)
 }
 
-  const prescriptionUpload = async(e)=>{
-    setloadinga(true)
-    if(file){
+  // const prescriptionUpload = async(e)=>{
+  //   setloadinga(true)
+  //   if(file){
 
-        await firebase.storage().ref('prescriptions/' + file.name).put(file);
-        let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
+  //       await firebase.storage().ref('prescriptions/' + file.name).put(file);
+  //       let url = await firebase.storage().ref(`prescriptions`).child(file.name).getDownloadURL()
         
-         if(url){
-            setloadinga(false)
-            setPrescription(url)
-            setprescriptiona(false)
-            localStorage.setItem('prescription', JSON.stringify(url))
-            handleClose()
+  //        if(url){
+  //           setloadinga(false)
+  //           setPrescription(url)
+  //           setprescriptiona(false)
+  //           localStorage.setItem('prescription', JSON.stringify(url))
+  //           handleClose()
             
-            swal({
-                title: "Prescription Upload",
-                text: "uploaded prescription to server",
-                icon: "success",
-                button: "Ok",
-              });
-              navigate("/prescribedDrugs")
-         }
-    }
+  //           swal({
+  //               title: "Prescription Upload",
+  //               text: "uploaded prescription to server",
+  //               icon: "success",
+  //               button: "Ok",
+  //             });
+  //             navigate("/prescribedDrugs")
+  //        }
+  //   }
     
-  }
+  // }
 
   return (
     <MainLayout>
@@ -124,7 +121,7 @@ function Drugs() {
           <div class="drugs-hisory-container">
               <div className="his-container-cont-drug">
                   <>
-                {bookings.length ? bookings.map((item)=>(
+                {bookings.length === 0 && loaded ? (<img src={loading} alt="" className="loader-img"/>) : bookings.length ? bookings.map((item)=>(
                             <>
                             <div className='single-drug-history'>
                             <h6>PHARMACY ORDER</h6>  
@@ -154,7 +151,7 @@ function Drugs() {
                             
                             </div>
                             </>
-                        )):(<img src={loading} alt="" className="loader-img"/>)}
+                        )):<p>No Drugs Yet</p>}
                   </>
               </div>
             </div>
@@ -174,7 +171,7 @@ function Drugs() {
           <p className="upload-prescribe">Please upload images of valid Prescription from your doctor.</p>
           <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           <br />
-          <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button>
+          {/* <button className="upload-prescr-btn" onClick={() => prescriptionUpload()}>{loadinga ? "Uploading..." : "Upload Prescription"}</button> */}
         </Box>
       </Modal>
       <div>
