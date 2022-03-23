@@ -24,7 +24,7 @@ import HomeCareForm from '../Pages/Homecare/HomeCareForm'
 // import Blog from '../Pages/Blog/Blog'
 // import PendingOrders from '../Pages/PendingOrders/PendingOrders'
 // import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
-import Referral from '../Pages/Referral/Referral'
+import Referral from '../Pages/Referral/Referral';
 // import Wallet from '../Pages/Wallet/Wallet'
 // import Notification from '../Pages/Notification/Notification'
 // import Chat from '../Pages/Chat/Chat'
