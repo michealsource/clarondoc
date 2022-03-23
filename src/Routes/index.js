@@ -15,7 +15,7 @@ import Laboratory from '../Pages/Laboratory/Laboratory'
 // import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
 // import IndividualRequest from '../Component/Forms/IndividualRequest'
 // import FacilityRequest from '../Component/Forms/FacilityRequest'
-    import Drugs from '../Pages/Drugs/Drugs'
+// import Drugs from '../Pages/Drugs/Drugs'
 // import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
 // import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
 // import Prescribed from '../Pages/Prescribed/Prescribed'
@@ -72,7 +72,7 @@ function index() {
                 <Route exact path="/homecare" element={<Homecare />} />
                 <Route exact path="/laboratory" element={<Laboratory />} />
                 <Route exact path="/consultation" element={<Consultation />} />
-                <Route exact path="/drugs" element={< Drugs />}/>
+                {/* <Route exact path="/drugs" element={< Drugs />}/> */}
                 <Route exact path="/Subscribe" element={<Subscribe />} />
                 {/* <Route exact path="/Referral" element={< Referral />} /> */}
                 {/* <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} /> */}
