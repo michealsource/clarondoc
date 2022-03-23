@@ -86,30 +86,28 @@ function AppointmentHistory() {
         getBookings()
       },[])
 
-      const orderedItemNames = bookings.length ? bookings.filter(b => b.status =="Pending") : []
+      const orderedItemNames = bookings.length > 0 ? bookings.filter(b => b.status =="Pending") : []
 
-      const cancelAppointment = async (id) =>{
-        // console.log(filtered);
-        try{
-          setloadinga(true)
-          const email = localStorage.getItem('email');
-          await firebase.firestore().collection('deletedAppointment').doc(email).collection('list').add({id: id});
-          swal({
-            title: "Request successful",
-            text: `Appointment Deleted Successfully`,
-            icon: "success",
-            button: "Ok",
-        });  
-          await respondRequest('Rejected', id);
-        //   loadData();
-        }catch(e){
-          console.log(e)
-          setloadinga(false)
-        }
+    //   const cancelAppointment = async (id) =>{
+    //     try{
+    //       setloadinga(true)
+    //       const email = localStorage.getItem('email');
+    //       await firebase.firestore().collection('deletedAppointment').doc(email).collection('list').add({id: id});
+    //       swal({
+    //         title: "Request successful",
+    //         text: `Appointment Deleted Successfully`,
+    //         icon: "success",
+    //         button: "Ok",
+    //     });  
+    //       await respondRequest('Rejected', id);
+      
+    //     }catch(e){
+    //       console.log(e)
+    //       setloadinga(false)
+    //     }
     
-      }
+    //   }
     
-    // console.log(orderedItemNames,'upppp')
     return (
         <MainLayout>
        
@@ -118,15 +116,6 @@ function AppointmentHistory() {
                     <h2 class="ambulanc-heading">APPOINTMENTS REQUEST OVERVIEWS</h2>
                    
                     <div class="laboratory-container-btn">
-                    {/* <div class="individual-request">
-                        <Link to="/individualRequest" className="individual-btn">INDIVIDUAL REQUEST</Link>
-                    </div> */}
-
-                    {/* <div class="medical-facility">
-                        <Link to="/facilityrequest" className="facility-btn">LABORATORY REQUEST</Link>
-                    </div> */}
-
-                   
                 </div>
                 </div>
 
@@ -167,7 +156,7 @@ function AppointmentHistory() {
                 <div class="col-container">
                     
                              <div class="his-container-cont-lab">
-                             {!upcoming.length  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : upcoming.length ? upcoming.map((item)=>(
+                             {upcoming.length === 0  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : upcoming.length ? upcoming.map((item)=>(
                                  <>
                                  <div className='single-ambulance'>
                                   <div>
@@ -181,7 +170,7 @@ function AppointmentHistory() {
                                  </div>  
                                  <div className='divider'></div> 
                                  <div className='booked-container'>
-                                     <p onClick={()=>cancelAppointment(item.id)} className='cancel-booking-btn'>Cancel Booking</p>
+                                     {/* <p onClick={()=>cancelAppointment(item.id)} className='cancel-booking-btn'>Cancel Booking</p> */}
                                       </div>
                                  </div>
                                  </>
@@ -203,7 +192,7 @@ function AppointmentHistory() {
                 <div className="column-his-1">
                 <div class="col-container">
                 <div class="his-container-cont-lab">
-                        {!filtered.length  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : filtered.length ? filtered.map((item)=>(
+                        {filtered.length === 0  && loaded ? (<img src={loading} alt="" className="loader-img"/>) : filtered.length ? filtered.map((item)=>(
                             <>
                             <div className='single-ambulance'>
                              <div>
