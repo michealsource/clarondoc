@@ -58,7 +58,7 @@ import Referral from '../Pages/Referral/Referral';
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
 import About from '../Pages/Settings/About'
-import LandingPage from '../Pages/landingPage/LandingPage'
+import LandingPage from '../Pages/landingPage/LandingPage';
 import TermsandCondition from '../Pages/Settings/TermsandCondition'
 // import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 // import Navbar from '../Component/Navbar/Navbar'
