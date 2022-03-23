@@ -3,7 +3,7 @@ import React from 'react'
 import { Routes, Route, Link } from "react-router-dom"
 import PatientRoute from './PatientRoute'
 // PAGES
-// import Card from '../Component/Card/Card'
+import Card from '../Component/Card/Card'
 // import Consultation from '../Pages/Consultation/Consultation'
 // import Subscribe from '../Pages/Subscribe/Subscribe'
 // import Homecare from '../Pages/Homecare/Homecare'
@@ -58,7 +58,7 @@ import PatientRoute from './PatientRoute'
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
 import About from '../Pages/Settings/About'
-import LandingPage from '../Pages/landingPage.js/LandingPage'
+import LandingPage from '../Pages/landingPage/LandingPage'
 import TermsandCondition from '../Pages/Settings/TermsandCondition'
 import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 // import Navbar from '../Component/Navbar/Navbar'
@@ -67,7 +67,8 @@ function index() {
         <div>
             <Routes>
                 {/* PATIENT ROUTES */}
-                {/* <Route exact path="/userDashboard" element={<Card/>} />
+                <Route exact path="/userDashboard" element={<Card/>} />
+                {/* 
                 <Route exact path="/ambulance" element={<Ambulance />} />
                 <Route exact path="/homecare" element={<Homecare />} />
                 <Route exact path="/laboratory" element={<Laboratory />} />
