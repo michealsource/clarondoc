@@ -20,7 +20,7 @@ import FacilityRequest from '../Component/Forms/FacilityRequest'
 // import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
 // import Prescribed from '../Pages/Prescribed/Prescribed'
 // import OrderReview from '../Pages/OrderReview/OrderReview'
-// import HomeCareForm from '../Pages/Homecare/HomeCareForm'
+import HomeCareForm from '../Pages/Homecare/HomeCareForm'
 // import Blog from '../Pages/Blog/Blog'
 // import PendingOrders from '../Pages/PendingOrders/PendingOrders'
 // import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
@@ -75,6 +75,7 @@ function index() {
                 {/* <Route exact path="/drugs" element={< Drugs />}/> */}
                 <Route exact path="/Subscribe" element={<Subscribe />} />
                 <Route exact path="/facilityrequest" element={< FacilityRequest />} />
+                <Route exact path="/HomeCareForm" element={< HomeCareForm />} />
                 {/* <Route exact path="/Referral" element={< Referral />} /> */}
                 {/* <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} /> */}
                 {/* 
@@ -92,7 +93,7 @@ function index() {
                 <Route exact path="/prescribedDrugs" element={< PrescribedDrugs />} />
                 <Route exact path="/prescribed" element={< Prescribed />} />
                 <Route  exact path="/OrderReview" element={< OrderReview />} />
-                <Route exact path="/HomeCareForm" element={< HomeCareForm />} />
+               
                 <Route exact path="/blog"  element={< Blog />}/>
                 <Route exact path="/pending" element={< PendingOrders />} />
                 <Route exact path="/SavedDoctors" element={< SavedDoctors />} />
