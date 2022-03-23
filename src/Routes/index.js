@@ -5,36 +5,36 @@ import PatientRoute from './PatientRoute'
 // PAGES
 import Card from '../Component/Card/Card'
 import Consultation from '../Pages/Consultation/Consultation'
-// import Subscribe from '../Pages/Subscribe/Subscribe'
+import Subscribe from '../Pages/Subscribe/Subscribe'
 import Homecare from '../Pages/Homecare/Homecare'
 import Ambulance from '../Pages/Ambulance/Ambulance'
 import Laboratory from '../Pages/Laboratory/Laboratory'
 // import AppointmentHistory from '../Pages/Appointmenthistory/AppointmentHistory'
-// import UserProfile from '../UserDetails/Profile/Profile'
-// import Editpatient from '../UserDetails/EditPatient/Editpatient'
-// import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
-// import IndividualRequest from '../Component/Forms/IndividualRequest'
-// import FacilityRequest from '../Component/Forms/FacilityRequest'
-// import Drugs from '../Pages/Drugs/Drugs'
-// import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
-// import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
-// import Prescribed from '../Pages/Prescribed/Prescribed'
-// import OrderReview from '../Pages/OrderReview/OrderReview'
-// import HomeCareForm from '../Pages/Homecare/HomeCareForm'
-// import Blog from '../Pages/Blog/Blog'
-// import PendingOrders from '../Pages/PendingOrders/PendingOrders'
-// import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
-// import Referral from '../Pages/Referral/Referral'
-// import Wallet from '../Pages/Wallet/Wallet'
-// import Notification from '../Pages/Notification/Notification'
-// import Chat from '../Pages/Chat/Chat'
-// import AboutClaron from '../Pages/AboutClaron/AboutClaron'
-// import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
-// import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
-// import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
-// import Book from '../Pages/Book/Book'
-// import Dash from '../Pages/Dash/Dash'
-// // import UserProfileDropDown from '../Pages/Dashboard/UserProfileDropDown'
+import UserProfile from '../UserDetails/Profile/Profile'
+import Editpatient from '../UserDetails/EditPatient/Editpatient'
+import DemandBooking from '../Component/DemandBookingModal/DemandBooking'
+import IndividualRequest from '../Component/Forms/IndividualRequest'
+import FacilityRequest from '../Component/Forms/FacilityRequest'
+import Drugs from '../Pages/Drugs/Drugs'
+import OtcDrugs from '../Pages/OtcDrugs/OtcDrugs'
+import PrescribedDrugs from '../Pages/OtcDrugs/PrescribedDrugs'
+import Prescribed from '../Pages/Prescribed/Prescribed'
+import OrderReview from '../Pages/OrderReview/OrderReview'
+import HomeCareForm from '../Pages/Homecare/HomeCareForm'
+import Blog from '../Pages/Blog/Blog'
+import PendingOrders from '../Pages/PendingOrders/PendingOrders'
+import SavedDoctors from '../Pages/SavedDoctors/SavedDoctors'
+import Referral from '../Pages/Referral/Referral'
+import Wallet from '../Pages/Wallet/Wallet'
+import Notification from '../Pages/Notification/Notification'
+import Chat from '../Pages/Chat/Chat'
+import AboutClaron from '../Pages/AboutClaron/AboutClaron'
+import ClaronTerms from '../Pages/ClaronTerms/ClaronTerms'
+import SubscriptionSummary from '../Pages/Subscribe/SubscriptionSummary'
+import PayAsYouGo from '../Pages/Subscribe/PayAsYouGo'
+import Book from '../Pages/Book/Book'
+import Dash from '../Pages/Dash/Dash'
+import Call from '../Pages/Call/audioCalls'
 
 // // DOCTORS PAGE IMPORT
 // import Home from '../DoctorPages/Home/Home'
@@ -53,14 +53,14 @@ import Laboratory from '../Pages/Laboratory/Laboratory'
 // import TermsD from '../DoctorPages/Terms/Terms'
 // import AboutD from '../DoctorPages/About/About'
 // import CartModal from '../DoctorPages/Modals/CartModal'
-// import Call from '../Pages/Call/audioCalls'
+
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
 import About from '../Pages/Settings/About'
 import LandingPage from '../Pages/landingPage/LandingPage'
 import TermsandCondition from '../Pages/Settings/TermsandCondition'
-// import ChangePassword from '../Pages/ChangePassword/ChangePassword'
+import ChangePassword from '../Pages/ChangePassword/ChangePassword'
 // import Navbar from '../Component/Navbar/Navbar'
 function index() {
     return (
@@ -73,8 +73,6 @@ function index() {
                 <Route exact path="/laboratory" element={<Laboratory />} />
                 <Route exact path="/consultation" element={<Consultation />} />
                 {/* <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} /> */}
-                {/* 
-               
                
                 <Route exact path="/Subscribe" element={<Subscribe />} />
                
@@ -103,8 +101,7 @@ function index() {
                 <Route exact path="/Book" element={< Book />} />
                 <Route exact path="/call" element={< Call />} />
                 <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
-                <Route exact path="/Dash" element={<Dash/>}></Route> */}
-                
+                <Route exact path="/Dash" element={<Dash/>}></Route> 
                 {/* DOCTOR ROUTES */}
                 {/* <Route exact path="/doctorDashboard" element={<Home />}></Route>
                     <Route exact path="/LabRequestUser" element={<LabRequest />}></Route>
