@@ -53,7 +53,7 @@ import HomeCareForm from '../Pages/Homecare/HomeCareForm'
 // import TermsD from '../DoctorPages/Terms/Terms'
 // import AboutD from '../DoctorPages/About/About'
 // import CartModal from '../DoctorPages/Modals/CartModal'
-// import Call from '../Pages/Call/audioCalls'
+import Call from '../Pages/Call/audioCalls'
 // PUBLIC PAGES
 import SignUp from '../Pages/signup/Signup'
 import SignIn from '../Pages/SignIn/SignIn'
@@ -76,6 +76,7 @@ function index() {
                 <Route exact path="/Subscribe" element={<Subscribe />} />
                 <Route exact path="/facilityrequest" element={< FacilityRequest />} />
                 <Route exact path="/HomeCareForm" element={< HomeCareForm />} />
+                <Route exact path="/call" element={< Call />} />
                 {/* <Route exact path="/Referral" element={< Referral />} /> */}
                 {/* <Route exact path="/AppointmentHistory" element={<AppointmentHistory/>} /> */}
                 {/* 
@@ -106,7 +107,7 @@ function index() {
                 <Route exact path="/Sub-Summary" element={< SubscriptionSummary />} />
                 <Route exact path="/PayAsYouGo" element={< PayAsYouGo />} />
                 <Route exact path="/Book" element={< Book />} />
-                <Route exact path="/call" element={< Call />} />
+                
                 <Route exact path="/ChangePassword" element={<ChangePassword />}></Route>
                 <Route exact path="/Dash" element={<Dash/>}></Route> 
                 {/* DOCTOR ROUTES */}
